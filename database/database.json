@@ -27,6 +27,24 @@
       "user_id": "1",
       "content": "está funcionando...",
       "created_at": "Sat Apr 20 2024 21:47:45 GMT-0300 (Brasilia Standard Time)"
+    },
+    {
+      "id": "01HVZ5952HXZPGXP7HQVHD2GYN",
+      "user_id": "1",
+      "content": "dfbzdfbz",
+      "created_at": "Sat Apr 20 2024 22:45:39 GMT-0300 (Horário Padrão de Brasília)"
+    },
+    {
+      "id": "01HVZ7HAPR5BRQA2K2W37HT7KN",
+      "user_id": "1",
+      "content": "bruh",
+      "created_at": "Sat Apr 20 2024 23:25:04 GMT-0300 (Horário Padrão de Brasília)"
+    },
+    {
+      "id": "01HVZ87S9AK1GR10F595X5EEH1",
+      "user_id": "1",
+      "content": "bruh dnv",
+      "created_at": "Sat Apr 20 2024 23:37:20 GMT-0300 (Horário Padrão de Brasília)"
     }
   ],
   "following": [
@@ -40,6 +58,5 @@
       "from_user_id": "1",
       "to_user_id": "3"
     }
-    
   ]
 }

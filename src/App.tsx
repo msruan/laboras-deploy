@@ -5,24 +5,28 @@ import { IProfile } from "./models/profile";
 import style from "./App.module.css";
 
 interface AppProps {
-  idLoggedUser : string;
+  idLoggedUser: string;
 }
 
-export function App({idLoggedUser} : AppProps) {
+export function App({ idLoggedUser }: AppProps) {
   return (
-    <div className="container">
-      <header className={style.header}>
+    <div className="row">
+      <header className="row"> {/*className={style.header}*/}
         <h1>LABORAS</h1>
       </header>
-      <aside className={style.aside}>
-        <AsideMyProfile idLoggedUser={idLoggedUser}/>
-      </aside>
-      <main className={style.main}>
-        <MainPosts idLoggedUser={idLoggedUser}/>
+      <main>
+        <div className="row">
+          <aside className={`col-md-3 ${style.box} ${style.AsideMyProfile} `} > {/*className={style.aside}*/}
+            <AsideMyProfile idLoggedUser={idLoggedUser} />
+          </aside>
+          <main className={`col-md-6 ${style.box} ${style.main}`}> {/*className={style.main}*/}
+            <MainPosts idLoggedUser={idLoggedUser} />
+          </main>
+          <aside className={`col-md-3 ${style.box} ${style.AsideFollowers}`}> {/*className={style.aside}*/}
+            <AsideFollowers idLoggedUser={"1"} />
+          </aside>
+        </div>
       </main>
-      <aside className={style.aside}>
-        <AsideFollowers idLoggedUser={"1"} />
-      </aside>
     </div>
   );
 }

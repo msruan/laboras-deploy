@@ -1,6 +1,6 @@
 import { Profile } from "../Profile/index";
 import {IProfile} from '../../models/profile'
-import styles from "./AsideProfile.module.css";
+import style from "./AsideProfile.module.css";
 import { useEffect, useState } from "react";
 
 interface AsideMyProfileProps {
@@ -34,9 +34,9 @@ export function AsideMyProfile({idLoggedUser} : AsideMyProfileProps) {
   useEffect(()=>{auxSetPerfil()},[]);
 
   return (
-    <div className={styles.main_container}>
+    <div className={style.main_container}>
       <div>
-        <div className={styles.opcao}>
+        <div className={style.opcao}>
           <i>ICON EM BREVE</i>
           <h3>Acesse o perfil</h3>
         </div>
