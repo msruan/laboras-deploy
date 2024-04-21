@@ -38,17 +38,23 @@ export function TextBox({ idLoggedUser, addNewPost }: TextBoxProps) {
   return (
     <div>
       <div className={style.box}>
-        <img className={style.img} src="src/assets/chorro-timido.JPG" alt="" />
-        <textarea
-          ref={input}
-          className={style.input}
-          name="text"
-          maxlength="200"
-          placeholder="No que voce está pensando?"
-        ></textarea>
-        <button onClick={handleClick} className={style.btn}>
-          POST
-        </button>
+        <div className={style.header}>
+          <img
+            className={style.img}
+            src="src/assets/chorro-timido.JPG"
+            alt=""
+          />
+          <textarea
+            ref={input}
+            className={style.input}
+            name="text"
+            maxlength="400"
+            placeholder="No que voce está pensando?"
+          ></textarea>
+        </div>
+        <div className={style.btn}>
+          <button onClick={handleClick}>POST</button>
+        </div>
       </div>
     </div>
   );

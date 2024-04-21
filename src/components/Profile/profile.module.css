@@ -3,9 +3,11 @@
     background-color: #18112C;
     display: flex;
     gap: .5rem;
-    width: 100%;
+    width: 14rem;
     height: fit-content;
     padding-bottom: 5px;
+    border-radius: 25px;
+    margin-bottom: 13px;
 }
 
 .profile_pic {

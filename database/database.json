@@ -23,10 +23,16 @@
   ],
   "posts": [
     {
-      "id": "01HVZ1Z48145DRFCJSRATVJ8TQ",
+      "id": "01HVZEFKBQZXGTKM7K9SEAA79R",
+      "user_id": "3",
+      "content": "anyway nihao\n",
+      "created_at": "Sun Apr 21 2024 01:26:28 GMT-0300 (Brasilia Standard Time)"
+    },
+    {
+      "id": "01HVZEG9RGGZ24302PPC4YVHYB",
       "user_id": "1",
-      "content": "está funcionando...",
-      "created_at": "Sat Apr 20 2024 21:47:45 GMT-0300 (Brasilia Standard Time)"
+      "content": "mudou...",
+      "created_at": "Sun Apr 21 2024 01:26:51 GMT-0300 (Brasilia Standard Time)"
     }
   ],
   "following": [
@@ -37,9 +43,18 @@
     },
     {
       "id": "2",
-      "from_user_id": "1",
-      "to_user_id": "3"
+      "from_user_id": "3",
+      "to_user_id": "1"
+    },
+    {
+      "id": "3",
+      "from_user_id": "2",
+      "to_user_id": "1"
+    },
+    {
+      "id": "4",
+      "from_user_id": "4",
+      "to_user_id": "1"
     }
-    
   ]
 }

@@ -14,21 +14,19 @@ export function AsideFollowers({ idLoggedUser}: AsideFollowersProps) {
   async function auxSetFollowers(userId: string){
 
     const userFollowers = await getFollowers(idLoggedUser);
-    console.log("Oxi, chamei auxSetFollowers com isso aqui de dados ",userFollowers)
 
     setFollowers(userFollowers);
   }
 
   useEffect(() => {
-    console.log("Oxi, montei")
     auxSetFollowers(idLoggedUser);
   }, []);
 
   return (
-    <div>
+    <div className={style.followtab}>
       <h2 className={style.title}>Your followers</h2>
       <ul>
-        {followers.map((profile)=><Profile perfil={profile}/>)}
+        {followers.map((profile)=><Profile key={profile.id} perfil={profile}/>)}
       </ul>
     </div>
   );
@@ -37,14 +35,15 @@ export function AsideFollowers({ idLoggedUser}: AsideFollowersProps) {
 async function getFollowersId(userId: string) : Promise<string[]> {
   const response = await fetch("http://localhost:3000/following");
   const jsonFollowers: IFollowing[] = await response.json();
-  console.log(jsonFollowers);
   const idFollowers : string[]= [];
+
   jsonFollowers.forEach((following) => {
-    if (following.from_user_id === userId) {
-      idFollowers.push(following.to_user_id);
+    if (following.to_user_id == userId) {
+      idFollowers.push(following.from_user_id);//Todo: Que porra eh essa?
     }
   });
-  console.log("Tenho ",jsonFollowers.length,' ids');
+
+ console.log('Followers: ',idFollowers)
   return idFollowers;
 }
 

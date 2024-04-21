@@ -6,6 +6,7 @@ import { DeleteIcon } from "@chakra-ui/icons";
 
 interface IPostProps {
   post: IPost;
+  handleDelete: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 async function getPerfil(perfilId: string) {
@@ -20,17 +21,16 @@ const initializer : IProfile = {
   username: "biancabzra"  
 }
 
-export function Post({ post }: IPostProps) {
+export function Post({ post, handleDelete }: IPostProps) {
   const [perfil, setPerfil] = useState<IProfile>(initializer);
 
   async function auxSetPerfil() {
-    console.log("id do perfil era: ",post.user_id);
+    
     const postPerfil : IProfile = await getPerfil(post.user_id);
     setPerfil(postPerfil);
   }
 
   useEffect(() => {
-    console.log("Oxi, montei o post");
     auxSetPerfil();
   }, []);
 
@@ -58,7 +58,7 @@ export function Post({ post }: IPostProps) {
         </footer>
         
       </div>
-      <i className={style.icon}><DeleteIcon color="white"/></i>
+      <i className={style.icon} onClick={handleDelete}><DeleteIcon cursor="pointer" color="white"/></i>
     </div>
   );
 }

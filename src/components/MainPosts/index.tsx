@@ -21,16 +21,31 @@ export function MainPosts({idLoggedUser} : MainPostsProps){
         setPosts([...posts, newPost]);
     }
 
+    function handleDelete(id:string){
+
+        const newPosts = posts.filter((post) => (
+            post.id !== id
+        ))
+
+        fetch(`http://localhost:3000/posts/${id}`, {
+        method: "DELETE",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        }).then(() => {
+        setPosts(newPosts);
+        });
+    }
 
     useEffect(() => {
-        console.log("Oxi, montei");
         auxSetPosts();
     }, []);        
 
     return (
         <div className={style.main}>
             <TextBox idLoggedUser={idLoggedUser} addNewPost={addNewPost}/>
-            {posts.map((post) => <Post post={post}/>)}
+            {posts.map((post) => <Post post={post} handleDelete={() => handleDelete(post.id)}/>)}
         </div>
     );
 }

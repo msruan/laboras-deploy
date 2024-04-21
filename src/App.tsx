@@ -10,10 +10,7 @@ interface AppProps {
 
 export function App({idLoggedUser} : AppProps) {
   return (
-    <div className="container">
-      <header className={style.header}>
-        <h1>LABORAS</h1>
-      </header>
+    <div className={style.container}>
       <aside className={style.aside}>
         <AsideMyProfile idLoggedUser={idLoggedUser}/>
       </aside>
