@@ -1,8 +1,9 @@
-import style from "./post.module.css";
+import { DeleteIcon } from "@chakra-ui/icons";
+import { useEffect, useState } from "react";
+
 import { IPost } from "../../models/post";
 import { IProfile } from "../../models/profile";
-import { useEffect, useState } from "react";
-import { DeleteIcon } from "@chakra-ui/icons";
+import style from "./post.module.css";
 
 interface IPostProps {
   post: IPost;
@@ -15,18 +16,17 @@ async function getPerfil(perfilId: string) {
   return jsonProfile;
 }
 
-const initializer : IProfile = {
-  id: "1", 
-  name: "Bianca Bezerra", 
-  username: "biancabzra"  
-}
+const initializer: IProfile = {
+  id: "1",
+  name: "Bianca Bezerra",
+  username: "biancabzra",
+};
 
 export function Post({ post, handleDelete }: IPostProps) {
   const [perfil, setPerfil] = useState<IProfile>(initializer);
 
   async function auxSetPerfil() {
-    
-    const postPerfil : IProfile = await getPerfil(post.user_id);
+    const postPerfil: IProfile = await getPerfil(post.user_id);
     setPerfil(postPerfil);
   }
 
@@ -52,13 +52,15 @@ export function Post({ post, handleDelete }: IPostProps) {
 
         <footer className={style.footer}>
           <p>
-            Data de publicação: <p>{new Date(post.created_at).toLocaleDateString()}</p>
+            Data de publicação:{" "}
+            <p>{new Date(post.created_at).toLocaleDateString()}</p>
             {/*Todo: trocar por <date>  */}
           </p>
         </footer>
-        
       </div>
-      <i className={style.icon} onClick={handleDelete}><DeleteIcon cursor="pointer" color="white"/></i>
+      <i className={style.icon} onClick={handleDelete}>
+        <DeleteIcon cursor="pointer" color="white" />
+      </i>
     </div>
   );
 }

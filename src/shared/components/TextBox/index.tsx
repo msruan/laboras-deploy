@@ -1,8 +1,9 @@
 // import { Input } from "@chakra-ui/react";
 import { useRef } from "react";
-import style from "./textbox.module.css";
 import { ulid } from "ulidx";
+
 import { IPost } from "../../models/post";
+import style from "./textbox.module.css";
 interface TextBoxProps {
   idLoggedUser: string;
   addNewPost: (newPost: IPost) => void;
@@ -48,7 +49,7 @@ export function TextBox({ idLoggedUser, addNewPost }: TextBoxProps) {
             ref={input}
             className={style.input}
             name="text"
-            maxlength="400"
+            maxLength={400}
             placeholder="No que voce está pensando?"
           ></textarea>
         </div>
