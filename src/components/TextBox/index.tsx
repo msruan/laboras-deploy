@@ -1,0 +1,55 @@
+// import { Input } from "@chakra-ui/react";
+import { useRef } from "react";
+import style from "./textbox.module.css";
+import { ulid } from "ulidx";
+import { IPost } from "../../models/post";
+interface TextBoxProps {
+  idLoggedUser: string;
+  addNewPost: (newPost: IPost) => void;
+}
+export function TextBox({ idLoggedUser, addNewPost }: TextBoxProps) {
+  const input = useRef<HTMLTextAreaElement>(null);
+
+  function handleClick() {
+    if (!input.current) {
+      return;
+    }
+
+    const newPost: IPost = {
+      id: ulid(),
+      user_id: idLoggedUser,
+      content: input.current.value,
+      created_at: `${new Date()}`,
+    };
+
+    fetch("http://localhost:3000/posts", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newPost),
+    });
+
+    addNewPost(newPost);
+    input.current.value = "";
+  }
+
+  return (
+    <div>
+      <div className={style.box}>
+        <img className={style.img} src="src/assets/chorro-timido.JPG" alt="" />
+        <textarea
+          ref={input}
+          className={style.input}
+          name="text"
+          maxlength="200"
+          placeholder="No que voce está pensando?"
+        ></textarea>
+        <button onClick={handleClick} className={style.btn}>
+          POST
+        </button>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,25 @@
+.aside {
+    grid-row: 2;
+}
+
+.asideMyProfile {
+    grid-column: 1;
+}
+
+.main {
+    grid-row: 2;
+    grid-column: 2;
+}
+
+
+
+.asideFollowers {
+    grid-column: 3;
+}
+
+.header {
+    grid-column: 1/4;
+    display: flex;
+    justify-content: start;
+    padding-left: 2em;
+}

@@ -1,0 +1,64 @@
+import style from "./post.module.css";
+import { IPost } from "../../models/post";
+import { IProfile } from "../../models/profile";
+import { useEffect, useState } from "react";
+import { DeleteIcon } from "@chakra-ui/icons";
+
+interface IPostProps {
+  post: IPost;
+}
+
+async function getPerfil(perfilId: string) {
+  const response = await fetch(`http://localhost:3000/profiles/${perfilId}`);
+  const jsonProfile: IProfile = await response.json();
+  return jsonProfile;
+}
+
+const initializer : IProfile = {
+  id: "1", 
+  name: "Bianca Bezerra", 
+  username: "biancabzra"  
+}
+
+export function Post({ post }: IPostProps) {
+  const [perfil, setPerfil] = useState<IProfile>(initializer);
+
+  async function auxSetPerfil() {
+    console.log("id do perfil era: ",post.user_id);
+    const postPerfil : IProfile = await getPerfil(post.user_id);
+    setPerfil(postPerfil);
+  }
+
+  useEffect(() => {
+    console.log("Oxi, montei o post");
+    auxSetPerfil();
+  }, []);
+
+  return (
+    <div className={style.body}>
+      <figure>
+        <img className={style.img} src="src/assets/chorro-timido.JPG" alt="" />
+      </figure>
+
+      <div className={style.text}>
+        <div className={style.names}>
+          <h3>{perfil?.name}</h3>
+          <h4>@{perfil?.username}</h4>
+        </div>
+
+        <div className={style.content}>
+          <p>{post?.content}</p>
+        </div>
+
+        <footer className={style.footer}>
+          <p>
+            Data de publicação: <p>{new Date(post.created_at).toLocaleDateString()}</p>
+            {/*Todo: trocar por <date>  */}
+          </p>
+        </footer>
+        
+      </div>
+      <i className={style.icon}><DeleteIcon color="white"/></i>
+    </div>
+  );
+}

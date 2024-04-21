@@ -1,0 +1,45 @@
+{
+  "profiles": [
+    {
+      "id": "1",
+      "name": "Bianca Bezerra",
+      "username": "biancabzra"
+    },
+    {
+      "id": "2",
+      "name": "Ruan Macedo",
+      "username": "msruan"
+    },
+    {
+      "id": "3",
+      "name": "Antonio Meireles",
+      "username": "meidesu"
+    },
+    {
+      "id": "4",
+      "name": "Herminio Neto",
+      "username": "herminioneto"
+    }
+  ],
+  "posts": [
+    {
+      "id": "01HVZ1Z48145DRFCJSRATVJ8TQ",
+      "user_id": "1",
+      "content": "está funcionando...",
+      "created_at": "Sat Apr 20 2024 21:47:45 GMT-0300 (Brasilia Standard Time)"
+    }
+  ],
+  "following": [
+    {
+      "id": "1",
+      "from_user_id": "1",
+      "to_user_id": "2"
+    },
+    {
+      "id": "2",
+      "from_user_id": "1",
+      "to_user_id": "3"
+    }
+    
+  ]
+}
