@@ -4,20 +4,21 @@ import { AsideFollowers } from "./components/AsideFollowers";
 import { IProfile } from "./models/profile";
 import style from "./App.module.css";
 
+
 interface AppProps {
-  idLoggedUser : string;
+  idLoggedUser: string;
 }
 
-export function App({idLoggedUser} : AppProps) {
+export function App({ idLoggedUser }: AppProps) {
   return (
-    <div className={style.container}>
-      <aside className={style.aside}>
-        <AsideMyProfile idLoggedUser={idLoggedUser}/>
+    <div className="columns-3"> {/*className={style.container} */}
+      <aside > {/*className={`${style.aside} ${style.asideMyProfile}`} */}
+        <AsideMyProfile idLoggedUser={idLoggedUser} />
       </aside>
-      <main className={style.main}>
-        <MainPosts idLoggedUser={idLoggedUser}/>
+      <main> {/* className={style.main} */}
+        <MainPosts idLoggedUser={idLoggedUser} />
       </main>
-      <aside className={style.aside}>
+      <aside > {/*className={`${style.aside} ${style.asideFollowers}`} */}
         <AsideFollowers idLoggedUser={"1"} />
       </aside>
     </div>

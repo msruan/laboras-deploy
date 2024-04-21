@@ -6,7 +6,7 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App idLoggedUser={"2"} />
-    {/* <Login/> */}
+    {/* <App idLoggedUser={"2"} /> */}
+    <Login/>
   </React.StrictMode>
 );
