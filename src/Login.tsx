@@ -25,10 +25,10 @@ import img2 from "./assets/img2.svg";
 import img3 from "./assets/img3.svg";
 import img4 from "./assets/img4.svg";
 
-type MyCarouselItemProps = {
+type LoginCarouselItemProps = {
   img: string;
 };
-function MyCarouselItem({ img }: MyCarouselItemProps) {
+function LoginCarouselItem({ img }: LoginCarouselItemProps) {
   return (
     <CarouselItem>
       <div className="flex aspect-square bg-background rounded p-8">
@@ -60,10 +60,10 @@ export function Login() {
           ]}
         >
           <CarouselContent>
-            <MyCarouselItem img={img1} />
-            <MyCarouselItem img={img2} />
-            <MyCarouselItem img={img3} />
-            <MyCarouselItem img={img4} />
+            <LoginCarouselItem img={img1} />
+            <LoginCarouselItem img={img2} />
+            <LoginCarouselItem img={img3} />
+            <LoginCarouselItem img={img4} />
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />

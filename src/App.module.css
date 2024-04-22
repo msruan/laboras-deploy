@@ -1,49 +1,47 @@
 .aside {
-    grid-row: 2;
+  grid-row: 2;
 }
 
 .asideMyProfile {
-    grid-column: 1;
-    min-height: 100%;
-    background-color: #1a1331;
-    width: min-content;
+  grid-column: 1;
+  min-height: 100%;
+  background-color: #1a1331;
+  width: min-content;
 }
 
 .main {
-    grid-row: 2;
-    grid-column: 2;
-    min-height: 100vh;
-    background-color: #1a1331;
+  grid-row: 2;
+  grid-column: 2;
+  min-height: 100vh;
+  background-color: #1a1331;
 }
 
 .title {
-    color: white;
-    height: 100%;
+  color: white;
+  height: 100%;
 }
 
-
-
 .asideFollowers {
-    grid-column: 3;
-    background-color: #1a1331;
-    min-height: 100vh;
+  grid-column: 3;
+  background-color: #1a1331;
+  min-height: 100vh;
 
-    /* background-color: rgb(49, 24, 133); */
+  /* background-color: rgb(49, 24, 133); */
 }
 
 .header {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    padding-left: 2em;
-    padding-top: 20px;
-    height: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 2em;
+  padding-top: 20px;
+  height: 100%;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: min-content min-content min-content;
-    grid-auto-flow: column;
-    row-gap: 5em;
-    column-gap: 5em;
+  display: grid;
+  grid-template-columns: min-content min-content min-content;
+  grid-auto-flow: column;
+  row-gap: 5em;
+  column-gap: 5em;
 }
