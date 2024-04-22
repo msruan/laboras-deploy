@@ -25,3 +25,5 @@
 ## Ajeitar os followers
 
 ## Colocar icons pra curtida
+
+## OK - Fazer autoplay do carousel: import Autoplay from "embla-carousel-autoplay"
