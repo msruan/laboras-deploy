@@ -1,24 +1,22 @@
-import { useState, useRef } from "react";
-// import style from './Login.module.css'
+import { Button } from "./components/ui/button";
 export function Login() {
-  const [loginMode, setLoginMode] = useState(false);
-  const loginButtonRef = useRef(null);
+  // const [loginMode, setLoginMode] = useState(false);
+  // const loginButtonRef = useRef(null);
 
-  function handleStartLogin() {
-    setLoginMode(true);
-    // loginButtonRef.current.disabled = true;
-  }
+  // function handleStartLogin() {
+  //   setLoginMode(true);
+  //   // loginButtonRef.current.disabled = true;
+  // }
 
   return (
-    <div className="border-gray-900 border-8">
-      <header>
-        <h1 className="text-3xl font-bold underline">LABORAS</h1>
-      </header>
+    <div >
       <main>
-        <button ref={loginButtonRef} onClick={handleStartLogin}>
-          Login
-        </button>
-        <button>Criar conta</button>
+        <div>
+          <Button>Criar conta</Button>
+          <Button>Criar conta</Button>
+        </div>
+        <section>
+        </section>
       </main>
     </div>
   );
