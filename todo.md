@@ -25,3 +25,7 @@
 ## Ajeitar os followers
 
 ## Colocar icons pra curtida
+
+## OK - Fazer autoplay do carousel: import Autoplay from "embla-carousel-autoplay"
+
+## Como sumir com um componente quando a tela ficar muito pequena?
