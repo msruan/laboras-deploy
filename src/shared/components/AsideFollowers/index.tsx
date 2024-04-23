@@ -4,11 +4,11 @@ import { IFollowing } from "../../models/following";
 import style from "./AsideFollowers.module.css";
 import { useEffect, useState } from "react";
 
-interface AsideFollowersProps {
+type AsideFollowersProps = {
   idLoggedUser: string;
 }
 
-export function AsideFollowers({ idLoggedUser}: AsideFollowersProps) {
+export const AsideFollowers = ({ idLoggedUser}: AsideFollowersProps) => {
   const [followers, setFollowers] = useState<IProfile[]>([]);
 
   async function auxSetFollowers(userId: string){

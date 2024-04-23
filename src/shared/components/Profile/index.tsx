@@ -1,11 +1,11 @@
 import styles from "./profile.module.css";
 import {IProfile} from '../../models/profile'
 
-interface IProfileProps {
+type IProfileProps = {
   perfil : IProfile;
 }
 
-export function Profile({perfil} : IProfileProps) {
+export const Profile = ({perfil} : IProfileProps) => {
   return (
     <div className={styles.profile_container}>
       <img

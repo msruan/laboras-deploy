@@ -21,20 +21,7 @@
       "username": "herminioneto"
     }
   ],
-  "posts": [
-    {
-      "id": "01HW0XD181W3M4DSQ07BRZ421A",
-      "user_id": "2",
-      "content": "anyway nihao",
-      "created_at": "Sun Apr 21 2024 15:06:27 GMT-0300 (Brasilia Standard Time)"
-    },
-    {
-      "id": "01HW12HF7YR2F1VPQFBJCVB2Z4",
-      "user_id": "2",
-      "content": "xcfgvh",
-      "created_at": "Sun Apr 21 2024 16:36:15 GMT-0300 (Horário Padrão de Brasília)"
-    }
-  ],
+  "posts": [],
   "following": [
     {
       "id": "1",

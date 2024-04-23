@@ -1,4 +1,4 @@
-import { Button } from "./components/ui/button";
+import { Button } from "./../../shared/components/ui/button";
 import {
   Card,
   CardContent,
@@ -6,24 +6,24 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./components/ui/card";
+} from "./../../shared/components/ui/card";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "./components/ui/carousel";
-import { Input } from "./components/ui/input";
-import { Label } from "./components/ui/label";
-import { Separator } from "./components/ui/separator";
+} from "./../../shared/components/ui/carousel";
+import { Input } from "./../../shared/components/ui/input";
+import { Label } from "./../../shared/components/ui/label";
+import { Separator } from "./../../shared/components/ui/separator";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import Autoplay from "embla-carousel-autoplay";
 
-import img1 from "./assets/img1.svg";
-import img2 from "./assets/img2.svg";
-import img3 from "./assets/img3.svg";
-import img4 from "./assets/img4.svg";
+import img1 from "./../..//assets/img1.svg";
+import img2 from "./../../assets/img2.svg";
+import img3 from "./../../assets/img3.svg";
+import img4 from "./../../assets/img4.svg";
 
 type MyCarouselItemProps = {
   img: string;
@@ -134,3 +134,5 @@ export function Login() {
     </main>
   );
 }
+
+export default Login

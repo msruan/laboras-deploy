@@ -5,11 +5,11 @@ import { TextBox } from "../TextBox";
 import { useEffect, useRef, useState } from 'react';
 import { IPost } from '../../models/post';
 
-interface MainPostsProps {
+type MainPostsProps = {
     idLoggedUser: string;
 }
 
-export function MainPosts({idLoggedUser} : MainPostsProps){
+export const MainPosts = ({idLoggedUser} : MainPostsProps) => {
 
     const [posts, setPosts] = useState<IPost[]>([]);
 

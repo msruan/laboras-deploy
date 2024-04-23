@@ -3,11 +3,12 @@ import { useRef } from "react";
 import style from "./textbox.module.css";
 import { ulid } from "ulidx";
 import { IPost } from "../../models/post";
-interface TextBoxProps {
+
+type TextBoxProps = {
   idLoggedUser: string;
   addNewPost: (newPost: IPost) => void;
 }
-export function TextBox({ idLoggedUser, addNewPost }: TextBoxProps) {
+export const TextBox = ({ idLoggedUser, addNewPost }: TextBoxProps) => {
   const input = useRef<HTMLTextAreaElement>(null);
 
   function handleClick() {

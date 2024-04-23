@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { MdHome } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 
-interface AsideMyProfileProps {
+type AsideMyProfileProps = {
   idLoggedUser : string;
 }
 
@@ -16,8 +16,7 @@ async function getPerfil(idPerfil: string) : Promise<IProfile>{
 }
 
 
-
-export function AsideMyProfile({idLoggedUser} : AsideMyProfileProps) {
+export const AsideMyProfile = ({idLoggedUser} : AsideMyProfileProps) => {
 
   const defaultPerfil : IProfile = {
     id: '2',

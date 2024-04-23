@@ -4,7 +4,7 @@ import { IProfile } from "../../models/profile";
 import { useEffect, useState } from "react";
 import { DeleteIcon } from "@chakra-ui/icons";
 
-interface IPostProps {
+type IPostProps = {
   post: IPost;
   handleDelete: (event: React.MouseEvent<HTMLElement>) => void;
 }
@@ -21,7 +21,7 @@ const initializer : IProfile = {
   username: "biancabzra"  
 }
 
-export function Post({ post, handleDelete }: IPostProps) {
+export const Post = ({ post, handleDelete }: IPostProps) => {
   const [perfil, setPerfil] = useState<IProfile>(initializer);
 
   async function auxSetPerfil() {
