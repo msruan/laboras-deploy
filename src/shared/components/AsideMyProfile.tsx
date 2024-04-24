@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 
 type AsideMyProfileProps = {
   idLoggedUser: string;
+  className: string;
 };
 
 async function getPerfil(idPerfil: string): Promise<IProfile> {
@@ -14,7 +15,7 @@ async function getPerfil(idPerfil: string): Promise<IProfile> {
   return jsonPerfil;
 }
 
-export const AsideMyProfile = ({ idLoggedUser }: AsideMyProfileProps) => {
+export const AsideMyProfile = ({ idLoggedUser, className }: AsideMyProfileProps) => {
   const defaultPerfil: IProfile = {
     id: "2",
     name: "Ruan Macedo",
@@ -32,19 +33,18 @@ export const AsideMyProfile = ({ idLoggedUser }: AsideMyProfileProps) => {
   }, []);
 
   return (
-    <div className="flex flex-col w-fit min-h-screen p-6 justify-between">
+    <div className={`flex flex-col  border-r-2 border-rebeccapurple2 p-5 justify-between ${className}`}>
       <style>
         {`
                 h2 {
                   font-family: 'Habbo', sans-serif;
-                  font-size: 50px;
                   text-shadow: 2px 2px 15px rebeccapurple
                 }
               `}
       </style>
 
-      <div className="flex flex-col w-full gap-4">
-        <h2>LABORAS</h2>
+      <div className="flex flex-col text-5xl w-full gap-4 p-2">
+        <h2 className="">LABORAS</h2>
         <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
           <HomeIcon className="mr-1 h-9 w-9" />
           Home

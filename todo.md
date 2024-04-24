@@ -27,3 +27,5 @@
 ## Colocar icons pra curtida
 
 ## OK - Fazer autoplay do carousel: import Autoplay from "embla-carousel-autoplay"
+
+## Refazer iamgens do carousel com essa cor: #1b091a

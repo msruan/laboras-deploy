@@ -21,7 +21,44 @@
       "username": "herminioneto"
     }
   ],
-  "posts": [],
+  "posts": [
+    {
+      "id": "01HW8MBP29RDZB8FW45JR7ZMW0",
+      "user_id": "2",
+      "content": "hikbhibhi",
+      "created_at": "Wed Apr 24 2024 15:02:21 GMT-0300 (Hora padrão de Brasília)"
+    },
+    {
+      "id": "01HW8MBQRBE652NZAYD20HCJEX",
+      "user_id": "2",
+      "content": "ibhibhi",
+      "created_at": "Wed Apr 24 2024 15:02:22 GMT-0300 (Hora padrão de Brasília)"
+    },
+    {
+      "id": "01HW8MBSCASC4H8C2J4C0B4PW3",
+      "user_id": "2",
+      "content": "bibhibhi",
+      "created_at": "Wed Apr 24 2024 15:02:24 GMT-0300 (Hora padrão de Brasília)"
+    },
+    {
+      "id": "01HW8MBVBJARJ2GV77DSQ7J7E6",
+      "user_id": "2",
+      "content": "ibhibhibhibhi",
+      "created_at": "Wed Apr 24 2024 15:02:26 GMT-0300 (Hora padrão de Brasília)"
+    },
+    {
+      "id": "01HW8MC1DSSDQRAX89Y1XX0WEZ",
+      "user_id": "2",
+      "content": "bhibhibhib{followers.map((profile) => (\n            <Profile key={profile.id} perfil={profile} />\n          ))}",
+      "created_at": "Wed Apr 24 2024 15:02:32 GMT-0300 (Hora padrão de Brasília)"
+    },
+    {
+      "id": "01HW8NN8R6JNDGCPME2HKS2W5R",
+      "user_id": "2",
+      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, iure. Voluptatibus saepe cum deserunt rem eos repellat unde odio, cupiditate nesciunt impedit provident accusantium numquam suscipit itaque possimus incidunt. Minus.",
+      "created_at": "Wed Apr 24 2024 15:25:03 GMT-0300 (Hora padrão de Brasília)"
+    }
+  ],
   "following": [
     {
       "id": "1",

@@ -9,8 +9,10 @@ interface AppProps {
 export function App({ idLoggedUser }: AppProps) {
   return (
     <div>
-      <AsideMyProfile idLoggedUser={idLoggedUser} />
-      <MainPosts idLoggedUser={idLoggedUser} />
+      <AsideMyProfile  idLoggedUser={idLoggedUser} />
+      <main>
+        <MainPosts idLoggedUser={idLoggedUser} />
+      </main>
       <AsideFollowers idLoggedUser={"1"} />
     </div>
   );

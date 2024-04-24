@@ -11,6 +11,7 @@ import { AsideMyProfile } from "@/components/AsideMyProfile";
 import { TextBox } from "@/components/TextBox";
 import { IPost } from "@/models/post";
 import { App } from "./App";
+import Post from "@/components/Post";
 
 export const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "/posts", element: <PostsPage /> },
+      { path: "/posts", element: <MainPosts idLoggedUser={"2"}/> },
       { path: "/posts/profile", element: <ProfilePage /> },
     ],
   },
@@ -42,7 +43,7 @@ export const router = createBrowserRouter([
       />
     ),
   },
-  { path: "/teste2", element: <App idLoggedUser={""} /> },
+  { path: "/teste2", element: <MainPosts idLoggedUser={"1"} /> },
 ]);
 
 export default router;

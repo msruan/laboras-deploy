@@ -37,7 +37,7 @@ export const MainPosts = ({ idLoggedUser }: MainPostsProps) => {
   }, []);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full gap-2 pl-3 pr-3">
       <TextBox idLoggedUser={idLoggedUser} addNewPost={addNewPost} />
       {posts.map((post) => (
         <Post post={post} handleDelete={() => handleDelete(post.id)} />

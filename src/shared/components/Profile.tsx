@@ -24,7 +24,7 @@ export const Profile = ({ perfil }: IProfileProps) => {
     //   </div>
     // </div>
 
-    <Card className="w-full bg-rebeccapurple flex justify-between p-3 border-0">
+    <Card className="w-full bg-rebeccapurple flex gap-4 p-2 border-0">
       {/* Fotinha */}
       <Avatar className="w-12 h-12 rounded-full">
         <AvatarImage src="src/assets/chorro-timido.JPG" />
