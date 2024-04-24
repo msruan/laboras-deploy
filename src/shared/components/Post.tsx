@@ -2,7 +2,10 @@ import { IPost } from "../models/post";
 import { IProfile } from "../models/profile";
 import { useEffect, useRef, useState } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
-import { Card, CardContent } from "./ui/card";
+import { Card, CardContent, CardTitle } from "./ui/card";
+import { BeakerIcon } from '@heroicons/react/24/solid'
+import {HandThumbDownIcon, HandThumbUpIcon} from "@heroicons/react/24/solid";
+
 import {
   HeartIcon,
   HeartFilledIcon,
@@ -10,6 +13,8 @@ import {
   Cross1Icon,
   Cross2Icon,
 } from "@radix-ui/react-icons";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { PostContent } from "./PostContent";
 
 type IPostProps = {
   post: IPost;
@@ -28,17 +33,31 @@ const initializer: IProfile = {
   username: "biancabzra",
 };
 
-function handleLike(){}
-
 export const Post = ({ post, handleDelete }: IPostProps) => {
   const [perfil, setPerfil] = useState<IProfile>(initializer);
 
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [isDesliked, setIsDesliked] = useState<boolean>(false);
 
+  const likePressedRef = useRef();
+  const likeUnpressedRef = useRef();
+
+  const deslikePressedRef = useRef();
+  const deslikeUnpressedRef = useRef();
+
   async function auxSetPerfil() {
     const postPerfil: IProfile = await getPerfil(post.user_id);
     setPerfil(postPerfil);
+  }
+
+  function handleHoverLikePressed() {}
+
+  function handleLike() {
+    setIsLiked(!isLiked);
+  }
+
+  function handleDeslike() {
+    setIsDesliked(!isDesliked);
   }
 
   useEffect(() => {
@@ -54,36 +73,45 @@ export const Post = ({ post, handleDelete }: IPostProps) => {
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
 
-      <CardContent className="flex gap-8 w-full break-all p-0 ">
-        <div className="flex flex-col gap-2">
-          <div className="flex flex-row items-center text-aliceblue text-sm gap-1.5">
-            <h3>{perfil?.name}</h3>
-            <h4 className="opacity-70">@{perfil?.username}</h4>
-          </div>
-
-          <div className="text-aliceblue font-sans text-base w-full">
-            <p>{post?.content}</p>
-          </div>
-
-          <footer className="text-white opacity-70 text-sm">
-            <p>
-              Data de publicação:{" "}
-              <p>{new Date(post.created_at).toLocaleDateString()}</p>
-              {/*Todo: trocar por <date>  */}
-            </p>
-          </footer>
-        </div>
+      <Dialog>
+        <DialogTrigger className="w-full flex flex-row text-start">
+          <PostContent perfil={perfil} post={post} />
+        </DialogTrigger>
         <i className="ml-auto pr-5" onClick={handleDelete}>
           <TrashIcon cursor="pointer" color="white" />
         </i>
         <i onClick={handleLike}>
           {isLiked ? (
-            <HeartIcon cursor="pointer" color="white" />
+            <>
+            {/* <BeakerIcon className="h-6 w-6 text-blue-500" /> */}
+            <HeartFilledIcon
+              // ref={likePressedRef}   
+              cursor="pointer"
+              color="purple"
+            />
+            </>
           ) : (
-            <HeartFilledIcon cursor="pointer" color="red" />
+            <>
+            <HeartIcon cursor="pointer" color="white" />
+            {/* <BeakerIcon className="h-6 w-6 text-blue-500" /> */}
+            </>
           )}
         </i>
-      </CardContent>
+        {/* <i onClick={handleDeslike}>
+          {isDesliked ? (
+          ) : (
+          )}
+        </i> */}
+        <DialogContent>
+          Data de publicação:{" "}
+          <p>{new Date(post.created_at).toLocaleDateString()}</p>
+          {/*Todo: trocar por <date>  */}
+          {/* </p>
+                </footer>
+              </div> */}
+          {/* </CardContent> */}
+        </DialogContent>
+      </Dialog>
     </Card>
   );
 };

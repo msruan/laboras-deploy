@@ -41,12 +41,6 @@
       "created_at": "Wed Apr 24 2024 15:02:24 GMT-0300 (Hora padrão de Brasília)"
     },
     {
-      "id": "01HW8MBVBJARJ2GV77DSQ7J7E6",
-      "user_id": "2",
-      "content": "ibhibhibhibhi",
-      "created_at": "Wed Apr 24 2024 15:02:26 GMT-0300 (Hora padrão de Brasília)"
-    },
-    {
       "id": "01HW8MC1DSSDQRAX89Y1XX0WEZ",
       "user_id": "2",
       "content": "bhibhibhib{followers.map((profile) => (\n            <Profile key={profile.id} perfil={profile} />\n          ))}",
