@@ -49,7 +49,7 @@ export function Login() {
 
   return (
     <main className=" h-screen  flex justify-center items-center  w-full">
-      <div className="bg-primary-foreground w-full h-full flex justify-center items-center p-16">
+      <div className="bg-card w-full h-full flex justify-center items-center p-16">
         <Carousel
           className="w-full max-w-xl"
           opts={{ loop: true }}
@@ -69,23 +69,6 @@ export function Login() {
           <CarouselNext />
         </Carousel>
       </div>
-      {/* <Carousel className="w-full max-w-xs">
-      <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index}>
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-    </Carousel> */}
       <section className="flex items-center justify-center bg-background h-full max-w-3xl w-full p-4">
         <Card className="w-full max-w-md">
           <CardHeader>

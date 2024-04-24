@@ -1,4 +1,4 @@
-import { Profile } from "../Profile/index";
+import { Profile } from "../Profile";
 import { IProfile } from "../../models/profile";
 import { IFollowing } from "../../models/following";
 import style from "./AsideFollowers.module.css";

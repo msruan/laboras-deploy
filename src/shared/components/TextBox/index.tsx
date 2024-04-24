@@ -3,6 +3,7 @@ import { useRef } from "react";
 import style from "./textbox.module.css";
 import { ulid } from "ulidx";
 import { IPost } from "../../models/post";
+import { Textarea } from "../ui/textarea";
 
 type TextBoxProps = {
   idLoggedUser: string;
@@ -37,21 +38,34 @@ export const TextBox = ({ idLoggedUser, addNewPost }: TextBoxProps) => {
   }
 
   return (
+  //   .box {
+  //     display: flex;
+  //     flex-direction: column;
+  //     width: 100%;
+  //     align-items: center;
+  //     border-bottom: 2px solid #7B1AF2;
+  //     border-top: 2px solid #7B1AF2;
+  //     border-top-right-radius: 2px ;
+  //     border-top-left-radius: 2px ;
+  //     padding-bottom: 10px;
+  //     margin-bottom: 10px;
+  // }
+    
     <div>
-      <div className={style.box}>
+      <div className="flex flex-col w-full align-middle">
         <div className={style.header}>
           <img
             className={style.img}
             src="src/assets/chorro-timido.JPG"
             alt=""
           />
-          <textarea
+          <Textarea
             ref={input}
             className={style.input}
             name="text"
-            maxlength="400"
+            maxLength="400"
             placeholder="No que voce está pensando?"
-          ></textarea>
+          ></Textarea>
         </div>
         <div className={style.btn}>
           <button onClick={handleClick}>POST</button>

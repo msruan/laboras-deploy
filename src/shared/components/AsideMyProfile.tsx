@@ -1,7 +1,7 @@
-import { Profile } from "./Profile/index";
+import { Profile } from "./Profile";
 import { IProfile } from "../models/profile";
 import { useEffect, useState } from "react";
-import { AvatarIcon,  HomeIcon } from "@radix-ui/react-icons";
+import { AvatarIcon, HomeIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 
 type AsideMyProfileProps = {
@@ -32,35 +32,30 @@ export const AsideMyProfile = ({ idLoggedUser }: AsideMyProfileProps) => {
   }, []);
 
   return (
-    <div>
-        <div className="flex flex-col w-fit p-6">
-            <style>
-              {`
+    <div className="flex flex-col w-fit min-h-screen p-6 justify-between">
+      <style>
+        {`
                 h2 {
                   font-family: 'Habbo', sans-serif;
                   font-size: 50px;
                   text-shadow: 2px 2px 15px rebeccapurple
                 }
               `}
-            </style>
+      </style>
 
-              <h2>LABORAS</h2>
-            
-          <div className="flex flex-col w-full gap-4">
-            <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
-                <HomeIcon className="mr-1 h-9 w-9"/> 
-                Home
-            </Button>
+      <div className="flex flex-col w-full gap-4">
+        <h2>LABORAS</h2>
+        <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
+          <HomeIcon className="mr-1 h-9 w-9" />
+          Home
+        </Button>
 
-            <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
-                <AvatarIcon className="mr-1 h-10 w-10" /> Profile
-              </Button>
-          </div>
+        <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
+          <AvatarIcon className="mr-1 h-10 w-10" /> Profile
+        </Button>
+      </div>
 
-        </div>
-
-        <Profile perfil={perfil} />
-      
+      <Profile perfil={perfil} />
     </div>
   );
 };
