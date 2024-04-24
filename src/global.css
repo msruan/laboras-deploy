@@ -74,3 +74,8 @@
       @apply bg-background text-foreground;
     }
   }
+
+  @font-face {
+    font-family: 'Habbo';
+    src: url('/src/assets/habbo-font/HabboFont.ttf') format('truetype');
+  }

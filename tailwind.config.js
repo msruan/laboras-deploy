@@ -18,6 +18,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        rebeccapurple: "rgba(123, 26, 242, 0.1)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -71,6 +72,8 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      fontFamily: {
+        'sans': ['Helvetica', 'Arial', 'sans-serif']}
     },
   },
   plugins: [require("tailwindcss-animate")],

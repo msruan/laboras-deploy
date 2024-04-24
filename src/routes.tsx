@@ -6,6 +6,9 @@ import HomePage from "./pages/public/HomePage";
 import LoginPage from "./pages/public/LoginPage";
 import PostsPage from "./pages/authenticated/PostsPage";
 import ProfilePage from "./pages/authenticated/ProfilePage";
+import { MainPosts } from "@/components/MainPosts";
+
+
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +28,10 @@ export const router = createBrowserRouter([
         { path: "/posts", element: <PostsPage /> },
         { path: "/posts/profile", element: <ProfilePage/>}
     ],
+  },
+  {
+    path: "/teste",
+    element: <MainPosts idLoggedUser={"1"}/>
   }
 ]);
 
