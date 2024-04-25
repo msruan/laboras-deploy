@@ -1,24 +1,22 @@
 import { IPost } from "../models/post";
 import { IProfile } from "../models/profile";
-import { useEffect, useRef, useState } from "react";
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
-import { Card, CardContent, CardTitle } from "./ui/card";
-import { BeakerIcon } from '@heroicons/react/24/solid'
-import {HandThumbDownIcon, HandThumbUpIcon} from "@heroicons/react/24/solid";
-
-import {
-  HeartIcon,
-  HeartFilledIcon,
-  TrashIcon,
-  Cross1Icon,
-  Cross2Icon,
-} from "@radix-ui/react-icons";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import { PostContent } from "./PostContent";
+
+import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
+import { Card, CardContent, CardTitle } from "./ui/card";
+import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
+import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
+import DeleteOutlineTwoToneIcon from "@mui/icons-material/DeleteOutlineTwoTone";
+
+import { useEffect, useRef, useState } from "react";
 
 type IPostProps = {
   post: IPost;
   handleDelete: (event: React.MouseEvent<HTMLElement>) => void;
+  fullpage: boolean;
 };
 
 async function getPerfil(perfilId: string) {
@@ -33,11 +31,16 @@ const initializer: IProfile = {
   username: "biancabzra",
 };
 
-export const Post = ({ post, handleDelete }: IPostProps) => {
+export const Post = ({
+  post,
+  handleDelete = (e) => {},
+  fullpage = false,
+}: IPostProps) => {
   const [perfil, setPerfil] = useState<IProfile>(initializer);
 
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [isDesliked, setIsDesliked] = useState<boolean>(false);
+  const [isTrashed, setIsTrashed] = useState<boolean>(false);
 
   const likePressedRef = useRef();
   const likeUnpressedRef = useRef();
@@ -65,7 +68,11 @@ export const Post = ({ post, handleDelete }: IPostProps) => {
   }, []);
 
   return (
-    <Card className="w-full bg-rebeccapurple flex gap-4 p-3 border-b border-purple-400">
+    <Card
+      className={`w-full bg-rebeccapurple flex gap-4 p-3 border-b border-purple-400 
+    ${fullpage ? "" : "h-full"}
+    `}
+    >
       {/* Fotinha */}
       <Avatar className="w-12 h-12 rounded-full">
         <AvatarImage src="https://p2.trrsf.com/image/fget/cf/1200/1600/middle/images.terra.com/2023/07/31/pedro-flamengo-uv5ta7zqn5us.jpg" />
@@ -73,45 +80,51 @@ export const Post = ({ post, handleDelete }: IPostProps) => {
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
 
-      <Dialog>
-        <DialogTrigger className="w-full flex flex-row text-start">
-          <PostContent perfil={perfil} post={post} />
-        </DialogTrigger>
-        <i className="ml-auto pr-5" onClick={handleDelete}>
-          <TrashIcon cursor="pointer" color="white" />
-        </i>
-        <i onClick={handleLike}>
-          {isLiked ? (
-            <>
-            {/* <BeakerIcon className="h-6 w-6 text-blue-500" /> */}
-            <HeartFilledIcon
-              // ref={likePressedRef}   
+      <PostContent perfil={perfil} post={post} fullPage={fullpage} />
+
+      <div className="flex flex-col justify-between">
+        {!isLiked ? (
+          <>
+            <FavoriteTwoToneIcon
+              onClick={handleLike}
+              style={{
+                color: "purple",
+                fontSize: "1rem",
+                border: "solid thin yelllow",
+                borderRadius: "2px",
+              }}
               cursor="pointer"
-              color="purple"
             />
-            </>
-          ) : (
-            <>
-            <HeartIcon cursor="pointer" color="white" />
+          </>
+        ) : (
+          <>
+            <FavoriteBorderOutlinedIcon
+              onClick={handleLike}
+              cursor="pointer"
+              style={{ color: "white", fontSize: "1rem" }}
+            />
             {/* <BeakerIcon className="h-6 w-6 text-blue-500" /> */}
-            </>
-          )}
-        </i>
-        {/* <i onClick={handleDeslike}>
-          {isDesliked ? (
-          ) : (
-          )}
-        </i> */}
-        <DialogContent>
-          Data de publicação:{" "}
-          <p>{new Date(post.created_at).toLocaleDateString()}</p>
-          {/*Todo: trocar por <date>  */}
-          {/* </p>
-                </footer>
-              </div> */}
-          {/* </CardContent> */}
-        </DialogContent>
-      </Dialog>
+          </>
+        )}
+
+        {isDesliked ? (
+          <ThumbDownAltIcon
+            onClick={handleDeslike}
+            cursor="pointer"
+            style={{ color: "red", fontSize: "1rem" }}
+          />
+        ) : (
+          <ThumbDownOffAltIcon
+            onClick={handleDeslike}
+            cursor="pointer"
+            style={{ color: "white", fontSize: "1rem" }}
+          />
+        )}
+        <DeleteOutlineTwoToneIcon
+          cursor="pointer"
+          style={{ cursor: "pointer", fontSize: "1rem" }}
+        />
+      </div>
     </Card>
   );
 };

@@ -1,6 +1,8 @@
+import { IProfile } from "./profile";
+
 export interface IComment {
-    content,
-    user,
-    post,
-    created_at
+    content: string,
+    user: IProfile,
+    postId: string,
+    created_at: string,
 } 

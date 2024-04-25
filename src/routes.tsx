@@ -14,7 +14,7 @@ import { App } from "./App";
 import Post from "@/components/Post";
 
 export const router = createBrowserRouter([
-  {
+{
     path: "/",
     element: <LoginLayout />,
     errorElement: <ErrorPage />,
@@ -30,6 +30,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/posts", element: <MainPosts idLoggedUser={"2"}/> },
       { path: "/posts/profile", element: <ProfilePage /> },
+      { path: "/posts/postPage", element: <PostsPage/>},
     ],
   },
   {

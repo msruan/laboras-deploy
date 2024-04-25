@@ -16,7 +16,7 @@ export const TextBox = ({ idLoggedUser, addNewPost }: TextBoxProps) => {
   const input = useRef<HTMLTextAreaElement>(null);
 
   function handleClick() {
-    if (!input.current) {
+    if (input.current == null ||input.current.value === "") {
       return;
     }
 

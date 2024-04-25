@@ -19,6 +19,8 @@ module.exports = {
     extend: {
       spacing: {
         'custom': '80%',
+        'half-vh': '50vh',
+        'icon' : '1rem'
       },
       colors: {
         rebeccapurple: "rgba(123, 26, 242, 0.1)",
