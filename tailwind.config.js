@@ -24,7 +24,7 @@ module.exports = {
       },
       colors: {
         rebeccapurple: "rgba(123, 26, 242, 0.1)",
-        rebeccapurple2: "rgba(123, 26, 242, 0.7)",
+        rebeccapurple2: "rgba(123, 26, 242, 0.2)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

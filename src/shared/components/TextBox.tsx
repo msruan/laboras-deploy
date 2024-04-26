@@ -43,7 +43,7 @@ export const TextBox = ({ idLoggedUser, addNewPost }: TextBoxProps) => {
   return (
     
     <div>
-      <div className="flex flex-col w-full align-middle pb-10 border-b-2 pt-5 pl-3 pr-3 border-rebeccapurple2">
+      <div className="flex flex-col w-full align-middle pb-10 border-b-2  pl-3 pr-3 border-rebeccapurple2">
         <div className="w-full flex flex-row gap-8 items-center">
           <Avatar className="w-12 h-12 rounded-full">
             <AvatarImage src="src/assets/chorro-timido.JPG" />
@@ -52,30 +52,17 @@ export const TextBox = ({ idLoggedUser, addNewPost }: TextBoxProps) => {
 
           <textarea
             ref={input}
-            className="bg-transparent items-center"
+            className="bg-transparent py-5 w-full content-center border-none text-white outline-none resize-none"
             name="text"
             maxLength="400"
             placeholder="No que voce está pensando?"
           ></textarea>
         </div>
         <div className="self-end justify-self-end w-fit h-fit">
-          <Button onClick={handleClick} className=" bg-rebeccapurple2 hover:bg-rebeccapurple w-full h-full rounded-full transition-all duration-400">POST</Button>
+          <Button onClick={handleClick} className=" bg-rebeccapurple2 hover:bg-rebeccapurple w-full h-full rounded-full font-bold">POST</Button>
         </div>
       </div>
     </div>
   );
 }
 
-// .input {
-//   padding: 20px 0px 20px;
-//   background-color: transparent;
-//   width: 615px;
-//   align-items: center;
-//   border: none;
-//   color: white;
-//   outline: none;
-//   font-size: 16px;
-//   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-//   resize: none;
-  
-// }

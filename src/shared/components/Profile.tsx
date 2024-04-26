@@ -1,47 +1,62 @@
-import styles from "./profile.module.css";
-import { IProfile } from "../models/profile";
-import { Card, CardContent } from "./ui/card";
 
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import {
+    Card,
+    CardTitle,
+    CardContent
+  } from "./../../shared/components/ui/card";
+  import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+  import { Button } from "@/components/ui/button";
+  
 
+export const Profile = () => {
 
-type IProfileProps = {
-  perfil: IProfile;
-};
+    return (
 
-export const Profile = ({ perfil }: IProfileProps) => {
-  return (
-    // <div className="bg-purple-900 py-10 px-2 flex items-center gap-2 w-full h-auto pb-5 rounded-3xl mb-13">
-    //   <img
-    //     className="w-12 h-12 rounded-full"
-    //     src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84cc83ea9f56fe6130ce96a405"
-    //     alt="foto do usuario atual"
-    //   />
-    //   <div className="flex flex-col">
-    //     <p className="text-white">{perfil.name}</p>
-    //     <p className="text-gray-500">@{perfil.username}</p>
-    //   </div>
-    // </div>
+<Card className="flex flex-row items-center gap-16 p-9 px-20 rounded-none bg-transparent border-r-0 border-l-0 border-rebeccapurple2">
+          <div className="flex flex-col h-full items-center justify-center gap-5">
+            <Avatar className="h-56 w-56">
+              <AvatarImage src="https://i.pinimg.com/originals/b5/81/61/b58161c8a74b05c68eeefae22908ce35.jpg" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <Button className="w-16 text-white rounded-full font-bold px-9">
+              Seguir
+            </Button>
+          </div>
 
-    <Card className="w-full bg-rebeccapurple flex gap-4 p-2 border-0">
-      {/* Fotinha */}
-      <Avatar className="w-12 h-12 rounded-full">
-        <AvatarImage src="src/assets/chorro-timido.JPG" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
+          <div className="flex flex-col w-full gap-3 items-center">
 
-      <CardContent className="flex gap-5 break-all justify-center items-center p-0">
-        <div className="flex flex-col items-start text-aliceblue text-sm gap-1.5">
-          <h3>{perfil?.name}</h3>
-          <h4 className="opacity-70">@{perfil?.username}</h4>
-        </div>
+            <CardTitle className="text-2xl font-bold tracking-tighter">
+              bianca bezerra
+            </CardTitle>
 
-        <i className="ml-auto pr-5">
-        <DotsHorizontalIcon cursor="pointer" color="white" />
-      </i>
+            <CardContent className="flex flex-col gap-6 p-0 items-center">
 
-      </CardContent>
-    </Card>
-  );
-};
+              <div className="flex flex-row w-full gap-10 p-0 justify-center">
+                <p>300 <strong>publicações</strong></p>
+                <p>500 <strong>seguimores</strong></p>
+                <p>400 <strong>seguindo</strong></p>
+              </div>
+
+              <div className="flex w-fit h-fit text-wrap ">
+                <p className="break-normal text-ellipsis ">
+                  Meiga e abusada, faço você se perder!
+                  e quem foi que disse que eu estava apaixonada por você?
+                  eu só quero saber!
+                  linda e perfumada, ah, na tua mente!
+                  faz o que quiser comigo na imaginação.
+                  homem do teu tipo eu uso
+                  mas se chega lá, eu digo não...
+                </p>
+              </div>
+
+              <Button className="font-bold p-4 px-9 w-16 h-8 bg-slate-700 hover:bg-slate-800 text-white rounded-full justify-self-center">
+              Editar
+              </Button>
+
+            </CardContent>
+
+            
+          </div>
+        </Card>
+    )
+}

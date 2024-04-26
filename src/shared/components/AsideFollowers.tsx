@@ -1,9 +1,7 @@
-import { Profile } from "./Profile";
+import { ProfileTag } from "./ProfileTag";
 import { IProfile } from "../models/profile";
 import { IFollowing } from "../models/following";
-import style from "./AsideFollowers.module.css";
 import { useEffect, useState } from "react";
-import { Separator } from "./ui/separator";
 import { ScrollArea } from "./ui/scrolarea";
 
 type AsideFollowersProps = {
@@ -31,17 +29,17 @@ export const AsideFollowers = ({
     <div
       className={`flex flex-col border-l-2 items-center border-rebeccapurple2 p-6 gap-3 ${className}`}
     >
-      <h2 className="text-white font-sans text-2xl">Your followers</h2>
+      <h2 className="text-white font-sans text-2xl font-bold">Your followers</h2>
       <ScrollArea className="flex flex-row h-lvh w-60">
         <div className="min-h-full flex flex-col gap-11">
           {followers.map((profile) => (
-            <Profile key={profile.id} perfil={profile} />
+            <ProfileTag key={profile.id} perfil={profile} />
           ))}
           {followers.map((profile) => (
-            <Profile key={profile.id} perfil={profile} />
+            <ProfileTag key={profile.id} perfil={profile} />
           ))}
           {followers.map((profile) => (
-            <Profile key={profile.id} perfil={profile} />
+            <ProfileTag key={profile.id} perfil={profile} />
           ))}
         </div>
       </ScrollArea>

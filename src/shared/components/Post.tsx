@@ -1,10 +1,8 @@
 import { IPost } from "../models/post";
 import { IProfile } from "../models/profile";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import { PostContent } from "./PostContent";
-
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
-import { Card, CardContent, CardTitle } from "./ui/card";
+import { Card} from "./ui/card";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -69,7 +67,7 @@ export const Post = ({
 
   return (
     <Card
-      className={`w-full bg-rebeccapurple flex gap-4 p-3 border-b border-purple-400 
+      className={`w-full bg-rebeccapurple flex pt-3 pl-5 pr-3 pb-3 border-b border-purple-400 
     ${fullpage ? "" : "h-full"}
     `}
     >
@@ -80,10 +78,13 @@ export const Post = ({
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
 
-      <PostContent perfil={perfil} post={post} fullPage={fullpage} />
-
-      <div className="flex flex-col justify-between">
-        {!isLiked ? (
+      <PostContent perfil={perfil} post={post} fullPage={fullpage}/>
+      
+      
+      <div className={`
+    ${fullpage ? "flex flex-row gap-10 pr-7 pb-1 h-fit self-end" : "flex flex-col justify-between"}
+    `}>
+        {isLiked ? (
           <>
             <FavoriteTwoToneIcon
               onClick={handleLike}
