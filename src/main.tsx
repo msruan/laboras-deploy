@@ -4,13 +4,16 @@ import "./global.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes.tsx";
 import { ThemeProvider } from "@/components/ui/theme-provider.tsx";
-// import Login from "./pages/public/LoginPage.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const client = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    {/* <App idLoggedUser={"2"} /> */}
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-     <RouterProvider router={router}/> 
-     </ThemeProvider>
+    <QueryClientProvider client={client}>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

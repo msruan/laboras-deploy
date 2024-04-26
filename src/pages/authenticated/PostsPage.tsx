@@ -12,9 +12,16 @@ const myPost: IPost = {
 
 export const PostsPage = () => {
   return (
-    <Post post={myPost} fullpage={true} handleDelete={function (event: React.MouseEvent<HTMLElement>): void {
-      throw new Error("Function not implemented.");
-    } } />
+    <div className="flex flex-col gap-2">
+      <Post post={myPost} fullpage={true} handleDelete={function (event: React.MouseEvent<HTMLElement>): void {
+        throw new Error("Function not implemented.");
+      } } fullBorder={false} />
+      <div>
+        <Post post={myPost} handleDelete={function (event: React.MouseEvent<HTMLElement>): void {
+          throw new Error("Function not implemented.");
+        } } fullpage={false} fullBorder={true} />
+      </div>
+    </div>
   );
 };
 

@@ -15,6 +15,7 @@ type IPostProps = {
   post: IPost;
   handleDelete: (event: React.MouseEvent<HTMLElement>) => void;
   fullpage: boolean;
+  fullBorder: boolean;
 };
 
 async function getPerfil(perfilId: string) {
@@ -33,6 +34,7 @@ export const Post = ({
   post,
   handleDelete = (e) => {},
   fullpage = false,
+  fullBorder = false
 }: IPostProps) => {
   const [perfil, setPerfil] = useState<IProfile>(initializer);
 
@@ -67,12 +69,12 @@ export const Post = ({
 
   return (
     <Card
-      className={`w-full bg-rebeccapurple flex pt-3 pl-5 pr-3 pb-3 border-b border-purple-400 
-    ${fullpage ? "" : "h-full"}
+      className={`w-full  flex pt-3 pl-5 pr-3 pb-3 
+    ${fullpage ? "bg-transparent" : "h-full bg-rebeccapurple"}
+    ${fullBorder ? "border-purple-400 " : "border-t-0 border-l-0 border-r-0 border-b-purple-400 rounded-none"}
     `}
     >
-      {/* Fotinha */}
-      <Avatar className="w-12 h-12 rounded-full">
+      {/* Fotinha */}  <Avatar className="w-12 h-12 rounded-full">
         <AvatarImage src="https://p2.trrsf.com/image/fget/cf/1200/1600/middle/images.terra.com/2023/07/31/pedro-flamengo-uv5ta7zqn5us.jpg" />
 
         <AvatarFallback>CN</AvatarFallback>
@@ -121,7 +123,9 @@ export const Post = ({
             style={{ color: "white", fontSize: "1rem" }}
           />
         )}
+
         <DeleteOutlineTwoToneIcon
+          // onClick={handleDelete}
           cursor="pointer"
           style={{ cursor: "pointer", fontSize: "1rem" }}
         />

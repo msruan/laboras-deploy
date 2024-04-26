@@ -8,18 +8,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import Autoplay from "embla-carousel-autoplay";
+import { Link } from "react-router-dom";
 
 import img1 from "./../..//assets/img1.svg";
 import img2 from "./../../assets/img2.svg";
@@ -38,13 +30,32 @@ function MyCarouselItem({ img}: MyCarouselItemProps) {
 
 
   return (
-    <CarouselItem>
-      <div className="flex aspect-square bg-background rounded p-8">
-        <img src={img} alt="" />
-      </div>
-    </CarouselItem>
-  );
-}
+    <Card className="w-full max-w-md text-wrap">
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold tracking-tighter">
+          Entre por sua conta em risco
+        </CardTitle>
+        <CardDescription className="text-purple-300">
+          Não possui conta ainda? <Link className="underline" to={"/signup"}>Criar nova conta</Link>
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4">
+        <div>
+          <Label htmlFor="email">Login</Label>
+          <Input
+            id="email"
+            placeholder="Digite seu e-mail ou nome de usuário"
+            type="email"
+          ></Input>
+        </div>
+        <div>
+          <Label htmlFor="senha">Senha</Label>
+          <Input
+            id="senha"
+            placeholder="Digite sua melhor senha"
+            type="password"
+          ></Input>
+        </div>
 
 async function LoginUser(credentials: any) {
   return fetch('http://localhost:3000/users',{
@@ -133,18 +144,16 @@ export function LoginPage({setToken} : LoginProps) {
             <Button variant="outline" className="mt-2">
               <GitHubLogoIcon className="mr-2" />
               Entrar com o GitHub
-            </Button>
-          </CardContent>
-          <CardFooter>
-            <p className="text-sm text-muted-foreground text-center text-wrapp">
-              Ao entrar em nossa plataforma, você concorda que roubemos todos os
-              seus dados.
-            </p>
-          </CardFooter>
-        </Card>
-      </section>
-    </main>
+            </Button> */}
+      </CardContent>
+
+      
+      <CardFooter>
+        <p className="text-sm text-muted-foreground text-center text-wrapp">
+          Ao entrar em nossa plataforma, você concorda que roubemos todos os
+          seus dados.
+        </p>
+      </CardFooter>
+    </Card>
   );
 }
-
-export default LoginPage

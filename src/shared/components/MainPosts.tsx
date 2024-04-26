@@ -18,19 +18,7 @@ export const MainPosts = ({ idLoggedUser }: MainPostsProps) => {
     setPosts([...posts, newPost]);
   }
 
-  function handleDelete(id: string) {
-    const newPosts = posts.filter((post) => post.id !== id);
-
-    fetch(`http://localhost:3000/posts/${id}`, {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    }).then(() => {
-      setPosts(newPosts);
-    });
-  }
+  
 
   useEffect(() => {
     auxSetPosts();
@@ -40,15 +28,9 @@ export const MainPosts = ({ idLoggedUser }: MainPostsProps) => {
     <div className="flex flex-col h-full gap-2 pl-3 pr-3">
       <TextBox idLoggedUser={idLoggedUser} addNewPost={addNewPost} />
       {posts.map((post) => (
-        <Post post={post} handleDelete={() => handleDelete(post.id)} fullpage={false} />
+        <Post post={post} handleDelete={() => handleDelete(post.id)} fullpage={false} fullBorder={true} />
       ))}
     </div>
   );
 };
 
-async function getPosts(): Promise<IPost[]> {
-  const response = await fetch(`http://localhost:3000/posts`);
-  const jsonPosts: IPost[] = await response.json();
-  console.log(jsonPosts);
-  return jsonPosts;
-}
