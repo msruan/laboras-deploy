@@ -4,3 +4,7 @@ export interface IPost {
     content : string,
     created_at : string,
 }
+
+export type PostsResponse = {
+    posts: IPost[]
+}

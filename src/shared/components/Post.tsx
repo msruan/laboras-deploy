@@ -13,7 +13,7 @@ import { useEffect, useRef, useState } from "react";
 
 type IPostProps = {
   post: IPost;
-  handleDelete: (event: React.MouseEvent<HTMLElement>) => void;
+  // handleDelete: (event: React.MouseEvent<HTMLElement>) => void;
   fullpage: boolean;
   fullBorder: boolean;
 };
@@ -32,7 +32,7 @@ const initializer: IProfile = {
 
 export const Post = ({
   post,
-  handleDelete = (e) => {},
+  // handleDelete = (e) => {},
   fullpage = false,
   fullBorder = false
 }: IPostProps) => {

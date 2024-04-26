@@ -1,27 +1,23 @@
-import {useQuery} from '@tanstack/react-query'
-import axios from 'axios'
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import axiosInstance from "../config/axiosConfig.js";
+import axios, { AxiosPromise, AxiosResponse } from "axios";
+import { PostsResponse, IPost } from "@/models/post.js";
 
-const fetchPosts = async () => {
-    const response = await axios.get(`http://localhost:3000/posts`);
-    const jsonPosts: IPost[] = await response.json();
-    console.log(jsonPosts);
-    return jsonPosts;
-}
+const fetchPosts = async (): AxiosPromise<IPost[]>  => {
+  const response = await axios.get(`http://localhost:3000/posts`);
+  // console.log(response.data);
+  return response;
+};
 
-function handleDelete(id: string) {
-    const newPosts = posts.filter((post) => post.id !== id);
+export function usePostsData(){
+  const query = useQuery({ queryFn: fetchPosts, queryKey: ["posts-data"], refetchInterval: 2000});
+  // console.log("Posts")
+  // console.log(query.data?.data)
 
-    fetch(`http://localhost:3000/posts/${id}`, {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    }).then(() => {
-      setPosts(newPosts);
-    });
+  return {
+    ...query,
+    response: query.data?.data
   }
-  
-export function usePostDate(){
-
 }
+
+

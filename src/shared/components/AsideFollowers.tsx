@@ -58,7 +58,7 @@ async function getFollowersId(userId: string): Promise<string[]> {
     }
   });
 
-  console.log("Followers: ", idFollowers);
+  // console.log("Followers: ", idFollowers);
   return idFollowers;
 }
 
