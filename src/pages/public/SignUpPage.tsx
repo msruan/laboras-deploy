@@ -12,24 +12,44 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 
-export function LoginPage() {
- 
+export function SignUpPage() {
   return (
-    <Card className="w-full max-w-md text-wrap">
+    <Card className="w-full max-w-md text-wrap ">
       <CardHeader>
         <CardTitle className="text-2xl font-bold tracking-tighter">
-          Entre por sua conta em risco
+          Cadastrar-se
         </CardTitle>
         <CardDescription className="text-purple-300">
-          Não possui conta ainda? <Link className="underline" to={"/signup"}>Criar nova conta</Link>
+          Já possui uma conta?{" "}
+          <Link className="underline" to={"/"}>
+            Login
+          </Link>
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div>
-          <Label htmlFor="email">Login</Label>
+          {/**Todo: partir depois pra pegar o first name */}
+          <Label htmlFor="nome">Nome</Label>
+          <Input
+            id="nome"
+            placeholder="Digite seu nome completo"
+            type="text"
+          ></Input>
+        </div>
+        <div>
+          {/**Todo: partir depois pra pegar o first name */}
+          <Label htmlFor="username">Username</Label>
+          <Input
+            id="username"
+            placeholder="Digite seu nome de usuário"
+            type="text"
+          ></Input>
+        </div>
+        <div>
+          <Label htmlFor="email">Email</Label>
           <Input
             id="email"
-            placeholder="Digite seu e-mail ou nome de usuário"
+            placeholder="Digite seu melhor email"
             type="email"
           ></Input>
         </div>
@@ -37,7 +57,7 @@ export function LoginPage() {
           <Label htmlFor="senha">Senha</Label>
           <Input
             id="senha"
-            placeholder="Digite sua melhor senha"
+            placeholder="Digite sua senha mais secreta"
             type="password"
           ></Input>
         </div>
@@ -54,8 +74,6 @@ export function LoginPage() {
               Entrar com o GitHub
             </Button> */}
       </CardContent>
-
-      
       <CardFooter>
         <p className="text-sm text-muted-foreground text-center text-wrapp">
           Ao entrar em nossa plataforma, você concorda que roubemos todos os

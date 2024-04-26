@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "./shared/layouts/MainLayout";
-import LoginLayout from "./shared/layouts/LoginLayout";
+import {LoginLayout} from "./shared/layouts/LoginLayout";
 import ErrorPage from "./pages/public/ErrorPage";
 import HomePage from "./pages/public/HomePage";
-import LoginPage from "./pages/public/LoginPage";
+import {LoginPage} from "./pages/public/LoginPage";
+import {SignUpPage} from "./pages/public/SignUpPage";
 import PostsPage from "./pages/authenticated/PostsPage";
 import ProfilePage from "./pages/authenticated/ProfilePage";
 import { MainPosts } from "@/components/MainPosts";
@@ -19,8 +20,8 @@ export const router = createBrowserRouter([
     element: <LoginLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "/", element: <HomePage /> },
-      { path: "/login", element: <LoginPage /> },
+      { path: "/", element: <LoginPage /> },
+      { path: "/signup", element: <SignUpPage /> },
     ],
   },
   {
