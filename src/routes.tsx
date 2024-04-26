@@ -12,6 +12,9 @@ import { TextBox } from "@/components/TextBox";
 import { IPost } from "@/models/post";
 import { App } from "./App";
 import Post from "@/components/Post";
+import useToken from "@/hooks/useToken";
+
+const {setToken} = useToken()
 
 export const router = createBrowserRouter([
 {
@@ -20,7 +23,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { path: "/", element: <HomePage /> },
-      { path: "/login", element: <LoginPage /> },
+      { path: "/login", element: <LoginPage  setToken={setToken}/> },
     ],
   },
   {

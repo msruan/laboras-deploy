@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+
 import {
   Card,
   CardContent,
@@ -24,11 +25,18 @@ import img1 from "./../..//assets/img1.svg";
 import img2 from "./../../assets/img2.svg";
 import img3 from "./../../assets/img3.svg";
 import img4 from "./../../assets/img4.svg";
+import { useRef } from "react";
+
+type LoginProps = {
+  setToken: (token: any) => void;
+}
 
 type MyCarouselItemProps = {
   img: string;
 };
-function MyCarouselItem({ img }: MyCarouselItemProps) {
+function MyCarouselItem({ img}: MyCarouselItemProps) {
+
+
   return (
     <CarouselItem>
       <div className="flex aspect-square bg-background rounded p-8">
@@ -38,14 +46,33 @@ function MyCarouselItem({ img }: MyCarouselItemProps) {
   );
 }
 
-export function Login() {
-  // const [loginMode, setLoginMode] = useState(false);
-  // const loginButtonRef = useRef(null);
+async function LoginUser(credentials: any) {
+  return fetch('http://localhost:3000/users',{
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(credentials)
+  }).then(data => data.json())
+}
 
-  // function handleStartLogin() {
-  //   setLoginMode(true);
-  //   // loginButtonRef.current.disabled = true;
-  // }
+export function LoginPage({setToken} : LoginProps) {
+
+  const usernameRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
+
+  async function handleSubmit(){
+
+    if(usernameRef.current == null|| passwordRef.current == null){
+      return
+    }
+    const token = await LoginUser({
+      username: usernameRef.current.value, password: passwordRef.current.value
+    })
+
+
+      setToken({token})
+  }
 
   return (
     <main className=" h-screen  flex justify-center items-center  w-full">
@@ -81,6 +108,7 @@ export function Login() {
             <div>
               <Label htmlFor="email">Email</Label>
               <Input
+                ref={usernameRef}
                 id="email"
                 placeholder="Digite seu email"
                 type="email"
@@ -89,13 +117,14 @@ export function Login() {
             <div>
               <Label htmlFor="senha">Senha</Label>
               <Input
+                ref={passwordRef}
                 id="senha"
                 placeholder="Digite sua senha"
                 type="password"
               ></Input>
             </div>
 
-            <Button className="mt-2">Entrar</Button>
+            <Button onClick={handleSubmit} className="mt-2">Entrar</Button>
             <div className="flex justify-center items-center gap-6 mt-2">
               <Separator></Separator>
               <span className="text-xs text-muted-foreground">OU</span>
@@ -118,4 +147,4 @@ export function Login() {
   );
 }
 
-export default Login
+export default LoginPage

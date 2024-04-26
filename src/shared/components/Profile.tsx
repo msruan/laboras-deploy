@@ -32,9 +32,9 @@ export const Profile = () => {
             <CardContent className="flex flex-col gap-6 p-0 items-center">
 
               <div className="flex flex-row w-full gap-10 p-0 justify-center">
-                <p>300 <strong>publicações</strong></p>
-                <p>500 <strong>seguimores</strong></p>
-                <p>400 <strong>seguindo</strong></p>
+                <p>300 <strong>posts</strong></p>
+                <p>500 <strong>follovers</strong></p>
+                <p>400 <strong>following</strong></p>
               </div>
 
               <div className="flex w-fit h-fit text-wrap ">
