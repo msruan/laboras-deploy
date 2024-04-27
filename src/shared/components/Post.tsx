@@ -13,7 +13,7 @@ import { useEffect, useRef, useState } from "react";
 
 type IPostProps = {
   post: IPost;
-  // handleDelete: (event: React.MouseEvent<HTMLElement>) => void;
+  handleDelete: (postId: string) => void;
   fullpage: boolean;
   fullBorder: boolean;
 };
@@ -32,7 +32,7 @@ const initializer: IProfile = {
 
 export const Post = ({
   post,
-  // handleDelete = (e) => {},
+  handleDelete = (postId : string) => {},
   fullpage = false,
   fullBorder = false
 }: IPostProps) => {
@@ -125,7 +125,7 @@ export const Post = ({
         )}
 
         <DeleteOutlineTwoToneIcon
-          // onClick={handleDelete}
+          onClick={()=>{handleDelete(post.id)}}
           cursor="pointer"
           style={{ cursor: "pointer", fontSize: "1rem" }}
         />

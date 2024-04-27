@@ -27,15 +27,6 @@ export const TextBox = ({ idLoggedUser, addNewPost }: TextBoxProps) => {
       created_at: `${new Date()}`,
     };
 
-    fetch("http://localhost:3000/posts", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newPost),
-    });
-
     addNewPost(newPost);
     input.current.value = "";
   }
@@ -54,7 +45,7 @@ export const TextBox = ({ idLoggedUser, addNewPost }: TextBoxProps) => {
             ref={input}
             className="bg-transparent py-5 w-full content-center border-none text-white outline-none resize-none"
             name="text"
-            maxLength="400"
+            maxLength={400}
             placeholder="No que voce está pensando?"
           ></textarea>
         </div>

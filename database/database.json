@@ -23,12 +23,6 @@
   ],
   "posts": [
     {
-      "id": "01HWAPN0EP3A5EB85WDBWCE2RT",
-      "user_id": "2",
-      "content": "oie",
-      "created_at": "Thu Apr 25 2024 10:20:52 GMT-0300 (Hora padrão de Brasília)"
-    },
-    {
       "id": "01HWAPN63FGXDPAJD5YXXRSYFR",
       "user_id": "2",
       "content": "https://prod.liveshare.vsengsaas.visualstudio.com/join?13082C537FE4658662028E209600761E1289",
@@ -57,9 +51,33 @@
       "user_id": "2",
       "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc elit velit, sagittis nec eros ac, mattis lacinia odio. Sed tincidunt massa et mattis fermentum. Sed ultricies dictum dui nec molestie. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In ut finibus dolor. Suspendisse eget vehicula libero, eu pharetra lorem. Praesent molestie in lorem sed tristi",
       "created_at": "Thu Apr 25 2024 14:19:33 GMT-0300 (Hora padrão de Brasília)"
+    },
+    {
+      "id": "01HWEBXR2N79A3WGTKJYMGGEDK",
+      "user_id": "1",
+      "content": "gimme gimme more",
+      "created_at": "Fri Apr 26 2024 20:30:22 GMT-0300 (Horário Padrão de Brasília)"
+    },
+    {
+      "id": "01HWEC6BQ734HGC83JCCF75EW1",
+      "user_id": "1",
+      "content": "you're toxic\n",
+      "created_at": "Fri Apr 26 2024 20:35:04 GMT-0300 (Horário Padrão de Brasília)"
+    },
+    {
+      "id": "01HWEGVQR1G85JGEK46ZR67R75",
+      "user_id": "1",
+      "content": "my telephone",
+      "created_at": "Fri Apr 26 2024 21:56:39 GMT-0300 (Horário Padrão de Brasília)"
+    },
+    {
+      "id": "01HWEH1J5X13Z398G5PHTMTG2J",
+      "user_id": "1",
+      "content": "hello hello baby",
+      "created_at": "Fri Apr 26 2024 21:59:50 GMT-0300 (Horário Padrão de Brasília)"
     }
   ],
-  "following": [
+  "followings": [
     {
       "id": "1",
       "from_user_id": "1",

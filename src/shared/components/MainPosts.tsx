@@ -2,51 +2,42 @@ import { Post } from "./Post";
 import { TextBox } from "./TextBox";
 import { useEffect, useState } from "react";
 import { IPost } from "../models/post";
-import { usePostsData } from "@/../actions/usePostData";
+import { useGetPosts } from "../../actions/useGetPosts";
+import { useAddPostMutation } from "../../actions/useAddPost";
+import { useDeletePostMutation } from "../../actions/useDeletePost";
 
 type MainPostsProps = {
   idLoggedUser: string;
 };
+
 export const MainPosts = ({ idLoggedUser }: MainPostsProps) => {
-  // const [posts, setPosts] = useState<IPost[]>([]);
+  const { response: posts, isSuccess, isError, isLoading } = useGetPosts();
+  const { mutate : addNewPost} = useAddPostMutation();
+  const {mutate : deletePost} = useDeletePostMutation();
 
-  const { response, status } = usePostsData();
-  const query = usePostsData()
-  // function addNewPost(newPost: IPost) {
-  //   setPosts([...posts, newPost]);
-  // }
-  // if(!isLoading){
-  // return <div>Loading</div>
-
-  useEffect(() => {
-    if (status === "success") {
-      console.log("Its succecsss");
-
-      if (query.isSuccess) {
-        console.log(response);
-      }
-    } else if (status === "error") {
-      console.log("Error");
-    }
-  }, [status]);
-
+  //Como faço pra quando der isError ele levar pra página de erro?
   return (
     <div>
-      {status === "pending" && <div>Pedding</div>}
-      {status === "error" && <div>Error</div>}
-      {status === "success" && (
+      {isLoading && <div>Pedding</div>}
+      {isError && <div>Error</div>}
+      {isSuccess && (
         <div className="flex flex-col h-full gap-2 pl-3 pr-3">
-          {response!.map(
-            (post) => (
-              (<Post key={post.id} post={post} fullpage={false} fullBorder={true} />)
-            )
-          )}
+          <TextBox idLoggedUser={idLoggedUser} addNewPost={addNewPost} />
+          {posts!.map((post) => (
+            <Post
+              key={post.id}
+              post={post}
+              fullpage={false}
+              fullBorder={true}
+              handleDelete={deletePost}
+            />
+          ))}
         </div>
       )}
     </div>
   );
 
-  // return status === "success" ? (
+  // return status === "success" ? ( CO
   // ) : (
   //   <div>adjfas</div>
   // );
