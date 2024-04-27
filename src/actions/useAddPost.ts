@@ -1,4 +1,4 @@
-import { IPost } from "@/models/post.js";
+import { IPost } from "@/shared/models/post.js";
 import axiosInstance from "../config/axiosConfig.js";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 

@@ -1,7 +1,5 @@
-import axios from 'axios'
 import axiosInstance from '../config/axiosConfig'
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { IPost } from '@/models/post';
 
 function deletePost(postId : string){
     return axiosInstance.delete(`/posts/${postId}`);

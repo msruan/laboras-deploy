@@ -4,17 +4,12 @@ import { useEffect, useState } from "react";
 import { AvatarIcon, HomeIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
+import { useGetUserProfile } from "@/actions/useGetUserProfile";
 
 type AsideMyProfileProps = {
   idLoggedUser: string;
   className: string;
 };
-
-async function getPerfil(idPerfil: string): Promise<IProfile> {
-  const response = await fetch(`http://localhost:3000/profiles/${idPerfil}`);
-  const jsonPerfil: IProfile = await response.json();
-  return jsonPerfil;
-}
 
 export const AsideMyProfile = ({
   idLoggedUser,
@@ -26,15 +21,7 @@ export const AsideMyProfile = ({
     username: "msruan",
   };
 
-  const [perfil, setPerfil] = useState(defaultPerfil);
-
-  async function auxSetPerfil() {
-    setPerfil(await getPerfil(idLoggedUser));
-  }
-
-  useEffect(() => {
-    auxSetPerfil();
-  }, []);
+  const { response: perfil, isSuccess } = useGetUserProfile(idLoggedUser);
 
   return (
     <div
@@ -64,10 +51,9 @@ export const AsideMyProfile = ({
             <AvatarIcon className="mr-1 h-10 w-10" /> Profile
           </Button>
         </Link>
-
       </div>
 
-      <ProfileTag perfil={perfil} />
+      {isSuccess && <ProfileTag perfil={perfil ?? defaultPerfil} />}
     </div>
   );
 };

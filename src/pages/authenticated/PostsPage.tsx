@@ -1,7 +1,7 @@
-import Post from "@/components/Post";
+import Post from "@/shared/components/Post";
 import { MainPosts } from "../../shared/components/MainPosts";
 import { Link } from "react-router-dom";
-import { IPost } from "@/models/post";
+import { IPost } from "@/shared/models/post";
 
 const myPost: IPost = {
   "id": "OIARHPOGIUAHREWOGIUAHWOIUGHAWRGA",
@@ -13,13 +13,13 @@ const myPost: IPost = {
 export const PostsPage = () => {
   return (
     <div className="flex flex-col gap-2">
-      <Post post={myPost} fullpage={true} handleDelete={function (event: React.MouseEvent<HTMLElement>): void {
+      <Post post={myPost} fullpage={true} fullBorder={false} handleDelete={function (postId: string): void {
         throw new Error("Function not implemented.");
-      } } fullBorder={false} />
+      } } />
       <div>
-        <Post post={myPost} handleDelete={function (event: React.MouseEvent<HTMLElement>): void {
+        <Post post={myPost} fullpage={false} fullBorder={true} handleDelete={function (postId: string): void {
           throw new Error("Function not implemented.");
-        } } fullpage={false} fullBorder={true} />
+        } } />
       </div>
     </div>
   );

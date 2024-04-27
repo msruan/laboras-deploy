@@ -7,12 +7,11 @@ import {LoginPage} from "./pages/public/LoginPage";
 import {SignUpPage} from "./pages/public/SignUpPage";
 import PostsPage from "./pages/authenticated/PostsPage";
 import ProfilePage from "./pages/authenticated/ProfilePage";
-import { MainPosts } from "@/components/MainPosts";
-import { AsideMyProfile } from "@/components/AsideMyProfile";
-import { TextBox } from "@/components/TextBox";
-import { IPost } from "@/models/post";
-import { App } from "./App";
-import Post from "@/components/Post";
+import { MainPosts } from "@/shared/components/MainPosts";
+import { AsideMyProfile } from "@/shared/components/AsideMyProfile";
+import { TextBox } from "@/shared/components/TextBox";
+import { IPost } from "@/shared/models/post";
+import Post from "@/shared/components/Post";
 
 export const router = createBrowserRouter([
 {
@@ -21,6 +20,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { path: "/", element: <LoginPage /> },
+      { path: "/login", element: <LoginPage /> },
       { path: "/signup", element: <SignUpPage /> },
     ],
   },

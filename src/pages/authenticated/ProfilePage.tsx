@@ -1,5 +1,5 @@
-import { Profile } from "@/components/Profile";
-import { Button } from "@/components/ui/button";
+import { Profile } from "@/shared/components/Profile";
+import { Button } from "@/shared/components/ui/button";
 import { Link } from "react-router-dom";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 

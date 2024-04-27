@@ -1,7 +1,7 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../config/axiosConfig.js";
-import axios, { AxiosPromise, AxiosResponse } from "axios";
-import { IPost } from "@/models/post.js";
+import { AxiosPromise } from "axios";
+import { IPost } from "@/shared/models/post.js";
 
 const getPosts = async (): AxiosPromise<IPost[]> => {
   const response = await axiosInstance.get(`/posts`);

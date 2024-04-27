@@ -1,5 +1,5 @@
-import { AsideFollowers } from "@/components/AsideFollowers";
-import { AsideMyProfile } from "@/components/AsideMyProfile";
+import { AsideFollowers } from "@/shared/components/AsideFollowers";
+import { AsideMyProfile } from "@/shared/components/AsideMyProfile";
 import { Link, Outlet } from "react-router-dom";
 
 export const MainLayout = () => {

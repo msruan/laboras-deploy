@@ -11,11 +11,12 @@ type MainPostsProps = {
 };
 
 export const MainPosts = ({ idLoggedUser }: MainPostsProps) => {
+  
   const { response: posts, isSuccess, isError, isLoading } = useGetPosts();
   const { mutate : addNewPost} = useAddPostMutation();
   const {mutate : deletePost} = useDeletePostMutation();
 
-  //Como faço pra quando der isError ele levar pra página de erro?
+  //Todo: Como faço pra quando der isError ele levar pra página de erro?
   return (
     <div>
       {isLoading && <div>Pedding</div>}
@@ -36,9 +37,4 @@ export const MainPosts = ({ idLoggedUser }: MainPostsProps) => {
       )}
     </div>
   );
-
-  // return status === "success" ? ( CO
-  // ) : (
-  //   <div>adjfas</div>
-  // );
 };

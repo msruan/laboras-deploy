@@ -4,8 +4,8 @@ import {
     CardTitle,
     CardContent
   } from "./../../shared/components/ui/card";
-  import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-  import { Button } from "@/components/ui/button";
+  import { Avatar, AvatarFallback, AvatarImage } from "@/shared/components/ui/avatar";
+  import { Button } from "@/shared/components/ui/button";
   
 
 export const Profile = () => {
