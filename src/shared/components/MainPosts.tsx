@@ -1,10 +1,6 @@
 import { Post } from "./Post";
 import { TextBox } from "./TextBox";
-import { useEffect, useState } from "react";
-import { IPost } from "../models/post";
-import { useGetPosts } from "../../actions/useGetPosts";
-import { useAddPostMutation } from "../../actions/useAddPost";
-import { useDeletePostMutation } from "../../actions/useDeletePost";
+import { GetAllPosts } from "@/actions/PostAction";
 
 type MainPostsProps = {
   idLoggedUser: string;
@@ -12,9 +8,7 @@ type MainPostsProps = {
 
 export const MainPosts = ({ idLoggedUser }: MainPostsProps) => {
   
-  const { response: posts, isSuccess, isError, isLoading } = useGetPosts();
-  const { mutate : addNewPost} = useAddPostMutation();
-  const {mutate : deletePost} = useDeletePostMutation();
+  const { response: posts, isSuccess, isError, isLoading } = GetAllPosts();
 
   //Todo: Como faço pra quando der isError ele levar pra página de erro?
   return (
@@ -23,14 +17,13 @@ export const MainPosts = ({ idLoggedUser }: MainPostsProps) => {
       {isError && <div>Error</div>}
       {isSuccess && (
         <div className="flex flex-col h-full gap-2 pl-3 pr-3">
-          <TextBox idLoggedUser={idLoggedUser} addNewPost={addNewPost} />
+          <TextBox idLoggedUser={idLoggedUser}/>
           {posts!.map((post) => (
             <Post
               key={post.id}
               post={post}
               fullpage={false}
               fullBorder={true}
-              handleDelete={deletePost}
             />
           ))}
         </div>

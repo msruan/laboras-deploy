@@ -3,4 +3,6 @@ export interface IPost {
     user_id : string,
     content : string,
     created_at : string,
+    likes : number,
+    deslikes : number
 }

@@ -39,9 +39,6 @@ export const router = createBrowserRouter([
     element: (
       <TextBox
         idLoggedUser={""}
-        addNewPost={function (newPost: IPost): void {
-          throw new Error("Function not implemented.");
-        }}
       />
     ),
   },

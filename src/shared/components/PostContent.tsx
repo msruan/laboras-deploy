@@ -1,7 +1,6 @@
 import { IPost } from "@/shared/models/post";
 import { IProfile } from "@/shared/models/profile";
 import { CardContent } from "./ui/card";
-import { Separator } from "./ui/separator";
 
 interface IPostContentProps {
   perfil: IProfile;

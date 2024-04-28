@@ -23,34 +23,12 @@
   ],
   "posts": [
     {
-      "id": "01HWEBXR2N79A3WGTKJYMGGEDK",
+      "id": "01HWJT4Y75APCEM21YKC1KW08C",
       "user_id": "1",
-      "content": "gimme gimme more",
-      "created_at": "Fri Apr 26 2024 20:30:22 GMT-0300 (Horário Padrão de Brasília)"
-    },
-    {
-      "id": "01HWEC6BQ734HGC83JCCF75EW1",
-      "user_id": "1",
-      "content": "you're toxic\n",
-      "created_at": "Fri Apr 26 2024 20:35:04 GMT-0300 (Horário Padrão de Brasília)"
-    },
-    {
-      "id": "01HWEGVQR1G85JGEK46ZR67R75",
-      "user_id": "1",
-      "content": "my telephone",
-      "created_at": "Fri Apr 26 2024 21:56:39 GMT-0300 (Horário Padrão de Brasília)"
-    },
-    {
-      "id": "01HWEH1J5X13Z398G5PHTMTG2J",
-      "user_id": "1",
-      "content": "hello hello baby",
-      "created_at": "Fri Apr 26 2024 21:59:50 GMT-0300 (Horário Padrão de Brasília)"
-    },
-    {
-      "id": "01HWFQHH32NK3R5JVK5S9E9VDW",
-      "user_id": "1",
-      "content": "Chorar por homem? Jamais meu rímel custa caro baby. Meu ex com outra? E daí? Tenho que doar brinquedos as mais necessitadas. Meu ficante me traiu? E daí quem se importa? Isso prova q figurinha repetida não completa meu álbum. Nasci linda cresci abusada tô ficando + gostosa e hj sou o terror das recalcadas ",
-      "created_at": "Sat Apr 27 2024 09:12:39 GMT-0300 (Horário Padrão de Brasília)"
+      "content": "sometimes ",
+      "created_at": "2024-04-28T16:55:55.877Z",
+      "likes": 1,
+      "deslikes": 1
     }
   ],
   "followings": [

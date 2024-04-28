@@ -7,19 +7,17 @@ const myPost: IPost = {
   "id": "OIARHPOGIUAHREWOGIUAHWOIUGHAWRGA",
   "user_id": "2",
   "content": `olaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`,
-  "created_at": "Thu Apr 25 2024 10:20:52 GMT-0300 (Hora padrão de Brasília)"
+  "created_at": "Thu Apr 25 2024 10:20:52 GMT-0300 (Hora padrão de Brasília)",
+  "likes" : 2,
+  "deslikes" : 2 
 };
 
 export const PostsPage = () => {
   return (
     <div className="flex flex-col gap-2">
-      <Post post={myPost} fullpage={true} fullBorder={false} handleDelete={function (postId: string): void {
-        throw new Error("Function not implemented.");
-      } } />
+      <Post post={myPost} fullpage={true} fullBorder={false} />
       <div>
-        <Post post={myPost} fullpage={false} fullBorder={true} handleDelete={function (postId: string): void {
-          throw new Error("Function not implemented.");
-        } } />
+        <Post post={myPost} fullpage={false} fullBorder={true} />
       </div>
     </div>
   );

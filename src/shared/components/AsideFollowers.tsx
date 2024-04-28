@@ -1,9 +1,6 @@
 import { ProfileTag } from "./ProfileTag";
-import { IProfile } from "../models/profile";
-import { IFollowing } from "../models/following";
-import { useEffect, useState } from "react";
 import { ScrollArea } from "./ui/scrolarea";
-import { useGetFollowers } from "@/actions/useGetFollowers";
+import { GetUserFollowers } from "@/actions/HomePageAction";
 
 type AsideFollowersProps = {
   idLoggedUser: string;
@@ -14,7 +11,7 @@ export const AsideFollowers = ({
   idLoggedUser,
   className,
 }: AsideFollowersProps) => {
-  const { response: followers, isSuccess, isLoading } = useGetFollowers();
+  const { response: followers, isSuccess, isLoading } = GetUserFollowers();
 
   return (
     <div

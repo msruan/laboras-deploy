@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { AvatarIcon, HomeIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
-import { useGetUserProfile } from "@/actions/useGetUserProfile";
+import { GetUserProfile } from "@/actions/HomePageAction";
 
 type AsideMyProfileProps = {
   idLoggedUser: string;
@@ -21,7 +21,7 @@ export const AsideMyProfile = ({
     username: "msruan",
   };
 
-  const { response: perfil, isSuccess } = useGetUserProfile(idLoggedUser);
+  const { response: perfil, isSuccess } = GetUserProfile(idLoggedUser);
 
   return (
     <div

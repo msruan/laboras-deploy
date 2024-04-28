@@ -22,6 +22,13 @@ module.exports = {
         'half-vh': '50vh',
         'icon' : '1rem'
       },
+      gridTemplateColumns: {
+        // Simple 16 column grid
+        'custom': 'auto 1fr',
+
+        // Complex site-specific column configuration
+        // 'footer': '200px minmax(900px, 1fr) 100px',
+      },
       colors: {
         rebeccapurple: "rgba(123, 26, 242, 0.1)",
         rebeccapurple2: "rgba(123, 26, 242, 0.2)",

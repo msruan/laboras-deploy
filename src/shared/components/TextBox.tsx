@@ -7,12 +7,12 @@ import { Textarea } from "./ui/textarea";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { CreatePost } from "@/actions/PostAction";
 
 type TextBoxProps = {
   idLoggedUser: string;
-  addNewPost: (newPost: IPost) => void;
 }
-export const TextBox = ({ idLoggedUser, addNewPost }: TextBoxProps) => {
+export const TextBox = ({ idLoggedUser }: TextBoxProps) => {
   const input = useRef<HTMLTextAreaElement>(null);
 
   function handleClick() {
@@ -24,12 +24,16 @@ export const TextBox = ({ idLoggedUser, addNewPost }: TextBoxProps) => {
       id: ulid(),
       user_id: idLoggedUser,
       content: input.current.value,
-      created_at: `${new Date()}`,
+      created_at: `${new Date().toISOString()}`,
+      likes: 0,
+      deslikes: 0
     };
 
     addNewPost(newPost);
     input.current.value = "";
   }
+
+  const { mutate : addNewPost} = CreatePost();
 
   return (
     
