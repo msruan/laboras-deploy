@@ -27,14 +27,14 @@
       "user_id": "1",
       "content": "Você também pode personalizar os ícones, se necessário, usando propriedades específicas. Por exemplo, você pode definir o tamanho do ícone ou a cor usando as propriedades size e color, respectivamente.\n\njsx\n",
       "created_at": "2024-04-29T11:26:37.635Z",
-      "likes": 0,
+      "likes": 3,
       "deslikes": 0
     },
     {
-      "id": "01HWMZJAS5QACGVWQ47AP33J9D",
+      "id": "01HWNMF9YVQ7ZHMS2A2K947XD8",
       "user_id": "1",
-      "content": "testando",
-      "created_at": "2024-04-29T13:09:06.470Z",
+      "content": "Você também pode personalizar os ícones, se necessário, usando propriedades específicas. Por exemplo, você pode definir o tamanho do ícone ou a cor usando as propriedades size e color, respectivamente. jsx ",
+      "created_at": "2024-04-29T19:14:27.419Z",
       "likes": 0,
       "deslikes": 0
     }

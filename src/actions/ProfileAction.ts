@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { axiosInstance } from "../config/axiosConfig";
 import { AxiosPromise } from "axios";
 import { IProfile } from "@/shared/models/profile";
@@ -34,3 +34,34 @@ export function GetUserProfile(profileId: string) {
     response: query.data?.data,
   };
 }
+
+// async function fetchUpdateProfile(profile:IProfile){
+//   return await axiosInstance.put('/posts',profile);
+// }
+
+// export function UpdateProfile(){
+//   const queryClient = useQueryClient();
+//   const mutate = useMutation({
+//     mutationFn: fetchUpdateProfile,
+//     onSuccess: ()=>{
+//       queryClient.setQueryData();
+//     }
+//   });
+//   return mutate;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

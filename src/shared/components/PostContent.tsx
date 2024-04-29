@@ -2,7 +2,7 @@ import { IPost } from "@/shared/models/post";
 import { IProfile } from "@/shared/models/profile";
 import { CardContent, CardFooter } from "./ui/card";
 import { Icons } from "./Icons";
-import { UpdatePost } from "@/actions/PostAction";
+import { PatchPost } from "@/actions/PostAction";
 import {PostMenu} from './PostMenu'
 
 interface IPostContentProps {
@@ -12,7 +12,7 @@ interface IPostContentProps {
 }
 
 export function PostContent({ perfil, post, fullPage }: IPostContentProps) {
-  const { mutate: handleUpdate } = UpdatePost();
+  const { mutate: handleUpdate } = PatchPost();
 
   return (
     <>

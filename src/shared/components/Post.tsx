@@ -3,25 +3,9 @@ import { IProfile } from "../models/profile";
 import { PostContent } from "./PostContent";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { Card, CardFooter } from "./ui/card";
-
-import {
-  TrashIcon,
-  FaceSmileIcon,
-  FaceFrownIcon,
-  HandThumbDownIcon,
-  StarIcon,
-} from "@heroicons/react/16/solid";
-
-// import {
-//   TrashIcon,
-//   FaceSmileIcon,
-//   FaceFrownIcon,
-//   HandThumbDownIcon,
-//   StarIcon,
-// } from "@heroicons/react/24/outline";
-
+import { Button } from "@/shared/components/ui/button";
+import { Textarea } from "@/shared/components/ui/textarea";
 import { GetUserProfile } from "@/actions/ProfileAction";
-import { UpdatePost, DeletePost } from "@/actions/PostAction";
 
 import { useState } from "react";
 import { PostMenu } from "./PostMenu";
@@ -45,8 +29,7 @@ export const Post = ({
   fullBorder = false,
 }: IPostProps) => {
   const { response: perfil, isSuccess } = GetUserProfile(post.user_id);
-  const { mutate: handleDelete } = DeletePost();
-  const { mutate: handleUpdate } = UpdatePost();
+  const [editMode, setEditMode] = useState(false);
 
   return (
     <Card
@@ -65,7 +48,12 @@ export const Post = ({
 
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        {isSuccess && (
+        {isSuccess && editMode ? (
+          <div className="grid w-full gap-2">
+            <Textarea placeholder="Type your message here." />
+            <Button>Send message</Button>
+          </div>
+        ) : (
           <PostContent
             perfil={perfil ?? initializer}
             post={post}

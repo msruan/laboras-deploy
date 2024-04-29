@@ -13,6 +13,16 @@ import { Label } from "@/shared/components/ui/label";
 import { Link } from "react-router-dom";
 
 export function SignUpPage() {
+
+  const [inputValues, setInputValues] = useState({
+    nome: "", username: "", email: "", senha: ""
+   })
+
+   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    
+   }
+
+
   return (
     <Card className="w-full max-w-md text-wrap ">
       <CardHeader>

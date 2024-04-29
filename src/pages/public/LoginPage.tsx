@@ -1,3 +1,4 @@
+import { Login } from "@/actions/AuthAction";
 import { Button } from "@/shared/components/ui/button";
 import {
   Card,
@@ -10,25 +11,28 @@ import {
 
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
+import { Experimental_CssVarsProvider } from "@mui/material";
 import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 export function LoginPage() {
-
-  const { mutate, status } = Login();
-  const { token } = useToken();
+  const {status, mutate} = Login();
 
   const [inputValues, setInputValues] = useState({
-    username: '',password: ''
+   email: "",password: ""
   })
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = e.target
+    e.preventDefault()
+    const {name, value} = e.target 
     setInputValues({ ...inputValues, [name]: value })
   }
-
-  const onSubmit = () => {
-    mutate(inputValues)
+  const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    mutate(inputValues);
+  }
+  if (status === "success") {
+    return <Navigate to="/posts" />
   }
  
   return (

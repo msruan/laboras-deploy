@@ -1,6 +1,6 @@
 import { ProfileTag } from "./ProfileTag";
 import { ScrollArea } from "./ui/scrolarea";
-import { GetProfileFollowers } from "@/actions/ProfileAction";
+import {GetProfileFollowers } from "@/actions/ProfileAction";
 
 type AsideFollowersProps = {
   idLoggedUser: string;
@@ -25,9 +25,6 @@ export const AsideFollowers = ({
           </h2>
           <ScrollArea className="flex flex-row h-lvh w-60">
             <div className="min-h-full flex flex-col gap-11">
-              {followers!.map((profile) => (
-                <ProfileTag key={profile.id} perfil={profile} />
-              ))}
               {followers!.map((profile) => (
                 <ProfileTag key={profile.id} perfil={profile} />
               ))}
