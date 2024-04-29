@@ -3,13 +3,13 @@ import { axiosInstance } from "../config/axiosConfig";
 import { AxiosPromise } from "axios";
 import { IProfile } from "@/shared/models/profile";
 
-async function fetchGetFollowers(): AxiosPromise<IProfile[]> {
+async function fetchGetProfileFollowers(): AxiosPromise<IProfile[]> {
   return await axiosInstance.get("/profiles");
 } //Todo: atualizar rota para algo como .get('<token_user>/followers);
 
-export function GetUserFollowers() {
+export function GetProfileFollowers() {
   const query = useQuery({
-    queryFn: fetchGetFollowers,
+    queryFn: fetchGetProfileFollowers,
     queryKey: ["followings"],
   });
   return {
@@ -18,14 +18,14 @@ export function GetUserFollowers() {
   };
 }
 
-async function fetchGetUserProfile(profileId: string): AxiosPromise<IProfile> {
+async function fetchGetProfile(profileId: string): AxiosPromise<IProfile> {
   return await axiosInstance.get(`/profiles/${profileId}`);
 } //Todo: atualizar rota para algo como .get('<token_user>/followers);
 
 export function GetUserProfile(profileId: string) {
   const query = useQuery({
     queryFn: async () => {
-      return fetchGetUserProfile(profileId);
+      return fetchGetProfile(profileId);
     },
     queryKey: ["user-profile"],
   });

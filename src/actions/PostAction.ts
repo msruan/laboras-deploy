@@ -3,6 +3,21 @@ import axiosInstance from "../config/axiosConfig.js";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosPromise, AxiosResponse } from "axios";
 
+async function fetchCreatePost(postagem: IPost) {
+  return await axiosInstance.post("/posts", postagem);
+}
+
+export function CreatePost() {
+  const queryClient = useQueryClient();
+  const mutate = useMutation({
+    mutationFn: fetchCreatePost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
+  });
+  return mutate;
+}
+
 const fetchGetPosts = async (): AxiosPromise<IPost[]> => {
   const response = await axiosInstance.get(`/posts`);
   return response;
@@ -19,36 +34,6 @@ export function GetAllPosts() {
     ...query,
     response: query.data?.data,
   };
-}
-
-async function fetchCreatePost(postagem: IPost) {
-  return await axiosInstance.post("/posts", postagem);
-}
-
-export function CreatePost() {
-  const queryClient = useQueryClient();
-  const mutate = useMutation({
-    mutationFn: fetchCreatePost,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
-    },
-  });
-  return mutate;
-}
-
-async function fetchDeletePost(postId: string) {
-  return await axiosInstance.delete(`/posts/${postId}`);
-}
-
-export function DeletePost() {
-  const queryClient = useQueryClient();
-  const mutateDelete = useMutation({
-    mutationFn: fetchDeletePost,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
-    },
-  });
-  return mutateDelete;
 }
 
 async function fetchUpdatePost(post: IPost): AxiosPromise<IPost> {
@@ -70,4 +55,19 @@ export function UpdatePost() {
     },
   });
   return mutate;
+}
+
+async function fetchDeletePost(postId: string) {
+  return await axiosInstance.delete(`/posts/${postId}`);
+}
+
+export function DeletePost() {
+  const queryClient = useQueryClient();
+  const mutateDelete = useMutation({
+    mutationFn: fetchDeletePost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
+  });
+  return mutateDelete;
 }

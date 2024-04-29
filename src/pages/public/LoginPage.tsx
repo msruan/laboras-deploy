@@ -10,9 +10,26 @@ import {
 
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
+import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
 export function LoginPage() {
+
+  const { mutate, status } = Login();
+  const { token } = useToken();
+
+  const [inputValues, setInputValues] = useState({
+    username: '',password: ''
+  })
+
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = e.target
+    setInputValues({ ...inputValues, [name]: value })
+  }
+
+  const onSubmit = () => {
+    mutate(inputValues)
+  }
  
   return (
     <Card className="w-full max-w-md text-wrap">
@@ -31,6 +48,8 @@ export function LoginPage() {
             id="email"
             placeholder="Digite seu e-mail ou nome de usuário"
             type="email"
+            name="email"
+            onChange={handleOnChange}
           ></Input>
         </div>
         <div>
@@ -39,10 +58,12 @@ export function LoginPage() {
             id="senha"
             placeholder="Digite sua melhor senha"
             type="password"
+            name="password"
+            onChange={handleOnChange}
           ></Input>
         </div>
 
-        <Button className="mt-2">Entrar</Button>
+        <Button className="mt-2" onClick={onSubmit}>Entrar</Button>
 
         {/* <div className="flex justify-center items-center gap-6 mt-2">
               <Separator></Separator>

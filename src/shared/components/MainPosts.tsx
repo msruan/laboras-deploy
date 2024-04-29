@@ -22,7 +22,7 @@ export const MainPosts = ({ idLoggedUser }: MainPostsProps) => {
             <Post
               key={post.id}
               post={post}
-              fullpage={false}
+              fullPage={false}
               fullBorder={true}
             />
           ))}

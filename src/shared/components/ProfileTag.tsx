@@ -1,11 +1,10 @@
-
 import { IProfile } from "../models/profile";
 import { Card, CardContent } from "./ui/card";
 
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { Link } from "react-router-dom";
-
+import { SettingsMenu } from "./SettingsMenu";
 
 type IProfileProps = {
   perfil: IProfile;
@@ -28,24 +27,24 @@ export const ProfileTag = ({ perfil }: IProfileProps) => {
     <Card className="w-full bg-rebeccapurple2 flex gap-4 p-2 border-0 rounded-full hover:bg-rebeccapurple transition-all duration-150">
       {/* Fotinha */}
       <Link to="/posts/profile">
-      <Avatar className="w-12 h-12 rounded-full cursor-pointer">
-        
-        <AvatarImage src="src/assets/chorro-timido.JPG" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
+        <Avatar className="w-12 h-12 rounded-full cursor-pointer">
+          <AvatarImage src="src/assets/chorro-timido.JPG" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
       </Link>
       <CardContent className="flex gap-5 break-all justify-center items-center p-0">
         <div className="flex flex-col items-start text-aliceblue text-sm gap-0.5">
           <Link to="/posts/profile">
-            <h3><strong>{perfil?.name}</strong></h3>
+            <h3>
+              <strong>{perfil?.name}</strong>
+            </h3>
           </Link>
           <h4 className="opacity-70">@{perfil?.username}</h4>
         </div>
 
         <i className="ml-auto pr-5">
-        <DotsHorizontalIcon cursor="pointer" color="white" />
-      </i>
-
+          <SettingsMenu/>
+        </i>
       </CardContent>
     </Card>
   );

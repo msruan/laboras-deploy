@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { AvatarIcon, HomeIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
-import { GetUserProfile } from "@/actions/HomePageAction";
+import { GetUserProfile } from "@/actions/ProfileAction";
+import { SettingsMenu } from "./SettingsMenu";
 
 type AsideMyProfileProps = {
   idLoggedUser: string;

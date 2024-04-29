@@ -15,9 +15,9 @@ const myPost: IPost = {
 export const PostsPage = () => {
   return (
     <div className="flex flex-col gap-2">
-      <Post post={myPost} fullpage={true} fullBorder={false} />
+      <Post post={myPost} fullPage={true} fullBorder={false} />
       <div>
-        <Post post={myPost} fullpage={false} fullBorder={true} />
+        <Post post={myPost} fullPage={false} fullBorder={true} />
       </div>
     </div>
   );
