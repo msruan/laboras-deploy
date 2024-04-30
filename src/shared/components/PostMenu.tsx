@@ -14,16 +14,20 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/shared/components/ui/dropdown-menu";
-import { EllipsisHorizontalIcon, TrashIcon, PencilIcon } from "@heroicons/react/16/solid";
+import {
+  EllipsisHorizontalIcon,
+  TrashIcon,
+  PencilIcon,
+} from "@heroicons/react/16/solid";
 import { IPost } from "../models/post";
 
 type PostMenuProps = {
   post: IPost;
-}
+  handleEdit: (value: boolean) => void;
+};
 
-export function PostMenu({post} : PostMenuProps) {
-
-  const {mutate : handleDelete} = DeletePost();
+export function PostMenu({ post, handleEdit }: PostMenuProps) {
+  const { mutate: handleDelete } = DeletePost();
 
   return (
     <DropdownMenu>
@@ -36,15 +40,27 @@ export function PostMenu({post} : PostMenuProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-28">
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              handleEdit(true);
+            }}
+          >
             Editar
-            <DropdownMenuShortcut><PencilIcon className="h-4 w-4"/></DropdownMenuShortcut>
+            <DropdownMenuShortcut>
+              <PencilIcon className="h-4 w-4" />
+            </DropdownMenuShortcut>
           </DropdownMenuItem>
 
-          <DropdownMenuItem onClick={()=>{handleDelete(post.id)}}>
+          <DropdownMenuItem
+            className="text-red-700"
+            onClick={() => {
+              handleDelete(post.id);
+            }}
+          >
             Deletar
             <DropdownMenuShortcut>
-              <TrashIcon className="w-4 h-4"/></DropdownMenuShortcut>
+              <TrashIcon className="w-4 h-4" />
+            </DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
