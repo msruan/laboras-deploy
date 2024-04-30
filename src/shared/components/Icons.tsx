@@ -6,7 +6,7 @@ import { PatchPost } from "@/actions/PostAction";
 
 type IconsProps = {
   post: IPost;
-  fullPage : boolean;
+  fullPage: boolean;
 };
 
 export const Icons = ({ post, fullPage }: IconsProps) => {
@@ -22,11 +22,11 @@ export const Icons = ({ post, fullPage }: IconsProps) => {
       if (isDesliked) {
         post.deslikes--;
         setIsDesliked(false);
-        handleUpdate({id: post.id, deslikes: post.deslikes});
+        handleUpdate({ id: post.id, deslikes: post.deslikes });
       }
     }
     setIsLiked(!isLiked);
-    handleUpdate({id: post.id, likes: post.likes});
+    handleUpdate({ id: post.id, likes: post.likes });
     // handleUpdate(post);
   }
 
@@ -37,19 +37,15 @@ export const Icons = ({ post, fullPage }: IconsProps) => {
       if (isLiked) {
         post.likes--;
         setIsLiked(false);
-        handleUpdate({id: post.id, likes: post.likes});
+        handleUpdate({ id: post.id, likes: post.likes });
       }
     }
     setIsDesliked(!isDesliked);
-    handleUpdate({id: post.id, deslikes: post.deslikes});
+    handleUpdate({ id: post.id, deslikes: post.deslikes });
     // handleUpdate(post);
   }
   return (
-    <div
-      className={`flex flex-row justify-between pr-7 pb-1 h-fit
-      ${fullPage ? " w-1/4" : " w-1/4"}
-      `}
-    >
+    <>
       <div className="flex justify-between items-center text-sm">
         <span>{post.likes > 0 && post.likes}</span>
         <StarIcon
@@ -71,15 +67,6 @@ export const Icons = ({ post, fullPage }: IconsProps) => {
           cursor="pointer"
         />
       </div>
-      <PostMenu post={post}></PostMenu>
-
-      {/* <TrashIcon
-          className="h-4 w-4 text-gray-500 hover:text-gray-100"
-          cursor="pointer"
-          onClick={() => {
-            handleDelete(post.id);
-          }}
-        /> */}
-    </div>
+    </>
   );
 };

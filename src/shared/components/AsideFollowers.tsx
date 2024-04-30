@@ -19,7 +19,7 @@ export const AsideFollowers = ({
     >
       {isLoading && <h2>Carregando...</h2>}
       {isSuccess && (
-        <div>
+        <>
           <h2 className="text-white font-sans text-2xl font-bold">
             Your followers
           </h2>
@@ -33,7 +33,7 @@ export const AsideFollowers = ({
               ))}
             </div>
           </ScrollArea>
-        </div>
+        </>
       )}
     </div>
   );

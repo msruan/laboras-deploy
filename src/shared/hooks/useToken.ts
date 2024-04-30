@@ -9,8 +9,13 @@ export const useToken = () => {
         sessionStorage.setItem('token', JSON.stringify(userToken)) 
     }
 
+    const removeToken = () => {
+        sessionStorage.removeItem('token')
+    }
+
     return {
         token: getToken,
-        setToken: saveToken
+        setToken: saveToken,
+        removeToken
     }
 }
