@@ -18,7 +18,7 @@ export function CreatePost() {
   return mutate;
 }
 
-const fetchGetPosts = async (): AxiosPromise<IPost[]> => {
+export const fetchGetPosts = async (): AxiosPromise<IPost[]> => {
   const response = await axiosInstance.get(`/posts`);
   return response;
 };
@@ -29,6 +29,27 @@ export function GetAllPosts() {
     queryKey: ["posts"],
     refetchInterval: 5 * 60 * 1000,
   });
+
+  return {
+    ...query,
+    response: query.data?.data,
+  };
+}
+
+export const fetchGetPost = async (id: string): AxiosPromise<IPost> => {
+  const response = await axiosInstance.get(`/posts/${id}`);
+  console.log("mana o id foi... ",id)
+  console.log("mano...")
+  return response;
+};
+
+export function GetPost(id: string) {
+  const query = useQuery({
+    queryFn: ()=>{return fetchGetPost(id)},
+    queryKey: ["post"],
+    refetchInterval: 5 * 60 * 1000,
+  });
+  
 
   return {
     ...query,

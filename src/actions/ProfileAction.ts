@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {useQuery} from "@tanstack/react-query"
 import { axiosInstance } from "../config/axiosConfig";
 import { AxiosPromise } from "axios";
 import { IProfile } from "@/shared/models/profile";

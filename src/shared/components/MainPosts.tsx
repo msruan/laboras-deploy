@@ -17,7 +17,7 @@ export const MainPosts = ({ idLoggedUser }: MainPostsProps) => {
       {isError && <div>Error</div>}
       {isSuccess && (
         <div className="flex flex-col h-full gap-2 pl-3 pr-3">
-          <TextBox idLoggedUser={idLoggedUser}/>
+          <TextBox idLoggedUser={idLoggedUser} linkedTo={null}/>
           {posts!.map((post) => (
             <Post
               key={post.id}

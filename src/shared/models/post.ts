@@ -4,7 +4,8 @@ export interface IPost {
     content : string,
     created_at : string,
     likes : number,
-    deslikes : number
+    deslikes : number,
+    linked_to: string | null
 }
 
 export type PostRequest = {
