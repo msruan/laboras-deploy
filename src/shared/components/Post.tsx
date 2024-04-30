@@ -23,6 +23,8 @@ const initializer: IProfile = {
   id: "1",
   name: "Bianca Bezerra",
   username: "biancabzra",
+  email: "bianca@gmail.com",
+  password: "biazinha"
 };
 
 export const Post = ({
@@ -52,12 +54,6 @@ export const Post = ({
     }
     `}
     >
-      {/* <Link to={window.origin + `/posts/postPage/${post.id}`}> */}
-        <div className="w-full flex h-fit pt-3 pl-5 pr-3" onClick={onClick}>
-          {/* <h1>{location.pathname}</h1> */}
-        {/* <Button onClick={onClick}>entra aq</Button> */}
-          <Avatar className="w-12 h-12 rounded-full">
-            <AvatarImage src="https://p2.trrsf.com/image/fget/cf/1200/1600/middle/images.terra.com/2023/07/31/pedro-flamengo-uv5ta7zqn5us.jpg" />
       {isSuccess && editMode ? (
         <div className="grid w-full h-full gap-2">
           <Textarea
@@ -71,7 +67,7 @@ export const Post = ({
         </div>
       ) : (
         <>
-          <div className="w-full flex h-fit pt-3 pl-5 pr-3">
+          <div className="w-full flex h-fit pt-3 pl-5 pr-3" onClick={onClick}>
             <Avatar className="w-12 h-12 rounded-full">
               <AvatarImage src="https://p2.trrsf.com/image/fget/cf/1200/1600/middle/images.terra.com/2023/07/31/pedro-flamengo-uv5ta7zqn5us.jpg" />
 
