@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { path: "/posts", element: <MainPosts idLoggedUser={"1"} /> },
-      { path: "/posts/profile", element: <ProfilePage /> },
+      { path: "/posts/profile/:username", element: <ProfilePage /> },
       { path: "/posts/postPage/:id", element: <PostsPage idLoggedUser={"1"} /> },
     ],
   },

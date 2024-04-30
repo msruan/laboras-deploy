@@ -35,6 +35,26 @@ export function GetUserProfile(profileId: string) {
   };
 }
 
+export const fetchGetProfileByUsername = async (username: string): AxiosPromise<IProfile[]> => {
+  const response = await axiosInstance.get(`/profiles?username=${username}`);
+  return response;
+};
+
+export function GetProfileByUsername(username: string) {
+  const query = useQuery({
+    queryFn: async () => {
+      return fetchGetProfileByUsername(username);
+    },
+    queryKey: ["profile"],
+  });
+  
+  return {
+    ...query,
+    response: query.data?.data,
+  };
+}
+
+
 // async function fetchUpdateProfile(profile:IProfile){
 //   return await axiosInstance.put('/posts',profile);
 // }
