@@ -30,7 +30,6 @@ export const PostsPage = ({ idLoggedUser }: postPageProps) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <h1>{window.origin + `postPage/${id}`}</h1>
       <div>
         {isGetPostSuccess && (post ? (
           <div>

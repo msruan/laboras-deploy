@@ -28,9 +28,6 @@ export const AsideFollowers = ({
               {followers!.map((profile) => (
                 <ProfileTag key={profile.id} perfil={profile} />
               ))}
-              {followers!.map((profile) => (
-                <ProfileTag key={profile.id} perfil={profile} />
-              ))}
             </div>
           </ScrollArea>
         </>

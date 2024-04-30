@@ -21,7 +21,8 @@ type IPostProps = {
 
 const initializer: IProfile = {
   id: "1",
-  name: "Bianca Bezerra",
+  first_name: "Bianca",
+  last_name: "Bezerra",
   username: "biancabzra",
   email: "bianca@gmail.com",
   password: "biazinha"

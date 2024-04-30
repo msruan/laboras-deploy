@@ -9,8 +9,15 @@ import {
   AvatarImage,
 } from "@/shared/components/ui/avatar";
 import { Button } from "@/shared/components/ui/button";
+import { useEffect } from "react";
+import { useParams } from "react-router";
+import { IProfile } from "../models/profile";
 
-export const Profile = () => {
+type IProfileProps = {
+  profile: IProfile;
+};
+
+export const Profile = ({ profile }: IProfileProps) => {
   return (
     <Card className="flex flex-row items-center gap-16 p-9 px-20 rounded-none bg-transparent border-r-0 border-l-0 border-rebeccapurple2">
       <div className="flex flex-col h-full items-center justify-center gap-5">
@@ -25,7 +32,14 @@ export const Profile = () => {
 
       <div className="flex flex-col w-full gap-3 items-center">
         <CardTitle className="text-2xl font-bold tracking-tighter">
-          bianca bezerra
+          {profile ? (
+            <p>
+              {profile.first_name} {profile.last_name}
+              {/* {profile.username} */}
+            </p>
+          ) : (
+            <p>Nada n</p>
+          )}
         </CardTitle>
 
         <CardContent className="flex flex-col gap-6 p-0 items-center">
@@ -43,10 +57,17 @@ export const Profile = () => {
 
           <div className="flex w-fit h-fit text-wrap ">
             <p className="break-normal text-ellipsis ">
-              Meiga e abusada, faço você se perder! e quem foi que disse que eu
-              estava apaixonada por você? eu só quero saber! linda e perfumada,
-              ah, na tua mente! faz o que quiser comigo na imaginação. homem do
-              teu tipo eu uso mas se chega lá, eu digo não...
+              {profile.bio ? (
+                profile.bio
+              ) : (
+                <p>
+                  Meiga e abusada, faço você se perder! e quem foi que disse que
+                  eu estava apaixonada por você? eu só quero saber! linda e
+                  perfumada, ah, na tua mente! faz o que quiser comigo na
+                  imaginação. homem do teu tipo eu uso mas se chega lá, eu digo
+                  não...
+                </p>
+              )}
             </p>
           </div>
 
