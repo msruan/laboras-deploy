@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "./shared/layouts/MainLayout";
-import {LoginLayout} from "./shared/layouts/LoginLayout";
+import { LoginLayout } from "./shared/layouts/LoginLayout";
 import ErrorPage from "./pages/public/ErrorPage";
 import HomePage from "./pages/public/HomePage";
 import {LoginPage} from "./pages/public/LoginPage";
@@ -14,7 +14,7 @@ import { SignUpPage } from "./pages/public/SignUpPage";
 
 
 export const router = createBrowserRouter([
-{
+  {
     path: "/",
     element: <LoginLayout />,
     errorElement: <ErrorPage />,
@@ -28,18 +28,14 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "/posts", element: <MainPosts idLoggedUser={"1"}/> },
+      { path: "/posts", element: <MainPosts idLoggedUser={"1"} /> },
       { path: "/posts/profile", element: <ProfilePage /> },
-      { path: "/posts/postPage", element: <PostsPage/>},
+      { path: "/posts/postPage/:id", element: <PostsPage idLoggedUser={"1"} /> },
     ],
   },
   {
     path: "/teste",
-    element: (
-      <TextBox
-        idLoggedUser={""}
-      />
-    ),
+    element: <TextBox idLoggedUser={""} linkedTo={null} />,
   },
   { path: "/teste2", element: <MainPosts idLoggedUser={"1"} /> },
 ]);
