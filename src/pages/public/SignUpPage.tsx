@@ -1,3 +1,4 @@
+import { SignUp } from "@/actions/AuthAction";
 import { Button } from "@/shared/components/ui/button";
 import {
   Card,
@@ -10,18 +11,30 @@ import {
 
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
-import { Link } from "react-router-dom";
+import { useState, ChangeEvent } from "react";
+
+import { Link, Navigate } from "react-router-dom";
 
 export function SignUpPage() {
 
+  const {status, mutate : handleSignUp} = SignUp()
+
   const [inputValues, setInputValues] = useState({
-    nome: "", username: "", email: "", senha: ""
+    firstName: "",lastName:"",username: "", email: "", password: ""
    })
 
    const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    
+    const {name, value} = e.target
+    setInputValues({...inputValues, [name]: value})
    }
 
+  const onSubmit = () => {
+    handleSignUp(inputValues)
+  }
+
+  if(status == "success"){
+    
+  }
 
   return (
     <Card className="w-full max-w-md text-wrap ">
@@ -39,11 +52,21 @@ export function SignUpPage() {
       <CardContent className="flex flex-col gap-4">
         <div>
           {/**Todo: partir depois pra pegar o first name */}
-          <Label htmlFor="nome">Nome</Label>
+          <Label htmlFor="nome">First name</Label>
           <Input
-            id="nome"
-            placeholder="Digite seu nome completo"
+            
+            placeholder="Type your first name"
             type="text"
+            name="firstName"
+            onChange={handleOnChange}
+          ></Input>
+           <Label htmlFor="nome">Last name</Label>
+          <Input
+            
+            placeholder="Type your last name"
+            type="text"
+            name="lastName"
+            onChange={handleOnChange}
           ></Input>
         </div>
         <div>
@@ -51,28 +74,35 @@ export function SignUpPage() {
           <Label htmlFor="username">Username</Label>
           <Input
             id="username"
-            placeholder="Digite seu nome de usuário"
+            placeholder="Type your username"
             type="text"
+            name="username"
+            onChange={handleOnChange}
           ></Input>
         </div>
         <div>
           <Label htmlFor="email">Email</Label>
           <Input
             id="email"
-            placeholder="Digite seu melhor email"
+            placeholder="Type your best email"
             type="email"
+            name="email"
+            onChange={handleOnChange}
           ></Input>
         </div>
         <div>
           <Label htmlFor="senha">Senha</Label>
           <Input
             id="senha"
-            placeholder="Digite sua senha mais secreta"
+            placeholder="Type your most discreet password"
             type="password"
+            name="password"
+            onChange={handleOnChange}
           ></Input>
         </div>
 
-        <Button className="mt-2">Entrar</Button>
+  
+        <Button className="mt-2" onClick={()=>{handleSignUp(inputValues)}}>Sign Up</Button>
 
         {/* <div className="flex justify-center items-center gap-6 mt-2">
               <Separator></Separator>

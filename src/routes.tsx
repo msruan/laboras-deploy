@@ -4,14 +4,14 @@ import {LoginLayout} from "./shared/layouts/LoginLayout";
 import ErrorPage from "./pages/public/ErrorPage";
 import HomePage from "./pages/public/HomePage";
 import {LoginPage} from "./pages/public/LoginPage";
-import {SignUpPage} from "./pages/public/SignUpPage";
+
 import PostsPage from "./pages/authenticated/PostsPage";
 import ProfilePage from "./pages/authenticated/ProfilePage";
 import { MainPosts } from "@/shared/components/MainPosts";
 import { AsideMyProfile } from "@/shared/components/AsideMyProfile";
 import { TextBox } from "@/shared/components/TextBox";
-import { IPost } from "@/shared/models/post";
-import Post from "@/shared/components/Post";
+import { SignUpPage } from "./pages/public/SignUpPage";
+
 
 export const router = createBrowserRouter([
 {
@@ -20,7 +20,6 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { path: "/", element: <LoginPage /> },
-      { path: "/login", element: <LoginPage /> },
       { path: "/signup", element: <SignUpPage /> },
     ],
   },

@@ -1,3 +1,4 @@
+import { Logout } from "@/actions/AuthAction"
 import { Button } from "@/shared/components/ui/button"
 import {
   Card,
@@ -15,8 +16,17 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/shared/components/ui/tabs"
+import { Navigate, useNavigate } from "react-router"
 
 export function SettingsTabs() {
+
+  const navigate = useNavigate()
+
+  const onLogout = () => {
+    Logout()
+    navigate("/")
+  }
+
   return (
     <Tabs defaultValue="account" className="w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
@@ -41,8 +51,9 @@ export function SettingsTabs() {
               <Input id="username" defaultValue="@peduarte" />
             </div>
           </CardContent>
-          <CardFooter>
+          <CardFooter className="flex flex-row justify-between">
             <Button>Save changes</Button>
+            <Button onClick={onLogout}>Logout</Button>
           </CardFooter>
         </Card>
       </TabsContent>
