@@ -42,28 +42,47 @@ export const Post = ({
     }
     `}
     >
-      <div className="w-full flex h-fit pt-3 pl-5 pr-3">
-        <Avatar className="w-12 h-12 rounded-full">
-          <AvatarImage src="https://p2.trrsf.com/image/fget/cf/1200/1600/middle/images.terra.com/2023/07/31/pedro-flamengo-uv5ta7zqn5us.jpg" />
-
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-        {isSuccess && editMode ? (
-          <div className="grid w-full gap-2">
-            <Textarea placeholder="Type your message here." />
-            <Button>Send message</Button>
-          </div>
-        ) : (
-          <PostContent
-            perfil={perfil ?? initializer}
-            post={post}
-            fullPage={fullPage}
+      {isSuccess && editMode ? (
+        <div className="grid w-full h-full gap-2">
+          <Textarea
+            className="bg-transparent"
+            placeholder="Type your message here."
           />
-        )}
-      </div>
-      <CardFooter className="flex items-center justify-end h-fit">
-        <Icons post={post} fullPage={fullPage}></Icons>
-      </CardFooter>
+          <div className="w-1/2 first-letter:flex items-center justify-center">
+            <Button>Cancelar</Button>
+            <Button>Salvar</Button>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="w-full flex h-fit pt-3 pl-5 pr-3">
+            <Avatar className="w-12 h-12 rounded-full">
+              <AvatarImage src="https://p2.trrsf.com/image/fget/cf/1200/1600/middle/images.terra.com/2023/07/31/pedro-flamengo-uv5ta7zqn5us.jpg" />
+
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+
+            <PostContent
+              perfil={perfil ?? initializer}
+              post={post}
+              fullPage={fullPage}
+              handleEdit={setEditMode}
+            />
+          </div>
+          {!fullPage && (
+            <CardFooter className="flex items-center justify-end h-fit">
+              <div
+                className={`flex flex-row justify-between pr-7 pb-1 h-fit
+      ${fullPage ? " w-1/4" : " w-1/4"}
+      `}
+              >
+                <Icons post={post} fullPage={fullPage}></Icons>
+                <PostMenu handleEdit={setEditMode} post={post} />
+              </div>
+            </CardFooter>
+          )}
+        </>
+      )}
     </Card>
   );
 };
