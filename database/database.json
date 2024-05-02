@@ -505,6 +505,39 @@
       "id": "be96",
       "email": "fffffffff",
       "password": "fffffffffffff"
+    },
+    {
+      "id": "4f7d",
+      "email": "msruan",
+      "password": "ggggggggggg"
+    },
+    {
+      "id": "5e01",
+      "firstName": "Fulano",
+      "lastName": "De Tal",
+      "username": "fulano",
+      "email": "fulano@gmail.com",
+      "password": "fulano"
+    },
+    {
+      "id": "35fa",
+      "email": "fulano@gmail.com",
+      "password": "fulano"
+    },
+    {
+      "id": "ef1f",
+      "email": "user@example.com",
+      "password": "string"
+    },
+    {
+      "id": "4d84",
+      "email": "user@example.com",
+      "password": "string"
+    },
+    {
+      "id": "2765",
+      "email": "naoexistente",
+      "password": "naoexiste"
     }
   ],
   "posts": [

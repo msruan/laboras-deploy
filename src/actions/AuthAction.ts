@@ -19,7 +19,7 @@ type credentialsSignup = {
 }
 
 const fetchLogin = async (credentials: credentialsLogin) => {
-    return await axios.post("http://localhost:3000/profiles", credentials, {
+    return await axios.post("http://localhost:8000/api/auth/login/", credentials, {
         headers: {'Content-Type': 'application/json'}
     })
     
