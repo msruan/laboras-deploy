@@ -11,8 +11,9 @@ import { CreatePost } from "@/actions/PostAction";
 
 type TextBoxProps = {
   idLoggedUser: string;
+  linkedTo: string | null
 }
-export const TextBox = ({ idLoggedUser }: TextBoxProps) => {
+export const TextBox = ({ idLoggedUser, linkedTo = null }: TextBoxProps) => {
   const input = useRef<HTMLTextAreaElement>(null);
 
   function handleClick() {
@@ -26,7 +27,8 @@ export const TextBox = ({ idLoggedUser }: TextBoxProps) => {
       content: input.current.value,
       created_at: `${new Date().toISOString()}`,
       likes: 0,
-      deslikes: 0
+      deslikes: 0,
+      linked_to: linkedTo
     };
 
     addNewPost(newPost);

@@ -26,7 +26,7 @@ export const ProfileTag = ({ perfil }: IProfileProps) => {
 
     <Card className="w-full bg-rebeccapurple2 flex gap-4 p-2 border-0 rounded-full hover:bg-rebeccapurple transition-all duration-150">
       {/* Fotinha */}
-      <Link to="/posts/profile">
+      <Link to={`/posts/profile/${perfil.username}`}>
         <Avatar className="w-12 h-12 rounded-full cursor-pointer">
           <AvatarImage src="src/assets/chorro-timido.JPG" />
           <AvatarFallback>CN</AvatarFallback>
@@ -36,7 +36,7 @@ export const ProfileTag = ({ perfil }: IProfileProps) => {
         <div className="flex flex-col items-start text-aliceblue text-sm gap-0.5">
           <Link to="/posts/profile">
             <h3>
-              <strong>{perfil?.name}</strong>
+              <strong>{perfil?.first_name}</strong>
             </h3>
           </Link>
           <h4 className="opacity-70">@{perfil?.username}</h4>

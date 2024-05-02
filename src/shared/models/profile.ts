@@ -1,7 +1,9 @@
 export interface IProfile {
     id: string,
-    name: string,
+    first_name: string,
+    last_name: string,
     username: string,
-    // password: string,
-    // followers: Array<string>
+    email : string, 
+    password: string,
+    bio?: string,
 }

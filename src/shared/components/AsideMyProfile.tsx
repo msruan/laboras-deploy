@@ -48,7 +48,7 @@ export const AsideMyProfile = ({
           </Button>
         </Link>
 
-        <Link to="/posts/profile">
+        <Link to={`/posts/profile/${perfil?.username}`}>
           <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
             <AvatarIcon className="mr-1 h-10 w-10" /> Profile
           </Button>
