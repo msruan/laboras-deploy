@@ -18,6 +18,7 @@ module.exports = {
     },
     extend: {
       spacing: {
+        'noavatar': 'calc(100% - 1rem)',
         'custom': '80%',
         'half-vh': '50vh',
         'icon' : '1rem'

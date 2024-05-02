@@ -7,9 +7,11 @@ import { Button } from "@/shared/components/ui/button";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { GetUserProfile } from "@/actions/ProfileAction";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { PostMenu } from "./PostMenu";
 import { Icons } from "./Icons";
+import { Label } from "@radix-ui/react-label";
+import { PatchPost } from "@/actions/PostAction";
 
 type IPostProps = {
   post: IPost;
@@ -30,28 +32,45 @@ export const Post = ({
 }: IPostProps) => {
   const { response: perfil, isSuccess } = GetUserProfile(post.user_id);
   const [editMode, setEditMode] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const { mutate: handlePatch } = PatchPost();
+
+  function handleSaveEdit() {
+    if (
+      textareaRef.current !== null &&
+      textareaRef.current.value !== post.content
+    ) {
+      handlePatch({ content: textareaRef.current.value, id: post.id });
+    }
+    setEditMode(!editMode);
+  }
 
   return (
     <Card
       className={`flex flex-col
-    ${fullPage ? "bg-transparent" : "h-full bg-rebeccapurple"}
+    ${fullPage || editMode ? "bg-transparent" : "h-full bg-rebeccapurple"}
     ${
-      fullBorder
+      editMode
+        ? "border-t-0 border-l-0 border-r-0 border-b-0 rounded-none"
+        : fullBorder
         ? "border-purple-400 "
         : "border-t-0 border-l-0 border-r-0 border-b-purple-400 rounded-none"
     }
     `}
     >
       {isSuccess && editMode ? (
-        <div className="grid w-full h-full gap-2">
+        <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-r-0 border-l-0 border-t-0 border-b-0">
           <Textarea
-            className="bg-transparent"
-            placeholder="Type your message here."
-          />
-          <div className="w-1/2 first-letter:flex items-center justify-center">
-            <Button>Cancelar</Button>
-            <Button>Salvar</Button>
-          </div>
+            defaultValue={post.content}
+            ref={textareaRef}
+            autoFocus={true}
+            className="bg-rebeccapurple w-noavatar"
+            placeholder="Edit your message here."
+            id={`post-${post.id}`}
+          ></Textarea>
+          <Button onClick={handleSaveEdit} variant="ghost">
+            Salvar
+          </Button>
         </div>
       ) : (
         <>

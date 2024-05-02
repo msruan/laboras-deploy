@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 import { GetUserProfile } from "@/actions/ProfileAction";
 import { SettingsMenu } from "./SettingsMenu";
+import { Cog6ToothIcon, Cog8ToothIcon, CogIcon } from "@heroicons/react/16/solid";
 
 type AsideMyProfileProps = {
   idLoggedUser: string;
@@ -52,6 +53,13 @@ export const AsideMyProfile = ({
             <AvatarIcon className="mr-1 h-10 w-10" /> Profile
           </Button>
         </Link>
+
+        <Link to="/config">
+          <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
+            <CogIcon className="mr-1 h-10 w-10" /> Settings
+          </Button>
+        </Link>
+
       </div>
 
       {isSuccess && <ProfileTag perfil={perfil ?? defaultPerfil} />}

@@ -15,9 +15,73 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/shared/components/ui/tabs";
-export function SettingsTabs() {
+import { Separator } from "@/shared/components/ui/separator";
+import {
+  ArchiveBoxArrowDownIcon,
+  ArchiveBoxXMarkIcon,
+  ArrowLeftStartOnRectangleIcon,
+} from "@heroicons/react/16/solid";
+import { ModeToggle } from "@/shared/components/ModeToggle";
+
+export function SettingsPage() {
   return (
-    <Tabs defaultValue="account" className="w-[400px]">
+    <div className="flex items-center justify-center pt-6">
+      <Card className="w-full max-w-lg text-wrap bg-transparant">
+        <CardHeader>
+          <CardTitle
+            id="beggin"
+            className="text-2xl font-bold tracking-tighter text-center"
+          >
+            Settings
+          </CardTitle>
+          <Separator />
+        </CardHeader>
+        <CardContent className="flex flex-col gap-8">
+          <section className="flex flex-col justify-between h-full gap-6 items-center">
+            <SectionTitle title="Profile" />
+            <SectionProfile />
+          </section>
+          <section className="flex flex-col justify-between h-full gap-4 w-full items-center">
+            <SectionTitle title="General" />
+            <SectionGeneral />
+          </section>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+function SectionGeneral() {
+  return (
+    <div className="w-full border border-t-purple-00 rounded-sm border-r-0 border-l-0 border-b-0">
+      <ModeToggle />
+      <Button variant="ghost" className="flex justify-between w-full">
+        Logout
+        <ArrowLeftStartOnRectangleIcon className="w-4 h-4" />
+      </Button>
+      <Button
+        variant="ghost"
+        className="flex justify-between w-full text-red-700"
+      >
+        Delete account
+        <ArchiveBoxXMarkIcon className="w-4 h-4" />
+      </Button>
+    </div>
+  );
+}
+type SectionTitleProps = {
+  title: string;
+};
+function SectionTitle({ title }: SectionTitleProps) {
+  return (
+    <h3 className="w-full h-full text-purple-400 text-xl text-sans text-center font-semibold leading-none tracking-tight">
+      {title}
+    </h3>
+  );
+}
+function SectionProfile() {
+  return (
+    <Tabs defaultValue="account" className="w-[400px] mb-4">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="account">Account</TabsTrigger>
         <TabsTrigger value="password">Password</TabsTrigger>
@@ -38,6 +102,10 @@ export function SettingsTabs() {
             <div className="space-y-1">
               <Label htmlFor="username">Username</Label>
               <Input id="username" defaultValue="@peduarte" />
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" defaultValue="@peduarte" />
             </div>
           </CardContent>
           <CardFooter>
@@ -69,5 +137,5 @@ export function SettingsTabs() {
         </Card>
       </TabsContent>
     </Tabs>
-  )
+  );
 }

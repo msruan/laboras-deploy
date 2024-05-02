@@ -46,6 +46,7 @@ export const TextBox = ({ idLoggedUser }: TextBoxProps) => {
           </Avatar>
 
           <textarea
+          onKeyDown={(e)=>{e.key == 'Enter' && handleClick()}}
             ref={input}
             className="bg-transparent py-5 w-full content-center border-none text-white outline-none resize-none"
             name="text"

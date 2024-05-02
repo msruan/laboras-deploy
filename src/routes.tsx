@@ -12,6 +12,7 @@ import { AsideMyProfile } from "@/shared/components/AsideMyProfile";
 import { TextBox } from "@/shared/components/TextBox";
 import { IPost } from "@/shared/models/post";
 import Post from "@/shared/components/Post";
+import { SettingsPage } from "./pages/public/SettingsPage";
 
 export const router = createBrowserRouter([
 {
@@ -35,12 +36,12 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/teste",
-    element: (
-      <TextBox
-        idLoggedUser={""}
-      />
-    ),
+    path: "/config",
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: "/config", element: <SettingsPage/> },
+    ],
   },
   { path: "/teste2", element: <MainPosts idLoggedUser={"1"} /> },
 ]);
