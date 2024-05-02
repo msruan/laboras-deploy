@@ -7,7 +7,6 @@ type MainPostsProps = {
 };
 
 export const MainPosts = ({ idLoggedUser }: MainPostsProps) => {
-  
   const { response: posts, isSuccess, isError, isLoading } = GetAllPosts();
 
   //Todo: Como faço pra quando der isError ele levar pra página de erro?
@@ -17,7 +16,7 @@ export const MainPosts = ({ idLoggedUser }: MainPostsProps) => {
       {isError && <div>Error</div>}
       {isSuccess && (
         <div className="flex flex-col h-full gap-2 pl-3 pr-3">
-          <TextBox idLoggedUser={idLoggedUser} linkedTo={null}/>
+          <TextBox idLoggedUser={idLoggedUser} linkedTo={null} />
           {posts!.map((post) => (
             <Post
               key={post.id}

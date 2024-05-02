@@ -23,7 +23,6 @@
       "last_name": "Meireles",
       "email": "ggggggggg",
       "password": "ggggggggggg"
-      
     },
     {
       "id": "4",
@@ -512,7 +511,7 @@
     {
       "id": "01HWMSPP23DW9CF0CRDADKZZ7F",
       "user_id": "1",
-      "content": "meireels",
+      "content": "jujuba\n",
       "created_at": "2024-04-29T11:26:37.635Z",
       "likes": 4,
       "deslikes": 1,
@@ -580,6 +579,33 @@
       "likes": 0,
       "deslikes": 0,
       "linked_to": "01HWQXT3EMXN2PWW6K955NDRQB"
+    },
+    {
+      "id": "01HWXB7SNZTN2RW7ZB40CJHTZK",
+      "user_id": "1",
+      "content": "oi",
+      "created_at": "2024-05-02T19:06:59.647Z",
+      "likes": 0,
+      "deslikes": 0,
+      "linked_to": null
+    },
+    {
+      "id": "01HWXB7WXYCTCDFS3W133TYTBC",
+      "user_id": "1",
+      "content": "\noi",
+      "created_at": "2024-05-02T19:07:02.974Z",
+      "likes": 0,
+      "deslikes": 0,
+      "linked_to": null
+    },
+    {
+      "id": "01HWXB8WVRANFYEZHC3SVG49HA",
+      "user_id": "1",
+      "content": "oi",
+      "created_at": "2024-05-02T19:07:35.672Z",
+      "likes": 0,
+      "deslikes": 0,
+      "linked_to": null
     }
   ],
   "followings": [

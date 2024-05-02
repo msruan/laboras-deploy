@@ -19,8 +19,11 @@ export const AsideMyProfile = ({
 }: AsideMyProfileProps) => {
   const defaultPerfil: IProfile = {
     id: "2",
-    name: "Ruan Macedo",
-    username: "msruan",
+    first_name: "Ruan",
+    last_name: "Macedo",
+    password: "1234",
+    email: "ruan@gmail.com",
+    username: "msruan"
   };
 
   const { response: perfil, isSuccess } = GetUserProfile(idLoggedUser);
