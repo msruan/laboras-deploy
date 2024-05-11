@@ -43,7 +43,7 @@ export const ProfileTag = ({ perfil }: IProfileProps) => {
         </div>
 
         <i className="ml-auto pr-5">
-          <SettingsMenu/>
+          <SettingsMenu />
         </i>
       </CardContent>
     </Card>

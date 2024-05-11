@@ -1,6 +1,6 @@
 import { ProfileTag } from "./ProfileTag";
 import { ScrollArea } from "./ui/scrolarea";
-import {GetProfileFollowers } from "@/actions/ProfileAction";
+import { GetProfileFollowers } from "@/actions/ProfileAction";
 
 type AsideFollowersProps = {
   idLoggedUser: string;

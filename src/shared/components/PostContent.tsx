@@ -2,18 +2,23 @@ import { IPost } from "@/shared/models/post";
 import { IProfile } from "@/shared/models/profile";
 import { CardContent, CardFooter } from "./ui/card";
 import { Icons } from "./Icons";
-import { PatchPost } from "@/actions/PostAction";
+import { UpdatePost } from "@/actions/PostAction";
 import { PostMenu } from "./PostMenu";
 
 interface IPostContentProps {
   perfil: IProfile;
   post: IPost;
   fullPage: boolean;
-  handleEdit : (value: boolean)=>void;
+  handleEdit: (value: boolean) => void;
 }
 
-export function PostContent({ perfil, post, fullPage, handleEdit }: IPostContentProps) {
-  const { mutate: handleUpdate } = PatchPost();
+export function PostContent({
+  perfil,
+  post,
+  fullPage,
+  handleEdit,
+}: IPostContentProps) {
+  const { mutate: handleUpdate } = UpdatePost();
 
   return (
     <>
@@ -24,7 +29,7 @@ export function PostContent({ perfil, post, fullPage, handleEdit }: IPostContent
               fullPage ? "flex-col" : ""
             } items-start text-aliceblue text-sm gap-2`}
           >
-            <h3>{perfil?.name}</h3>
+            <h3>{perfil?.first_name}</h3>
             <h4 className="opacity-70">@{perfil?.username}</h4>
           </div>
 

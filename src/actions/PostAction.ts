@@ -1,5 +1,5 @@
+import axiosInstance from "./../config/axiosConfig";
 import { IPost, PostRequest } from "@/shared/models/post.js";
-import axiosInstance from "../config/axiosConfig.js";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosPromise, AxiosResponse } from "axios";
 
@@ -38,18 +38,19 @@ export function GetAllPosts() {
 
 export const fetchGetPost = async (id: string): AxiosPromise<IPost> => {
   const response = await axiosInstance.get(`/posts/${id}`);
-  console.log("mana o id foi... ",id)
-  console.log("mano...")
+  console.log("mana o id foi... ", id);
+  console.log("mano...");
   return response;
 };
 
 export function GetPost(id: string) {
   const query = useQuery({
-    queryFn: ()=>{return fetchGetPost(id)},
+    queryFn: () => {
+      return fetchGetPost(id);
+    },
     queryKey: ["post"],
     refetchInterval: 5 * 60 * 1000,
   });
-  
 
   return {
     ...query,
@@ -57,23 +58,16 @@ export function GetPost(id: string) {
   };
 }
 
-async function fetchPutPost(post: IPost): AxiosPromise<IPost> {
-  return await axiosInstance.put(`/posts/${post.id}`, post);
+async function fetchPatchPost(post: PostRequest): AxiosPromise<IPost> {
+  return await axiosInstance.patch(`/posts/${post.id}`, post);
 }
 
-export function PutPost() {
+export function UpdatePost() {
   const queryClient = useQueryClient();
 
   const mutate = useMutation({
-    mutationFn: fetchPutPost,
-    onSuccess: (response: AxiosResponse<IPost>) => {
-      queryClient.setQueryData(["posts"], (oldPosts: IPost[]) => {
-        oldPosts.map((post) => {
-          if (post.id === response.data.id) return response.data;
-          return post;
-        });
-      });
-    },
+    mutationFn: fetchPatchPost,
+    onSuccess: ()=>{queryClient.invalidateQueries({queryKey: ['posts']})}
   });
   return mutate;
 }
@@ -86,71 +80,7 @@ export function DeletePost() {
   const queryClient = useQueryClient();
   const mutate = useMutation({
     mutationFn: fetchDeletePost,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
-    },
-  });
-  return mutate;
-}
-
-function validatePacthParameters({
-  id,
-  content,
-  likes,
-  deslikes,
-}: PostRequest) {
-  if (content == "" && likes == -1 && deslikes == -1) {
-    throw new Error(
-      "Nenhum atributo a ser atualizado foi passado para PatchPost deve ser nulo!"
-    );
-  } else if (content !== "") {
-    return {
-      id,
-      content,
-    };
-  } else if (likes !== -1 && deslikes !== -1) {
-    return {
-      id,
-      likes,
-      deslikes,
-    };
-  } else if (likes !== -1) {
-    return {
-      id,
-      likes,
-    };
-  }
-  return {
-    id,
-    deslikes,
-  };
-}
-
-async function fetchPatchPost({
-  id,
-  content = "",
-  likes = -1,
-  deslikes = -1,
-}: PostRequest): AxiosPromise<IPost> {
-  return await axiosInstance.patch(
-    `/posts/${id}`,
-    validatePacthParameters({
-      id,
-      content,
-      likes,
-      deslikes,
-    })
-  );
-}
-
-export function PatchPost() {
-  const queryClient = useQueryClient();
-
-  const mutate = useMutation({
-    mutationFn: fetchPatchPost,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
-    },
+    onSuccess: ()=>{queryClient.invalidateQueries({queryKey: ['posts']})},
   });
   return mutate;
 }

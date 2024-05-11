@@ -1,12 +1,12 @@
 import { ProfileTag } from "./ProfileTag";
 import { IProfile } from "../models/profile";
-import { useEffect, useState } from "react";
 import { AvatarIcon, HomeIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 import { GetUserProfile } from "@/actions/ProfileAction";
-import { SettingsMenu } from "./SettingsMenu";
-import { Cog6ToothIcon, Cog8ToothIcon, CogIcon } from "@heroicons/react/16/solid";
+import {
+  CogIcon,
+} from "@heroicons/react/16/solid";
 
 type AsideMyProfileProps = {
   idLoggedUser: string;
@@ -23,7 +23,7 @@ export const AsideMyProfile = ({
     last_name: "Macedo",
     password: "1234",
     email: "ruan@gmail.com",
-    username: "msruan"
+    username: "msruan",
   };
 
   const { response: perfil, isSuccess } = GetUserProfile(idLoggedUser);
@@ -62,7 +62,6 @@ export const AsideMyProfile = ({
             <CogIcon className="mr-1 h-10 w-10" /> Settings
           </Button>
         </Link>
-
       </div>
 
       {isSuccess && <ProfileTag perfil={perfil ?? defaultPerfil} />}

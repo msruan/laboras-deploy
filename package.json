@@ -40,7 +40,8 @@
     "shadcn-ui": "^0.2.3",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "ulidx": "^2.3.0"
+    "ulidx": "^2.3.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@fortawesome/react-fontawesome": "^0.2.0",

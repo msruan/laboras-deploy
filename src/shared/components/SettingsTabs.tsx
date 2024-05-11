@@ -15,16 +15,15 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/shared/components/ui/tabs";
-import { Logout } from "@/actions/AuthAction"
-import { Navigate, useNavigate } from "react-router"
+import { Logout } from "@/actions/AuthAction";
+import { Navigate, useNavigate } from "react-router";
 export function SettingsTabs() {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const onLogout = () => {
-    Logout()
-    navigate("/")
-  }
+    Logout();
+    navigate("/");
+  };
 
   return (
     <Tabs defaultValue="account" className="w-[400px]">
@@ -80,5 +79,5 @@ export function SettingsTabs() {
         </Card>
       </TabsContent>
     </Tabs>
-  )
+  );
 }

@@ -2,7 +2,8 @@ import { useState } from "react";
 import { IPost } from "../models/post";
 import { PostMenu } from "./PostMenu";
 import { FaceFrownIcon, StarIcon } from "@heroicons/react/16/solid";
-import { PatchPost } from "@/actions/PostAction";
+import { UpdatePost } from "@/actions/PostAction";
+import { PostRequest } from "../models/post";
 
 type IconsProps = {
   post: IPost;
@@ -12,8 +13,7 @@ type IconsProps = {
 export const Icons = ({ post, fullPage }: IconsProps) => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [isDesliked, setIsDesliked] = useState<boolean>(false);
-  // const { mutate: handleUpdate } = UpdatePost();
-  const { mutate: handleUpdate } = PatchPost();
+  const { mutate: handleUpdate } = UpdatePost();
 
   function handleLike() {
     if (isLiked) post.likes--;
@@ -22,12 +22,15 @@ export const Icons = ({ post, fullPage }: IconsProps) => {
       if (isDesliked) {
         post.deslikes--;
         setIsDesliked(false);
-        handleUpdate({ id: post.id, deslikes: post.deslikes });
+        handleUpdate({
+          id: post.id,
+          likes: post.likes,
+          deslikes: post.deslikes,
+        });
       }
     }
     setIsLiked(!isLiked);
     handleUpdate({ id: post.id, likes: post.likes });
-    // handleUpdate(post);
   }
 
   function handleDeslike() {
@@ -37,12 +40,15 @@ export const Icons = ({ post, fullPage }: IconsProps) => {
       if (isLiked) {
         post.likes--;
         setIsLiked(false);
-        handleUpdate({ id: post.id, likes: post.likes });
+        handleUpdate({
+          id: post.id,
+          likes: post.likes,
+          deslikes: post.deslikes,
+        });
       }
     }
     setIsDesliked(!isDesliked);
     handleUpdate({ id: post.id, deslikes: post.deslikes });
-    // handleUpdate(post);
   }
   return (
     <>

@@ -14,9 +14,9 @@ import img1 from "./../..//assets/img1.svg";
 import img2 from "./../../assets/img2.svg";
 import img3 from "./../../assets/img3.svg";
 import img4 from "./../../assets/img4.svg";
+import img5 from "@/assets/img5.svg";
 
 export const LoginLayout = () => {
-  
   type MyCarouselItemProps = {
     img: string;
   };
@@ -39,7 +39,7 @@ export const LoginLayout = () => {
           opts={{ loop: true }}
           plugins={[
             Autoplay({
-              delay: 2000,
+              delay: 3000,
             }),
           ]}
         >
@@ -48,6 +48,7 @@ export const LoginLayout = () => {
             <MyCarouselItem img={img2} />
             <MyCarouselItem img={img3} />
             <MyCarouselItem img={img4} />
+            <MyCarouselItem img={img5} />
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />

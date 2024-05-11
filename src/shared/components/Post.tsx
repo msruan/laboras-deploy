@@ -11,7 +11,7 @@ import { useRef, useState } from "react";
 import { PostMenu } from "./PostMenu";
 import { Icons } from "./Icons";
 import { Label } from "@radix-ui/react-label";
-import { PatchPost } from "@/actions/PostAction";
+import { UpdatePost } from "@/actions/PostAction";
 import {
   Link,
   Navigate,
@@ -44,7 +44,7 @@ export const Post = ({
   const { response: perfil, isSuccess } = GetUserProfile(post.user_id);
   const [editMode, setEditMode] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const { mutate: handlePatch } = PatchPost();
+  const { mutate: handlePatch } = UpdatePost();
 
   function handleSaveEdit() {
     if (

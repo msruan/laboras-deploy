@@ -1,7 +1,7 @@
-import {useQuery} from "@tanstack/react-query"
-import { axiosInstance } from "../config/axiosConfig";
-import { AxiosPromise } from "axios";
-import { IProfile } from "@/shared/models/profile";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axiosInstance from "../config/axiosConfig";
+import { AxiosPromise, AxiosResponse } from "axios";
+import { IProfile, ProfileRequest } from "@/shared/models/profile";
 
 async function fetchGetProfileFollowers(): AxiosPromise<IProfile[]> {
   return await axiosInstance.get("/profiles");
@@ -35,7 +35,9 @@ export function GetUserProfile(profileId: string) {
   };
 }
 
-export const fetchGetProfileByUsername = async (username: string): AxiosPromise<IProfile[]> => {
+export const fetchGetProfileByUsername = async (
+  username: string
+): AxiosPromise<IProfile[]> => {
   const response = await axiosInstance.get(`/profiles?username=${username}`);
   return response;
 };
@@ -47,41 +49,30 @@ export function GetProfileByUsername(username: string) {
     },
     queryKey: ["profile"],
   });
-  
+
   return {
     ...query,
     response: query.data?.data,
   };
 }
 
+async function fetPatchProfile(profile: ProfileRequest) {
+  const response = await axiosInstance.put(`/profiles/${profile.id}`, profile);
+  return response;
+}
 
-// async function fetchUpdateProfile(profile:IProfile){
-//   return await axiosInstance.put('/posts',profile);
-// }
-
-// export function UpdateProfile(){
-//   const queryClient = useQueryClient();
-//   const mutate = useMutation({
-//     mutationFn: fetchUpdateProfile,
-//     onSuccess: ()=>{
-//       queryClient.setQueryData();
-//     }
-//   });
-//   return mutate;
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export function UpdateProfile() {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: fetPatchProfile,
+    //@Todo: o back ta retornando esse Profile?
+    onSuccess: (response: AxiosResponse<ProfileRequest>) => {
+      queryClient.setQueryData(["profile"], (oldProfile: IProfile) => {
+        response.data;
+      });
+    },
+  });
+  return {
+    mutation,
+  };
+}
