@@ -14,11 +14,12 @@ type credentialsLogin = {
 };
 
 type credentialsSignup = {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   username: string;
   email: string;
   password: string;
+  confirm_password: string;
 };
 
 const fetchLogin = async (credentials: credentialsLogin) => {
@@ -55,7 +56,7 @@ export const Login = () => {
 
 const fetchSignup = async (credentials: credentialsSignup) => {
   const response = await axios.post(
-    "http://localhost:3000/profiles",
+    "http://localhost:8000/api/auth/signup/",
     credentials,
     {
       headers: { "Content-Type": "application/json" },
@@ -68,11 +69,12 @@ const fetchSignup = async (credentials: credentialsSignup) => {
 export const SignUp = () => {
   const mutate = useMutation({
     mutationFn: fetchSignup,
-    onSuccess: (response: AxiosResponse<IProfile>) => {
-      const { mutate: handleLogin } = Login();
-      const body = response.data;
-      handleLogin({ email: body.email, password: body.password });
-    },
+    // onSuccess: (response: AxiosResponse<IProfile>) => {
+    //   //@Todo: perguntar pra Bianca se isso tava funcionando, se não tiver, apenas redirecionar o usuário para Login e alertar que o signup teve sucesso
+    //   const { mutate: handleLogin } = Login();
+    //   const body = response.data;
+    //   handleLogin({ email: body.email, password: body.password });
+    // },
   });
 
   return mutate;

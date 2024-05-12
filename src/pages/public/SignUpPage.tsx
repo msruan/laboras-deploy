@@ -11,33 +11,57 @@ import {
 
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import { useState, ChangeEvent } from "react";
 
 import { Link, Navigate } from "react-router-dom";
 
 export function SignUpPage() {
-
-  const {status, mutate : handleSignUp} = SignUp()
+  const { status, mutate: handleSignUp } = SignUp();
+  const [isEntering, setIsEntering] = useState(false);
 
   const [inputValues, setInputValues] = useState({
-    firstName: "",lastName:"",username: "", email: "", password: ""
-   })
+    first_name: "",
+    last_name: "",
+    username: "",
+    email: "",
+    password: "",
+    confirm_password: "",
+  });
 
-   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = e.target
-    setInputValues({...inputValues, [name]: value})
-   }
+  const onSubmit = (e: React.MouseEvent<HTMLButtonElement> | null = null) => {
+    e?.preventDefault();
+    handleSignUp(inputValues);
+    setIsEntering(true);
+  };
 
-  const onSubmit = () => {
-    handleSignUp(inputValues)
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputValues({ ...inputValues, [name]: value });
+  };
+
+  if (status == "success") {
+    return <Navigate to="/" />;
   }
 
-  if(status == "success"){
-    
-  }
+  const validarParametros = (): boolean => {
+    return (
+      inputValues.first_name !== "" &&
+      inputValues.last_name !== "" &&
+      inputValues.username !== "" &&
+      inputValues.email !== "" &&
+      inputValues.password !== "" &&
+      inputValues.confirm_password !== ""
+    );
+  };
 
   return (
-    <Card className="w-full max-w-md text-wrap ">
+    <Card
+      className="w-full max-w-md text-wrap "
+      onKeyDown={(e) => {
+        if (e.key === "Enter" && validarParametros()) onSubmit();
+      }}
+    >
       <CardHeader>
         <CardTitle className="text-2xl font-bold tracking-tighter">
           Cadastrar-se
@@ -51,21 +75,20 @@ export function SignUpPage() {
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div>
-          {/**Todo: partir depois pra pegar o first name */}
           <Label htmlFor="nome">First name</Label>
           <Input
-            
             placeholder="Type your first name"
             type="text"
-            name="firstName"
+            name="first_name"
             onChange={handleOnChange}
           ></Input>
-           <Label htmlFor="nome">Last name</Label>
+        </div>
+        <div>
+          <Label htmlFor="nome">Last name</Label>
           <Input
-            
             placeholder="Type your last name"
             type="text"
-            name="lastName"
+            name="last_name"
             onChange={handleOnChange}
           ></Input>
         </div>
@@ -100,9 +123,26 @@ export function SignUpPage() {
             onChange={handleOnChange}
           ></Input>
         </div>
-
-  
-        <Button className="mt-2" onClick={()=>{handleSignUp(inputValues)}}>Sign Up</Button>
+        <div>
+          <Label htmlFor="confirm-senha">Senha</Label>
+          <Input
+            id="confirm-senha"
+            placeholder="Retype your password"
+            type="password"
+            name="confirm_password"
+            onChange={handleOnChange}
+          ></Input>
+        </div>
+        {isEntering ? (
+          <Button className="mt-2" disabled>
+            <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+            Criando conta...
+          </Button>
+        ) : (
+          <Button className="mt-2" onClick={onSubmit}>
+            Criar conta
+          </Button>
+        )}
 
         {/* <div className="flex justify-center items-center gap-6 mt-2">
               <Separator></Separator>

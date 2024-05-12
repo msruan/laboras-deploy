@@ -14,18 +14,6 @@ type AsideFollowersProps = {
   className: string;
 };
 
-const initializer: IProfile = {
-  id: "1",
-  username: "biancabzra",
-  first_name: "Bianca",
-  last_name: "Bezerra",
-  email: "bia@gmail.com",
-  password: "1234",
-  bio: "anyway nihao",
-  profile_image_link:
-    "https://i.pinimg.com/564x/32/e9/1e/32e91e1a803722a0dab201feddf78070.jpg",
-};
-
 export const AsideFollowers = ({ className }: AsideFollowersProps) => {
   const { response: followers, isSuccess, isLoading } = GetProfileFollowers();
   const { profile: context } = useContext(LoggedUserContext);

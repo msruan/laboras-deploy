@@ -12,37 +12,56 @@ import {
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Experimental_CssVarsProvider } from "@mui/material";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import { ChangeEvent, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 
 export function LoginPage() {
-  const {status, mutate} = Login();
+  const { status, mutate } = Login();
 
+  const [isEntering, setIsEntering] = useState(false);
   const [inputValues, setInputValues] = useState({
-   email: "",password: ""
-  })
+    email: "",
+    password: "",
+  });
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    const {name, value} = e.target 
-    setInputValues({ ...inputValues, [name]: value })
-  }
-  const onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    const { name, value } = e.target;
+    setInputValues({ ...inputValues, [name]: value });
+  };
+  const onSubmit = (e: React.MouseEvent<HTMLButtonElement> | null = null) => {
+    if (e) {
+      e.preventDefault();
+    }
     mutate(inputValues);
-  }
+    setIsEntering(true);
+  };
+
   if (status === "success") {
-    return <Navigate to="/posts" />
+    return <Navigate to="/posts" />;
   }
- 
+
+  const validarParametros = (): boolean => {
+    return inputValues.email !== "" && inputValues.password !== "";
+  };
+
   return (
-    <Card className="w-full max-w-md text-wrap">
+    <Card
+      className="w-full max-w-md text-wrap"
+      onKeyDown={(e) => {
+        if (e.key === "Enter" && validarParametros()) onSubmit();
+      }}
+    >
       <CardHeader>
         <CardTitle className="text-2xl font-bold tracking-tighter">
           Entre por sua conta em risco
         </CardTitle>
         <CardDescription className="text-purple-300">
-          Não possui conta ainda? <Link className="underline" to={"/signup"}>Criar nova conta</Link>
+          Não possui conta ainda?{" "}
+          <Link className="underline" to={"/signup"}>
+            Criar nova conta
+          </Link>
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
@@ -67,7 +86,16 @@ export function LoginPage() {
           ></Input>
         </div>
 
-        <Button className="mt-2" onClick={onSubmit}>Entrar</Button>
+        {isEntering ? (
+          <Button className="mt-2" disabled>
+            <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+            Entrando...
+          </Button>
+        ) : (
+          <Button className="mt-2" onClick={onSubmit}>
+            Entrar
+          </Button>
+        )}
 
         {/* <div className="flex justify-center items-center gap-6 mt-2">
               <Separator></Separator>
@@ -80,7 +108,6 @@ export function LoginPage() {
             </Button> */}
       </CardContent>
 
-      
       <CardFooter>
         <p className="text-sm text-muted-foreground text-center text-wrapp">
           Ao entrar em nossa plataforma, você concorda que roubemos todos os
