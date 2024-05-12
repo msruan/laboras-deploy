@@ -3,6 +3,10 @@ import { useToken } from "@/shared/hooks/useToken";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { IPost } from "@/shared/models/post";
 import { IProfile } from "@/shared/models/profile";
+import { useContext } from "react";
+import { LoggedUserContext } from "@/context/LoggedUserContext";
+import { GetProfileByEmail, GetProfileByUsername } from "./ProfileAction";
+import axiosInstance from "@/config/axiosConfig";
 
 type credentialsLogin = {
   email: string;
@@ -27,25 +31,26 @@ const fetchLogin = async (credentials: credentialsLogin) => {
   );
 };
 
+async function fetchGetProfile(profileId: string): AxiosPromise<IProfile> {
+  return await axiosInstance.get(`/profiles/${profileId}`);
+} 
+
 export const Login = () => {
   const { setToken } = useToken();
 
-  const {
-    data: response,
-    status,
-    mutate,
-  } = useMutation({
+  const mutation = useMutation({
     mutationFn: fetchLogin,
-    onSuccess: (): void => {
+    onSuccess:  (response, variables) => {
+      sessionStorage.setItem('email',variables.email);
       setToken(response?.data);
     },
     onError: (error) => {
-      console.log("deu ruim");
+      console.log("deu ruim "+error);
       //todo: criar mensagem de erro na tela
     },
   });
 
-  return { status, mutate };
+  return mutation;
 };
 
 const fetchSignup = async (credentials: credentialsSignup) => {

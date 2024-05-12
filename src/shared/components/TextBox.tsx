@@ -1,5 +1,5 @@
 // import { Input } from "@chakra-ui/react";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import style from "./textbox.module.css";
 import { ulid } from "ulidx";
 import { IPost } from "../models/post";
@@ -8,14 +8,14 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { CreatePost } from "@/actions/PostAction";
+import { GetUserProfile } from "@/actions/ProfileAction";
+import { LoggedUserContext } from "@/context/LoggedUserContext";
 
 type TextBoxProps = {
-  idLoggedUser: string;
   linkedTo: string | null;
 };
-export const TextBox = ({ idLoggedUser, linkedTo = null }: TextBoxProps) => {
-  const input = useRef<HTMLTextAreaElement>(null);
-
+export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
+  
   function handleClick() {
     if (input.current == null || input.current.value === "") {
       return;
@@ -30,19 +30,24 @@ export const TextBox = ({ idLoggedUser, linkedTo = null }: TextBoxProps) => {
       deslikes: 0,
       linked_to: linkedTo,
     };
-
+    
     addNewPost(newPost);
     input.current.value = "";
   }
-
+  
+  const input = useRef<HTMLTextAreaElement>(null);
   const { mutate: addNewPost } = CreatePost();
+  const {profile : loggedUser} = useContext(LoggedUserContext);
+  const username = loggedUser?.username;
+  const idLoggedUser = loggedUser?.id ?? '1';
+  const {response:profile} = GetUserProfile(idLoggedUser);
 
   return (
     <div>
       <div className="flex flex-col w-full align-middle pb-10 border-b-2  pl-3 pr-3 border-rebeccapurple2">
         <div className="w-full flex flex-row gap-8 items-center">
           <Avatar className="w-12 h-12 rounded-full">
-            <AvatarImage src="src/assets/chorro-timido.JPG" />
+            <AvatarImage src={profile?.profile_image_link ?? 'src/assets/chorro-timido.JPG'} />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
 
@@ -54,7 +59,7 @@ export const TextBox = ({ idLoggedUser, linkedTo = null }: TextBoxProps) => {
             className="bg-transparent py-5 w-full content-center border-none text-white outline-none resize-none"
             name="text"
             maxLength={400}
-            placeholder="No que voce está pensando?"
+            placeholder={`No que voce está pensando ${username}?`}
           ></textarea>
         </div>
         <div className="self-end justify-self-end w-fit h-fit">

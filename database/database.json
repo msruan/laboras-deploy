@@ -5,98 +5,53 @@
       "username": "biancabzra",
       "first_name": "Bianca",
       "last_name": "Bezerra",
-      "email": "ggggggggg",
-      "password": "ggggggggggg"
+      "email": "bia@gmail.com",
+      "password": "1234",
+      "bio": "anyway nihao",
+      "profile_image_link": "https://i.pinimg.com/564x/32/e9/1e/32e91e1a803722a0dab201feddf78070.jpg"
     },
     {
       "id": "2",
       "username": "msruan",
       "first_name": "Ruan",
       "last_name": "Macedo",
-      "email": "ggggggggg",
-      "password": "ggggggggggg"
+      "email": "ruan@gmail.com",
+      "password": "1234",
+      "bio": "fiquei de *#%@&$",
+      "profile_image_link": "https://i.pinimg.com/736x/7a/44/cd/7a44cd27ea4185fade5ccae1fa0b15ce.jpg"
     },
     {
       "id": "3",
       "username": "meidesu",
       "first_name": "Antonio",
       "last_name": "Meireles",
-      "email": "ggggggggg",
-      "password": "ggggggggggg"
+      "email": "mei@gmail.com",
+      "password": "1234",
+      "bio": "acima de mim só deus e o helicopteros da policia...",
+      "profile_image_link": "https://i.pinimg.com/736x/c6/7f/62/c67f62af3e738e0d99ab05853029b4fb.jpg"
     },
     {
       "id": "4",
       "username": "herminioneto",
       "first_name": "Herminio",
       "last_name": "Neto",
-      "email": "ggggggggg",
-      "password": "ggggggggggg"
+      "email": "herminio@gmail.com",
+      "password": "1234",
+      "bio": "And I was like, why you so obsessed with me?",
+      "profile_image_link": "https://i.pinimg.com/736x/b3/37/c3/b337c3a29d5b715ba6abfc85b829a856.jpg"
+    },
+    {
+      "id": "5",
+      "username": "thelivia",
+      "first_name": "Lívia",
+      "last_name": "Tainá",
+      "email": "livia@gmail.com",
+      "password": "1234",
+      "bio": "dandadnadnadn",
+      "profile_image_link": "https://i.pinimg.com/564x/2b/b4/7e/2bb47e744440aa238d6b1380cc0ea884.jpg"
     }
   ],
   "posts": [
-    {
-      "id": "01HWQXS2JDT800F6243M9JJ17P",
-      "user_id": "1",
-      "content": "my oh my",
-      "created_at": "2024-04-30T16:35:33.581Z",
-      "likes": 1,
-      "deslikes": 2,
-      "linked_to": null
-    },
-    {
-      "id": "01HWQXTCBWDGH8HJEA7HJKBCVE",
-      "user_id": "1",
-      "content": "g3",
-      "created_at": "2024-04-30T16:36:16.381Z",
-      "likes": 0,
-      "deslikes": 0,
-      "linked_to": "01HWQXT3EMXN2PWW6K955NDRQB"
-    },
-    {
-      "id": "01HWXB7SNZTN2RW7ZB40CJHTZK",
-      "user_id": "1",
-      "content": "oi",
-      "created_at": "2024-05-02T19:06:59.647Z",
-      "likes": 0,
-      "deslikes": 0,
-      "linked_to": null
-    },
-    {
-      "id": "01HWXB7WXYCTCDFS3W133TYTBC",
-      "user_id": "1",
-      "content": "\noi",
-      "created_at": "2024-05-02T19:07:02.974Z",
-      "likes": 0,
-      "deslikes": 0,
-      "linked_to": null
-    },
-    {
-      "id": "01HWXB8WVRANFYEZHC3SVG49HA",
-      "user_id": "1",
-      "content": "camila te amo",
-      "created_at": "2024-05-02T19:07:35.672Z",
-      "likes": 0,
-      "deslikes": 0,
-      "linked_to": null
-    },
-    {
-      "id": "01HXMF6XNKMECCB250A68Q5SJ5",
-      "user_id": "1",
-      "content": "lala",
-      "created_at": "2024-05-11T18:38:57.203Z",
-      "likes": 0,
-      "deslikes": 0,
-      "linked_to": "01HWQXTCBWDGH8HJEA7HJKBCVE"
-    },
-    {
-      "id": "01HXMG0N8KV50S7861R26DNQQS",
-      "user_id": "1",
-      "content": "um dloks",
-      "created_at": "2024-05-11T18:53:00.563Z",
-      "likes": 0,
-      "deslikes": 0,
-      "linked_to": "01HWQXS2JDT800F6243M9JJ17P"
-    },
     {
       "id": "01HXMG12NA1P181067CJEZSAW0",
       "user_id": "1",
@@ -105,6 +60,24 @@
       "likes": 0,
       "deslikes": 0,
       "linked_to": "01HXMG0N8KV50S7861R26DNQQS"
+    },
+    {
+      "id": "01HXMND6RR4X4JV0PN1ABA7DC5",
+      "user_id": "1",
+      "content": "se quiser bater de frente",
+      "created_at": "2024-05-11T20:27:14.584Z",
+      "likes": 0,
+      "deslikes": 0,
+      "linked_to": "01HXMG12NA1P181067CJEZSAW0"
+    },
+    {
+      "id": "01HXMNDC1G15B94GXKV5JCME98",
+      "user_id": "1",
+      "content": "vem",
+      "created_at": "2024-05-11T20:27:19.984Z",
+      "likes": 0,
+      "deslikes": 0,
+      "linked_to": null
     }
   ],
   "followings": [

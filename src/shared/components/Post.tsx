@@ -95,7 +95,7 @@ export const Post = ({
         <>
           <div className="w-full flex h-fit pt-3 pl-5 pr-3" onClick={onClick}>
             <Avatar className="w-12 h-12 rounded-full">
-              <AvatarImage src="https://p2.trrsf.com/image/fget/cf/1200/1600/middle/images.terra.com/2023/07/31/pedro-flamengo-uv5ta7zqn5us.jpg" />
+              <AvatarImage src={perfil?.profile_image_link ?? "https://p2.trrsf.com/image/fget/cf/1200/1600/middle/images.terra.com/2023/07/31/pedro-flamengo-uv5ta7zqn5us.jpg" }/>
 
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>

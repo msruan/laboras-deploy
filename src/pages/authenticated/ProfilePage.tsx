@@ -12,7 +12,7 @@ export const ProfilePage = () => {
   
   if (isSuccess){
     if (profile)
-      console.log(profile[0]);
+      console.log(profile);
     
   }
   
@@ -30,7 +30,7 @@ export const ProfilePage = () => {
 
         {
           isSuccess ? (
-            profile && <Profile profile={profile[0]} />
+            profile && <Profile profile={profile} />
           ) : (
             <div>
               Loading...

@@ -25,7 +25,7 @@ async function fetchGetProfile(profileId: string): AxiosPromise<IProfile> {
 export function GetUserProfile(profileId: string) {
   const query = useQuery({
     queryFn: async () => {
-      return fetchGetProfile(profileId);
+      return fetchGetProfile(profileId );
     },
     queryKey: ["user-profile"],
   });
@@ -42,17 +42,38 @@ export const fetchGetProfileByUsername = async (
   return response;
 };
 
-export function GetProfileByUsername(username: string) {
+export function GetProfileByUsername(username: string ) {
   const query = useQuery({
     queryFn: async () => {
       return fetchGetProfileByUsername(username);
     },
-    queryKey: ["profile"],
+    queryKey: ["profile"]
   });
 
   return {
     ...query,
-    response: query.data?.data,
+    response: query.data?.data[0],
+  };
+}
+
+export const fetchGetProfileByEmail = async (
+  email: string
+): AxiosPromise<IProfile[]> => {
+  const response = await axiosInstance.get(`/profiles?email=${email}`);
+  return response;
+};
+
+export function GetProfileByEmail(email: string ) {
+  const query = useQuery({
+    queryFn: async () => {
+      return fetchGetProfileByEmail(email);
+    },
+    queryKey: ["profile"]
+  });
+
+  return {
+    ...query,
+    response: query.data?.data[0],
   };
 }
 

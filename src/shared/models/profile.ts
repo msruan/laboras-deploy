@@ -5,6 +5,7 @@ export interface IProfile {
   username: string;
   email: string;
   password: string;
+  profile_image_link?: string; 
   bio?: string;
 }
 
@@ -16,4 +17,5 @@ export type ProfileRequest = {
   email?: string;
   password?: string;
   bio?: string;
+  profile_image_link?: string;
 };

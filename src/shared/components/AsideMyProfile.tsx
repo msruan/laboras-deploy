@@ -7,14 +7,14 @@ import { GetUserProfile } from "@/actions/ProfileAction";
 import {
   CogIcon,
 } from "@heroicons/react/16/solid";
+import { useContext } from "react";
+import { LoggedUserContext } from "@/context/LoggedUserContext";
 
 type AsideMyProfileProps = {
-  idLoggedUser: string;
   className: string;
 };
 
 export const AsideMyProfile = ({
-  idLoggedUser,
   className,
 }: AsideMyProfileProps) => {
   const defaultPerfil: IProfile = {
@@ -26,7 +26,9 @@ export const AsideMyProfile = ({
     username: "msruan",
   };
 
-  const { response: perfil, isSuccess } = GetUserProfile(idLoggedUser);
+  const {profile : context} = useContext(LoggedUserContext);
+  const idLoggedUser = context?.id
+  const { response: perfil, isSuccess } = GetUserProfile(idLoggedUser ?? '1');
 
   return (
     <div

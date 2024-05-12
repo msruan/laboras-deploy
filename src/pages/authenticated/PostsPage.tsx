@@ -7,11 +7,8 @@ import { getRelationedPost } from "@/actions/PostPageAction";
 import { TextBox } from "@/shared/components/TextBox";
 import { useEffect } from "react";
 
-type postPageProps = {
-  idLoggedUser: string;
-};
 
-export const PostsPage = ({ idLoggedUser }: postPageProps) => {
+export const PostsPage = () => {
   const { response: posts, isSuccess } = GetAllPosts();
   const { id } = useParams();
   const { response: post, isSuccess: isGetPostSuccess, refetch } = GetPost(id!);
@@ -34,7 +31,7 @@ export const PostsPage = ({ idLoggedUser }: postPageProps) => {
         {isGetPostSuccess && (post ? (
           <div>
             <Post post={post} fullPage={true} fullBorder={false} />
-            <TextBox idLoggedUser={idLoggedUser} linkedTo={id ?? null} />
+            <TextBox linkedTo={id ?? null} />
           </div>) :
           <div>
             <p>Postagem não encontrada!!</p>

@@ -25,11 +25,11 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "/posts", element: <MainPosts idLoggedUser={"1"} /> },
+      { path: "/posts", element: <MainPosts/> },
       { path: "/posts/profile/:username", element: <ProfilePage /> },
       {
         path: "/posts/postPage/:id",
-        element: <PostsPage idLoggedUser={"1"} />,
+        element: <PostsPage/>,
       },
     ],
   },
@@ -37,9 +37,9 @@ export const router = createBrowserRouter([
     path: "/config",
     element: <MainLayout />,
     errorElement: <ErrorPage />,
-    children: [{ path: "/config", element: <SettingsPage /> }],
+    children: [{ path: "/config", element: <SettingsPage  /> }],
   },
-  { path: "/teste2", element: <MainPosts idLoggedUser={"1"} /> },
+  { path: "/teste2", element: <MainPosts /> },
 ]);
 
 export default router;

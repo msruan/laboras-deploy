@@ -23,29 +23,24 @@ export const ProfileTag = ({ perfil }: IProfileProps) => {
     //     <p className="text-gray-500">@{perfil.username}</p>
     //   </div>
     // </div>
-
-    <Card className="w-full bg-rebeccapurple2 flex gap-4 p-2 border-0 rounded-full hover:bg-rebeccapurple transition-all duration-150">
-      {/* Fotinha */}
-      <Link to={`/posts/profile/${perfil.username}`}>
+    <Link to={`/posts/profile/${perfil.username}`}>
+      <Card className="w-full bg-rebeccapurple2 flex gap-4 p-2 border-0 rounded-full hover:bg-rebeccapurple transition-all duration-150">
+        {/* Fotinha */}
         <Avatar className="w-12 h-12 rounded-full cursor-pointer">
-          <AvatarImage src="src/assets/chorro-timido.JPG" />
+          <AvatarImage
+            src={perfil.profile_image_link ?? "src/assets/chorro-timido.JPG"}
+          />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-      </Link>
-      <CardContent className="flex gap-5 break-all justify-center items-center p-0">
-        <div className="flex flex-col items-start text-aliceblue text-sm gap-0.5">
-          <Link to="/posts/profile">
+        <CardContent className="flex gap-5 break-all justify-center items-center p-0">
+          <div className="flex flex-col items-start text-aliceblue text-sm gap-0.5">
             <h3>
               <strong>{perfil?.first_name}</strong>
             </h3>
-          </Link>
-          <h4 className="opacity-70">@{perfil?.username}</h4>
-        </div>
-
-        <i className="ml-auto pr-5">
-          <SettingsMenu />
-        </i>
-      </CardContent>
-    </Card>
+            <h4 className="opacity-70">@{perfil?.username}</h4>
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   );
 };

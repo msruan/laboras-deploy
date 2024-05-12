@@ -1,13 +1,13 @@
+import { useContext } from "react";
 import { Post } from "./Post";
 import { TextBox } from "./TextBox";
 import { GetAllPosts } from "@/actions/PostAction";
+import { LoggedUserContext } from "@/context/LoggedUserContext";
 
-type MainPostsProps = {
-  idLoggedUser: string;
-};
-
-export const MainPosts = ({ idLoggedUser }: MainPostsProps) => {
+export const MainPosts = () => {
   const { response: posts, isSuccess, isError, isLoading } = GetAllPosts();
+  const {profile : context} = useContext(LoggedUserContext);
+  const idLoggedUser = context?.id ?? '1';
 
   //Todo: Como faço pra quando der isError ele levar pra página de erro?
   return (
@@ -16,7 +16,7 @@ export const MainPosts = ({ idLoggedUser }: MainPostsProps) => {
       {isError && <div>Error</div>}
       {isSuccess && (
         <div className="flex flex-col h-full gap-2 pl-3 pr-3">
-          <TextBox idLoggedUser={idLoggedUser} linkedTo={null} />
+          <TextBox linkedTo={null} />
           {posts!.map((post) => (
             <Post
               key={post.id}

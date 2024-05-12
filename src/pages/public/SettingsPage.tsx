@@ -22,32 +22,50 @@ import {
   ArrowLeftStartOnRectangleIcon,
 } from "@heroicons/react/16/solid";
 import { ModeToggle } from "@/shared/components/ModeToggle";
+import { Logout } from "@/actions/AuthAction";
+import { GetUserProfile } from "@/actions/ProfileAction";
+import { IProfile } from "@/shared/models/profile";
+import { useContext } from "react";
+import { LoggedUserContext } from "@/context/LoggedUserContext";
 
 export function SettingsPage() {
+  const { profile: context } = useContext(LoggedUserContext);
+  const idLoggedUser = context?.id;
+  const {
+    response: profile,
+    isSuccess,
+    isLoading,
+  } = GetUserProfile(idLoggedUser ?? '1');
+
   return (
-    <div className="flex items-center justify-center pt-6">
-      <Card className="w-full max-w-lg text-wrap bg-transparant">
-        <CardHeader>
-          <CardTitle
-            id="beggin"
-            className="text-2xl font-bold tracking-tighter text-center"
-          >
-            Settings
-          </CardTitle>
-          <Separator />
-        </CardHeader>
-        <CardContent className="flex flex-col gap-8">
-          <section className="flex flex-col justify-between h-full gap-6 items-center">
-            <SectionTitle title="Profile" />
-            <SectionProfile />
-          </section>
-          <section className="flex flex-col justify-between h-full gap-4 w-full items-center">
-            <SectionTitle title="General" />
-            <SectionGeneral />
-          </section>
-        </CardContent>
-      </Card>
-    </div>
+    <>
+      {isSuccess && (
+        <div className="flex items-center justify-center pt-6">
+          <Card className="w-full max-w-lg text-wrap bg-transparant">
+            <CardHeader>
+              <CardTitle
+                id="beggin"
+                className="text-2xl font-bold tracking-tighter text-center"
+              >
+                Settings
+              </CardTitle>
+              <Separator />
+            </CardHeader>
+            <CardContent className="flex flex-col gap-8">
+              <section className="flex flex-col justify-between h-full gap-6 items-center">
+                <SectionTitle title="Profile" />
+                <SectionProfile profile={profile!} />
+              </section>
+              <section className="flex flex-col justify-between h-full gap-4 w-full items-center">
+                <SectionTitle title="General" />
+                <SectionGeneral />
+              </section>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+      {isLoading && <h1>Pending...</h1>}
+    </>
   );
 }
 
@@ -55,7 +73,11 @@ function SectionGeneral() {
   return (
     <div className="w-full border border-t-purple-00 rounded-sm border-r-0 border-l-0 border-b-0">
       <ModeToggle />
-      <Button variant="ghost" className="flex justify-between w-full">
+      <Button
+        onClick={Logout}
+        variant="ghost"
+        className="flex justify-between w-full"
+      >
         Logout
         <ArrowLeftStartOnRectangleIcon className="w-4 h-4" />
       </Button>
@@ -79,7 +101,10 @@ function SectionTitle({ title }: SectionTitleProps) {
     </h3>
   );
 }
-function SectionProfile() {
+type SectionProfileProps = {
+  profile: IProfile;
+};
+function SectionProfile({ profile }: SectionProfileProps) {
   return (
     <Tabs defaultValue="account" className="w-[400px] mb-4">
       <TabsList className="grid w-full grid-cols-2">
@@ -97,15 +122,18 @@ function SectionProfile() {
           <CardContent className="space-y-2">
             <div className="space-y-1">
               <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Pedro Duarte" />
+              <Input
+                id="name"
+                defaultValue={`${profile.first_name} ${profile.last_name}`}
+              />
             </div>
             <div className="space-y-1">
               <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
+              <Input id="username" defaultValue={profile.username} />
             </div>
             <div className="space-y-1">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" defaultValue="@peduarte" />
+              <Input id="email" defaultValue={profile.email} />
             </div>
           </CardContent>
           <CardFooter>
