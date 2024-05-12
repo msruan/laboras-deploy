@@ -8,7 +8,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { CreatePost } from "@/actions/PostAction";
-import { GetUserProfile } from "@/actions/ProfileAction";
+import { GetProfileById } from "@/actions/ProfileAction";
 import { LoggedUserContext } from "@/context/LoggedUserContext";
 
 type TextBoxProps = {
@@ -39,8 +39,8 @@ export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
   const { mutate: addNewPost } = CreatePost();
   const {profile : loggedUser} = useContext(LoggedUserContext);
   const username = loggedUser?.username;
-  const idLoggedUser = loggedUser?.id ?? '1';
-  const {response:profile} = GetUserProfile(idLoggedUser);
+  const idLoggedUser = loggedUser?.id ?? '';
+  const {response:profile} = GetProfileById(idLoggedUser);
 
   return (
     <div>

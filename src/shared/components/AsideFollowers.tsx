@@ -4,26 +4,41 @@ import { ScrollArea } from "./ui/scrolarea";
 import {
   GetProfileByUsername,
   GetProfileFollowers,
-  GetUserProfile,
+  GetProfileById,
 } from "@/actions/ProfileAction";
+import { LoggedUserContext } from "@/context/LoggedUserContext";
+import { useContext } from "react";
 import { IProfile } from "../models/profile";
 
 type AsideFollowersProps = {
-  userId: string;
   className: string;
 };
 
-export const AsideFollowers = ({ className, userId }: AsideFollowersProps) => {
+const initializer: IProfile = {
+  id: "1",
+  username: "biancabzra",
+  first_name: "Bianca",
+  last_name: "Bezerra",
+  email: "bia@gmail.com",
+  password: "1234",
+  bio: "anyway nihao",
+  profile_image_link:
+    "https://i.pinimg.com/564x/32/e9/1e/32e91e1a803722a0dab201feddf78070.jpg",
+};
+
+export const AsideFollowers = ({ className }: AsideFollowersProps) => {
   const { response: followers, isSuccess, isLoading } = GetProfileFollowers();
+  const { profile: context } = useContext(LoggedUserContext);
+  const userId = context?.id ?? "";
   const { username } = useParams();
   let profile;
   let isTheLoggedUser = true;
   if (username !== undefined) {
-    isTheLoggedUser = false;
+    isTheLoggedUser = username == context?.username;
     const { response } = GetProfileByUsername(username);
     profile = response;
   } else {
-    const { response } = GetUserProfile(userId);
+    const { response } = GetProfileById(userId); //@Todo: por que diabos não consigo tirar isso?
     profile = response;
   }
 

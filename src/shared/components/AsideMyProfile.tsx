@@ -1,12 +1,9 @@
 import { ProfileTag } from "./ProfileTag";
-import { IProfile } from "../models/profile";
 import { AvatarIcon, HomeIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
-import { GetUserProfile } from "@/actions/ProfileAction";
-import {
-  CogIcon,
-} from "@heroicons/react/16/solid";
+import { GetProfileById } from "@/actions/ProfileAction";
+import { CogIcon } from "@heroicons/react/16/solid";
 import { useContext } from "react";
 import { LoggedUserContext } from "@/context/LoggedUserContext";
 
@@ -14,59 +11,52 @@ type AsideMyProfileProps = {
   className: string;
 };
 
-export const AsideMyProfile = ({
-  className,
-}: AsideMyProfileProps) => {
-  const defaultPerfil: IProfile = {
-    id: "2",
-    first_name: "Ruan",
-    last_name: "Macedo",
-    password: "1234",
-    email: "ruan@gmail.com",
-    username: "msruan",
-  };
-
-  const {profile : context} = useContext(LoggedUserContext);
-  const idLoggedUser = context?.id
-  const { response: perfil, isSuccess } = GetUserProfile(idLoggedUser ?? '1');
+export const AsideMyProfile = ({ className }: AsideMyProfileProps) => {
+  const { profile: context } = useContext(LoggedUserContext);
+  const idLoggedUser = context?.id;
+  const { response: perfil, isSuccess } = GetProfileById(idLoggedUser ?? "");
 
   return (
     <div
       className={`flex flex-col  border-r-2 border-rebeccapurple2 p-5 justify-between ${className}`}
     >
-      <style>
-        {`
+      {isSuccess && (
+        <>
+          <style>
+            {`
                 h2 {
                   font-family: 'Habbo', sans-serif;
                   text-shadow: 2px 2px 15px rebeccapurple
                 }
               `}
-      </style>
+          </style>
 
-      <div className="flex flex-col text-5xl w-full gap-4 p-2">
-        <h2 className="">LABORAS</h2>
+          <div className="flex flex-col text-5xl w-full gap-4 p-2">
+            <h2 className="">LABORAS</h2>
 
-        <Link to="/posts">
-          <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
-            <HomeIcon className="mr-1 h-9 w-9" />
-            Home
-          </Button>
-        </Link>
+            <Link to="/posts">
+              <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
+                <HomeIcon className="mr-1 h-9 w-9" />
+                Home
+              </Button>
+            </Link>
 
-        <Link to={`/posts/profile/${perfil?.username}`}>
-          <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
-            <AvatarIcon className="mr-1 h-10 w-10" /> Profile
-          </Button>
-        </Link>
+            <Link to={`/posts/profile/${perfil?.username}`}>
+              <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
+                <AvatarIcon className="mr-1 h-10 w-10" /> Profile
+              </Button>
+            </Link>
 
-        <Link to="/config">
-          <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
-            <CogIcon className="mr-1 h-10 w-10" /> Settings
-          </Button>
-        </Link>
-      </div>
+            <Link to="/config">
+              <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
+                <CogIcon className="mr-1 h-10 w-10" /> Settings
+              </Button>
+            </Link>
+          </div>
 
-      {isSuccess && <ProfileTag perfil={perfil ?? defaultPerfil} />}
+          <ProfileTag perfil={perfil!} />
+        </>
+      )}
     </div>
   );
 };

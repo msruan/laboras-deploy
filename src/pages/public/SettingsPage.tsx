@@ -23,7 +23,7 @@ import {
 } from "@heroicons/react/16/solid";
 import { ModeToggle } from "@/shared/components/ModeToggle";
 import { Logout } from "@/actions/AuthAction";
-import { GetUserProfile } from "@/actions/ProfileAction";
+import { GetProfileById } from "@/actions/ProfileAction";
 import { IProfile } from "@/shared/models/profile";
 import { useContext } from "react";
 import { LoggedUserContext } from "@/context/LoggedUserContext";
@@ -31,11 +31,12 @@ import { LoggedUserContext } from "@/context/LoggedUserContext";
 export function SettingsPage() {
   const { profile: context } = useContext(LoggedUserContext);
   const idLoggedUser = context?.id;
+  
   const {
     response: profile,
     isSuccess,
     isLoading,
-  } = GetUserProfile(idLoggedUser ?? '1');
+  } = GetProfileById(idLoggedUser ?? "");
 
   return (
     <>

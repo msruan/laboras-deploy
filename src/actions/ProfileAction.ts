@@ -22,12 +22,12 @@ async function fetchGetProfile(profileId: string): AxiosPromise<IProfile> {
   return await axiosInstance.get(`/profiles/${profileId}`);
 } //Todo: atualizar rota para algo como .get('<token_user>/followers);
 
-export function GetUserProfile(profileId: string) {
+export function GetProfileById(profileId: string) {
   const query = useQuery({
     queryFn: async () => {
       return fetchGetProfile(profileId );
     },
-    queryKey: ["user-profile"],
+    queryKey: [`profile/${profileId}`],
   });
   return {
     ...query,
@@ -47,7 +47,7 @@ export function GetProfileByUsername(username: string ) {
     queryFn: async () => {
       return fetchGetProfileByUsername(username);
     },
-    queryKey: ["profile"]
+    queryKey: [`profile/${username}`],
   });
 
   return {
@@ -68,7 +68,7 @@ export function GetProfileByEmail(email: string ) {
     queryFn: async () => {
       return fetchGetProfileByEmail(email);
     },
-    queryKey: ["profile"]
+    queryKey: [`profile/${email}`],
   });
 
   return {
@@ -88,6 +88,7 @@ export function UpdateProfile() {
     mutationFn: fetPatchProfile,
     //@Todo: o back ta retornando esse Profile?
     onSuccess: (response: AxiosResponse<ProfileRequest>) => {
+      //Todo: essa queryKey vai dar uma bagunça muito grande
       queryClient.setQueryData(["profile"], (oldProfile: IProfile) => {
         response.data;
       });

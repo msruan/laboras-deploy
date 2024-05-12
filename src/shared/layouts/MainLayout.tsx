@@ -16,18 +16,17 @@ export const MainLayout = () => {
   }
 
   return (
-    <div className="min-h-screen w-full">
-      <AsideMyProfile
-        className="fixed w-72 min-h-screen top-0 left-0 z-1 overflow-x-hidden"
-      />
-      <main className="ml-72 mr-72">
-        <Outlet />
-      </main>
-      <AsideFollowers
-        className="fixed w-72 min-h-screen right-0 top-0 z-1 overflow-x-hidden"
-        userId={"1"}
-      />
-    </div>
+    <>
+      {email && (
+        <div className="min-h-screen w-full">
+          <AsideMyProfile className="fixed w-72 min-h-screen top-0 left-0 z-1 overflow-x-hidden" />
+          <main className="ml-72 mr-72">
+            <Outlet />
+          </main>
+          <AsideFollowers className="fixed w-72 min-h-screen right-0 top-0 z-1 overflow-x-hidden" />
+        </div>
+      )}
+    </>
   );
 };
 
