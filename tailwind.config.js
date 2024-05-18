@@ -2,10 +2,10 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -18,20 +18,21 @@ module.exports = {
     },
     extend: {
       spacing: {
-        'noavatar': 'calc(100% - 1rem)',
-        'custom': '80%',
-        'half-vh': '50vh',
-        'icon' : '1rem'
+        noavatar: "calc(100% - 1rem)",
+        custom: "80%",
+        "half-vh": "50vh",
+        icon: "1rem",
       },
       gridTemplateColumns: {
         // Simple 16 column grid
-        'custom': 'auto 1fr',
+        custom: "auto 1fr",
 
         // Complex site-specific column configuration
         // 'footer': '200px minmax(900px, 1fr) 100px',
       },
       colors: {
         rebeccapurple: "rgba(123, 26, 242, 0.1)",
+        biancapurple: "rgb(85,50,154)",
         rebeccapurple2: "rgba(123, 26, 242, 0.2)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -87,8 +88,9 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
-        'sans': ['Helvetica', 'Arial', 'sans-serif']}
+        sans: ["Helvetica", "Arial", "sans-serif"],
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};

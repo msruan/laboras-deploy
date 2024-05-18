@@ -33,9 +33,7 @@ export const AsideFollowers = ({ className }: AsideFollowersProps) => {
   return (
     <>
       {profile ? (
-        <div
-          className={`flex flex-col border-l-2 items-center border-rebeccapurple2 p-6 gap-3 ${className}`}
-        >
+        <div className={`flex flex-col items-center p-6 gap-3 ${className}`}>
           {isLoading && <h2>Pending...</h2>}
           {isSuccess && (
             <>

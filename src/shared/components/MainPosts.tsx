@@ -6,7 +6,7 @@ import { LoggedUserContext } from "@/context/LoggedUserContext";
 
 export const MainPosts = () => {
   const { response: posts, isSuccess, isError, isLoading } = GetAllPosts();
-  const {profile : context} = useContext(LoggedUserContext);
+  const { profile: context } = useContext(LoggedUserContext);
   const idLoggedUser = context?.id;
 
   //Todo: Como faço pra quando der isError ele levar pra página de erro?
@@ -15,7 +15,7 @@ export const MainPosts = () => {
       {isLoading && <div>Pedding...</div>}
       {isError && <div>Error</div>}
       {isSuccess && idLoggedUser && (
-        <div className="flex flex-col h-full gap-2 pl-3 pr-3">
+        <div className="flex flex-col h-full gap-2 pl-3 pr-3 border-rebeccapurple2 border-r-2 border-l-2">
           <TextBox linkedTo={null} />
           {posts!.map((post) => (
             <Post
