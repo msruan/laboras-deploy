@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { IPost } from "../models/post";
+import { IPost } from "../../models/post";
 import { PostMenu } from "./PostMenu";
 import { FaceFrownIcon, StarIcon } from "@heroicons/react/16/solid";
 import { UpdatePost } from "@/actions/PostAction";
-import { PostRequest } from "../models/post";
+import { PostRequest } from "../../models/post";
 
 type IconsProps = {
   post: IPost;

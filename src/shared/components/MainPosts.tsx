@@ -1,12 +1,11 @@
-import { useContext } from "react";
-import { Post } from "./Post";
+import { Post } from "./post/Post";
 import { TextBox } from "./TextBox";
 import { GetAllPosts } from "@/actions/PostAction";
-import { LoggedUserContext } from "@/context/LoggedUserContext";
+import { useAuth } from "@/context/AuthContext";
 
 export const MainPosts = () => {
   const { response: posts, isSuccess, isError, isLoading } = GetAllPosts();
-  const { profile: context } = useContext(LoggedUserContext);
+  const { user: context } = useAuth();
   const idLoggedUser = context?.id;
 
   //Todo: Como faço pra quando der isError ele levar pra página de erro?

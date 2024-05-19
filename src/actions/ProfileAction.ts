@@ -25,7 +25,7 @@ async function fetchGetProfile(profileId: string): AxiosPromise<IProfile> {
 export function GetProfileById(profileId: string) {
   const query = useQuery({
     queryFn: async () => {
-      return fetchGetProfile(profileId );
+      return fetchGetProfile(profileId);
     },
     queryKey: [`profile/${profileId}`],
   });
@@ -42,7 +42,7 @@ export const fetchGetProfileByUsername = async (
   return response;
 };
 
-export function GetProfileByUsername(username: string ) {
+export function GetProfileByUsername(username: string) {
   const query = useQuery({
     queryFn: async () => {
       return fetchGetProfileByUsername(username);
@@ -63,12 +63,13 @@ export const fetchGetProfileByEmail = async (
   return response;
 };
 
-export function GetProfileByEmail(email: string ) {
+export function GetProfileByEmail(email: string, enabled: boolean) {
   const query = useQuery({
     queryFn: async () => {
       return fetchGetProfileByEmail(email);
     },
     queryKey: [`profile/${email}`],
+    enabled: enabled,
   });
 
   return {

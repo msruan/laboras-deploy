@@ -7,6 +7,10 @@ export interface IPost {
   deslikes: number;
   linked_to: string | null;
 }
+export interface IInitialPost {
+  title: string;
+  content: string;
+}
 
 export type PostRequest = {
   id: string;

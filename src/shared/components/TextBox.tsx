@@ -9,13 +9,12 @@ import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { CreatePost } from "@/actions/PostAction";
 import { GetProfileById } from "@/actions/ProfileAction";
-import { LoggedUserContext } from "@/context/LoggedUserContext";
+import { useAuth } from "@/context/AuthContext";
 
 type TextBoxProps = {
   linkedTo: string | null;
 };
 export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
-  
   function handleClick() {
     if (input.current == null || input.current.value === "") {
       return;
@@ -30,24 +29,28 @@ export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
       deslikes: 0,
       linked_to: linkedTo,
     };
-    
+
     addNewPost(newPost);
     input.current.value = "";
   }
-  
+
   const input = useRef<HTMLTextAreaElement>(null);
   const { mutate: addNewPost } = CreatePost();
-  const {profile : loggedUser} = useContext(LoggedUserContext);
+  const { user: loggedUser } = useAuth();
   const username = loggedUser?.username;
-  const idLoggedUser = loggedUser?.id ?? '';
-  const {response:profile} = GetProfileById(idLoggedUser);
+  const idLoggedUser = loggedUser?.id ?? "";
+  const { response: profile } = GetProfileById(idLoggedUser);
 
   return (
     <div>
       <div className="flex flex-col w-full align-middle pb-10 border-b-2  pl-3 pr-3 border-rebeccapurple2">
         <div className="w-full flex flex-row gap-8 items-center">
           <Avatar className="w-12 h-12 rounded-full">
-            <AvatarImage src={profile?.profile_image_link ?? 'src/assets/chorro-timido.JPG'} />
+            <AvatarImage
+              src={
+                profile?.profile_image_link ?? "src/assets/chorro-timido.JPG"
+              }
+            />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
 

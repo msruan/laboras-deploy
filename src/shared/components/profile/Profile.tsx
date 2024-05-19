@@ -1,8 +1,4 @@
-import {
-  Card,
-  CardTitle,
-  CardContent,
-} from "./../../shared/components/ui/card";
+import { Card, CardTitle, CardContent } from "../ui/card";
 import {
   Avatar,
   AvatarFallback,
@@ -11,7 +7,7 @@ import {
 import { Button } from "@/shared/components/ui/button";
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { IProfile } from "../models/profile";
+import { IProfile } from "../../models/profile";
 
 type IProfileProps = {
   profile: IProfile;

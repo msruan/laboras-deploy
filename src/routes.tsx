@@ -9,8 +9,11 @@ import ProfilePage from "./pages/authenticated/ProfilePage";
 import { MainPosts } from "@/shared/components/MainPosts";
 import { SettingsPage } from "./pages/public/SettingsPage";
 import { SignUpPage } from "./pages/public/SignUpPage";
+import { useAuth } from "./context/AuthContext";
+import { useToken } from "./shared/hooks/useToken";
 
-export const router = createBrowserRouter([
+const { token } = useToken();
+const OtherRoutes = [
   {
     path: "/",
     element: <LoginLayout />,
@@ -20,16 +23,19 @@ export const router = createBrowserRouter([
       { path: "/signup", element: <SignUpPage /> },
     ],
   },
+];
+
+const SignRoutes = [
   {
     path: "/posts",
     element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "/posts", element: <MainPosts/> },
+      { path: "/posts", element: <MainPosts /> },
       { path: "/posts/profile/:username", element: <ProfilePage /> },
       {
         path: "/posts/postPage/:id",
-        element: <PostsPage/>,
+        element: <PostsPage />,
       },
     ],
   },
@@ -37,9 +43,9 @@ export const router = createBrowserRouter([
     path: "/config",
     element: <MainLayout />,
     errorElement: <ErrorPage />,
-    children: [{ path: "/config", element: <SettingsPage  /> }],
+    children: [{ path: "/config", element: <SettingsPage /> }],
   },
-  { path: "/teste2", element: <MainPosts /> },
-]);
+];
+export const router = createBrowserRouter([...SignRoutes, ...OtherRoutes]);
 
 export default router;

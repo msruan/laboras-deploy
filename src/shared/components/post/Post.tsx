@@ -1,8 +1,8 @@
-import { IPost } from "../models/post";
-import { IProfile } from "../models/profile";
+import { IPost } from "../../models/post";
+import { IProfile } from "../../models/profile";
 import { PostContent } from "./PostContent";
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
-import { Card, CardFooter } from "./ui/card";
+import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
+import { Card, CardFooter } from "../ui/card";
 import { Button } from "@/shared/components/ui/button";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { GetProfileById } from "@/actions/ProfileAction";

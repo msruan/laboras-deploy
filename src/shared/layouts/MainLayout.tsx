@@ -1,23 +1,17 @@
 import { GetProfileByEmail } from "@/actions/ProfileAction";
-import { LoggedUserContext } from "@/context/LoggedUserContext";
+import { useAuth } from "@/context/AuthContext";
 import { AsideFollowers } from "@/shared/components/AsideFollowers";
 import { AsideMyProfile } from "@/shared/components/AsideMyProfile";
-import { useContext, useEffect } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, Navigate, Outlet } from "react-router-dom";
+import { useToken } from "../hooks/useToken";
 
 export const MainLayout = () => {
-  const email = sessionStorage.getItem("email");
-  const { profile, handleChange } = useContext(LoggedUserContext);
-  if (email && !profile) {
-    const { response: data, isSuccess } = GetProfileByEmail(email);
-    if (isSuccess) {
-      handleChange({ username: data?.username, id: data?.id });
-    }
-  }
+  const { user } = useAuth();
 
   return (
     <>
-      {email && (
+      {user && (
         <div className="min-h-screen w-full">
           <AsideMyProfile className="fixed w-72 min-h-screen top-0 left-0 z-1 overflow-x-hidden" />
           <main className="ml-72 mr-72">

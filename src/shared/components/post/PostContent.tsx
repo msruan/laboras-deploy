@@ -1,6 +1,6 @@
 import { IPost } from "@/shared/models/post";
 import { IProfile } from "@/shared/models/profile";
-import { CardContent, CardFooter } from "./ui/card";
+import { CardContent, CardFooter } from "../ui/card";
 import { Icons } from "./Icons";
 import { UpdatePost } from "@/actions/PostAction";
 import { PostMenu } from "./PostMenu";

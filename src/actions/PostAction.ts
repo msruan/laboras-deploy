@@ -67,7 +67,9 @@ export function UpdatePost() {
 
   const mutate = useMutation({
     mutationFn: fetchPatchPost,
-    onSuccess: ()=>{queryClient.invalidateQueries({queryKey: ['posts']})}
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
   });
   return mutate;
 }
@@ -80,7 +82,9 @@ export function DeletePost() {
   const queryClient = useQueryClient();
   const mutate = useMutation({
     mutationFn: fetchDeletePost,
-    onSuccess: ()=>{queryClient.invalidateQueries({queryKey: ['posts']})},
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
   });
   return mutate;
 }

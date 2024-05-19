@@ -1,6 +1,6 @@
-import { IProfile } from "../models/profile";
-import { Card, CardContent } from "./ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { IProfile } from "../../models/profile";
+import { Card, CardContent } from "../ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Link } from "react-router-dom";
 
 type IProfileProps = {
