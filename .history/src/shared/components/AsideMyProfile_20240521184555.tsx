@@ -52,6 +52,7 @@ export const AsideMyProfile = ({ className }: AsideMyProfileProps) => {
                     <UserCircleIcon className="w-8 h-8 mr-1 text-biancapurple" />{" "}
                     Profile
                   </Button>
+                  <UserCircleIcon className="w-8 h-8 md:hidden text-biancapurple" />{" "}
                 </Link>
 
                 <Link to="/config">

@@ -15,7 +15,7 @@ function Header({ handleGoBack }: { handleGoBack: () => void }) {
       <ChevronLeftIcon
         onClick={handleGoBack}
         className="fixed w-6 h-6 left-3"
-      ></ChevronLeftIcon>
+      ></ArrowLeftIcon>
       <h1 className="font-bold">Post</h1>
     </div>
   );

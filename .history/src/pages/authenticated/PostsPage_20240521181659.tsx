@@ -1,35 +1,29 @@
 import Post from "@/shared/components/post/Post";
 import { MainPosts } from "../../shared/components/MainPosts";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { IPost } from "@/shared/models/post";
 import { GetAllPosts, GetPost } from "@/actions/PostAction";
 import { getRelationedPost } from "@/actions/PostPageAction";
 import { TextBox } from "@/shared/components/TextBox";
 import { useEffect } from "react";
 import { Button } from "@/shared/components/ui/button";
-import { ArrowLeftIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
-function Header({ handleGoBack }: { handleGoBack: () => void }) {
+function Header() {
   return (
-    <div className="fixed justify-center items-center top-0 flex p-2 w-full bg-black border-b-[1px] border-b-gray-500 sm:hidden ">
-      <ChevronLeftIcon
-        onClick={handleGoBack}
-        className="fixed w-6 h-6 left-3"
-      ></ChevronLeftIcon>
-      <h1 className="font-bold">Post</h1>
+    <div className="fixed top-0 w-full h-8 bg-black sm:hidden">
+      <Button>
+        <ArrowLeftIcon className="w-6 h-6"></ArrowLeftIcon>
+      </Button>
+      <h1>Post</h1>
     </div>
   );
 }
 
 export const PostsPage = () => {
   const { response: posts, isSuccess } = GetAllPosts();
-  const navigate = useNavigate();
   const { id } = useParams();
   const { response: post, isSuccess: isGetPostSuccess, refetch } = GetPost(id!);
-
-  function handleGoBack() {
-    navigate(-1);
-  }
 
   let relationedPosts: IPost[] | undefined;
 
@@ -45,8 +39,8 @@ export const PostsPage = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <Header handleGoBack={handleGoBack}></Header>
-      <div className="max-sm:mt-8">
+      <Header></Header>
+      <div className="max-sm:mt-5">
         {isGetPostSuccess &&
           (post ? (
             <div>

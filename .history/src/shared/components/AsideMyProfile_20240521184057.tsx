@@ -35,7 +35,7 @@ export const AsideMyProfile = ({ className }: AsideMyProfileProps) => {
             <div className="flex flex-col items-center h-full gap-8">
               <div className="flex flex-col items-center gap-4">
                 <h2 className="max-md:hidden">LABORAS</h2>
-                <h2 className="md:hidden">L</h2>
+                <h2 className="">LABORAS</h2>
                 <Separator></Separator>
               </div>
 
@@ -48,7 +48,7 @@ export const AsideMyProfile = ({ className }: AsideMyProfileProps) => {
                 </Link>
 
                 <Link to={`/posts/profile/${perfil?.username}`}>
-                  <Button className="flex items-center justify-start w-full gap-4 p-1 pl-3 text-lg font-bold text-white transition-all duration-200 bg-transparent rounded-full max-md:hidden h-fit pr-7 hover:bg-rebeccapurple">
+                  <Button className="flex items-center justify-start w-full gap-4 p-1 pl-3 text-lg font-bold text-white transition-all duration-200 bg-transparent rounded-full h-fit pr-7 hover:bg-rebeccapurple">
                     <UserCircleIcon className="w-8 h-8 mr-1 text-biancapurple" />{" "}
                     Profile
                   </Button>

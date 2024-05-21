@@ -48,10 +48,11 @@ export const AsideMyProfile = ({ className }: AsideMyProfileProps) => {
                 </Link>
 
                 <Link to={`/posts/profile/${perfil?.username}`}>
-                  <Button className="flex items-center justify-start w-full gap-4 p-1 pl-3 text-lg font-bold text-white transition-all duration-200 bg-transparent rounded-full max-md:hidden h-fit pr-7 hover:bg-rebeccapurple">
+                  <Button className="flex items-center justify-start w-full gap-4 p-1 pl-3 text-lg font-bold text-white transition-all duration-200 bg-transparent rounded-full h-fit pr-7 hover:bg-rebeccapurple">
                     <UserCircleIcon className="w-8 h-8 mr-1 text-biancapurple" />{" "}
                     Profile
                   </Button>
+                  <UserCircleIcon className="w-8 h-8 md:hidden text-biancapurple" />{" "}
                 </Link>
 
                 <Link to="/config">

@@ -7,16 +7,13 @@ import { getRelationedPost } from "@/actions/PostPageAction";
 import { TextBox } from "@/shared/components/TextBox";
 import { useEffect } from "react";
 import { Button } from "@/shared/components/ui/button";
-import { ArrowLeftIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
-function Header({ handleGoBack }: { handleGoBack: () => void }) {
+function Header() {
   return (
-    <div className="fixed justify-center items-center top-0 flex p-2 w-full bg-black border-b-[1px] border-b-gray-500 sm:hidden ">
-      <ChevronLeftIcon
-        onClick={handleGoBack}
-        className="fixed w-6 h-6 left-3"
-      ></ChevronLeftIcon>
-      <h1 className="font-bold">Post</h1>
+    <div className="fixed justify-center top-0 flex p-2 w-full bg-black border-b-[1px] border-b-gray-500 sm:hidden ">
+      <ArrowLeftIcon className="fixed w-6 h-6 left-3"></ArrowLeftIcon>
+      <h1>Post</h1>
     </div>
   );
 }
@@ -45,7 +42,7 @@ export const PostsPage = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <Header handleGoBack={handleGoBack}></Header>
+      <Header></Header>
       <div className="max-sm:mt-8">
         {isGetPostSuccess &&
           (post ? (

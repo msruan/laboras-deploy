@@ -51,7 +51,7 @@ export const Post = ({
   const onClick = () => {
     // <Navigate to={`/posts/postPage/${post.id}`}/>
     // const queryClient = useQueryClient()
-    navigate(`/posts/postPage/${post.id}`);
+    navigate(`/posts/postPage/${post.id}`, { replace: true });
     // queryClient.invalidateQueries({queryKey: ['post']})
   };
 
@@ -71,7 +71,7 @@ export const Post = ({
     `}
         >
           {isSuccess && editMode ? (
-            <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-t-0 border-b-0 border-l-0 border-r-0">
+            <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-r-0 border-l-0 border-t-0 border-b-0">
               <Textarea
                 defaultValue={post.content}
                 ref={textareaRef}
@@ -87,7 +87,7 @@ export const Post = ({
           ) : (
             <>
               <div
-                className="flex w-full pt-3 pl-5 pr-3 h-fit"
+                className="w-full flex h-fit pt-3 pl-5 pr-3"
                 onClick={onClick}
               >
                 <Avatar className="w-12 h-12 rounded-full">
