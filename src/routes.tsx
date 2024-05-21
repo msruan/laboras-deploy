@@ -11,8 +11,12 @@ import { SettingsPage } from "./pages/public/SettingsPage";
 import { SignUpPage } from "./pages/public/SignUpPage";
 import { useAuth } from "./context/AuthContext";
 import { useToken } from "./shared/hooks/useToken";
+import { useEmail } from "./shared/hooks/useEmail";
 
-const { token } = useToken();
+const { email: token } = useEmail();
+if (token()) {
+  console.log("funfa");
+}
 const OtherRoutes = [
   {
     path: "/",
@@ -26,6 +30,19 @@ const OtherRoutes = [
 ];
 
 const SignRoutes = [
+  {
+    path: "/",
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: "/", element: <MainPosts /> },
+      { path: "/posts/profile/:username", element: <ProfilePage /> },
+      {
+        path: "/posts/postPage/:id",
+        element: <PostsPage />,
+      },
+    ],
+  },
   {
     path: "/posts",
     element: <MainLayout />,
@@ -46,6 +63,6 @@ const SignRoutes = [
     children: [{ path: "/config", element: <SettingsPage /> }],
   },
 ];
-export const router = createBrowserRouter([...SignRoutes, ...OtherRoutes]);
+export const router = createBrowserRouter(token() ? SignRoutes : OtherRoutes);
 
 export default router;
