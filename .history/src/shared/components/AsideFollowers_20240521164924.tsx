@@ -11,7 +11,6 @@ import { useAuth } from "@/context/AuthContext";
 import { IProfile } from "../models/profile";
 import { UserGroupIcon, XCircleIcon } from "@heroicons/react/16/solid";
 import { useEffect, useState } from "react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 
 type AsideFollowersProps = {
   className: string;
@@ -20,6 +19,7 @@ type AsideFollowersProps = {
 export const AsideFollowers = ({ className }: AsideFollowersProps) => {
   const { response: followers, isSuccess, isLoading } = GetProfileFollowers();
   const { user: context, signed } = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   return (
     <>
@@ -29,11 +29,13 @@ export const AsideFollowers = ({ className }: AsideFollowersProps) => {
             {isLoading && <h2>Pending...</h2>}
             {isSuccess && (
               <>
-                <h2 className="text-white font-sans text-2xl font-bold">
-                  {/* {isTheLoggedUser ? "Your " : `${profile?.first_name}'s `}
+                  <XCircleIcon className="w-4 h- "></XCircleIcon>
+
+                  <h2 className="text-white font-sans text-2xl font-bold">
+                    {/* {isTheLoggedUser ? "Your " : `${profile?.first_name}'s `}
                 followers */}
-                  People signed
-                </h2>
+                    People signed
+                  </h2>
                 <ScrollArea className="flex flex-row h-lvh w-60">
                   <div className="min-h-full flex flex-col gap-11">
                     {followers!.map((profile) => (

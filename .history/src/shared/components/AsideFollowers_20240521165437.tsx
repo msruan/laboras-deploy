@@ -20,6 +20,7 @@ type AsideFollowersProps = {
 export const AsideFollowers = ({ className }: AsideFollowersProps) => {
   const { response: followers, isSuccess, isLoading } = GetProfileFollowers();
   const { user: context, signed } = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   return (
     <>
@@ -28,20 +29,31 @@ export const AsideFollowers = ({ className }: AsideFollowersProps) => {
           <div className={`flex flex-col items-center p-6 gap-3 ${className}`}>
             {isLoading && <h2>Pending...</h2>}
             {isSuccess && (
-              <>
-                <h2 className="text-white font-sans text-2xl font-bold">
-                  {/* {isTheLoggedUser ? "Your " : `${profile?.first_name}'s `}
-                followers */}
-                  People signed
-                </h2>
-                <ScrollArea className="flex flex-row h-lvh w-60">
-                  <div className="min-h-full flex flex-col gap-11">
-                    {followers!.map((profile) => (
-                      <ProfileTag key={profile.id} perfil={profile} />
-                    ))}
-                  </div>
-                </ScrollArea>
-              </>
+              {isMenuOpen &&
+                <>
+                  <XMarkIcon
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                    }}
+                    cursor="pointer"
+                    className="w-6 h-6 absolute top-7 left-5"
+                  ></XMarkIcon>
+  
+                  <h2 className="text-white font-sans text-2xl font-bold">
+                    {/* {isTheLoggedUser ? "Your " : `${profile?.first_name}'s `}
+                  followers */}
+                    People signed
+                  </h2>
+                  <ScrollArea className="flex flex-row h-lvh w-60">
+                    <div className="min-h-full flex flex-col gap-11">
+                      {followers!.map((profile) => (
+                        <ProfileTag key={profile.id} perfil={profile} />
+                      ))}
+                    </div>
+                  </ScrollArea>
+                </>
+
+              }
             )}
           </div>
           {/* <UserGroupIcon className="w-4 h-4"></UserGroupIcon>

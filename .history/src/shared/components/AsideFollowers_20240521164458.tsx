@@ -9,9 +9,7 @@ import {
 import { useAuth } from "@/context/AuthContext";
 
 import { IProfile } from "../models/profile";
-import { UserGroupIcon, XCircleIcon } from "@heroicons/react/16/solid";
-import { useEffect, useState } from "react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { UserGroupIcon } from "@heroicons/react/16/solid";
 
 type AsideFollowersProps = {
   className: string;
@@ -20,6 +18,7 @@ type AsideFollowersProps = {
 export const AsideFollowers = ({ className }: AsideFollowersProps) => {
   const { response: followers, isSuccess, isLoading } = GetProfileFollowers();
   const { user: context, signed } = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = isM
 
   return (
     <>
@@ -44,13 +43,14 @@ export const AsideFollowers = ({ className }: AsideFollowersProps) => {
               </>
             )}
           </div>
-          {/* <UserGroupIcon className="w-4 h-4"></UserGroupIcon>
+          <UserGroupIcon className="w-4 h-4"></UserGroupIcon>
           <div className={`flex flex-col items-center p-6 gap-3 ${className}`}>
             {isLoading && <h2>Pending...</h2>}
             {isSuccess && (
               <>
                 <h2 className="text-white font-sans text-2xl font-bold">
-                
+                  {/* {isTheLoggedUser ? "Your " : `${profile?.first_name}'s `}
+                followers */}
                   People signed
                 </h2>
                 <ScrollArea className="flex flex-row h-lvh w-60">
@@ -62,7 +62,7 @@ export const AsideFollowers = ({ className }: AsideFollowersProps) => {
                 </ScrollArea>
               </>
             )}
-          </div> */}
+          </div>
         </>
       ) : (
         <h1>ERROR</h1>

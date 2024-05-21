@@ -20,6 +20,7 @@ type AsideFollowersProps = {
 export const AsideFollowers = ({ className }: AsideFollowersProps) => {
   const { response: followers, isSuccess, isLoading } = GetProfileFollowers();
   const { user: context, signed } = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   return (
     <>
@@ -29,6 +30,11 @@ export const AsideFollowers = ({ className }: AsideFollowersProps) => {
             {isLoading && <h2>Pending...</h2>}
             {isSuccess && (
               <>
+                <XMarkIcon
+                  cursor="pointer"
+                  className="w-6 h-6 absolute top-7 left-5"
+                ></XMarkIcon>
+
                 <h2 className="text-white font-sans text-2xl font-bold">
                   {/* {isTheLoggedUser ? "Your " : `${profile?.first_name}'s `}
                 followers */}

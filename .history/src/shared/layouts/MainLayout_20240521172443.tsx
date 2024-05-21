@@ -15,7 +15,7 @@ export const MainLayout = () => {
       {user && (
         <div className="w-full min-h-screen">
           <AsideMyProfile className="fixed top-0 left-0 min-h-screen overflow-x-hidden max-md:hidden w-72 z-1" />
-          <main className="ml-72 mr-72 max-md:m-0">
+          <main className="ml-72 mr-72 md">
             <Outlet />
           </main>
           <AsideFollowers className="fixed top-0 right-0 min-h-screen overflow-x-hidden max-md:hidden w-72 z-1" />
