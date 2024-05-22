@@ -9,8 +9,15 @@ import ProfilePage from "./pages/authenticated/ProfilePage";
 import { MainPosts } from "@/shared/components/MainPosts";
 import { SettingsPage } from "./pages/public/SettingsPage";
 import { SignUpPage } from "./pages/public/SignUpPage";
+import { useAuth } from "./context/AuthContext";
+import { useToken } from "./shared/hooks/useToken";
+import { useEmail } from "./shared/hooks/useEmail";
 
-export const router = createBrowserRouter([
+// const { email: token } = useEmail();
+// if (token()) {
+//   console.log("funfa");
+// }
+const OtherRoutes = [
   {
     path: "/",
     element: <LoginLayout />,
@@ -20,16 +27,32 @@ export const router = createBrowserRouter([
       { path: "/signup", element: <SignUpPage /> },
     ],
   },
+];
+
+const SignRoutes = [
+  {
+    path: "/",
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: "/", element: <MainPosts /> },
+      { path: "/posts/profile/:username", element: <ProfilePage /> },
+      {
+        path: "/posts/:id",
+        element: <PostsPage />,
+      },
+    ],
+  },
   {
     path: "/posts",
     element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "/posts", element: <MainPosts/> },
+      { path: "/posts", element: <MainPosts /> },
       { path: "/posts/profile/:username", element: <ProfilePage /> },
       {
-        path: "/posts/postPage/:id",
-        element: <PostsPage/>,
+        path: "/posts/:id",
+        element: <PostsPage />,
       },
     ],
   },
@@ -37,9 +60,9 @@ export const router = createBrowserRouter([
     path: "/config",
     element: <MainLayout />,
     errorElement: <ErrorPage />,
-    children: [{ path: "/config", element: <SettingsPage  /> }],
+    children: [{ path: "/config", element: <SettingsPage /> }],
   },
-  { path: "/teste2", element: <MainPosts /> },
-]);
+];
+export const router = createBrowserRouter([...SignRoutes, ...OtherRoutes]);
 
 export default router;

@@ -1,4 +1,6 @@
 import { Login } from "@/actions/AuthAction";
+import { GetProfileByEmail } from "@/actions/ProfileAction";
+import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/shared/components/ui/button";
 import {
   Card,
@@ -13,16 +15,17 @@ import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Experimental_CssVarsProvider } from "@mui/material";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 
 export function LoginPage() {
-  const { status, mutate } = Login();
+  // const { status, mutate } = Login();
+  const { Login, signed } = useAuth();
 
   const [isEntering, setIsEntering] = useState(false);
   const [inputValues, setInputValues] = useState({
-    email: "",
-    password: "",
+    email: "ruan@gmail.com",
+    password: "1234",
   });
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,13 +37,27 @@ export function LoginPage() {
     if (e) {
       e.preventDefault();
     }
-    mutate(inputValues);
+    localStorage.setItem("email", inputValues.email);
+    // mutate(inputValues);
+    Login(inputValues);
     setIsEntering(true);
   };
 
-  if (status === "success") {
+  if (signed) {
     return <Navigate to="/posts" />;
   }
+
+  // if (status === "success") {
+  // const email = inputValues.email;
+  // console.log(email);
+  // const { handleChange } = useAuth();
+  // const { response: data, isSuccess } = GetProfileByEmail(email);
+  // if (isSuccess) {
+  //   handleChange({ username: data?.username, id: data?.id });
+  // }
+  // console.log("LOGIN COM SUCESSO");
+  // return <Navigate to="/posts" />;
+  // }
 
   const validarParametros = (): boolean => {
     return inputValues.email !== "" && inputValues.password !== "";
@@ -68,6 +85,7 @@ export function LoginPage() {
         <div>
           <Label htmlFor="email">Login</Label>
           <Input
+            defaultValue="ruan@gmail.com"
             id="email"
             placeholder="Digite seu e-mail ou nome de usuário"
             type="email"
@@ -79,6 +97,7 @@ export function LoginPage() {
           <Label htmlFor="senha">Senha</Label>
           <Input
             id="senha"
+            defaultValue="1234"
             placeholder="Digite sua melhor senha"
             type="password"
             name="password"

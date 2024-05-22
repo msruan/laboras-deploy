@@ -19,7 +19,7 @@ import {
   TrashIcon,
   PencilIcon,
 } from "@heroicons/react/16/solid";
-import { IPost } from "../models/post";
+import { IPost } from "../../models/post";
 
 type PostMenuProps = {
   post: IPost;

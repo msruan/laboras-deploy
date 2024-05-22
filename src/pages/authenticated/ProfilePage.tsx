@@ -1,4 +1,4 @@
-import { Profile } from "@/shared/components/Profile";
+import { Profile } from "@/shared/components/profile/Profile";
 import { Button } from "@/shared/components/ui/button";
 import { Link, useParams } from "react-router-dom";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
@@ -6,17 +6,20 @@ import { GetProfileByUsername } from "@/actions/ProfileAction";
 import { useEffect } from "react";
 
 export const ProfilePage = () => {
-  const {username} = useParams();
-  const {response: profile, isSuccess, refetch} = GetProfileByUsername(username!)
+  const { username } = useParams();
+  const {
+    response: profile,
+    isSuccess,
+    refetch,
+  } = GetProfileByUsername(username!);
 
-  
-  if (isSuccess){
-    if (profile)
-      console.log(profile);
-    
+  if (isSuccess) {
+    if (profile) console.log(profile);
   }
-  
-  useEffect(()=>{refetch()}, [username])
+
+  useEffect(() => {
+    refetch();
+  }, [username]);
 
   return (
     <div className="flex flex-col gap-1">
@@ -28,16 +31,11 @@ export const ProfilePage = () => {
           </Button>
         </Link>
 
-        {
-          isSuccess ? (
-            profile && <Profile profile={profile} />
-          ) : (
-            <div>
-              Loading...
-            </div>
-          )
-        }
-
+        {isSuccess ? (
+          profile && <Profile profile={profile} />
+        ) : (
+          <div>Loading...</div>
+        )}
       </div>
     </div>
   );

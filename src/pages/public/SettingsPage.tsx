@@ -21,17 +21,17 @@ import {
   ArchiveBoxXMarkIcon,
   ArrowLeftStartOnRectangleIcon,
 } from "@heroicons/react/16/solid";
-import { ModeToggle } from "@/shared/components/ModeToggle";
+import { ModeToggle } from "@/shared/components/settings/ModeToggle";
 import { Logout } from "@/actions/AuthAction";
 import { GetProfileById } from "@/actions/ProfileAction";
 import { IProfile } from "@/shared/models/profile";
 import { useContext } from "react";
-import { LoggedUserContext } from "@/context/LoggedUserContext";
+import { useAuth } from "@/context/AuthContext";
 
 export function SettingsPage() {
-  const { profile: context } = useContext(LoggedUserContext);
+  const { user: context } = useAuth();
   const idLoggedUser = context?.id;
-  
+
   const {
     response: profile,
     isSuccess,

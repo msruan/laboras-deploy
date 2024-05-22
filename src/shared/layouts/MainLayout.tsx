@@ -1,29 +1,25 @@
 import { GetProfileByEmail } from "@/actions/ProfileAction";
-import { LoggedUserContext } from "@/context/LoggedUserContext";
+import { useAuth } from "@/context/AuthContext";
 import { AsideFollowers } from "@/shared/components/AsideFollowers";
 import { AsideMyProfile } from "@/shared/components/AsideMyProfile";
-import { useContext, useEffect } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, Navigate, Outlet } from "react-router-dom";
+import { useToken } from "../hooks/useToken";
+import { Footer } from "../components/Footer";
 
 export const MainLayout = () => {
-  const email = sessionStorage.getItem("email");
-  const { profile, handleChange } = useContext(LoggedUserContext);
-  if (email && !profile) {
-    const { response: data, isSuccess } = GetProfileByEmail(email);
-    if (isSuccess) {
-      handleChange({ username: data?.username, id: data?.id });
-    }
-  }
+  const { user } = useAuth();
 
   return (
     <>
-      {email && (
-        <div className="min-h-screen w-full">
-          <AsideMyProfile className="fixed w-72 min-h-screen top-0 left-0 z-1 overflow-x-hidden" />
-          <main className="ml-72 mr-72">
+      {user && (
+        <div className="w-full min-h-screen">
+          <AsideMyProfile className="fixed top-0 left-0 min-h-screen overflow-x-hidden max-md:hidden w-72 z-1" />
+          <main className="ml-72 mr-72 max-md:m-0">
             <Outlet />
           </main>
-          <AsideFollowers className="fixed w-72 min-h-screen right-0 top-0 z-1 overflow-x-hidden" />
+          <AsideFollowers className="fixed top-0 right-0 min-h-screen overflow-x-hidden max-md:hidden w-72 z-1" />
+          <Footer></Footer>
         </div>
       )}
     </>

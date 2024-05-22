@@ -1,11 +1,11 @@
-import { ProfileTag } from "./ProfileTag";
+import { ProfileTag } from "./profile/ProfileTag";
 // import { AvatarIcon, HomeIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 import { GetProfileById } from "@/actions/ProfileAction";
 import { CogIcon, HomeIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { useContext } from "react";
-import { LoggedUserContext } from "@/context/LoggedUserContext";
+import { useAuth } from "@/context/AuthContext";
 import { Separator } from "./ui/separator";
 
 type AsideMyProfileProps = {
@@ -13,15 +13,14 @@ type AsideMyProfileProps = {
 };
 
 export const AsideMyProfile = ({ className }: AsideMyProfileProps) => {
-  const { profile: context } = useContext(LoggedUserContext);
-  const idLoggedUser = context?.id;
-  const { response: perfil, isSuccess } = GetProfileById(idLoggedUser ?? "");
-
+  const { user: perfil, signed } = useAuth();
+  const idLoggedUser = perfil?.id;
+  // const { response: perfil, isSuccess } = GetProfileById(idLoggedUser ?? "");
   return (
     <div
       className={`flex flex-col   border-rebeccapurple2 p-5 justify-between ${className}`}
     >
-      {isSuccess && (
+      {signed && (
         <>
           <style>
             {`
@@ -32,31 +31,32 @@ export const AsideMyProfile = ({ className }: AsideMyProfileProps) => {
               `}
           </style>
 
-          <div className="flex flex-col justify-between h-screen text-5xl w-full p-5 pb-7 items-center">
-            <div className="h-full flex flex-col gap-8">
-              <div className="flex flex-col gap-4">
-                <h2 className="">LABORAS</h2>
+          <div className="flex flex-col items-center justify-between w-full h-screen p-5 text-5xl pb-7">
+            <div className="flex flex-col items-center h-full gap-8">
+              <div className="flex flex-col items-center gap-4">
+                <h2 className="max-md:hidden">LABORAS</h2>
+                <h2 className="md:hidden">L</h2>
                 <Separator></Separator>
               </div>
 
-              <div className="flex flex-col text-5xl w-full gap-4 justify-self-center">
+              <div className="flex flex-col w-full gap-4 text-5xl ">
                 <Link to="/posts">
-                  <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
-                    <HomeIcon className="mr-1 h-8 w-8 text-biancapurple" />
+                  <Button className="flex items-center justify-start w-full gap-4 p-1 pl-3 text-lg font-bold text-white transition-all duration-200 bg-transparent rounded-full h-fit pr-7 hover:bg-rebeccapurple">
+                    <HomeIcon className="w-8 h-8 mr-1 text-biancapurple" />
                     Home
                   </Button>
                 </Link>
 
                 <Link to={`/posts/profile/${perfil?.username}`}>
-                  <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
-                    <UserCircleIcon className="mr-1 h-8 w-8 text-biancapurple" />{" "}
+                  <Button className="flex items-center justify-start w-full gap-4 p-1 pl-3 text-lg font-bold text-white transition-all duration-200 bg-transparent rounded-full max-md:hidden h-fit pr-7 hover:bg-rebeccapurple">
+                    <UserCircleIcon className="w-8 h-8 mr-1 text-biancapurple" />{" "}
                     Profile
                   </Button>
                 </Link>
 
                 <Link to="/config">
-                  <Button className="flex items-center justify-start w-full h-fit p-1 pl-3 pr-7 gap-4 rounded-full bg-transparent hover:bg-rebeccapurple text-white font-bold text-lg transition-all duration-200">
-                    <CogIcon className="mr-1 h-8 w-8 text-biancapurple" />{" "}
+                  <Button className="flex items-center justify-start w-full gap-4 p-1 pl-3 text-lg font-bold text-white transition-all duration-200 bg-transparent rounded-full h-fit pr-7 hover:bg-rebeccapurple">
+                    <CogIcon className="w-8 h-8 mr-1 text-biancapurple" />{" "}
                     Settings
                   </Button>
                 </Link>
