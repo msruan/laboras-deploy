@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { CreatePost } from "@/actions/PostAction";
 import { GetProfileById } from "@/actions/ProfileAction";
 import { useAuth } from "@/context/AuthContext";
+import { useToken } from "../hooks/useToken";
 
 type TextBoxProps = {
   linkedTo: string | null;
@@ -37,9 +38,11 @@ export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
   const input = useRef<HTMLTextAreaElement>(null);
   const { mutate: addNewPost } = CreatePost();
   const { user: loggedUser } = useAuth();
-  const username = loggedUser?.username;
+  const name = loggedUser?.first_name;
+
   const idLoggedUser = loggedUser?.id ?? "";
   const { response: profile } = GetProfileById(idLoggedUser);
+  const { token } = useToken();
 
   return (
     <div>
@@ -62,7 +65,7 @@ export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
             className="bg-transparent py-5 w-full content-center border-none text-white outline-none resize-none"
             name="text"
             maxLength={400}
-            placeholder={`No que voce está pensando ${username}?`}
+            placeholder={`No que voce está pensando ${name}?`}
           ></textarea>
         </div>
         <div className="self-end justify-self-end w-fit h-fit">

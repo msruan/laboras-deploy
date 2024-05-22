@@ -1,11 +1,15 @@
-import { Profile } from "@/shared/components/profile/Profile";
-import { Button } from "@/shared/components/ui/button";
-import { Link, useParams } from "react-router-dom";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import { GetProfileByUsername } from "@/actions/ProfileAction";
+import { useAuth } from "@/context/AuthContext";
+import { Profile } from "@/shared/components/profile/Profile";
+import { ProfileMobile } from "@/shared/components/profile/ProfileMobile";
+import { Button } from "@/shared/components/ui/button";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const ProfilePage = () => {
+  const navigate = useNavigate();
   const { username } = useParams();
   const {
     response: profile,
@@ -13,8 +17,8 @@ export const ProfilePage = () => {
     refetch,
   } = GetProfileByUsername(username!);
 
-  if (isSuccess) {
-    if (profile) console.log(profile);
+  function handleGoBack() {
+    navigate(-1);
   }
 
   useEffect(() => {
@@ -24,15 +28,21 @@ export const ProfilePage = () => {
   return (
     <div className="flex flex-col gap-1">
       <div>
-        <Link to="/posts">
-          <Button className="text-text font-bold bg-transparent pl-2 pt-5 pb-4 ml-0.5 mt-1 mb-1 hover:bg-transparent">
-            <KeyboardArrowLeftIcon />
-            Back to timeline
-          </Button>
-        </Link>
-
+        <div className="fixed justify-center items-center top-0 flex p-2 w-full bg-black border-b-[1px] border-b-gray-500 sm:hidden ">
+          <ChevronLeftIcon
+            cursor={"pointer"}
+            onClick={handleGoBack}
+            className="fixed w-6 h-6 left-3 top-2"
+          ></ChevronLeftIcon>
+          <h1 className="font-bold">{profile?.username}</h1>
+        </div>
         {isSuccess ? (
-          profile && <Profile profile={profile} />
+          profile && (
+            <>
+              <Profile profile={profile} />
+              <ProfileMobile profile={profile} />
+            </>
+          )
         ) : (
           <div>Loading...</div>
         )}

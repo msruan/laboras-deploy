@@ -14,7 +14,7 @@ export const MainPosts = () => {
       {isLoading && <div>Pedding...</div>}
       {isError && <div>Error</div>}
       {isSuccess && idLoggedUser && (
-        <div className="flex flex-col h-full gap-2 pl-3 pr-3 border-rebeccapurple2 border-r-2 border-l-2">
+        <div className="flex flex-col h-full max-xl:border-0 gap-2 pl-3 pr-3 border-rebeccapurple2 border-r-2 border-l-2">
           <TextBox linkedTo={null} />
           {posts!.map((post) => (
             <Post

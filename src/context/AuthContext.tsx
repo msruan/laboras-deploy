@@ -25,6 +25,7 @@ type CredentialsLogin = {
 export type LoggedUserContextType = {
   user: IProfile | null;
   signed: boolean;
+  setSigned: (arg: boolean) => void;
   // handleChange: ({ username, id }: LoggedUserInfo) => void;
   Login(credentials: CredentialsLogin): Promise<void>;
 };
@@ -33,14 +34,10 @@ const AuthContext = createContext<LoggedUserContextType>(
   {} as LoggedUserContextType
 );
 
-type LoggedUserInfo = {
-  username: string;
-  id: string;
-};
-
 export const LoggedUserProvider = ({ children }: { children: ReactNode }) => {
   const [signed, setSigned] = useState<boolean>(false);
   const [user, setUser] = useState<IProfile | null>(null);
+
   const { email } = useEmail();
 
   useEffect(() => {
@@ -53,11 +50,11 @@ export const LoggedUserProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   async function Login(credentials: CredentialsLogin) {
-    // const { setToken } = useToken();
-    // const responseToken: AxiosResponse<{ token: string }> =
-    //   await axiosBackInstance.post("/auth/login/", credentials);
-    // setToken(responseToken?.data);
-    // axiosBackInstance.defaults.headers.Authorization = `Token ${responseToken.data.token}`;
+    const { setToken } = useToken();
+    const responseToken: AxiosResponse<{ token: string }> =
+      await axiosBackInstance.post("/auth/login/", credentials);
+    setToken(responseToken?.data.token);
+    axiosBackInstance.defaults.headers.Authorization = `Token ${responseToken.data.token}`;
     const { setEmail } = useEmail();
     const responseUser: AxiosResponse<IProfile[]> = await getUser(
       credentials.email
@@ -82,7 +79,7 @@ export const LoggedUserProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, signed, Login }}>
+    <AuthContext.Provider value={{ user, signed, setSigned, Login }}>
       {children}
     </AuthContext.Provider>
   );

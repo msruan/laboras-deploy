@@ -9,7 +9,10 @@ type IProfileProps = {
 
 export const ProfileTag = ({ perfil }: IProfileProps) => {
   return (
-    <Link className="w-full" to={`/posts/profile/${perfil.username}`}>
+    <Link
+      className="w-full max-xl:hidden"
+      to={`/posts/profile/${perfil.username}`}
+    >
       <Card className="w-full bg-rebeccapurple2 flex gap-4 p-2 border-0 rounded-full hover:bg-rebeccapurple transition-all duration-150">
         <Avatar className="w-12 h-12 rounded-full cursor-pointer">
           <AvatarImage

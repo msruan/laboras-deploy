@@ -1,4 +1,10 @@
-import { Button } from "@/shared/components/ui/button";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/shared/components/ui/tabs";
+
 import {
   Card,
   CardContent,
@@ -7,26 +13,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
+import { IProfile } from "@/shared/models/profile";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/shared/components/ui/tabs";
-import { Logout } from "@/actions/AuthAction";
-import { Navigate, useNavigate } from "react-router";
-export function SettingsTabs() {
-  const navigate = useNavigate();
+import { Button } from "../ui/button";
 
-  const onLogout = () => {
-    Logout();
-    navigate("/");
-  };
-
+export function SectionProfile({ profile }: { profile: IProfile }) {
   return (
-    <Tabs defaultValue="account" className="w-[400px]">
+    <Tabs defaultValue="account" className="w-[400px] mb-4">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="account">Account</TabsTrigger>
         <TabsTrigger value="password">Password</TabsTrigger>
@@ -42,16 +36,22 @@ export function SettingsTabs() {
           <CardContent className="space-y-2">
             <div className="space-y-1">
               <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Pedro Duarte" />
+              <Input
+                id="name"
+                defaultValue={`${profile.first_name} ${profile.last_name}`}
+              />
             </div>
             <div className="space-y-1">
               <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
+              <Input id="username" defaultValue={profile.username} />
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" defaultValue={profile.email} />
             </div>
           </CardContent>
-          <CardFooter className="flex flex-row justify-between">
+          <CardFooter>
             <Button>Save changes</Button>
-            <Button onClick={onLogout}>Logout</Button>
           </CardFooter>
         </Card>
       </TabsContent>

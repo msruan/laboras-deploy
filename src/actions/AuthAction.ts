@@ -4,9 +4,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { IPost } from "@/shared/models/post";
 import { IProfile } from "@/shared/models/profile";
 import { useContext } from "react";
-import  {useAuth} from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 import { GetProfileByEmail, GetProfileByUsername } from "./ProfileAction";
 import axiosInstance from "@/config/axiosConfig";
+import { useEmail } from "@/shared/hooks/useEmail";
 
 type credentialsLogin = {
   email: string;
@@ -82,5 +83,7 @@ export const SignUp = () => {
 
 export const Logout = () => {
   const { removeToken } = useToken();
+  const { removeEmail } = useEmail();
   removeToken();
+  removeEmail();
 };

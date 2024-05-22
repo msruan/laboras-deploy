@@ -43,6 +43,7 @@ const SignRoutes = [
       },
     ],
   },
+
   {
     path: "/config",
     element: <MainLayout />,

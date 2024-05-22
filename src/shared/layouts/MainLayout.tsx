@@ -13,12 +13,12 @@ export const MainLayout = () => {
   return (
     <>
       {user && (
-        <div className="w-full min-h-screen">
-          <AsideMyProfile className="fixed top-0 left-0 min-h-screen overflow-x-hidden max-md:hidden w-72 z-1" />
-          <main className="ml-72 mr-72 max-md:m-0">
+        <div className=" w-full min-h-screen">
+          <AsideMyProfile />
+          <main className="ml-72 max-xl:ml-24 xl:mr-72 max-md:m-0">
             <Outlet />
           </main>
-          <AsideFollowers className="fixed top-0 right-0 min-h-screen overflow-x-hidden max-md:hidden w-72 z-1" />
+          <AsideFollowers />
           <Footer></Footer>
         </div>
       )}
