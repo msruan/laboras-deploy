@@ -19,7 +19,7 @@ import { ChangeEvent, useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 
 export function LoginPage() {
-  // const { status, mutate } = Login();
+  console.log("funcionei saasdnjasfb jas"); // const { status, mutate } = Login();
   const { Login, signed } = useAuth();
 
   const [isEntering, setIsEntering] = useState(false);

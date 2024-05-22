@@ -31,19 +31,6 @@ const OtherRoutes = [
 
 const SignRoutes = [
   {
-    path: "/",
-    element: <MainLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      { path: "/", element: <MainPosts /> },
-      { path: "/posts/profile/:username", element: <ProfilePage /> },
-      {
-        path: "/posts/:id",
-        element: <PostsPage />,
-      },
-    ],
-  },
-  {
     path: "/posts",
     element: <MainLayout />,
     errorElement: <ErrorPage />,
