@@ -1,20 +1,20 @@
 export const useEmail = () => {
-  const getToken = () => {
-    const tokenString: string | null = sessionStorage.getItem("token");
+  const getEmail = () => {
+    const tokenString: string | null = sessionStorage.getItem("email");
     return tokenString;
   };
 
-  const saveToken = (token: string) => {
-    sessionStorage.setItem("token", token);
+  const saveEmail = (token: string) => {
+    sessionStorage.setItem("email", token);
   };
 
-  const removeToken = () => {
-    sessionStorage.removeItem("token");
+  const removeEmail = () => {
+    sessionStorage.removeItem("email");
   };
 
   return {
-    email: getToken,
-    setEmail: saveToken,
-    removeEmail: removeToken,
+    email: getEmail,
+    setEmail: saveEmail,
+    removeEmail: removeEmail,
   };
 };

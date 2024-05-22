@@ -36,6 +36,7 @@ export const Post = ({
   const [editMode, setEditMode] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { mutate: handlePatch } = UpdatePost();
+  const local = useLocation();
 
   function handleSaveEdit() {
     if (
@@ -51,7 +52,12 @@ export const Post = ({
   const onClick = () => {
     // <Navigate to={`/posts/postPage/${post.id}`}/>
     // const queryClient = useQueryClient()
-    navigate(`/posts/postPage/${post.id}`);
+    const link = `/posts/${post.id}`;
+    //evitar q o usuario numa full page fique fazendo refetch do post atual
+    if (local.pathname != link) {
+      navigate(link);
+      console.log("naveguei fds");
+    }
     // queryClient.invalidateQueries({queryKey: ['post']})
   };
 
@@ -60,6 +66,7 @@ export const Post = ({
       {isSuccess && (
         <Card
           className={`flex flex-col
+          ${fullPage ? "" : "cursor-pointer"}
     ${fullPage || editMode ? "bg-transparent" : "h-full bg-rebeccapurple"}
     ${
       editMode
@@ -86,22 +93,22 @@ export const Post = ({
             </div>
           ) : (
             <>
-              <div
-                className="flex w-full pt-3 pl-5 pr-3 h-fit"
-                onClick={onClick}
-              >
-                <Avatar className="w-12 h-12 rounded-full">
-                  <AvatarImage
-                    src={
-                      perfil?.profile_image_link ??
-                      "https://p2.trrsf.com/image/fget/cf/1200/1600/middle/images.terra.com/2023/07/31/pedro-flamengo-uv5ta7zqn5us.jpg"
-                    }
-                  />
+              <div className="flex w-full pt-3 pl-5 pr-3 h-fit">
+                <Link to={`/posts/profile/${perfil?.username}`}>
+                  <Avatar className="w-12 h-12 rounded-full">
+                    <AvatarImage
+                      src={
+                        perfil?.profile_image_link ??
+                        "https://p2.trrsf.com/image/fget/cf/1200/1600/middle/images.terra.com/2023/07/31/pedro-flamengo-uv5ta7zqn5us.jpg"
+                      }
+                    />
 
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </Link>
 
                 <PostContent
+                  onClick={onClick}
                   perfil={perfil!}
                   post={post}
                   fullPage={fullPage}
@@ -112,7 +119,7 @@ export const Post = ({
                 <CardFooter className="flex items-center justify-end h-fit">
                   <div
                     className={`flex flex-row justify-between pr-7 pb-1 h-fit
-      ${fullPage ? " w-1/4" : " w-1/4"}
+      ${fullPage ? " w-1/4 max-md:w-full" : " w-1/4 max-md:w-full"}
       `}
                   >
                     <Icons post={post} fullPage={fullPage}></Icons>

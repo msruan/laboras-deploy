@@ -4,11 +4,13 @@ import { CardContent, CardFooter } from "../ui/card";
 import { Icons } from "./Icons";
 import { UpdatePost } from "@/actions/PostAction";
 import { PostMenu } from "./PostMenu";
+import { Link } from "react-router-dom";
 
 interface IPostContentProps {
   perfil: IProfile;
   post: IPost;
   fullPage: boolean;
+  onClick: () => void;
   handleEdit: (value: boolean) => void;
 }
 
@@ -17,20 +19,28 @@ export function PostContent({
   post,
   fullPage,
   handleEdit,
+  onClick,
 }: IPostContentProps) {
   const { mutate: handleUpdate } = UpdatePost();
 
   return (
     <>
-      <CardContent className="flex flex-col justify-between w-full break-all">
+      <CardContent
+        onClick={onClick}
+        className="flex flex-col justify-between w-full break-all"
+      >
         <div className="flex flex-col gap-4">
           <div
             className={`flex ${
               fullPage ? "flex-col" : ""
             } items-start text-aliceblue text-sm gap-2`}
           >
-            <h3>{perfil?.first_name}</h3>
-            <h4 className="opacity-70">@{perfil?.username}</h4>
+            <Link to={`/posts/profile/${perfil?.username}`}>
+              <h3>{perfil?.first_name}</h3>
+            </Link>
+            <Link to={`/posts/profile/${perfil?.username}`}>
+              <h4 className="opacity-70">@{perfil?.username}</h4>
+            </Link>
           </div>
 
           <div className="text-aliceblue font-sans text-base w-full">
