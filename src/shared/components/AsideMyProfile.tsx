@@ -1,21 +1,26 @@
 import { ProfileTag } from "./profile/ProfileTag";
 // import { AvatarIcon, HomeIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { GetProfileById } from "@/actions/ProfileAction";
 import { CogIcon, HomeIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+import {
+  CogIcon as CogIconFilled,
+  HomeIcon as HomeIconFilled,
+  UserCircleIcon as UserCircleIconFilled,
+} from "@heroicons/react/16/solid";
 import { useContext } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { Separator } from "./ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
-type AsideMyProfileProps = {
-  className: string;
-};
-
 export const AsideMyProfile = () => {
   const { user: perfil, signed } = useAuth();
   const idLoggedUser = perfil?.id;
+  const local = useLocation();
+  const localIsHome = local.pathname === "/posts";
+  const localIsUser = local.pathname === `/posts/profile/${perfil?.username}`;
+  const localIsConfig = local.pathname === "/config";
   // const { response: perfil, isSuccess } = GetProfileById(idLoggedUser ?? "");
   return (
     <div
@@ -45,21 +50,33 @@ export const AsideMyProfile = () => {
               <div className="flex flex-col w-full gap-4 text-5xl ">
                 <Link to="/posts">
                   <Button className="flex items-center max-xl:p-0 max-xl:pb-2 max-xl:justify-center justify-start w-full gap-4 p-1 xl:pl-3 text-lg font-bold text-white transition-all duration-200 bg-transparent rounded-full h-fit pr-7 hover:bg-rebeccapurple">
-                    <HomeIcon className="w-8 max-xl:mr-0 h-8 mr-1 text-biancapurple" />
+                    {localIsHome ? (
+                      <HomeIconFilled className="w-8 max-xl:mr-0 h-8 mr-1 text-biancapurple" />
+                    ) : (
+                      <HomeIcon className="w-8 max-xl:mr-0 h-8 mr-1 text-biancapurple" />
+                    )}
                     <span className="max-xl:hidden">Home</span>
                   </Button>
                 </Link>
 
                 <Link to={`/posts/profile/${perfil?.username}`}>
                   <Button className="flex items-center  max-xl:p-0 max-xl:pb-2 max-xl:justify-center justify-start w-full gap-4 p-1 pl-3 text-lg font-bold text-white transition-all duration-200 bg-transparent rounded-full max-md:hidden h-fit pr-7 hover:bg-rebeccapurple">
-                    <UserCircleIcon className="w-8 h-8 max-xl:mr-0 mr-1 text-biancapurple" />{" "}
+                    {localIsUser ? (
+                      <UserCircleIconFilled className="w-8 h-8 max-xl:mr-0 mr-1 text-biancapurple" />
+                    ) : (
+                      <UserCircleIcon className="w-8 h-8 max-xl:mr-0 mr-1 text-biancapurple" />
+                    )}
                     <span className="max-xl:hidden">Profile</span>
                   </Button>
                 </Link>
 
                 <Link to="/config">
                   <Button className="flex items-center  max-xl:p-0 max-xl:pb-2 max-xl:justify-center justify-start w-full gap-4 p-1 pl-3 text-lg font-bold text-white transition-all duration-200 bg-transparent rounded-full h-fit pr-7 hover:bg-rebeccapurple">
-                    <CogIcon className="w-8 h-8 mr-1 max-xl:mr-0 text-biancapurple" />{" "}
+                    {localIsConfig ? (
+                      <CogIconFilled className="w-8 h-8 mr-1 max-xl:mr-0 text-biancapurple" />
+                    ) : (
+                      <CogIcon className="w-8 h-8 mr-1 max-xl:mr-0 text-biancapurple" />
+                    )}
                     <span className="max-xl:hidden">Settings</span>
                   </Button>
                 </Link>
