@@ -1,10 +1,15 @@
-import axiosInstance from "./../config/axiosConfig";
+import axiosInstance, { axiosBackInstance } from "./../config/axiosConfig";
 import { IPost, PostRequest } from "@/shared/models/post.js";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosPromise, AxiosResponse } from "axios";
 
-async function fetchCreatePost(postagem: IPost) {
-  return await axiosInstance.post("/posts", postagem);
+async function fetchCreatePost(postagem: any) {
+  return await axiosBackInstance.post("/posts/", postagem, {
+    headers: {
+      Authorization: `Token ${postagem.token}`,
+    },
+  });
+  // return await axiosInstance.post("/posts", postagem);
 }
 
 export function CreatePost() {
@@ -17,9 +22,24 @@ export function CreatePost() {
   });
   return mutate;
 }
+async function fetchCreatePostJsonServer(postagem: IPost) {
+  return await axiosInstance.post("/posts", postagem);
+  // return await axiosInstance.post("/posts", postagem);
+}
+
+export function CreatePostJsonServer() {
+  const queryClient = useQueryClient();
+  const mutate = useMutation({
+    mutationFn: fetchCreatePostJsonServer,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
+  });
+  return mutate;
+}
 
 export const fetchGetPosts = async (): AxiosPromise<IPost[]> => {
-  const response = await axiosInstance.get(`/posts`);
+  const response = await axiosBackInstance.get(`/posts/`);
   return response;
 };
 

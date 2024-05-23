@@ -32,7 +32,7 @@ export const Post = ({
   fullPage = false,
   fullBorder = false,
 }: IPostProps) => {
-  const { response: perfil, isSuccess } = GetProfileById(post.user_id);
+  const { response: perfil, isSuccess } = GetProfileById(post.user.id);
   const [editMode, setEditMode] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { mutate: handlePatch } = UpdatePost();
@@ -109,7 +109,7 @@ export const Post = ({
 
                 <PostContent
                   onClick={onClick}
-                  perfil={perfil!}
+                  perfil={post.user!}
                   post={post}
                   fullPage={fullPage}
                   handleEdit={setEditMode}

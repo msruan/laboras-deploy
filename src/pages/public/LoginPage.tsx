@@ -17,6 +17,8 @@ import { Experimental_CssVarsProvider } from "@mui/material";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { ChangeEvent, useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import Seo from "@/shared/components/Seo";
 
 export function LoginPage() {
   console.log("funcionei saasdnjasfb jas"); // const { status, mutate } = Login();
@@ -64,12 +66,15 @@ export function LoginPage() {
   };
 
   return (
+    // <Helmet>
+    // <title>vsf</title>
     <Card
       className="w-full max-w-md text-wrap"
       onKeyDown={(e) => {
         if (e.key === "Enter" && validarParametros()) onSubmit();
       }}
     >
+      <Seo title="DIego" />
       <CardHeader>
         <CardTitle className="text-2xl font-bold tracking-tighter">
           Entre por sua conta em risco
@@ -134,5 +139,6 @@ export function LoginPage() {
         </p>
       </CardFooter>
     </Card>
+    // </Helmet>
   );
 }

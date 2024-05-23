@@ -7,7 +7,7 @@ import { Textarea } from "./ui/textarea";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { CreatePost } from "@/actions/PostAction";
+import { CreatePost, CreatePostJsonServer } from "@/actions/PostAction";
 import { GetProfileById } from "@/actions/ProfileAction";
 import { useAuth } from "@/context/AuthContext";
 import { useToken } from "../hooks/useToken";
@@ -21,7 +21,13 @@ export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
       return;
     }
 
-    const newPost: IPost = {
+    const newPost: any = {
+      title: "No title",
+      content: input.current.value,
+      token: token(),
+    };
+
+    const newPostJsonServer: IPost = {
       id: ulid(),
       user_id: idLoggedUser,
       content: input.current.value,
@@ -32,11 +38,13 @@ export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
     };
 
     addNewPost(newPost);
+    addNewPostJsonServer(newPostJsonServer);
     input.current.value = "";
   }
 
   const input = useRef<HTMLTextAreaElement>(null);
   const { mutate: addNewPost } = CreatePost();
+  const { mutate: addNewPostJsonServer } = CreatePostJsonServer();
   const { user: loggedUser } = useAuth();
   const name = loggedUser?.first_name;
 

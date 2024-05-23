@@ -1,7 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axiosInstance from "../config/axiosConfig";
+import axiosInstance, { axiosBackInstance } from "../config/axiosConfig";
 import { AxiosPromise, AxiosResponse } from "axios";
 import { IProfile, ProfileRequest } from "@/shared/models/profile";
+import { IPost } from "@/shared/models/post";
 
 async function fetchGetProfileFollowers(): AxiosPromise<IProfile[]> {
   return await axiosInstance.get("/profiles");
@@ -97,5 +98,31 @@ export function UpdateProfile() {
   });
   return {
     mutation,
+  };
+}
+
+export const fetchGetProfilePosts = async (
+  item: any
+): AxiosPromise<IPost[]> => {
+  const response = await axiosBackInstance.get(
+    `/user/${item.username}/posts/`,
+    {
+      headers: { Authorization: `Token ${item.token}` },
+    }
+  );
+  return response;
+};
+
+export function GetProfilePosts(item: any) {
+  const query = useQuery({
+    queryFn: async () => {
+      return fetchGetProfilePosts(item);
+    },
+    queryKey: [`posts-${item.username}`],
+  });
+
+  return {
+    ...query,
+    response: query.data?.data,
   };
 }

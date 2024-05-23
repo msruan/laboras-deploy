@@ -1,3 +1,5 @@
+import { IProfile } from "./profile";
+
 export interface IPost {
   id: string;
   user_id: string;
@@ -6,6 +8,7 @@ export interface IPost {
   likes: number;
   deslikes: number;
   linked_to: string | null;
+  user: IProfile;
 }
 export interface IInitialPost {
   title: string;
