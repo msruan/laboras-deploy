@@ -32,7 +32,7 @@ export const Post = ({
   fullPage = false,
   fullBorder = false,
 }: IPostProps) => {
-  const { response: perfil, isSuccess } = GetProfileById(post.user.id);
+  const { response: perfil, isSuccess } = GetProfileById("1");
   const [editMode, setEditMode] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { mutate: handlePatch } = UpdatePost();
@@ -43,7 +43,7 @@ export const Post = ({
       textareaRef.current !== null &&
       textareaRef.current.value !== post.content
     ) {
-      handlePatch({ content: textareaRef.current.value, id: post.id });
+      handlePatch({ content: textareaRef.current.value, id: post._id });
     }
     setEditMode(!editMode);
   }
@@ -52,7 +52,7 @@ export const Post = ({
   const onClick = () => {
     // <Navigate to={`/posts/postPage/${post.id}`}/>
     // const queryClient = useQueryClient()
-    const link = `/posts/${post.id}`;
+    const link = `/posts/${post._id}`;
     //evitar q o usuario numa full page fique fazendo refetch do post atual
     if (local.pathname != link) {
       navigate(link);
@@ -85,7 +85,7 @@ export const Post = ({
                 autoFocus={true}
                 className="bg-rebeccapurple w-noavatar"
                 placeholder="Edit your message here."
-                id={`post-${post.id}`}
+                id={`post-${post._id}`}
               ></Textarea>
               <Button onClick={handleSaveEdit} variant="ghost">
                 Salvar

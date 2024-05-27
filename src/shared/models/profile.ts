@@ -1,11 +1,12 @@
 export interface IProfile {
   id: string;
+  token: string;
   first_name: string;
   last_name: string;
   username: string;
   email: string;
   password: string;
-  profile_image_link?: string; 
+  profile_image_link?: string;
   bio?: string;
 }
 

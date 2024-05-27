@@ -31,7 +31,7 @@ export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
       id: ulid(),
       user_id: idLoggedUser,
       content: input.current.value,
-      created_at: `${new Date().toISOString()}`,
+      createdAt: `${new Date().toISOString()}`,
       likes: 0,
       deslikes: 0,
       linked_to: linkedTo,

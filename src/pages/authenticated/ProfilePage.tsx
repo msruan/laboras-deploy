@@ -73,7 +73,7 @@ export const ProfilePage = () => {
           {isSuccess &&
             posts!.map((post: IPost) => (
               <Post
-                key={post.id}
+                key={post._id}
                 post={post}
                 fullPage={false}
                 fullBorder={true}

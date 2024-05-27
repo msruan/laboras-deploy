@@ -1,4 +1,4 @@
-import axiosInstance, { axiosBackInstance } from "./../config/axiosConfig";
+import axiosInstance, { axiosBackInstance, axiosNextInstance } from "./../config/axiosConfig";
 import { IPost, PostRequest } from "@/shared/models/post.js";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosPromise, AxiosResponse } from "axios";
@@ -39,7 +39,7 @@ export function CreatePostJsonServer() {
 }
 
 export const fetchGetPosts = async (): AxiosPromise<IPost[]> => {
-  const response = await axiosBackInstance.get(`/posts`);
+  const response = await axiosNextInstance.get(`/posts`);
   return response;
 };
 

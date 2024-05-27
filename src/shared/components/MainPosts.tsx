@@ -18,7 +18,7 @@ export const MainPosts = () => {
           <TextBox linkedTo={null} />
           {posts!.map((post) => (
             <Post
-              key={post.id}
+              key={post._id}
               post={post}
               fullPage={false}
               fullBorder={true}

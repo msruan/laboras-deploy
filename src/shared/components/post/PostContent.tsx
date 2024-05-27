@@ -53,7 +53,7 @@ export function PostContent({
           >
             <p className="w-3/4">
               Data de publicação:{" "}
-              {new Date(post.created_at).toLocaleDateString()}
+              {new Date(post.createdAt).toLocaleDateString()}
             </p>
             <div
               className={`flex flex-row justify-between pr-7 pb-1 h-fit

@@ -1,6 +1,9 @@
 import { Login } from "@/actions/AuthAction";
 import { GetProfileByEmail } from "@/actions/ProfileAction";
-import axiosInstance, { axiosBackInstance } from "@/config/axiosConfig";
+import axiosInstance, {
+  axiosBackInstance,
+  axiosNextInstance,
+} from "@/config/axiosConfig";
 import { useEmail } from "@/shared/hooks/useEmail";
 import { useToken } from "@/shared/hooks/useToken";
 import { IProfile } from "@/shared/models/profile";
@@ -47,39 +50,32 @@ export const LoggedUserProvider = ({ children }: { children: ReactNode }) => {
     } else {
       console.log("ainda nao baby");
     }
+    console.log(user);
   }, []);
 
   async function Login(credentials: CredentialsLogin) {
     const { setToken } = useToken();
-    const responseToken: AxiosResponse<{ token: string }> =
-      await axiosBackInstance.post("/auth/login/", credentials);
-    setToken(responseToken?.data.token);
-    axiosBackInstance.defaults.headers.Authorization = `Token ${responseToken.data.token}`;
     const { setEmail } = useEmail();
-    const responseUser: AxiosResponse<IProfile[]> = await getUser(
-      credentials.email
+    const user: AxiosResponse<IProfile> = await axiosNextInstance.post(
+      "/auth/login",
+      credentials
     );
-    setEmail(credentials.email);
-    setUser(responseUser.data[0]);
+    setToken(user?.data.token);
+    axiosBackInstance.defaults.headers.Authorization = `Token ${user.data.token}`;
+    setEmail(user.data.email);
+    setUser(user.data);
     setSigned(true);
   }
 
   function getLoggedUser(token: string): void {
-    axiosBackInstance
-      .get(`/user/me/`, {
+    axiosNextInstance
+      .get(`/user/me`, {
         headers: { Authorization: `Token ${token}` },
       })
       .then((response) => {
         setUser(response.data);
         setSigned(true);
       });
-  }
-
-  async function getUser(email: string) {
-    const responseUser: AxiosResponse<IProfile[]> = await axiosInstance.get(
-      `/profiles?email=${email}`
-    );
-    return responseUser;
   }
 
   return (
