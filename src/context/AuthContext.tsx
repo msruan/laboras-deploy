@@ -38,12 +38,12 @@ export const LoggedUserProvider = ({ children }: { children: ReactNode }) => {
   const [signed, setSigned] = useState<boolean>(false);
   const [user, setUser] = useState<IProfile | null>(null);
 
-  const { email } = useEmail();
+  const { token } = useToken();
 
   useEffect(() => {
-    if (!signed && email() !== null) {
-      console.log(email());
-      getLoggedUser(email()!);
+    if (!signed && token() !== null) {
+      console.log(token());
+      getLoggedUser(token()!);
     } else {
       console.log("ainda nao baby");
     }
@@ -64,11 +64,15 @@ export const LoggedUserProvider = ({ children }: { children: ReactNode }) => {
     setSigned(true);
   }
 
-  function getLoggedUser(email: string) {
-    axiosInstance.get(`/profiles?email=${email}`).then((response) => {
-      setUser(response.data[0]);
-      setSigned(true);
-    });
+  function getLoggedUser(token: string): void {
+    axiosBackInstance
+      .get(`/user/me/`, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((response) => {
+        setUser(response.data);
+        setSigned(true);
+      });
   }
 
   async function getUser(email: string) {

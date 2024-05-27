@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosPromise, AxiosResponse } from "axios";
 
 async function fetchCreatePost(postagem: any) {
-  return await axiosBackInstance.post("/posts/", postagem, {
+  return await axiosBackInstance.post("/posts", postagem, {
     headers: {
       Authorization: `Token ${postagem.token}`,
     },
@@ -39,7 +39,7 @@ export function CreatePostJsonServer() {
 }
 
 export const fetchGetPosts = async (): AxiosPromise<IPost[]> => {
-  const response = await axiosBackInstance.get(`/posts/`);
+  const response = await axiosBackInstance.get(`/posts`);
   return response;
 };
 

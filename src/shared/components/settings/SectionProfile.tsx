@@ -20,7 +20,7 @@ import { Button } from "../ui/button";
 
 export function SectionProfile({ profile }: { profile: IProfile }) {
   return (
-    <Tabs defaultValue="account" className="w-[400px] mb-4">
+    <Tabs defaultValue="account" className="w-full mb-4">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="account">Account</TabsTrigger>
         <TabsTrigger value="password">Password</TabsTrigger>
