@@ -3,7 +3,7 @@ import { ProfileTag } from "./profile/ProfileTag";
 import { ScrollArea } from "./ui/scrolarea";
 import {
   GetProfileByUsername,
-  GetProfileFollowers,
+  GetUsers,
   GetProfileById,
 } from "@/actions/ProfileAction";
 import { useAuth } from "@/context/AuthContext";
@@ -11,14 +11,13 @@ import { useAuth } from "@/context/AuthContext";
 import { IProfile } from "../models/profile";
 import { UserGroupIcon, XCircleIcon } from "@heroicons/react/16/solid";
 import { useEffect, useState } from "react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 
 type AsideFollowersProps = {
   className: string;
 };
 
 export const AsideFollowers = () => {
-  const { response: followers, isSuccess, isLoading } = GetProfileFollowers();
+  const { response: followers, isSuccess, isLoading } = GetUsers();
   const { user: context, signed } = useAuth();
 
   return (
@@ -37,7 +36,7 @@ export const AsideFollowers = () => {
                 <ScrollArea className="flex flex-row h-lvh w-60">
                   <div className="min-h-full flex flex-col gap-11">
                     {followers!.map((profile) => (
-                      <ProfileTag key={profile.id} perfil={profile} />
+                      <ProfileTag key={profile._id} perfil={profile} />
                     ))}
                   </div>
                 </ScrollArea>

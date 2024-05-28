@@ -69,7 +69,7 @@ export const LoggedUserProvider = ({ children }: { children: ReactNode }) => {
 
   function getLoggedUser(token: string): void {
     axiosNextInstance
-      .get(`/user/me`, {
+      .get(`/profiles/me`, {
         headers: { Authorization: `Token ${token}` },
       })
       .then((response) => {

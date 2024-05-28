@@ -1,16 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axiosInstance, { axiosBackInstance } from "../config/axiosConfig";
+import axiosInstance, {
+  axiosBackInstance,
+  axiosNextInstance,
+} from "@/config/axiosConfig";
 import { AxiosPromise, AxiosResponse } from "axios";
 import { IProfile, ProfileRequest } from "@/shared/models/profile";
 import { IPost } from "@/shared/models/post";
 
-async function fetchGetProfileFollowers(): AxiosPromise<IProfile[]> {
-  return await axiosInstance.get("/profiles");
+async function fetchGetUsers(): AxiosPromise<IProfile[]> {
+  return await axiosNextInstance.get("/profiles");
 } //Todo: atualizar rota para algo como .get('<token_user>/followers);
 
-export function GetProfileFollowers() {
+export function GetUsers() {
   const query = useQuery({
-    queryFn: fetchGetProfileFollowers,
+    queryFn: fetchGetUsers,
     queryKey: ["followings"],
   });
   return {
@@ -19,14 +22,14 @@ export function GetProfileFollowers() {
   };
 }
 
-async function fetchGetProfile(profileId: string): AxiosPromise<IProfile> {
-  return await axiosInstance.get(`/profiles/${profileId}`);
+async function fetchGetProfileById(profileId: string): AxiosPromise<IProfile> {
+  return await axiosNextInstance.get(`/profiles/id/${profileId}`);
 } //Todo: atualizar rota para algo como .get('<token_user>/followers);
 
 export function GetProfileById(profileId: string) {
   const query = useQuery({
     queryFn: async () => {
-      return fetchGetProfile(profileId);
+      return fetchGetProfileById(profileId);
     },
     queryKey: [`profile/${profileId}`],
   });
@@ -39,8 +42,7 @@ export function GetProfileById(profileId: string) {
 export const fetchGetProfileByUsername = async (
   username: string
 ): AxiosPromise<IProfile[]> => {
-  const response = await axiosInstance.get(`/profiles?username=${username}`);
-  return response;
+  return await axiosNextInstance.get(`/profiles/username/${username}`);
 };
 
 export function GetProfileByUsername(username: string) {
@@ -49,28 +51,6 @@ export function GetProfileByUsername(username: string) {
       return fetchGetProfileByUsername(username);
     },
     queryKey: [`profile/${username}`],
-  });
-
-  return {
-    ...query,
-    response: query.data?.data[0],
-  };
-}
-
-export const fetchGetProfileByEmail = async (
-  email: string
-): AxiosPromise<IProfile[]> => {
-  const response = await axiosInstance.get(`/profiles?email=${email}`);
-  return response;
-};
-
-export function GetProfileByEmail(email: string, enabled: boolean) {
-  const query = useQuery({
-    queryFn: async () => {
-      return fetchGetProfileByEmail(email);
-    },
-    queryKey: [`profile/${email}`],
-    enabled: enabled,
   });
 
   return {

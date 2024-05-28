@@ -8,7 +8,7 @@ export function getRelationedPost(
   let relationedPosts: IPost[] = [];
 
   if (posts) {
-    relationedPosts = posts.filter((comment) => comment.linked_to === post.id);
+    relationedPosts = posts.filter((comment) => comment.linked_to === post._id);
   }
 
   return relationedPosts;

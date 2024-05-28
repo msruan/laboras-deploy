@@ -1,5 +1,5 @@
 import { GetAllPosts } from "@/actions/PostAction";
-import { GetProfileByUsername, GetProfilePosts } from "@/actions/ProfileAction";
+import { GetProfileByUsername } from "@/actions/ProfileAction";
 import { useAuth } from "@/context/AuthContext";
 import Seo from "@/shared/components/Seo";
 import Post from "@/shared/components/post/Post";
@@ -17,14 +17,9 @@ export const ProfilePage = () => {
   const { token } = useToken();
   const lala = token();
   const { username } = useParams();
-  const {
-    response: posts,
-    isSuccess,
-    isError,
-    isLoading,
-  } = GetProfilePosts({ username: username, token: lala });
+  const { response: posts, isSuccess, isError, isLoading } = GetAllPosts();
   const { user: context } = useAuth();
-  const idLoggedUser = context?.id;
+  const idLoggedUser = context?._id;
   const navigate = useNavigate();
   const {
     response: profile,

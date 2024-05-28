@@ -2,7 +2,7 @@ import Post from "@/shared/components/post/Post";
 import { MainPosts } from "../../shared/components/MainPosts";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { IPost } from "@/shared/models/post";
-import { GetAllPosts, GetPost } from "@/actions/PostAction";
+import { GetAllPosts, GetPostById } from "@/actions/PostAction";
 import { getRelationedPost } from "@/actions/PostPageAction";
 import { TextBox } from "@/shared/components/TextBox";
 import { useEffect } from "react";
@@ -26,7 +26,11 @@ export const PostsPage = () => {
   const { response: posts, isSuccess } = GetAllPosts();
   const navigate = useNavigate();
   const { id } = useParams();
-  const { response: post, isSuccess: isGetPostSuccess, refetch } = GetPost(id!);
+  const {
+    response: post,
+    isSuccess: isGetPostSuccess,
+    refetch,
+  } = GetPostById(id!);
 
   function handleGoBack() {
     navigate(-1);
