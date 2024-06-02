@@ -1,11 +1,11 @@
 import {
   axiosNextInstance,
 } from "./../config/axiosConfig";
-import { IPost, PostRequest } from "@/shared/models/post.js";
+import { IInitialPost, IPost, PostRequest } from "@/shared/models/post.js";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosPromise, AxiosResponse } from "axios";
 
-async function fetchCreatePost(postagem: IPost) {
+async function fetchCreatePost(postagem: IInitialPost) {
   return await axiosNextInstance.post("/posts", postagem);
 }
 

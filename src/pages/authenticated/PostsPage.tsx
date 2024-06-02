@@ -23,9 +23,14 @@ function Header({ handleGoBack }: { handleGoBack: () => void }) {
 }
 
 export const PostsPage = () => {
-  const { response: posts, isSuccess } = GetAllPosts();
+  const {
+    response: posts,
+    isSuccess,
+    refetch: refetchComments,
+  } = GetAllPosts();
   const navigate = useNavigate();
   const { id } = useParams();
+  let deuBom = false;
   const {
     response: post,
     isSuccess: isGetPostSuccess,
@@ -41,12 +46,18 @@ export const PostsPage = () => {
   if (isGetPostSuccess) {
     if (isSuccess && post) {
       relationedPosts = getRelationedPost(post, posts);
+      deuBom = true;
     }
   }
 
   useEffect(() => {
     refetch();
+    refetchComments();
   }, [id]);
+
+  if (!deuBom) {
+    return <div>Pending...</div>;
+  }
 
   return (
     <div className="flex flex-col gap-2">
@@ -72,5 +83,5 @@ export const PostsPage = () => {
     </div>
   );
 };
-
+//Todo: fazer fetchs separados, para deixar a pagina carregar sem esperar pelos comentarios
 export default PostsPage;

@@ -5,8 +5,8 @@ import { IPost } from "@/shared/models/post";
 import { IProfile } from "@/shared/models/profile";
 import { useContext } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { GetProfileByEmail, GetProfileByUsername } from "./ProfileAction";
-import axiosInstance from "@/config/axiosConfig";
+import { GetProfileByUsername } from "./ProfileAction";
+import { axiosNextInstance } from "@/config/axiosConfig";
 import { useEmail } from "@/shared/hooks/useEmail";
 
 type credentialsLogin = {
@@ -24,17 +24,14 @@ type credentialsSignup = {
 };
 
 const fetchLogin = async (credentials: credentialsLogin) => {
-  return await axios.post(
-    "http://localhost:8000/api/auth/login/",
-    credentials,
-    {
-      headers: { "Content-Type": "application/json" },
-    }
-  );
+  return await axios.post("http://localhost:3000/api/auth/login", credentials, {
+    headers: { "Content-Type": "application/json" },
+  });
 };
 
 async function fetchGetProfile(profileId: string): AxiosPromise<IProfile> {
-  return await axiosInstance.get(`/profiles/${profileId}`);
+  console.log("mano me mandaram pegar o perfil com o id {", profileId, "}");
+  return await axiosNextInstance.get(`/profiles/id/${profileId}`);
 }
 
 export const Login = () => {

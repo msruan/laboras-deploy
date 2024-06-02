@@ -10,8 +10,9 @@ export interface IPost {
   linked_to: string | null;
 }
 export interface IInitialPost {
-  title: string;
+  user_id: string;
   content: string;
+  linked_to: string | null;
 }
 
 export type PostRequest = {

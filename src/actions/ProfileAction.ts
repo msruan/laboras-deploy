@@ -1,8 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axiosInstance, {
-  axiosBackInstance,
-  axiosNextInstance,
-} from "@/config/axiosConfig";
+import { axiosNextInstance } from "@/config/axiosConfig";
 import { AxiosPromise, AxiosResponse } from "axios";
 import { IProfile, ProfileRequest } from "@/shared/models/profile";
 import { IPost } from "@/shared/models/post";
@@ -50,7 +47,7 @@ export function GetProfileByUsername(username: string) {
     queryFn: async () => {
       return fetchGetProfileByUsername(username);
     },
-    queryKey: [`profile/${username}`],
+    queryKey: [`profiles/username/${username}`],
   });
 
   return {
@@ -60,7 +57,10 @@ export function GetProfileByUsername(username: string) {
 }
 
 async function fetPatchProfile(profile: ProfileRequest) {
-  const response = await axiosInstance.put(`/profiles/${profile.id}`, profile);
+  const response = await axiosNextInstance.put(
+    `/profiles/username/${profile.id}`,
+    profile
+  );
   return response;
 }
 
@@ -84,8 +84,9 @@ export function UpdateProfile() {
 export const fetchGetProfilePosts = async (
   item: any
 ): AxiosPromise<IPost[]> => {
-  const response = await axiosBackInstance.get(
-    `/user/${item.username}/posts/`,
+  const response = await axiosNextInstance.get(
+    // `/posts/${item.username}/posts/`,
+    `/posts`,
     {
       headers: { Authorization: `Token ${item.token}` },
     }

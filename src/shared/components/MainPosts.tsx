@@ -6,7 +6,7 @@ import { useAuth } from "@/context/AuthContext";
 export const MainPosts = () => {
   const { response: posts, isSuccess, isError, isLoading } = GetAllPosts();
   const { user: context } = useAuth();
-  const idLoggedUser = context?.id;
+  const idLoggedUser = context?._id;
   isSuccess &&
     console.log("MANO OS POSTS Q RECEBI SAO ", JSON.stringify(posts));
 

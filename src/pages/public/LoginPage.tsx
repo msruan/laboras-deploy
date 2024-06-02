@@ -1,5 +1,4 @@
 import { Login } from "@/actions/AuthAction";
-import { GetProfileByEmail } from "@/actions/ProfileAction";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -17,7 +16,6 @@ import { Experimental_CssVarsProvider } from "@mui/material";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { ChangeEvent, useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import Seo from "@/shared/components/Seo";
 
 export function LoginPage() {
@@ -39,8 +37,8 @@ export function LoginPage() {
     if (e) {
       e.preventDefault();
     }
-    localStorage.setItem("email", inputValues.email);
     // mutate(inputValues);
+    console.log("sim, chamei login para essas credenciais: ", inputValues);
     Login(inputValues);
     setIsEntering(true);
   };

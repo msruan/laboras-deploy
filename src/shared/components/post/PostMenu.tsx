@@ -54,7 +54,7 @@ export function PostMenu({ post, handleEdit }: PostMenuProps) {
           <DropdownMenuItem
             className="text-red-700"
             onClick={() => {
-              handleDelete(post.id);
+              handleDelete(post._id!);
             }}
           >
             Deletar

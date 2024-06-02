@@ -1,9 +1,5 @@
 import { Login } from "@/actions/AuthAction";
-import { GetProfileByEmail } from "@/actions/ProfileAction";
-import axiosInstance, {
-  axiosBackInstance,
-  axiosNextInstance,
-} from "@/config/axiosConfig";
+import { axiosNextInstance } from "@/config/axiosConfig";
 import { useEmail } from "@/shared/hooks/useEmail";
 import { useToken } from "@/shared/hooks/useToken";
 import { IProfile } from "@/shared/models/profile";
@@ -45,24 +41,24 @@ export const LoggedUserProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!signed && token() !== null) {
-      console.log(token());
+      console.log("mano tentei logar: ", token());
       getLoggedUser(token()!);
     } else {
-      console.log("ainda nao baby");
+      console.log("sem token ou signado já");
     }
-    console.log(user);
   }, []);
 
   async function Login(credentials: CredentialsLogin) {
+    console.log("mano eu salvei essa dsg");
     const { setToken } = useToken();
-    const { setEmail } = useEmail();
     const user: AxiosResponse<IProfile> = await axiosNextInstance.post(
       "/auth/login",
       credentials
     );
+    console.log("fiz a porra do login com o back");
+    console.log("o token que recebi do back foi: ", user?.data.token);
     setToken(user?.data.token);
-    axiosBackInstance.defaults.headers.Authorization = `Token ${user.data.token}`;
-    setEmail(user.data.email);
+    axiosNextInstance.defaults.headers.Authorization = `Token ${user.data.token}`;
     setUser(user.data);
     setSigned(true);
   }

@@ -15,10 +15,13 @@ import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export function SettingsPage() {
-  const { user: context } = useAuth();
-  const idLoggedUser = context?.id;
+  const { user: context, signed } = useAuth();
+  const idLoggedUser = context?._id;
   const { setSigned } = useAuth();
   const navigate = useNavigate();
+  if (!signed) {
+    return <div></div>;
+  }
 
   const {
     response: profile,

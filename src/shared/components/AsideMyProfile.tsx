@@ -16,7 +16,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export const AsideMyProfile = () => {
   const { user: perfil, signed } = useAuth();
-  const idLoggedUser = perfil?.id;
+  const idLoggedUser = perfil?._id;
   const local = useLocation();
   const localIsHome = local.pathname === "/posts";
   const localIsUser = local.pathname === `/posts/profile/${perfil?.username}`;

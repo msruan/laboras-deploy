@@ -2,7 +2,7 @@
 import { useContext, useRef } from "react";
 import style from "./textbox.module.css";
 import { ulid } from "ulidx";
-import { IPost } from "../models/post";
+import { IInitialPost, IPost } from "../models/post";
 import { Textarea } from "./ui/textarea";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -11,7 +11,6 @@ import { CreatePost } from "@/actions/PostAction";
 import { GetProfileById } from "@/actions/ProfileAction";
 import { useAuth } from "@/context/AuthContext";
 import { useToken } from "@/shared/hooks/useToken";
-
 
 type TextBoxProps = {
   linkedTo: string | null;
@@ -22,27 +21,24 @@ export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
       return;
     }
 
-    const newPost: IPost = {
+    const newPost: IInitialPost = {
       user_id: idLoggedUser,
       content: input.current.value,
-      createdAt: `${new Date().toISOString()}`,
-      likes: 0,
-      deslikes: 0,
       linked_to: linkedTo,
     };
 
     addNewPost(newPost);
     input.current.value = "";
   }
+  const { user: loggedUser, signed } = useAuth();
+  if (!signed) return <div></div>;
 
   const input = useRef<HTMLTextAreaElement>(null);
   const { mutate: addNewPost } = CreatePost();
-  const { user: loggedUser } = useAuth();
   const name = loggedUser?.first_name;
 
-  const idLoggedUser = loggedUser?.id ?? "";
+  const idLoggedUser = loggedUser?._id!;
   const { response: profile } = GetProfileById(idLoggedUser);
-  const { token } = useToken();
 
   return (
     <div>

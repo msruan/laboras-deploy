@@ -23,14 +23,14 @@ export const Icons = ({ post, fullPage }: IconsProps) => {
         post.deslikes--;
         setIsDesliked(false);
         handleUpdate({
-          id: post.id,
+          id: post._id!,
           likes: post.likes,
           deslikes: post.deslikes,
         });
       }
     }
     setIsLiked(!isLiked);
-    handleUpdate({ id: post.id, likes: post.likes });
+    handleUpdate({ id: post._id!, likes: post.likes });
   }
 
   function handleDeslike() {
@@ -41,14 +41,14 @@ export const Icons = ({ post, fullPage }: IconsProps) => {
         post.likes--;
         setIsLiked(false);
         handleUpdate({
-          id: post.id,
+          id: post._id!,
           likes: post.likes,
           deslikes: post.deslikes,
         });
       }
     }
     setIsDesliked(!isDesliked);
-    handleUpdate({ id: post.id, deslikes: post.deslikes });
+    handleUpdate({ id: post._id!, deslikes: post.deslikes });
   }
   return (
     <>

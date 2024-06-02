@@ -1,4 +1,3 @@
-import { GetProfileByEmail } from "@/actions/ProfileAction";
 import { useAuth } from "@/context/AuthContext";
 import { AsideFollowers } from "@/shared/components/AsideFollowers";
 import { AsideMyProfile } from "@/shared/components/AsideMyProfile";
@@ -9,6 +8,7 @@ import { Footer } from "../components/Footer";
 
 export const MainLayout = () => {
   const { user } = useAuth();
+  console.log("mana o user eh ", user);
 
   return (
     <>
