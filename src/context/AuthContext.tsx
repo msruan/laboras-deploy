@@ -1,10 +1,7 @@
-import { Login } from "@/actions/AuthAction";
-import { GetProfileByEmail } from "@/actions/ProfileAction";
-import axiosInstance, { axiosBackInstance } from "@/config/axiosConfig";
-import { useEmail } from "@/shared/hooks/useEmail";
+import axiosInstance from "@/config/axiosConfig";
 import { useToken } from "@/shared/hooks/useToken";
-import { IProfile } from "@/shared/models/profile";
-import axios, { AxiosPromise, AxiosResponse } from "axios";
+import { ProfileDetailed } from "@/shared/models/profile";
+import { AxiosResponse } from "axios";
 import {
   useState,
   createContext,
@@ -18,12 +15,12 @@ export function useAuth() {
 }
 
 type CredentialsLogin = {
-  email: string;
+  username: string;
   password: string;
 };
 
 export type LoggedUserContextType = {
-  user: IProfile | null;
+  user: ProfileDetailed | null;
   signed: boolean;
   setSigned: (arg: boolean) => void;
   // handleChange: ({ username, id }: LoggedUserInfo) => void;
@@ -36,12 +33,13 @@ const AuthContext = createContext<LoggedUserContextType>(
 
 export const LoggedUserProvider = ({ children }: { children: ReactNode }) => {
   const [signed, setSigned] = useState<boolean>(false);
-  const [user, setUser] = useState<IProfile | null>(null);
+  const [user, setUser] = useState<ProfileDetailed | null>(null);
 
   const { token } = useToken();
 
   useEffect(() => {
     if (!signed && token() !== null) {
+      axiosInstance.defaults.headers.Authorization = `Bearer ${token()}`;
       console.log(token());
       getLoggedUser(token()!);
     } else {
@@ -51,35 +49,28 @@ export const LoggedUserProvider = ({ children }: { children: ReactNode }) => {
 
   async function Login(credentials: CredentialsLogin) {
     const { setToken } = useToken();
-    const responseToken: AxiosResponse<{ token: string }> =
-      await axiosBackInstance.post("/auth/login/", credentials);
-    setToken(responseToken?.data.token);
-    axiosBackInstance.defaults.headers.Authorization = `Token ${responseToken.data.token}`;
-    const { setEmail } = useEmail();
-    const responseUser: AxiosResponse<IProfile[]> = await getUser(
-      credentials.email
-    );
-    setEmail(credentials.email);
-    setUser(responseUser.data[0]);
+
+    const loginRequest: AxiosResponse<{ acess_token: string }> =
+      await axiosInstance.post("/auth/login", credentials);
+
+    const token = loginRequest?.data.acess_token;
+    setToken(token);
+
+    axiosInstance.defaults.headers.Authorization = `Bearer ${token}`;
+    getLoggedUser(token);
+
     setSigned(true);
   }
 
   function getLoggedUser(token: string): void {
-    axiosBackInstance
-      .get(`/user/me/`, {
-        headers: { Authorization: `Token ${token}` },
+    axiosInstance
+      .get(`/users/me/`, {
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         setUser(response.data);
         setSigned(true);
       });
-  }
-
-  async function getUser(email: string) {
-    const responseUser: AxiosResponse<IProfile[]> = await axiosInstance.get(
-      `/profiles?email=${email}`
-    );
-    return responseUser;
   }
 
   return (

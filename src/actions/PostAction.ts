@@ -1,10 +1,10 @@
-import axiosInstance, { axiosBackInstance } from "./../config/axiosConfig";
+import axiosInstance from "./../config/axiosConfig";
 import { IPost, PostRequest } from "@/shared/models/post.js";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosPromise, AxiosResponse } from "axios";
 
 async function fetchCreatePost(postagem: any) {
-  return await axiosBackInstance.post("/posts", postagem, {
+  return await axiosInstance.post("/posts", postagem, {
     headers: {
       Authorization: `Token ${postagem.token}`,
     },
@@ -39,7 +39,7 @@ export function CreatePostJsonServer() {
 }
 
 export const fetchGetPosts = async (): AxiosPromise<IPost[]> => {
-  const response = await axiosBackInstance.get(`/posts`);
+  const response = await axiosInstance.get(`/posts/feed`);
   return response;
 };
 

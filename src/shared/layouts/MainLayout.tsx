@@ -18,8 +18,8 @@ export const MainLayout = () => {
           <main className="ml-72 max-xl:ml-24 xl:mr-72 max-md:m-0 max-sm:mb-16">
             <Outlet />
           </main>
-          <AsideFollowers />
-          <Footer></Footer>
+          {/* <AsideFollowers /> */}
+          <Footer />
         </div>
       )}
     </>

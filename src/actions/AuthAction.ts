@@ -2,48 +2,37 @@ import axios, { AxiosPromise, AxiosResponse } from "axios";
 import { useToken } from "@/shared/hooks/useToken";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { IPost } from "@/shared/models/post";
-import { IProfile } from "@/shared/models/profile";
+import { ProfileDetailed } from "@/shared/models/profile";
 import { useContext } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { GetProfileByEmail, GetProfileByUsername } from "./ProfileAction";
-import axiosInstance from "@/config/axiosConfig";
-import { useEmail } from "@/shared/hooks/useEmail";
+import { GetProfileByUsername } from "./ProfileAction";
+import { axiosInstance } from "@/config/axiosConfig";
 
 type credentialsLogin = {
-  email: string;
+  username: string;
   password: string;
 };
 
 type credentialsSignup = {
-  first_name: string;
-  last_name: string;
+  full_name: string;
   username: string;
   email: string;
   password: string;
-  confirm_password: string;
 };
-
-const fetchLogin = async (credentials: credentialsLogin) => {
-  return await axios.post(
-    "http://localhost:8000/api/auth/login/",
-    credentials,
-    {
-      headers: { "Content-Type": "application/json" },
-    }
-  );
-};
-
-async function fetchGetProfile(profileId: string): AxiosPromise<IProfile> {
-  return await axiosInstance.get(`/profiles/${profileId}`);
-}
 
 export const Login = () => {
+  async function fetchLogin(credentials: credentialsLogin) {
+    return await axios.post("http://localhost:8000/auth/login", credentials, {
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
   const { setToken } = useToken();
 
   const mutation = useMutation({
     mutationFn: fetchLogin,
     onSuccess: (response, variables) => {
-      sessionStorage.setItem("email", variables.email);
+      sessionStorage.setItem("username", variables.username);
       setToken(response?.data);
     },
     onError: (error) => {
@@ -55,19 +44,19 @@ export const Login = () => {
   return mutation;
 };
 
-const fetchSignup = async (credentials: credentialsSignup) => {
-  const response = await axios.post(
-    "http://localhost:8000/api/auth/signup/",
-    credentials,
-    {
-      headers: { "Content-Type": "application/json" },
-    }
-  );
-  console.log("fiz a req aqui no signup");
-  return response;
-};
-
 export const SignUp = () => {
+  async function fetchSignup(credentials: credentialsSignup) {
+    const response = await axios.post(
+      "http://localhost:8000/auth/register/",
+      credentials,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    console.log("fiz a req aqui no signup");
+    return response;
+  }
+
   const mutate = useMutation({
     mutationFn: fetchSignup,
     // onSuccess: (response: AxiosResponse<IProfile>) => {
@@ -83,7 +72,5 @@ export const SignUp = () => {
 
 export const Logout = () => {
   const { removeToken } = useToken();
-  const { removeEmail } = useEmail();
   removeToken();
-  removeEmail();
 };

@@ -3,7 +3,6 @@ import { MainPosts } from "../../shared/components/MainPosts";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { IPost } from "@/shared/models/post";
 import { GetAllPosts, GetPost } from "@/actions/PostAction";
-import { getRelationedPost } from "@/actions/PostPageAction";
 import { TextBox } from "@/shared/components/TextBox";
 import { useEffect } from "react";
 import { Button } from "@/shared/components/ui/button";
@@ -32,14 +31,6 @@ export const PostsPage = () => {
     navigate(-1);
   }
 
-  let relationedPosts: IPost[] | undefined;
-
-  if (isGetPostSuccess) {
-    if (isSuccess && post) {
-      relationedPosts = getRelationedPost(post, posts);
-    }
-  }
-
   useEffect(() => {
     refetch();
   }, [id]);
@@ -58,11 +49,6 @@ export const PostsPage = () => {
             <div>
               <p>Postagem não encontrada!!</p>
             </div>
-          ))}
-
-        {isSuccess &&
-          relationedPosts?.map((_post, index) => (
-            <Post key={index} post={_post} fullPage={false} fullBorder={true} />
           ))}
       </div>
     </div>

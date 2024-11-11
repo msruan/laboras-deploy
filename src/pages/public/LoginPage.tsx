@@ -1,5 +1,4 @@
 import { Login } from "@/actions/AuthAction";
-import { GetProfileByEmail } from "@/actions/ProfileAction";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -13,33 +12,36 @@ import {
 
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
-import { Experimental_CssVarsProvider } from "@mui/material";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { ChangeEvent, useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import Seo from "@/shared/components/Seo";
+import { LoginRequest } from "@/shared/models/auth";
+
+type CredentialsLogin = {
+  username: string;
+  password: string;
+};
 
 export function LoginPage() {
-  console.log("funcionei saasdnjasfb jas"); // const { status, mutate } = Login();
   const { Login, signed } = useAuth();
 
   const [isEntering, setIsEntering] = useState(false);
-  const [inputValues, setInputValues] = useState({
-    email: "ruan@gmail.com",
-    password: "1234",
+  const [inputValues, setInputValues] = useState<CredentialsLogin>({
+    username: "",
+    password: "",
   });
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const { name, value } = e.target;
-    setInputValues({ ...inputValues, [name]: value });
+    setInputValues({ ...inputValues, [name]: value } as LoginRequest);
   };
+
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement> | null = null) => {
     if (e) {
       e.preventDefault();
     }
-    localStorage.setItem("email", inputValues.email);
     // mutate(inputValues);
     Login(inputValues);
     setIsEntering(true);
@@ -49,20 +51,8 @@ export function LoginPage() {
     return <Navigate to="/posts" />;
   }
 
-  // if (status === "success") {
-  // const email = inputValues.email;
-  // console.log(email);
-  // const { handleChange } = useAuth();
-  // const { response: data, isSuccess } = GetProfileByEmail(email);
-  // if (isSuccess) {
-  //   handleChange({ username: data?.username, id: data?.id });
-  // }
-  // console.log("LOGIN COM SUCESSO");
-  // return <Navigate to="/posts" />;
-  // }
-
   const validarParametros = (): boolean => {
-    return inputValues.email !== "" && inputValues.password !== "";
+    return inputValues?.username !== "" && inputValues?.password !== "";
   };
 
   return (
@@ -74,7 +64,7 @@ export function LoginPage() {
         if (e.key === "Enter" && validarParametros()) onSubmit();
       }}
     >
-      <Seo title="DIego" />
+      <Seo title="Laboras" />
       <CardHeader>
         <CardTitle className="text-2xl font-bold tracking-tighter">
           Entre por sua conta em risco
@@ -88,13 +78,12 @@ export function LoginPage() {
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div>
-          <Label htmlFor="email">Login</Label>
+          <Label htmlFor="username">Usuário</Label>
           <Input
-            defaultValue="ruan@gmail.com"
-            id="email"
-            placeholder="Digite seu e-mail ou nome de usuário"
-            type="email"
-            name="email"
+            id="username"
+            placeholder="Digite seu nome de usuário"
+            type="text"
+            name="username"
             onChange={handleOnChange}
           ></Input>
         </div>
@@ -102,7 +91,6 @@ export function LoginPage() {
           <Label htmlFor="senha">Senha</Label>
           <Input
             id="senha"
-            defaultValue="1234"
             placeholder="Digite sua melhor senha"
             type="password"
             name="password"

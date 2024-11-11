@@ -1,21 +1,20 @@
-export interface IProfile {
-  id: string;
-  first_name: string;
-  last_name: string;
+import { IPost } from "./post";
+
+export interface ProfileBase {
+  uid: string;
   username: string;
+  full_name: string;
   email: string;
-  password: string;
-  profile_image_link?: string; 
-  bio?: string;
+  created_at: string;
+  updated_at: string;
 }
 
-export type ProfileRequest = {
-  id: string;
-  first_name?: string;
-  last_name?: string;
-  username?: string;
-  email?: string;
-  password?: string;
-  bio?: string;
-  profile_image_link?: string;
-};
+export interface ProfileDetailed extends ProfileBase {
+  posts: IPost[];
+  following: ProfileBase[];
+}
+
+export interface ProfileUpdate {
+  full_name: string;
+  password: string;
+}

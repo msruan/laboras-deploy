@@ -21,12 +21,10 @@ export function SignUpPage() {
   const [isEntering, setIsEntering] = useState(false);
 
   const [inputValues, setInputValues] = useState({
-    first_name: "",
-    last_name: "",
+    full_name: "",
     username: "",
     email: "",
     password: "",
-    confirm_password: "",
   });
 
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement> | null = null) => {
@@ -46,12 +44,10 @@ export function SignUpPage() {
 
   const validarParametros = (): boolean => {
     return (
-      inputValues.first_name !== "" &&
-      inputValues.last_name !== "" &&
+      inputValues.full_name !== "" &&
       inputValues.username !== "" &&
       inputValues.email !== "" &&
-      inputValues.password !== "" &&
-      inputValues.confirm_password !== ""
+      inputValues.password !== ""
     );
   };
 
@@ -75,20 +71,12 @@ export function SignUpPage() {
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div>
-          <Label htmlFor="nome">First name</Label>
+          <Label htmlFor="full_name">Nome</Label>
           <Input
-            placeholder="Type your first name"
+            placeholder="Type your full name"
             type="text"
-            name="first_name"
-            onChange={handleOnChange}
-          ></Input>
-        </div>
-        <div>
-          <Label htmlFor="nome">Last name</Label>
-          <Input
-            placeholder="Type your last name"
-            type="text"
-            name="last_name"
+            name="full_name"
+            id="full_name"
             onChange={handleOnChange}
           ></Input>
         </div>
@@ -97,7 +85,7 @@ export function SignUpPage() {
           <Label htmlFor="username">Username</Label>
           <Input
             id="username"
-            placeholder="Type your username"
+            placeholder="DIgite seu username"
             type="text"
             name="username"
             onChange={handleOnChange}
@@ -107,7 +95,7 @@ export function SignUpPage() {
           <Label htmlFor="email">Email</Label>
           <Input
             id="email"
-            placeholder="Type your best email"
+            placeholder="Digite seu melhor email"
             type="email"
             name="email"
             onChange={handleOnChange}
@@ -117,19 +105,9 @@ export function SignUpPage() {
           <Label htmlFor="senha">Senha</Label>
           <Input
             id="senha"
-            placeholder="Type your most discreet password"
+            placeholder="Digite sua senha mais discreta"
             type="password"
             name="password"
-            onChange={handleOnChange}
-          ></Input>
-        </div>
-        <div>
-          <Label htmlFor="confirm-senha">Senha</Label>
-          <Input
-            id="confirm-senha"
-            placeholder="Retype your password"
-            type="password"
-            name="confirm_password"
             onChange={handleOnChange}
           ></Input>
         </div>

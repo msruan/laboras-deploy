@@ -115,7 +115,7 @@ export const Post = ({
                   handleEdit={setEditMode}
                 />
               </div>
-              {!fullPage && (
+              {/* {!fullPage && (
                 <CardFooter className="flex items-center justify-end h-fit">
                   <div
                     className={`flex flex-row justify-between pr-7 pb-1 h-fit
@@ -126,7 +126,7 @@ export const Post = ({
                     <PostMenu handleEdit={setEditMode} post={post} />
                   </div>
                 </CardFooter>
-              )}
+              )} */}
             </>
           )}
         </Card>

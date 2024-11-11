@@ -9,14 +9,7 @@ import ProfilePage from "./pages/authenticated/ProfilePage";
 import { MainPosts } from "@/shared/components/MainPosts";
 import { SettingsPage } from "./pages/public/SettingsPage";
 import { SignUpPage } from "./pages/public/SignUpPage";
-import { useAuth } from "./context/AuthContext";
-import { useToken } from "./shared/hooks/useToken";
-import { useEmail } from "./shared/hooks/useEmail";
 
-// const { email: token } = useEmail();
-// if (token()) {
-//   console.log("funfa");
-// }
 const OtherRoutes = [
   {
     path: "/",
