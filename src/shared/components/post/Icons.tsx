@@ -5,6 +5,8 @@ import { IPost } from "../../models/post";
 type IconInteractsProps = {
   icon: JSX.Element;
   count: number;
+  isLiked?: boolean;
+  isDisliked?: boolean;
   onClick: () => void;
   activeColor: string;
   inactiveColor: string;
@@ -16,12 +18,14 @@ const IconInteracts = ({
   onClick,
   activeColor,
   inactiveColor,
+  isLiked,
+  isDisliked,
 }: IconInteractsProps) => (
   <div className="flex justify-between items-center text-sm">
     <span>{count > 0 && count}</span>
     <span
       className={`h-4 w-4 cursor-pointer ${
-        count > 0 ? activeColor : inactiveColor
+        isLiked || isDisliked ? activeColor : inactiveColor
       }`}
       onClick={onClick}
     >
@@ -40,6 +44,7 @@ export const Icons = ({ post }: { post: IPost }) => {
       <IconInteracts
         icon={<StarIcon />}
         count={post.likes}
+        isLiked={post.liked_by_me}
         onClick={() => handleLikePost(post.uid)}
         activeColor="text-yellow-500"
         inactiveColor="text-gray-500"
@@ -47,6 +52,7 @@ export const Icons = ({ post }: { post: IPost }) => {
       <IconInteracts
         icon={<FaceFrownIcon />}
         count={post.dislikes}
+        isDisliked={post.disliked_by_me}
         onClick={() => handleDislikePost(post.uid)}
         activeColor="text-red-500"
         inactiveColor="text-gray-500"
