@@ -30,7 +30,7 @@ export function GetProfileById(profileId: string) {
 export const fetchGetProfileByUsername = async (
   username: string
 ): AxiosPromise<ProfileDetailed[]> => {
-  const response = await axiosInstance.get(`/users?username=${username}`);
+  const response = await axiosInstance.get(`/users/${username}`);
   return response;
 };
 
@@ -73,7 +73,7 @@ export function UpdateProfile() {
 export const fetchGetProfilePosts = async (
   item: any
 ): AxiosPromise<IPost[]> => {
-  const response = await axiosInstance.get(`/user/${item.username}/posts/`, {
+  const response = await axiosInstance.get(`/user/${item.username}/`, {
     headers: { Authorization: `Token ${item.token}` },
   });
   return response;

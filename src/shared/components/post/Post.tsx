@@ -28,6 +28,7 @@ export const Post = ({
   fullBorder = false,
 }: IPostProps) => {
   const { response: perfil, isSuccess } = GetProfileById(post.owner.uid);
+  const { response: perfil, isSuccess } = GetProfileById(post.owner.uid);
   const [editMode, setEditMode] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { mutate: handlePatch } = UpdatePost();
@@ -47,6 +48,7 @@ export const Post = ({
   const onClick = () => {
     // <Navigate to={`/posts/postPage/${post.id}`}/>
     // const queryClient = useQueryClient()
+    const link = `/posts/${post.uid}`;
     const link = `/posts/${post.uid}`;
     console.log("uid do post",post.uid)
     console.log("content do post", post.content);
@@ -83,6 +85,7 @@ export const Post = ({
                 className="bg-rebeccapurple w-noavatar"
                 placeholder="Edit your message here."
                 id={`post-${post.uid}`}
+                id={`post-${post.uid}`}
               ></Textarea>
               <Button onClick={handleSaveEdit} variant="ghost">
                 Salvar
@@ -91,7 +94,7 @@ export const Post = ({
           ) : (
             <>
               <div className="flex w-full pt-3 pl-5 pr-3 h-fit">
-                <Link to={`/posts/profile/${perfil?.username}`}>
+                <Link to={`/users/${perfil?.uid}`}>
                   <Avatar className="w-12 h-12 rounded-full">
                     <AvatarImage
                       src={

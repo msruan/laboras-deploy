@@ -15,7 +15,7 @@ export function Footer() {
   const { user: perfil, signed } = useAuth();
   const local = useLocation();
   const localIsHome = local.pathname === "/posts";
-  const localIsUser = local.pathname === `/posts/profile/${perfil?.username}`;
+  const localIsUser = local.pathname === `/users/${perfil?.uid}`;
   const localIsConfig = local.pathname === "/config";
   return (
     <>
@@ -32,11 +32,11 @@ export function Footer() {
           )}
 
           {localIsUser ? (
-            <Link to={`/posts/profile/${perfil?.username}`}>
+            <Link to={`/users/${perfil?.uid}`}>
               <UserCircleIconFilled className="w-8 h-8 text-biancapurple" />{" "}
             </Link>
           ) : (
-            <Link to={`/posts/profile/${perfil?.username}`}>
+            <Link to={`/users/${perfil?.uid}`}>
               <UserCircleIcon className="w-8 h-8 text-biancapurple" />{" "}
             </Link>
           )}
@@ -51,12 +51,10 @@ export function Footer() {
             </Link>
           )}
 
-          <Link to={`/posts/profile/${perfil?.username}`}>
+          <Link to={`/users/${perfil?.uid}`}>
             <Avatar className="w-8 h-8 rounded-full cursor-pointer">
               <AvatarImage
-                src={
-                  perfil?.profile_image_link ?? "src/assets/chorro-timido.JPG"
-                }
+                src={perfil?.avatar ?? "src/assets/chorro-timido.JPG"}
               />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>

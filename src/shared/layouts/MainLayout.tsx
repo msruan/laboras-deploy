@@ -1,9 +1,7 @@
-import { GetProfileByEmail } from "@/actions/ProfileAction";
 import { useAuth } from "@/context/AuthContext";
 import { AsideFollowers } from "@/shared/components/AsideFollowers";
 import { AsideMyProfile } from "@/shared/components/AsideMyProfile";
-import { useEffect } from "react";
-import { Link, Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useToken } from "../hooks/useToken";
 import { Footer } from "../components/Footer";
 
@@ -18,7 +16,7 @@ export const MainLayout = () => {
           <main className="ml-72 max-xl:ml-24 xl:mr-72 max-md:m-0 max-sm:mb-16">
             <Outlet />
           </main>
-          {/* <AsideFollowers /> */}
+          <AsideFollowers />
           <Footer />
         </div>
       )}

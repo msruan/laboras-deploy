@@ -12,6 +12,11 @@ export interface IPost {
   disliked_by_me: boolean,
   linked_to: string[] | null
 }
+
+export type Posts = {
+  posts: IPost[]
+}
+
 export interface IInitialPost {
   title: string;
   content: string;

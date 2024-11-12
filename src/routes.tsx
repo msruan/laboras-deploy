@@ -29,7 +29,6 @@ const SignRoutes = [
     errorElement: <ErrorPage />,
     children: [
       { path: "/posts", element: <MainPosts /> },
-      { path: "/posts/profile/:username", element: <ProfilePage /> },
       {
         path: "/posts/:id",
         element: <PostsPage />,
@@ -42,6 +41,19 @@ const SignRoutes = [
     element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [{ path: "/config", element: <SettingsPage /> }],
+  },
+
+  {
+    path: "/users",
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: "/users", element: <ErrorPage /> },
+      {
+        path: "/users/:id",
+        element: <ProfilePage />,
+      },
+    ],
   },
 ];
 export const router = createBrowserRouter([...SignRoutes, ...OtherRoutes]);

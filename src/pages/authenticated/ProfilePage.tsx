@@ -1,52 +1,63 @@
-import { GetAllPosts } from "@/actions/PostAction";
 import { GetProfileByUsername, GetProfilePosts } from "@/actions/ProfileAction";
 import { useAuth } from "@/context/AuthContext";
 import Seo from "@/shared/components/Seo";
 import Post from "@/shared/components/post/Post";
 import { Profile } from "@/shared/components/profile/Profile";
 import { ProfileMobile } from "@/shared/components/profile/ProfileMobile";
-import { Button } from "@/shared/components/ui/button";
 import { useToken } from "@/shared/hooks/useToken";
 import { IPost } from "@/shared/models/post";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const ProfilePage = () => {
-  const { token } = useToken();
-  const lala = token();
-  const { username } = useParams();
-  const {
-    response: posts,
-    isSuccess,
-    isError,
-    isLoading,
-  } = GetProfilePosts({ username: username, token: lala });
-  const { user: context } = useAuth();
-  const idLoggedUser = context?.uid;
-  const navigate = useNavigate();
-  const {
-    response: profile,
-    isSuccess: sucesso,
-    refetch,
-  } = GetProfileByUsername(username!);
+<<<<<<< HEAD
+  // const { token } = useToken();
+  // const lala = token();
+  // const { username } = useParams();
+  // const {
+  //   response: posts,
+  //   isSuccess,
+  //   isError,
+  //   isLoading,
+  // } = GetProfilePosts({ username: username, token: lala });
+  // const { user: context } = useAuth();
+  // const idLoggedUser = context?.uid;
+  // const navigate = useNavigate();
+  // const {
+  //   response: profile,
+  //   isSuccess: sucesso,
+  //   refetch,
+  // } = GetProfileByUsername(username!);
+  console.log("meu saco");
+  // const { username } = useParams();
+  // const { user: context } = useAuth();
+  // const navigate = useNavigate();
 
-  function handleGoBack() {
-    navigate(-1);
-  }
+  // const {
+  //   response: profile,
+  //   isSuccess,
+  //   isLoading,
+  //   isError,
+  //   refetch,
+  // } = GetProfileByUsername(username!);
 
-  useEffect(() => {
-    refetch();
-  }, [username]);
-  console.log(posts);
+  // function handleGoBack() {
+  //   navigate(-1);
+  // }
+
+  // useEffect(() => {
+  //   refetch();
+  // }, [username]);
 
   return (
     <div>
-      {/* <Seo title={"@" + username ?? "@"}></Seo> */}
+      <span className="text-white">teu cu</span>
+      teu cu
+      {/* <Seo title={"@" + username} />
       {isLoading && <div>Pedding...</div>}
       {isError && <div>Error</div>}
-      {sucesso && idLoggedUser && (
+      {isSuccess && (
         <div className="flex flex-col h-full max-xl:border-0 gap-2 pl-3 pr-3 border-rebeccapurple2 border-r-2 border-l-2">
           <div className="flex flex-col gap-1">
             <div>
@@ -58,29 +69,25 @@ export const ProfilePage = () => {
                 ></ChevronLeftIcon>
                 <h1 className="font-bold">{profile?.username}</h1>
               </div>
-              {sucesso ? (
-                profile && (
-                  <>
-                    <Profile profile={profile} />
-                    <ProfileMobile profile={profile} />
-                  </>
-                )
-              ) : (
-                <div>Loading...</div>
-              )}
+              {}
+              profile && (
+              <>
+                <Profile profile={profile!} />
+                <ProfileMobile profile={profile!} />
+              </>
+              )
             </div>
           </div>
-          {isSuccess &&
-            posts!.map((post: IPost) => (
-              <Post
-                key={post.uid}
-                post={post}
-                fullPage={false}
-                fullBorder={true}
-              />
-            ))}
+          {profile?.posts.map((post: IPost) => (
+            <Post
+              key={post.uid}
+              post={post}
+              fullPage={false}
+              fullBorder={true}
+            />
+          ))}
         </div>
-      )}
+      )} */}
     </div>
   );
 };

@@ -82,16 +82,18 @@ export const fetchGetPosts = async (): AxiosPromise<Posts> => {
 };
 
 export function GetAllPosts() {
+  
   const query = useQuery({
     queryFn: fetchGetPosts,
     queryKey: ["posts"],
     refetchInterval: 5 * 60 * 1000,
   });
-
+  console.log("query",query.data?.data.posts)
   return {
     ...query,
     response: query.data?.data.posts,
   };
+
 }
 
 export const fetchGetPost = async (id: string): AxiosPromise<IPost> => {
