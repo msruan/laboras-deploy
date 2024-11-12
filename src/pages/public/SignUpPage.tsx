@@ -25,6 +25,8 @@ export function SignUpPage() {
     username: "",
     email: "",
     password: "",
+    bio: "",
+    avatar_link: ""
   });
 
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement> | null = null) => {

@@ -18,11 +18,13 @@ type credentialsSignup = {
   username: string;
   email: string;
   password: string;
+  bio: string,
+  avatar_link: string
 };
 
 export const Login = () => {
   async function fetchLogin(credentials: credentialsLogin) {
-    return await axios.post("http://localhost:8000/auth/login", credentials, {
+    return await axios.post("https://rede-social-fast-neo4j.onrender.com/auth/login", credentials, {
       headers: { "Content-Type": "application/json" },
     });
   }
@@ -47,7 +49,7 @@ export const Login = () => {
 export const SignUp = () => {
   async function fetchSignup(credentials: credentialsSignup) {
     const response = await axios.post(
-      "http://localhost:8000/auth/register/",
+      "https://rede-social-fast-neo4j.onrender.com/auth/register/",
       credentials,
       {
         headers: { "Content-Type": "application/json" },

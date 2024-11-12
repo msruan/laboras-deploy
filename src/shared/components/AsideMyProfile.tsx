@@ -16,7 +16,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export const AsideMyProfile = () => {
   const { user: perfil, signed } = useAuth();
-  const idLoggedUser = perfil?.id;
+  const idLoggedUser = perfil?.uid;
   const local = useLocation();
   const localIsHome = local.pathname === "/posts";
   const localIsUser = local.pathname === `/posts/profile/${perfil?.username}`;
@@ -86,7 +86,7 @@ export const AsideMyProfile = () => {
             <Avatar className="w-12 xl:hidden h-12 rounded-full cursor-pointer">
               <AvatarImage
                 src={
-                  perfil?.profile_image_link ?? "src/assets/chorro-timido.JPG"
+                  perfil?.avatar_link?? "src/assets/chorro-timido.JPG"
                 }
               />
               <AvatarFallback>CN</AvatarFallback>

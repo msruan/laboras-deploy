@@ -1,25 +1,20 @@
-import { IPost } from "../../models/post";
-import { IProfile } from "../../models/profile";
-import { PostContent } from "./PostContent";
-import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
-import { Card, CardFooter } from "../ui/card";
+import { GetProfileById } from "@/actions/ProfileAction";
 import { Button } from "@/shared/components/ui/button";
 import { Textarea } from "@/shared/components/ui/textarea";
-import { GetProfileById } from "@/actions/ProfileAction";
+import { IPost } from "../../models/post";
+import { Card, CardFooter } from "../ui/card";
+import { PostContent } from "./PostContent";
 
-import { useRef, useState } from "react";
-import { PostMenu } from "./PostMenu";
-import { Icons } from "./Icons";
-import { Label } from "@radix-ui/react-label";
 import { UpdatePost } from "@/actions/PostAction";
+import { useRef, useState } from "react";
 import {
   Link,
-  Navigate,
   useLocation,
-  useNavigate,
-  useNavigation,
+  useNavigate
 } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
+import { Icons } from "./Icons";
+import { PostMenu } from "./PostMenu";
+import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 
 type IPostProps = {
   post: IPost;
@@ -32,7 +27,7 @@ export const Post = ({
   fullPage = false,
   fullBorder = false,
 }: IPostProps) => {
-  const { response: perfil, isSuccess } = GetProfileById(post.user.id);
+  const { response: perfil, isSuccess } = GetProfileById(post.owner.uid);
   const [editMode, setEditMode] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { mutate: handlePatch } = UpdatePost();
@@ -43,7 +38,7 @@ export const Post = ({
       textareaRef.current !== null &&
       textareaRef.current.value !== post.content
     ) {
-      handlePatch({ content: textareaRef.current.value, id: post.id });
+      handlePatch({ content: textareaRef.current.value, uid: post.uid });
     }
     setEditMode(!editMode);
   }
@@ -52,7 +47,9 @@ export const Post = ({
   const onClick = () => {
     // <Navigate to={`/posts/postPage/${post.id}`}/>
     // const queryClient = useQueryClient()
-    const link = `/posts/${post.id}`;
+    const link = `/posts/${post.uid}`;
+    console.log("uid do post",post.uid)
+    console.log("content do post", post.content);
     //evitar q o usuario numa full page fique fazendo refetch do post atual
     if (local.pathname != link) {
       navigate(link);
@@ -85,7 +82,7 @@ export const Post = ({
                 autoFocus={true}
                 className="bg-rebeccapurple w-noavatar"
                 placeholder="Edit your message here."
-                id={`post-${post.id}`}
+                id={`post-${post.uid}`}
               ></Textarea>
               <Button onClick={handleSaveEdit} variant="ghost">
                 Salvar
@@ -98,7 +95,7 @@ export const Post = ({
                   <Avatar className="w-12 h-12 rounded-full">
                     <AvatarImage
                       src={
-                        perfil?.profile_image_link ??
+                        perfil?.avatar_link ??
                         "https://p2.trrsf.com/image/fget/cf/1200/1600/middle/images.terra.com/2023/07/31/pedro-flamengo-uv5ta7zqn5us.jpg"
                       }
                     />
@@ -109,24 +106,24 @@ export const Post = ({
 
                 <PostContent
                   onClick={onClick}
-                  perfil={post.user!}
+                  perfil={post.owner!}
                   post={post}
                   fullPage={fullPage}
                   handleEdit={setEditMode}
                 />
               </div>
-              {/* {!fullPage && (
+              {!fullPage && (
                 <CardFooter className="flex items-center justify-end h-fit">
                   <div
                     className={`flex flex-row justify-between pr-7 pb-1 h-fit
       ${fullPage ? " w-1/4 max-md:w-full" : " w-1/4 max-md:w-full"}
       `}
                   >
-                    <Icons post={post} fullPage={fullPage}></Icons>
+                    <Icons post={post}></Icons>
                     <PostMenu handleEdit={setEditMode} post={post} />
                   </div>
                 </CardFooter>
-              )} */}
+              )}
             </>
           )}
         </Card>

@@ -5,35 +5,49 @@ export interface IPost {
   content: string;
   owner: ProfileBase;
   created_at: string;
-  linked_to: string[] | null;
+  updated_at: string
+  likes: number,
+  dislikes: number,
+  liked_by_me: boolean,
+  disliked_by_me: boolean,
+  linked_to: string[] | null
 }
 export interface IInitialPost {
   title: string;
   content: string;
 }
 
+export interface Posts {
+  posts: IPost[]
+}
+
 export type PostRequest = {
-  id: string;
+  uid?: string;
+  token?: string
   content?: string;
-  likes?: number;
-  deslikes?: number;
 };
 
-
-        // {
-        //     "uid": "8edc0f02-9b27-4417-b96b-116a89ee3d35",
-        //     "content": "string",
-        //     "owner": {
-        //         "uid": "2b3afefe-3bda-427d-83a6-ba5e56316478",
-        //         "username": "string",
-        //         "full_name": "string",
-        //         "email": "string",
-        //         "posts": [],
-        //         "following": [],
-        //         "created_at": "2024-11-10T23:11:53.899396",
-        //         "updated_at": "2024-11-10T23:11:53.904824"
-        //     },
-        //     "created_at": "2024-11-10T23:12:22.541756",
-        //     "updated_at": "2024-11-10T23:12:22.541760",
-        //     "linked_to": []
-        // },
+// "posts": [
+//   {
+//     "uid": "fb3fbff2-0f8b-4966-a601-18d2c2d9a41a",
+//     "content": "Herminio neto eh vagabundo",
+//     "owner": {
+//       "uid": "69efb6cf-92b0-48f7-80ea-a167310482b3",
+//       "username": "bianque",
+//       "full_name": "bianque",
+//       "email": "bianque",
+//       "bio": "",
+//       "avatar_link": "",
+//       "posts": [],
+//       "following": [],
+//       "created_at": "2024-11-11T20:38:11.581881",
+//       "updated_at": "2024-11-11T20:38:11.581885"
+//     },
+//     "created_at": "2024-11-11T11:30:17.248036",
+//     "updated_at": "2024-11-11T11:30:17.248040",
+//     "likes": 1,
+//     "dislikes": 0,
+//     "liked_by_me": false,
+//     "disliked_by_me": false,
+//     "linked_to": []
+//   }

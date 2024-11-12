@@ -1,15 +1,53 @@
 import axiosInstance from "./../config/axiosConfig";
-import { IPost, PostRequest } from "@/shared/models/post.js";
+import { IPost, PostRequest, Posts } from "@/shared/models/post.js";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosPromise, AxiosResponse } from "axios";
 
-async function fetchCreatePost(postagem: any) {
-  return await axiosInstance.post("/posts", postagem, {
-    headers: {
-      Authorization: `Token ${postagem.token}`,
+async function fetchInteractPost(action: "like" | "dislike", post_id: string) {
+  return await axiosInstance.post(`/posts/${post_id}/${action}`);
+}
+
+export function InteractPost(action: "like" | "dislike") {
+  const queryClient = useQueryClient();
+
+  const mutate = useMutation({
+    mutationFn: (post_id: string) => fetchInteractPost(action, post_id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
   });
-  // return await axiosInstance.post("/posts", postagem);
+
+  return mutate;
+}
+
+
+async function fetchCommentPost(comentario: PostRequest) {
+  return await axiosInstance.post(`/posts/${comentario.uid}/comment`, { content: comentario.content }, {
+    headers: {
+      Authorization: `Bearer ${comentario.token}`,
+    },
+  });
+}
+
+
+export function CommentPost() {
+  const queryClient = useQueryClient();
+  const mutate = useMutation({
+    mutationFn: fetchCommentPost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["comments"] });
+    },
+  });
+  return mutate;
+}
+
+
+async function fetchCreatePost(postagem: PostRequest) {
+  return await axiosInstance.post("/posts", { content: postagem.content }, {
+    headers: {
+      Authorization: `Bearer ${postagem.token}`,
+    },
+  });
 }
 
 export function CreatePost() {
@@ -38,7 +76,7 @@ export function CreatePostJsonServer() {
   return mutate;
 }
 
-export const fetchGetPosts = async (): AxiosPromise<IPost[]> => {
+export const fetchGetPosts = async (): AxiosPromise<Posts> => {
   const response = await axiosInstance.get(`/posts/feed`);
   return response;
 };
@@ -52,14 +90,12 @@ export function GetAllPosts() {
 
   return {
     ...query,
-    response: query.data?.data,
+    response: query.data?.data.posts,
   };
 }
 
 export const fetchGetPost = async (id: string): AxiosPromise<IPost> => {
   const response = await axiosInstance.get(`/posts/${id}`);
-  console.log("mana o id foi... ", id);
-  console.log("mano...");
   return response;
 };
 
@@ -79,7 +115,7 @@ export function GetPost(id: string) {
 }
 
 async function fetchPatchPost(post: PostRequest): AxiosPromise<IPost> {
-  return await axiosInstance.patch(`/posts/${post.id}`, post);
+  return await axiosInstance.put(`/posts/${post.uid}`, { content: post.content });
 }
 
 export function UpdatePost() {

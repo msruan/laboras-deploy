@@ -24,7 +24,7 @@ export const ProfilePage = () => {
     isLoading,
   } = GetProfilePosts({ username: username, token: lala });
   const { user: context } = useAuth();
-  const idLoggedUser = context?.id;
+  const idLoggedUser = context?.uid;
   const navigate = useNavigate();
   const {
     response: profile,
@@ -73,7 +73,7 @@ export const ProfilePage = () => {
           {isSuccess &&
             posts!.map((post: IPost) => (
               <Post
-                key={post.id}
+                key={post.uid}
                 post={post}
                 fullPage={false}
                 fullBorder={true}

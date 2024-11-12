@@ -6,8 +6,8 @@ import { useAuth } from "@/context/AuthContext";
 export const MainPosts = () => {
   const { response: posts, isSuccess, isError, isLoading } = GetAllPosts();
   const { user: context } = useAuth();
-  const idLoggedUser = context?.id;
-
+  const idLoggedUser = context?.uid;
+  
   //Todo: Como faço pra quando der isError ele levar pra página de erro?
   return (
     <div>
@@ -18,7 +18,7 @@ export const MainPosts = () => {
           <TextBox linkedTo={null} />
           {posts!.map((post) => (
             <Post
-              key={post.id}
+              key={post.uid}
               post={post}
               fullPage={false}
               fullBorder={true}

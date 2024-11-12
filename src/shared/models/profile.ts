@@ -7,6 +7,8 @@ export interface ProfileBase {
   email: string;
   created_at: string;
   updated_at: string;
+  avatar_link: string;
+  bio: string;
 }
 
 export interface ProfileDetailed extends ProfileBase {

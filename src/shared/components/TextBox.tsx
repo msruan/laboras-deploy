@@ -1,16 +1,13 @@
 // import { Input } from "@chakra-ui/react";
-import { useContext, useRef } from "react";
-import style from "./textbox.module.css";
-import { ulid } from "ulidx";
-import { IPost } from "../models/post";
-import { Textarea } from "./ui/textarea";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { CreatePost, CreatePostJsonServer } from "@/actions/PostAction";
+import { CommentPost, CreatePost, CreatePostJsonServer } from "@/actions/PostAction";
 import { GetProfileById } from "@/actions/ProfileAction";
 import { useAuth } from "@/context/AuthContext";
+import { useRef } from "react";
+import { ulid } from "ulidx";
 import { useToken } from "../hooks/useToken";
+import { IPost } from "../models/post";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Button } from "./ui/button";
 
 type TextBoxProps = {
   linkedTo: string | null;
@@ -22,33 +19,38 @@ export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
     }
 
     const newPost: any = {
-      title: "No title",
       content: input.current.value,
       token: token(),
+      uid: linkedTo
     };
 
-    const newPostJsonServer: IPost = {
-      id: ulid(),
-      user_id: idLoggedUser,
-      content: input.current.value,
-      created_at: `${new Date().toISOString()}`,
-      likes: 0,
-      deslikes: 0,
-      linked_to: linkedTo,
-    };
-
-    addNewPost(newPost);
-    addNewPostJsonServer(newPostJsonServer);
+    // const newPostJsonServer: IPost = {
+    //   id: ulid(),
+    //   user_id: idLoggedUser,
+    //   content: input.current.value,
+    //   created_at: `${new Date().toISOString()}`,
+    //   likes: 0,
+    //   deslikes: 0,
+    //   linked_to: linkedTo,
+    // };
+    if(linkedTo){
+      addNewComment(newPost);
+      console.log("novo comment", newPost);
+    } else {
+      addNewPost(newPost);
+      console.log("novo post", newPost)
+    }
+    // addNewPostJsonServer(newPostJsonServer);
     input.current.value = "";
   }
 
   const input = useRef<HTMLTextAreaElement>(null);
   const { mutate: addNewPost } = CreatePost();
-  const { mutate: addNewPostJsonServer } = CreatePostJsonServer();
+  const { mutate: addNewComment } = CommentPost();
+  // const { mutate: addNewPostJsonServer } = CreatePostJsonServer();
   const { user: loggedUser } = useAuth();
-  const name = loggedUser?.first_name;
-
-  const idLoggedUser = loggedUser?.id ?? "";
+  const name = loggedUser?.full_name;
+  const idLoggedUser = loggedUser?.uid ?? "";
   const { response: profile } = GetProfileById(idLoggedUser);
   const { token } = useToken();
 
@@ -59,7 +61,7 @@ export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
           <Avatar className="w-12 h-12 rounded-full">
             <AvatarImage
               src={
-                profile?.profile_image_link ?? "src/assets/chorro-timido.JPG"
+                profile?.avatar_link ?? "src/assets/chorro-timido.JPG"
               }
             />
             <AvatarFallback>CN</AvatarFallback>

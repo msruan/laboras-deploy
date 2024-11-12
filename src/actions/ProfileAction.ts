@@ -11,7 +11,7 @@ import { IPost } from "@/shared/models/post";
 async function fetchGetProfile(
   profileId: string
 ): AxiosPromise<ProfileDetailed> {
-  return await axiosInstance.get(`/profiles/${profileId}`);
+  return await axiosInstance.get(`/users/${profileId}`);
 } //Todo: atualizar rota para algo como .get('<token_user>/followers);
 
 export function GetProfileById(profileId: string) {
@@ -19,7 +19,7 @@ export function GetProfileById(profileId: string) {
     queryFn: async () => {
       return fetchGetProfile(profileId);
     },
-    queryKey: [`profile/${profileId}`],
+    queryKey: [`users/${profileId}`],
   });
   return {
     ...query,
@@ -30,7 +30,7 @@ export function GetProfileById(profileId: string) {
 export const fetchGetProfileByUsername = async (
   username: string
 ): AxiosPromise<ProfileDetailed[]> => {
-  const response = await axiosInstance.get(`/profiles?username=${username}`);
+  const response = await axiosInstance.get(`/users?username=${username}`);
   return response;
 };
 
@@ -39,7 +39,7 @@ export function GetProfileByUsername(username: string) {
     queryFn: async () => {
       return fetchGetProfileByUsername(username);
     },
-    queryKey: [`profile/${username}`],
+    queryKey: [`users/${username}`],
   });
 
   return {
@@ -49,7 +49,7 @@ export function GetProfileByUsername(username: string) {
 }
 
 async function fetPatchProfile(profile: ProfileUpdate) {
-  const response = await axiosInstance.put(`/profiles/`, profile);
+  const response = await axiosInstance.put(`/users/`, profile);
   return response;
 }
 
