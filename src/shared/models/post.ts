@@ -10,7 +10,7 @@ export interface IPost {
   dislikes: number,
   liked_by_me: boolean,
   disliked_by_me: boolean,
-  linked_to: IPost[] | null
+  comments: IPost[] | null
 }
 
 export type Posts = {

@@ -1,12 +1,9 @@
-import Post from "@/shared/components/post/Post";
-import { MainPosts } from "../../shared/components/MainPosts";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { IPost } from "@/shared/models/post";
-import { GetAllPosts, GetPost } from "@/actions/PostAction";
+import { GetPost } from "@/actions/PostAction";
 import { TextBox } from "@/shared/components/TextBox";
+import Post from "@/shared/components/post/Post";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
-import { Button } from "@/shared/components/ui/button";
-import { ArrowLeftIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Header({ handleGoBack }: { handleGoBack: () => void }) {
   return (
@@ -22,9 +19,9 @@ function Header({ handleGoBack }: { handleGoBack: () => void }) {
 }
 
 export const PostsPage = () => {
-  const { response: posts, isSuccess } = GetAllPosts();
-  const navigate = useNavigate();
+
   const { id } = useParams();
+  const navigate = useNavigate();
   const { response: post, isSuccess: isGetPostSuccess, refetch } = GetPost(id!);
 
   function handleGoBack() {
@@ -44,6 +41,14 @@ export const PostsPage = () => {
             <div>
               <Post post={post} fullPage={true} fullBorder={false} />
               <TextBox linkedTo={id ?? null} />
+              {post.comments?.map((comment) => (
+                <Post
+                  post={comment}
+                  fullPage={false}
+                  fullBorder={false}
+                  key={post.uid}
+                />
+              ))}
             </div>
           ) : (
             <div>

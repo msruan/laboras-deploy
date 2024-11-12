@@ -2,7 +2,7 @@ import { ProfileBase } from "./profile";
 
 export interface IComment {
     content: string,
-    user: ProfileBase,
-    postId: string,
+    uid: string,
+    updated_at: string,
     created_at: string,
 } 

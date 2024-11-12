@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { ScrollArea } from "@/shared/components/ui/scrolarea";
 import { ProfileTag } from "@/shared/components/profile/ProfileTag";
+import { ProfileBase } from "@/shared/models/profile";
 
 type AsideFollowersProps = {
   className: string;
@@ -35,8 +36,8 @@ export const AsideFollowers = () => {
                 </h2>
                 <ScrollArea className="flex flex-row h-lvh w-60">
                   <div className="min-h-full flex flex-col gap-11">
-                    {followers!.map((profile) => (
-                      <ProfileTag key={profile.id} perfil={profile} />
+                    {followers!.map((profile: ProfileBase) => (
+                      <ProfileTag key={profile.uid} perfil={profile} />
                     ))}
                   </div>
                 </ScrollArea>

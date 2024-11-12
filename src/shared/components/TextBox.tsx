@@ -1,5 +1,5 @@
 // import { Input } from "@chakra-ui/react";
-import { CommentPost, CreatePost, CreatePostJsonServer } from "@/actions/PostAction";
+import { CommentPost, CreatePost } from "@/actions/PostAction";
 import { GetProfileById } from "@/actions/ProfileAction";
 import { useAuth } from "@/context/AuthContext";
 import { useRef } from "react";
@@ -24,15 +24,7 @@ export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
       uid: linkedTo
     };
 
-    // const newPostJsonServer: IPost = {
-    //   id: ulid(),
-    //   user_id: idLoggedUser,
-    //   content: input.current.value,
-    //   created_at: `${new Date().toISOString()}`,
-    //   likes: 0,
-    //   deslikes: 0,
-    //   linked_to: linkedTo,
-    // };
+    
     if(linkedTo){
       addNewComment(newPost);
       console.log("novo comment", newPost);
@@ -40,19 +32,21 @@ export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
       addNewPost(newPost);
       console.log("novo post", newPost)
     }
-    // addNewPostJsonServer(newPostJsonServer);
     input.current.value = "";
   }
 
-  const input = useRef<HTMLTextAreaElement>(null);
-  const { mutate: addNewPost } = CreatePost();
-  const { mutate: addNewComment } = CommentPost();
-  // const { mutate: addNewPostJsonServer } = CreatePostJsonServer();
+  
+  const { token } = useToken();
   const { user: loggedUser } = useAuth();
   const name = loggedUser?.full_name;
   const idLoggedUser = loggedUser?.uid ?? "";
+  
+  
   const { response: profile } = GetProfileById(idLoggedUser);
-  const { token } = useToken();
+  const input = useRef<HTMLTextAreaElement>(null);
+
+    const { mutate: addNewPost } = CreatePost();
+    const { mutate: addNewComment } = CommentPost();
 
   return (
     <div>

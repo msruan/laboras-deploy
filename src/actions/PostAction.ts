@@ -1,7 +1,7 @@
-import axiosInstance from "./../config/axiosConfig";
 import { IPost, PostRequest, Posts } from "@/shared/models/post.js";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { AxiosPromise, AxiosResponse } from "axios";
+import { AxiosPromise } from "axios";
+import axiosInstance from "./../config/axiosConfig";
 
 async function fetchInteractPost(action: "like" | "dislike", post_id: string) {
   return await axiosInstance.post(`/posts/${post_id}/${action}`);
@@ -20,55 +20,47 @@ export function InteractPost(action: "like" | "dislike") {
   return mutate;
 }
 
-
-async function fetchCommentPost(comentario: PostRequest) {
-  return await axiosInstance.post(`/posts/${comentario.uid}/comment`, { content: comentario.content }, {
-    headers: {
-      Authorization: `Bearer ${comentario.token}`,
-    },
-  });
+async function fetchCommentPost(postagem: PostRequest) {
+  return await axiosInstance.post(
+    `/posts/${postagem.uid}/comment`,
+    { content: postagem.content },
+    {
+      headers: {
+        Authorization: `Bearer ${postagem.token}`,
+      },
+    }
+  );
 }
-
 
 export function CommentPost() {
   const queryClient = useQueryClient();
   const mutate = useMutation({
     mutationFn: fetchCommentPost,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["comments"] });
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: [`post-${variables.uid}`],
+      });
     },
   });
   return mutate;
 }
 
-
 async function fetchCreatePost(postagem: PostRequest) {
-  return await axiosInstance.post("/posts", { content: postagem.content }, {
-    headers: {
-      Authorization: `Bearer ${postagem.token}`,
-    },
-  });
+  return await axiosInstance.post(
+    "/posts",
+    { content: postagem.content },
+    {
+      headers: {
+        Authorization: `Bearer ${postagem.token}`,
+      },
+    }
+  );
 }
 
 export function CreatePost() {
   const queryClient = useQueryClient();
   const mutate = useMutation({
     mutationFn: fetchCreatePost,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
-    },
-  });
-  return mutate;
-}
-async function fetchCreatePostJsonServer(postagem: IPost) {
-  return await axiosInstance.post("/posts", postagem);
-  // return await axiosInstance.post("/posts", postagem);
-}
-
-export function CreatePostJsonServer() {
-  const queryClient = useQueryClient();
-  const mutate = useMutation({
-    mutationFn: fetchCreatePostJsonServer,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
@@ -82,18 +74,16 @@ export const fetchGetPosts = async (): AxiosPromise<Posts> => {
 };
 
 export function GetAllPosts() {
-  
   const query = useQuery({
     queryFn: fetchGetPosts,
     queryKey: ["posts"],
     refetchInterval: 5 * 60 * 1000,
   });
-  console.log("query",query.data?.data.posts)
+
   return {
     ...query,
     response: query.data?.data.posts,
   };
-
 }
 
 export const fetchGetPost = async (id: string): AxiosPromise<IPost> => {
@@ -104,9 +94,10 @@ export const fetchGetPost = async (id: string): AxiosPromise<IPost> => {
 export function GetPost(id: string) {
   const query = useQuery({
     queryFn: () => {
+      console.log("pedi o id: ", id);
       return fetchGetPost(id);
     },
-    queryKey: ["post"],
+    queryKey: [`post-${id}`],
     refetchInterval: 5 * 60 * 1000,
   });
 
@@ -117,7 +108,9 @@ export function GetPost(id: string) {
 }
 
 async function fetchPatchPost(post: PostRequest): AxiosPromise<IPost> {
-  return await axiosInstance.put(`/posts/${post.uid}`, { content: post.content });
+  return await axiosInstance.put(`/posts/${post.uid}`, {
+    content: post.content,
+  });
 }
 
 export function UpdatePost() {

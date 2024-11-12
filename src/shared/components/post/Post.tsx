@@ -1,4 +1,3 @@
-import { GetProfileById } from "@/actions/ProfileAction";
 import { Button } from "@/shared/components/ui/button";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { IPost } from "../../models/post";
@@ -12,22 +11,23 @@ import { Icons } from "./Icons";
 import { PostMenu } from "./PostMenu";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 
-type IPostProps = {
+type Props = {
   post: IPost;
   fullPage: boolean;
   fullBorder: boolean;
 };
 
-export const Post = ({
-  post,
-  fullPage = false,
-  fullBorder = false,
-}: IPostProps) => {
-  const { response: perfil, isSuccess } = GetProfileById(post.owner.uid);
-  const [editMode, setEditMode] = useState(false);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+export const Post = ({ fullBorder = false, ...props }: Props) => {
+  
+  const post = props.post;
+  const perfil = props.post.owner;
+  const fullPage = props.fullPage;
+  
   const { mutate: handlePatch } = UpdatePost();
+  
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const local = useLocation();
+  const [editMode, setEditMode] = useState(false);
 
   function handleSaveEdit() {
     if (
@@ -56,7 +56,6 @@ export const Post = ({
 
   return (
     <>
-      {isSuccess && (
         <Card
           className={`flex flex-col
           ${fullPage ? "" : "cursor-pointer"}
@@ -70,7 +69,7 @@ export const Post = ({
     }
     `}
         >
-          {isSuccess && editMode ? (
+          {editMode ? (
             <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-t-0 border-b-0 border-l-0 border-r-0">
               <Textarea
                 defaultValue={post.content}
@@ -123,7 +122,6 @@ export const Post = ({
             </>
           )}
         </Card>
-      )}
     </>
   );
 };
