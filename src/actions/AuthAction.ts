@@ -18,15 +18,19 @@ type credentialsSignup = {
   username: string;
   email: string;
   password: string;
-  bio: string,
-  avatar_link: string
+  bio: string;
+  avatar_link: string;
 };
 
 export const Login = () => {
   async function fetchLogin(credentials: credentialsLogin) {
-    return await axios.post("https://rede-social-fast-neo4j.onrender.com/auth/login", credentials, {
-      headers: { "Content-Type": "application/json" },
-    });
+    return await axiosInstance.post(
+      "/auth/login",
+      credentials,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 
   const { setToken } = useToken();
@@ -48,13 +52,7 @@ export const Login = () => {
 
 export const SignUp = () => {
   async function fetchSignup(credentials: credentialsSignup) {
-    const response = await axios.post(
-      "https://rede-social-fast-neo4j.onrender.com/auth/register/",
-      credentials,
-      {
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    const response = await axiosInstance.post("/auth/register/", credentials);
     console.log("fiz a req aqui no signup");
     return response;
   }

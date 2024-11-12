@@ -7,11 +7,7 @@ import { PostContent } from "./PostContent";
 
 import { UpdatePost } from "@/actions/PostAction";
 import { useRef, useState } from "react";
-import {
-  Link,
-  useLocation,
-  useNavigate
-} from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Icons } from "./Icons";
 import { PostMenu } from "./PostMenu";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
@@ -27,7 +23,6 @@ export const Post = ({
   fullPage = false,
   fullBorder = false,
 }: IPostProps) => {
-  const { response: perfil, isSuccess } = GetProfileById(post.owner.uid);
   const { response: perfil, isSuccess } = GetProfileById(post.owner.uid);
   const [editMode, setEditMode] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -49,8 +44,7 @@ export const Post = ({
     // <Navigate to={`/posts/postPage/${post.id}`}/>
     // const queryClient = useQueryClient()
     const link = `/posts/${post.uid}`;
-    const link = `/posts/${post.uid}`;
-    console.log("uid do post",post.uid)
+    console.log("uid do post", post.uid);
     console.log("content do post", post.content);
     //evitar q o usuario numa full page fique fazendo refetch do post atual
     if (local.pathname != link) {
@@ -84,7 +78,6 @@ export const Post = ({
                 autoFocus={true}
                 className="bg-rebeccapurple w-noavatar"
                 placeholder="Edit your message here."
-                id={`post-${post.uid}`}
                 id={`post-${post.uid}`}
               ></Textarea>
               <Button onClick={handleSaveEdit} variant="ghost">

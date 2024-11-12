@@ -10,7 +10,7 @@ export interface IPost {
   dislikes: number,
   liked_by_me: boolean,
   disliked_by_me: boolean,
-  linked_to: string[] | null
+  linked_to: IPost[] | null
 }
 
 export type Posts = {
@@ -20,10 +20,6 @@ export type Posts = {
 export interface IInitialPost {
   title: string;
   content: string;
-}
-
-export interface Posts {
-  posts: IPost[]
 }
 
 export type PostRequest = {

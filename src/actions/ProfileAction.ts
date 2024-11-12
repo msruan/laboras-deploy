@@ -8,13 +8,15 @@ import {
 } from "@/shared/models/profile";
 import { IPost } from "@/shared/models/post";
 
-async function fetchGetProfile(
-  profileId: string
-): AxiosPromise<ProfileDetailed> {
-  return await axiosInstance.get(`/users/${profileId}`);
-} //Todo: atualizar rota para algo como .get('<token_user>/followers);
-
 export function GetProfileById(profileId: string) {
+  const fetchGetProfile = async (
+    profileId: string
+  ): AxiosPromise<ProfileDetailed> => {
+    const res = await axiosInstance.get(`/users/${profileId}`);
+    return res;
+  };
+  //Todo: atualizar rota para algo como .get('<token_user>/followers);
+
   const query = useQuery({
     queryFn: async () => {
       return fetchGetProfile(profileId);
@@ -27,24 +29,25 @@ export function GetProfileById(profileId: string) {
   };
 }
 
-export const fetchGetProfileByUsername = async (
-  username: string
-): AxiosPromise<ProfileDetailed[]> => {
-  const response = await axiosInstance.get(`/users/${username}`);
-  return response;
-};
+export function GetProfileByUsername(id: string) {
+  const fetchGetProfileById = async (
+    id: string
+  ): AxiosPromise<ProfileDetailed> => {
+    const response = await axiosInstance.get(`/users/${id}`);
+    
+    return response;
+  };
 
-export function GetProfileByUsername(username: string) {
   const query = useQuery({
     queryFn: async () => {
-      return fetchGetProfileByUsername(username);
+      return fetchGetProfileById(id);
     },
-    queryKey: [`users/${username}`],
+    queryKey: [`users/${id}`],
   });
 
   return {
     ...query,
-    response: query.data?.data[0],
+    response: query.data?.data,
   };
 }
 

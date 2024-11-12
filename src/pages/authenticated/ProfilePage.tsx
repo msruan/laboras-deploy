@@ -11,50 +11,30 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const ProfilePage = () => {
-<<<<<<< HEAD
-  // const { token } = useToken();
-  // const lala = token();
-  // const { username } = useParams();
-  // const {
-  //   response: posts,
-  //   isSuccess,
-  //   isError,
-  //   isLoading,
-  // } = GetProfilePosts({ username: username, token: lala });
-  // const { user: context } = useAuth();
-  // const idLoggedUser = context?.uid;
-  // const navigate = useNavigate();
-  // const {
-  //   response: profile,
-  //   isSuccess: sucesso,
-  //   refetch,
-  // } = GetProfileByUsername(username!);
-  console.log("meu saco");
-  // const { username } = useParams();
-  // const { user: context } = useAuth();
-  // const navigate = useNavigate();
+  console.log("dando errado");
+  const { id } = useParams();
+  const { user: context } = useAuth();
+  const navigate = useNavigate();
 
-  // const {
-  //   response: profile,
-  //   isSuccess,
-  //   isLoading,
-  //   isError,
-  //   refetch,
-  // } = GetProfileByUsername(username!);
+  const {
+    response: profile,
+    isSuccess,
+    isLoading,
+    isError,
+    refetch,
+  } = GetProfileByUsername(id!);
 
-  // function handleGoBack() {
-  //   navigate(-1);
-  // }
+  function handleGoBack() {
+    navigate(-1);
+  }
 
-  // useEffect(() => {
-  //   refetch();
-  // }, [username]);
+  useEffect(() => {
+    refetch();
+  }, [id]);
 
   return (
     <div>
-      <span className="text-white">teu cu</span>
-      teu cu
-      {/* <Seo title={"@" + username} />
+      <Seo title={"@" + profile?.username} />
       {isLoading && <div>Pedding...</div>}
       {isError && <div>Error</div>}
       {isSuccess && (
@@ -69,13 +49,12 @@ export const ProfilePage = () => {
                 ></ChevronLeftIcon>
                 <h1 className="font-bold">{profile?.username}</h1>
               </div>
-              {}
-              profile && (
-              <>
-                <Profile profile={profile!} />
-                <ProfileMobile profile={profile!} />
-              </>
-              )
+              {profile && (
+                <>
+                  <Profile profile={profile!} />
+                  <ProfileMobile profile={profile!} />
+                </>
+              )}
             </div>
           </div>
           {profile?.posts.map((post: IPost) => (
@@ -87,7 +66,7 @@ export const ProfilePage = () => {
             />
           ))}
         </div>
-      )} */}
+      )}
     </div>
   );
 };
