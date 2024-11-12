@@ -32,7 +32,7 @@ export const Post = ({
   fullPage = false,
   fullBorder = false,
 }: IPostProps) => {
-  const { response: perfil, isSuccess } = GetProfileById(post.user.id);
+  const { response: perfil, isSuccess } = GetProfileById(post.owner.uid);
   const [editMode, setEditMode] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { mutate: handlePatch } = UpdatePost();
@@ -43,7 +43,7 @@ export const Post = ({
       textareaRef.current !== null &&
       textareaRef.current.value !== post.content
     ) {
-      handlePatch({ content: textareaRef.current.value, id: post.id });
+      handlePatch({ content: textareaRef.current.value, id: post.uid });
     }
     setEditMode(!editMode);
   }
@@ -52,7 +52,7 @@ export const Post = ({
   const onClick = () => {
     // <Navigate to={`/posts/postPage/${post.id}`}/>
     // const queryClient = useQueryClient()
-    const link = `/posts/${post.id}`;
+    const link = `/posts/${post.uid}`;
     //evitar q o usuario numa full page fique fazendo refetch do post atual
     if (local.pathname != link) {
       navigate(link);
@@ -85,7 +85,7 @@ export const Post = ({
                 autoFocus={true}
                 className="bg-rebeccapurple w-noavatar"
                 placeholder="Edit your message here."
-                id={`post-${post.id}`}
+                id={`post-${post.uid}`}
               ></Textarea>
               <Button onClick={handleSaveEdit} variant="ghost">
                 Salvar
@@ -94,11 +94,11 @@ export const Post = ({
           ) : (
             <>
               <div className="flex w-full pt-3 pl-5 pr-3 h-fit">
-                <Link to={`/posts/profile/${perfil?.username}`}>
+                <Link to={`/users/${perfil?.uid}`}>
                   <Avatar className="w-12 h-12 rounded-full">
                     <AvatarImage
                       src={
-                        perfil?.profile_image_link ??
+                        perfil?.avatar ??
                         "https://p2.trrsf.com/image/fget/cf/1200/1600/middle/images.terra.com/2023/07/31/pedro-flamengo-uv5ta7zqn5us.jpg"
                       }
                     />
@@ -109,7 +109,7 @@ export const Post = ({
 
                 <PostContent
                   onClick={onClick}
-                  perfil={post.user!}
+                  perfil={post.owner!}
                   post={post}
                   fullPage={fullPage}
                   handleEdit={setEditMode}

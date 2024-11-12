@@ -1,5 +1,5 @@
 import axiosInstance from "./../config/axiosConfig";
-import { IPost, PostRequest } from "@/shared/models/post.js";
+import { IPost, PostRequest, Posts } from "@/shared/models/post.js";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosPromise, AxiosResponse } from "axios";
 
@@ -38,22 +38,24 @@ export function CreatePostJsonServer() {
   return mutate;
 }
 
-export const fetchGetPosts = async (): AxiosPromise<IPost[]> => {
+export const fetchGetPosts = async (): AxiosPromise<Posts> => {
   const response = await axiosInstance.get(`/posts/feed`);
   return response;
 };
 
 export function GetAllPosts() {
+  
   const query = useQuery({
     queryFn: fetchGetPosts,
     queryKey: ["posts"],
     refetchInterval: 5 * 60 * 1000,
   });
-
+  console.log("query",query.data?.data.posts)
   return {
     ...query,
-    response: query.data?.data,
+    response: query.data?.data.posts,
   };
+
 }
 
 export const fetchGetPost = async (id: string): AxiosPromise<IPost> => {

@@ -7,6 +7,11 @@ export interface IPost {
   created_at: string;
   linked_to: string[] | null;
 }
+
+export type Posts = {
+  posts: IPost[]
+}
+
 export interface IInitialPost {
   title: string;
   content: string;

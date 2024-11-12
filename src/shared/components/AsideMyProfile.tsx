@@ -19,7 +19,7 @@ export const AsideMyProfile = () => {
   const idLoggedUser = perfil?.id;
   const local = useLocation();
   const localIsHome = local.pathname === "/posts";
-  const localIsUser = local.pathname === `/posts/profile/${perfil?.username}`;
+  const localIsUser = local.pathname === `/users/${perfil?.uid}`;
   const localIsConfig = local.pathname === "/config";
   // const { response: perfil, isSuccess } = GetProfileById(idLoggedUser ?? "");
   return (
@@ -59,7 +59,7 @@ export const AsideMyProfile = () => {
                   </Button>
                 </Link>
 
-                <Link to={`/posts/profile/${perfil?.username}`}>
+                <Link to={`/users/${perfil?.uid}`}>
                   <Button className="flex items-center  max-xl:p-0 max-xl:pb-2 max-xl:justify-center justify-start w-full gap-4 p-1 pl-3 text-lg font-bold text-white transition-all duration-200 bg-transparent rounded-full max-md:hidden h-fit pr-7 hover:bg-rebeccapurple">
                     {localIsUser ? (
                       <UserCircleIconFilled className="w-8 h-8 max-xl:mr-0 mr-1 text-biancapurple" />
@@ -86,7 +86,7 @@ export const AsideMyProfile = () => {
             <Avatar className="w-12 xl:hidden h-12 rounded-full cursor-pointer">
               <AvatarImage
                 src={
-                  perfil?.profile_image_link ?? "src/assets/chorro-timido.JPG"
+                  perfil?.avatar ?? "src/assets/chorro-timido.JPG"
                 }
               />
               <AvatarFallback>CN</AvatarFallback>
