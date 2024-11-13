@@ -16,12 +16,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export const AsideMyProfile = () => {
   const { user: perfil, signed } = useAuth();
-  const idLoggedUser = perfil?.uid;
   const local = useLocation();
   const localIsHome = local.pathname === "/";
   const localIsUser = local.pathname === `/users/${perfil?.username}`;
   const localIsConfig = local.pathname === "/config";
-  // const { response: perfil, isSuccess } = GetProfileById(idLoggedUser ?? "");
   return (
     <div
       className={`flex flex-col max-xl:border-r-[1px] max-xl:border-gray-700  border-rebeccapurple2 xl:p-5 justify-between fixed top-0 left-0 min-h-screen overflow-x-hidden max-xl:w-fit max-md:hidden w-72 z-1`}
@@ -55,7 +53,7 @@ export const AsideMyProfile = () => {
                     ) : (
                       <HomeIcon className="w-8 max-xl:mr-0 h-8 mr-1 text-biancapurple" />
                     )}
-                    <span className="max-xl:hidden">Home</span>
+                    <span className="max-xl:hidden text-purple-400 dark:text-white">Home</span>
                   </Button>
                 </Link>
 
@@ -66,7 +64,7 @@ export const AsideMyProfile = () => {
                     ) : (
                       <UserCircleIcon className="w-8 h-8 max-xl:mr-0 mr-1 text-biancapurple" />
                     )}
-                    <span className="max-xl:hidden">Profile</span>
+                    <span className="max-xl:hidden text-purple-400 dark:text-white">Profile</span>
                   </Button>
                 </Link>
 
@@ -77,7 +75,7 @@ export const AsideMyProfile = () => {
                     ) : (
                       <CogIcon className="w-8 h-8 mr-1 max-xl:mr-0 text-biancapurple" />
                     )}
-                    <span className="max-xl:hidden">Settings</span>
+                    <span className="max-xl:hidden text-purple-400 dark:text-white">Settings</span>
                   </Button>
                 </Link>
               </div>

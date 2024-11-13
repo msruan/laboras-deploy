@@ -15,26 +15,18 @@ import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export function SettingsPage() {
-  const { user: context } = useAuth();
-  const idLoggedUser = context?.id;
+  const { user: profile } = useAuth();
   const { setSigned } = useAuth();
   const navigate = useNavigate();
 
-  const {
-    response: profile,
-    isSuccess,
-    isLoading,
-  } = GetProfileById(idLoggedUser ?? "");
 
   const handleLogout = () => {
     setSigned(false);
     Logout();
-    navigate("/");
+    navigate("/login");
   };
 
   return (
-    <>
-      {isSuccess && (
         <div className="flex items-center justify-center pt-6">
           <Card className="w-full max-w-lg text-wrap bg-transparant">
             <CardHeader>
@@ -58,9 +50,6 @@ export function SettingsPage() {
             </CardContent>
           </Card>
         </div>
-      )}
-      {isLoading && <h1>Pending...</h1>}
-    </>
   );
 }
 

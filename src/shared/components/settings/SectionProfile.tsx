@@ -13,12 +13,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
-import { IProfile } from "@/shared/models/profile";
+import { ProfileDetailed } from "@/shared/models/profile";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Button } from "../ui/button";
 
-export function SectionProfile({ profile }: { profile: IProfile }) {
+export function SectionProfile({ profile }: { profile: ProfileDetailed }) {
   return (
     <Tabs defaultValue="account" className="w-full mb-4">
       <TabsList className="grid w-full grid-cols-2">
@@ -38,7 +38,7 @@ export function SectionProfile({ profile }: { profile: IProfile }) {
               <Label htmlFor="name">Name</Label>
               <Input
                 id="name"
-                defaultValue={`${profile.first_name} ${profile.last_name}`}
+                defaultValue={`${profile.full_name}`}
               />
             </div>
             <div className="space-y-1">
@@ -65,11 +65,11 @@ export function SectionProfile({ profile }: { profile: IProfile }) {
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
+              <Label htmlFor="current">Senha atual</Label>
               <Input id="current" type="password" />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
+              <Label htmlFor="new">Nova senha</Label>
               <Input id="new" type="password" />
             </div>
           </CardContent>

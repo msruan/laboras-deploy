@@ -7,6 +7,7 @@ import {
   ProfileUpdate,
 } from "@/shared/models/profile";
 import { IPost } from "@/shared/models/post";
+import { LoggedUserProvider } from "@/context/AuthContext";
 
 export function GetProfileById(profileId: string) {
   const fetchGetProfile = async (
@@ -88,12 +89,40 @@ async function fetchFollow(user: { id_user: string, token: string }) {
 }
 
 export function FollowProfile(user: { id_user: string, token: string }) {
-  const query = useQuery({
-    queryFn: () => fetchFollow(user),
-    queryKey: ["follow"]
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: () => fetchFollow(user),
+    mutationKey: ["follow"],
+    onSuccess: () => {
+      queryClient.refetchQueries({ queryKey: ["posts"] })
+    }
   })
-  return {
-    ...query,
-    response: query.data
-  }
+  return mutation
 }
+
+
+async function fetchUnfollow(user: { id_user: string, token: string, username: string }) {
+  const response = await axiosInstance.post(
+    `/users/unfollow/${user.id_user}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    }
+  );
+  return response.data;
+}
+
+export function UnfollowProfile(user: { id_user: string, token: string, username: string }) {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: () => fetchUnfollow(user),
+    mutationKey: ["unfollow"],
+    onSuccess: () => {
+      queryClient.refetchQueries({ queryKey: [`users/${user.username}`] })
+    }
+  })
+  return mutation
+}
+

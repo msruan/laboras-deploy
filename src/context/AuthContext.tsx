@@ -1,6 +1,7 @@
 import axiosInstance from "@/config/axiosConfig";
 import { useToken } from "@/shared/hooks/useToken";
 import { ProfileDetailed } from "@/shared/models/profile";
+import { useQuery } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import {
   useState,
@@ -9,6 +10,7 @@ import {
   useContext,
   useEffect,
 } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function useAuth() {
   return useContext(AuthContext);
@@ -36,14 +38,18 @@ export const LoggedUserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<ProfileDetailed | null>(null);
 
   const { token } = useToken();
+  // const local = useLocation();
+  // const navigate = useNavigate();
+  // const isOnAuthRoutes = local.pathname === "/signup" || local.pathname === "login";
 
   useEffect(() => {
-    if (!signed && token() !== null) {
+    if (signed) {
+    } else if (token() !== null) {
       axiosInstance.defaults.headers.Authorization = `Bearer ${token()}`;
       console.log(token());
       getLoggedUser(token()!);
-    } else {
-      console.log("ainda nao baby");
+      // } else if (!isOnAuthRoutes) {
+      //   navigate("/login");
     }
   }, []);
 

@@ -3,6 +3,7 @@ import { TextBox } from "./TextBox";
 import { GetAllPosts } from "@/actions/PostAction";
 import { useAuth } from "@/context/AuthContext";
 import Spinner from "./ui/spinner";
+import Seo from "@/shared/components/Seo";
 
 export const MainPosts = () => {
   const { response: posts, isSuccess, isError, isLoading } = GetAllPosts();
@@ -12,6 +13,7 @@ export const MainPosts = () => {
   //Todo: Como faço pra quando der isError ele levar pra página de erro?
   return (
     <>
+    <Seo title='Laboras'/>
       {isLoading && <Spinner />}
       {isError && <div>Error</div>}
       <div>

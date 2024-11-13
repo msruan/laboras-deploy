@@ -73,7 +73,7 @@ export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
         <div className="self-end justify-self-end w-fit h-fit">
           <Button
             onClick={handleClick}
-            className=" bg-rebeccapurple2 hover:bg-rebeccapurple w-full h-full rounded-full font-bold"
+            className="bg-purple-600 dark:bg-rebeccapurple2 hover:bg-rebeccapurple w-full h-full rounded-full font-bold"
           >
             POST
           </Button>

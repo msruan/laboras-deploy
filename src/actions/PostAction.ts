@@ -3,22 +3,24 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosPromise } from "axios";
 import axiosInstance from "./../config/axiosConfig";
 
-async function fetchInteractPost(action: "like" | "dislike", post_id: string) {
+async function fetchInteractPost(action: "toggle-like" | "toggle-dislike", post_id: string) {
   return await axiosInstance.post(`/posts/${post_id}/${action}`);
 }
 
-export function InteractPost(action: "like" | "dislike") {
+export function InteractPost(action: "toggle-like" | "toggle-dislike") {
   const queryClient = useQueryClient();
 
   const mutate = useMutation({
     mutationFn: (post_id: string) => fetchInteractPost(action, post_id),
     onSuccess: (data, variables) => {
-      queryClient.invalidateQueries({
+      console.log("string?",variables)
+      queryClient.refetchQueries({
         queryKey: [`post-${variables}`],
       });
       queryClient.invalidateQueries({
         queryKey: ["posts"],
       });
+      
     },
   });
 
@@ -142,5 +144,7 @@ export function DeletePost() {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
   });
-  return mutate;
+  return {
+    ...mutate
+  };
 }

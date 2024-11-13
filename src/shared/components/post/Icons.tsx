@@ -35,8 +35,8 @@ const IconInteracts = ({
 );
 
 export const Icons = ({ post }: { post: IPost }) => {
-  const { mutate: handleLikePost } = InteractPost("like");
-  const { mutate: handleDislikePost } = InteractPost("dislike");
+  const { mutate: handleLikePost } = InteractPost("toggle-like");
+  const { mutate: handleDislikePost } = InteractPost("toggle-dislike");
 
 
   return (
