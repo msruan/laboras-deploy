@@ -10,13 +10,12 @@ import { MainPosts } from "@/shared/components/MainPosts";
 import { SettingsPage } from "./pages/public/SettingsPage";
 import { SignUpPage } from "./pages/public/SignUpPage";
 
-const OtherRoutes = [
+const AuthRoutes = [
   {
-    path: "/",
     element: <LoginLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "/", element: <LoginPage /> },
+      { path: "/login", element: <LoginPage /> },
       { path: "/signup", element: <SignUpPage /> },
     ],
   },
@@ -24,11 +23,12 @@ const OtherRoutes = [
 
 const SignRoutes = [
   {
-    path: "/posts",
+    path: "/",
     element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
       { path: "/posts", element: <MainPosts /> },
+      { path: "/", element: <MainPosts /> },
       {
         path: "/posts/:id",
         element: <PostsPage />,
@@ -44,18 +44,16 @@ const SignRoutes = [
   },
 
   {
-    path: "/users",
     element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "/users", element: <ErrorPage /> },
       {
-        path: "/users/:id",
+        path: "/users/:username",
         element: <ProfilePage />,
       },
     ],
   },
 ];
-export const router = createBrowserRouter([...SignRoutes, ...OtherRoutes]);
+export const router = createBrowserRouter([...SignRoutes, ...AuthRoutes]);
 
 export default router;

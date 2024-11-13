@@ -8,18 +8,20 @@ import {
 } from "@/shared/models/profile";
 import { IPost } from "@/shared/models/post";
 
-async function fetchGetProfile(
-  profileId: string
-): AxiosPromise<ProfileDetailed> {
-  return await axiosInstance.get(`/profiles/${profileId}`);
-} //Todo: atualizar rota para algo como .get('<token_user>/followers);
-
 export function GetProfileById(profileId: string) {
+  const fetchGetProfile = async (
+    profileId: string
+  ): AxiosPromise<ProfileDetailed> => {
+    const res = await axiosInstance.get(`/users/${profileId}`);
+    return res;
+  };
+  //Todo: atualizar rota para algo como .get('<token_user>/followers);
+
   const query = useQuery({
     queryFn: async () => {
       return fetchGetProfile(profileId);
     },
-    queryKey: [`profile/${profileId}`],
+    queryKey: [`users/${profileId}`],
   });
   return {
     ...query,
@@ -27,29 +29,30 @@ export function GetProfileById(profileId: string) {
   };
 }
 
-export const fetchGetProfileByUsername = async (
-  username: string
-): AxiosPromise<ProfileDetailed[]> => {
-  const response = await axiosInstance.get(`/users/${username}`);
-  return response;
-};
-
 export function GetProfileByUsername(username: string) {
+  const fetchGetProfileByUsername = async (
+    id: string
+  ): AxiosPromise<ProfileDetailed> => {
+    const response = await axiosInstance.get(`/users/${username}`);
+
+    return response;
+  };
+
   const query = useQuery({
     queryFn: async () => {
       return fetchGetProfileByUsername(username);
     },
-    queryKey: [`profile/${username}`],
+    queryKey: [`users/${username}`],
   });
 
   return {
     ...query,
-    response: query.data?.data[0],
+    response: query.data?.data,
   };
 }
 
 async function fetPatchProfile(profile: ProfileUpdate) {
-  const response = await axiosInstance.put(`/profiles/`, profile);
+  const response = await axiosInstance.put(`/users/`, profile);
   return response;
 }
 
@@ -70,25 +73,27 @@ export function UpdateProfile() {
   };
 }
 
-export const fetchGetProfilePosts = async (
-  item: any
-): AxiosPromise<IPost[]> => {
-  const response = await axiosInstance.get(`/user/${item.username}/`, {
-    headers: { Authorization: `Token ${item.token}` },
-  });
-  return response;
-};
 
-export function GetProfilePosts(item: any) {
+async function fetchFollow(user: { id_user: string, token: string }) {
+  const response = await axiosInstance.post(
+    `/users/follow/${user.id_user}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    }
+  );
+  return response.data;
+}
+
+export function FollowProfile(user: { id_user: string, token: string }) {
   const query = useQuery({
-    queryFn: async () => {
-      return fetchGetProfilePosts(item);
-    },
-    queryKey: [`posts-${item.username}`],
-  });
-
+    queryFn: () => fetchFollow(user),
+    queryKey: ["follow"]
+  })
   return {
     ...query,
-    response: query.data?.data,
-  };
+    response: query.data
+  }
 }

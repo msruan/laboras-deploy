@@ -48,7 +48,7 @@ export function LoginPage() {
   };
 
   if (signed) {
-    return <Navigate to="/posts" />;
+    return <Navigate to="/" />;
   }
 
   const validarParametros = (): boolean => {
@@ -61,7 +61,10 @@ export function LoginPage() {
     <Card
       className="w-full max-w-md text-wrap"
       onKeyDown={(e) => {
-        if (e.key === "Enter" && validarParametros()) onSubmit();
+        if (e.key === "Enter" && validarParametros()) {
+          e.preventDefault();
+          onSubmit();
+        }
       }}
     >
       <Seo title="Laboras" />

@@ -1,23 +1,16 @@
 import { DeletePost } from "@/actions/PostAction";
-import { Button } from "@/shared/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from "@/shared/components/ui/dropdown-menu";
 import {
   EllipsisHorizontalIcon,
-  TrashIcon,
   PencilIcon,
+  TrashIcon,
 } from "@heroicons/react/16/solid";
 import { IPost } from "../../models/post";
 
@@ -54,7 +47,7 @@ export function PostMenu({ post, handleEdit }: PostMenuProps) {
           <DropdownMenuItem
             className="text-red-700"
             onClick={() => {
-              handleDelete(post.id);
+              handleDelete(post.uid);
             }}
           >
             Deletar

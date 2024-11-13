@@ -12,7 +12,7 @@ import {
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { useState, ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 
 import { Link, Navigate } from "react-router-dom";
 
@@ -25,6 +25,8 @@ export function SignUpPage() {
     username: "",
     email: "",
     password: "",
+    bio: "",
+    avatar_link: ""
   });
 
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement> | null = null) => {
@@ -55,7 +57,10 @@ export function SignUpPage() {
     <Card
       className="w-full max-w-md text-wrap "
       onKeyDown={(e) => {
-        if (e.key === "Enter" && validarParametros()) onSubmit();
+        if (e.key === "Enter" && validarParametros()) {
+          e.preventDefault();
+          onSubmit();
+        };
       }}
     >
       <CardHeader>

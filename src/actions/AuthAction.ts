@@ -1,12 +1,6 @@
-import axios, { AxiosPromise, AxiosResponse } from "axios";
-import { useToken } from "@/shared/hooks/useToken";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { IPost } from "@/shared/models/post";
-import { ProfileDetailed } from "@/shared/models/profile";
-import { useContext } from "react";
-import { useAuth } from "@/context/AuthContext";
-import { GetProfileByUsername } from "./ProfileAction";
 import { axiosInstance } from "@/config/axiosConfig";
+import { useToken } from "@/shared/hooks/useToken";
+import { useMutation } from "@tanstack/react-query";
 
 type credentialsLogin = {
   username: string;
@@ -18,13 +12,19 @@ type credentialsSignup = {
   username: string;
   email: string;
   password: string;
+  bio: string;
+  avatar_link: string;
 };
 
 export const Login = () => {
   async function fetchLogin(credentials: credentialsLogin) {
-    return await axios.post("http://localhost:8000/auth/login", credentials, {
-      headers: { "Content-Type": "application/json" },
-    });
+    return await axiosInstance.post(
+      "/auth/login",
+      credentials,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 
   const { setToken } = useToken();
@@ -46,13 +46,7 @@ export const Login = () => {
 
 export const SignUp = () => {
   async function fetchSignup(credentials: credentialsSignup) {
-    const response = await axios.post(
-      "http://localhost:8000/auth/register/",
-      credentials,
-      {
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    const response = await axiosInstance.post("/auth/register/", credentials);
     console.log("fiz a req aqui no signup");
     return response;
   }

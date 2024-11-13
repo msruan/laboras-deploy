@@ -1,78 +1,62 @@
-import { useState } from "react";
-import { IPost } from "../../models/post";
-import { PostMenu } from "./PostMenu";
+import { InteractPost } from "@/actions/PostAction";
 import { FaceFrownIcon, StarIcon } from "@heroicons/react/16/solid";
-import { UpdatePost } from "@/actions/PostAction";
-import { PostRequest } from "../../models/post";
+import { IPost } from "../../models/post";
 
-type IconsProps = {
-  post: IPost;
-  fullPage: boolean;
+type IconInteractsProps = {
+  icon: JSX.Element;
+  count: number;
+  isLiked?: boolean;
+  isDisliked?: boolean;
+  onClick: () => void;
+  activeColor: string;
+  inactiveColor: string;
 };
 
-export const Icons = ({ post, fullPage }: IconsProps) => {
-  const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [isDesliked, setIsDesliked] = useState<boolean>(false);
-  const { mutate: handleUpdate } = UpdatePost();
+const IconInteracts = ({
+  icon,
+  count,
+  onClick,
+  activeColor,
+  inactiveColor,
+  isLiked,
+  isDisliked,
+}: IconInteractsProps) => (
+  <div className="flex justify-between items-center text-sm">
+    <span>{count > 0 && count}</span>
+    <span
+      className={`h-4 w-4 cursor-pointer ${
+        isLiked || isDisliked ? activeColor : inactiveColor
+      }`}
+      onClick={onClick}
+    >
+      {icon}
+    </span>
+  </div>
+);
 
-  function handleLike() {
-    if (isLiked) post.likes--;
-    else {
-      post.likes++;
-      if (isDesliked) {
-        post.deslikes--;
-        setIsDesliked(false);
-        handleUpdate({
-          id: post.id,
-          likes: post.likes,
-          deslikes: post.deslikes,
-        });
-      }
-    }
-    setIsLiked(!isLiked);
-    handleUpdate({ id: post.id, likes: post.likes });
-  }
+export const Icons = ({ post }: { post: IPost }) => {
+  const { mutate: handleLikePost } = InteractPost("like");
+  const { mutate: handleDislikePost } = InteractPost("dislike");
 
-  function handleDeslike() {
-    if (isDesliked) post.deslikes--;
-    else {
-      post.deslikes++;
-      if (isLiked) {
-        post.likes--;
-        setIsLiked(false);
-        handleUpdate({
-          id: post.id,
-          likes: post.likes,
-          deslikes: post.deslikes,
-        });
-      }
-    }
-    setIsDesliked(!isDesliked);
-    handleUpdate({ id: post.id, deslikes: post.deslikes });
-  }
+
   return (
     <>
-      <div className="flex justify-between items-center text-sm">
-        <span>{post.likes > 0 && post.likes}</span>
-        <StarIcon
-          className={
-            `h-4 w-4 ` + (isLiked ? " text-yellow-500" : "text-gray-500")
-          }
-          onClick={handleLike}
-          cursor="pointer"
-        />
-      </div>
-
-      <div className="flex justify-between items-center text-sm">
-        <span>{post.deslikes > 0 && post.deslikes}</span>
-        <FaceFrownIcon
-          className={
-            `h-4 w-4 ` + (isDesliked ? "text-red-500" : " text-gray-500")
-          }
-          onClick={handleDeslike}
-          cursor="pointer"
-        />
-      </div>
+      <IconInteracts
+        icon={<StarIcon />}
+        count={post.likes}
+        isLiked={post.liked_by_me}
+        onClick={() => handleLikePost(post.uid)}
+        activeColor="text-yellow-500"
+        inactiveColor="text-gray-500"
+      />
+      <IconInteracts
+        icon={<FaceFrownIcon />}
+        count={post.dislikes}
+        isDisliked={post.disliked_by_me}
+        onClick={() => handleDislikePost(post.uid)}
+        activeColor="text-red-500"
+        inactiveColor="text-gray-500"
+      />
     </>
   );
 };

@@ -9,11 +9,11 @@ type Props = {
 
 export const ProfileTag = ({ ...props }: Props) => {
   return (
-    <Link className="w-full max-xl:hidden" to={`/users/${props.perfil.uid}`}>
+    <Link className="w-full max-xl:hidden" to={`/users/${props.perfil.username}`}>
       <Card className="w-full bg-rebeccapurple2 flex gap-4 p-2 border-0 rounded-full hover:bg-rebeccapurple transition-all duration-150">
         <Avatar className="w-12 h-12 rounded-full cursor-pointer">
           <AvatarImage
-            src={props.perfil?.avatar ?? "src/assets/chorro-timido.JPG"}
+            src={props.perfil.avatar_link ?? "src/assets/chorro-timido.JPG"}
           />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>

@@ -1,13 +1,13 @@
-import { IPost } from "@/shared/models/post";
-import { IProfile } from "@/shared/models/profile";
-import { CardContent, CardFooter } from "../ui/card";
-import { Icons } from "./Icons";
 import { UpdatePost } from "@/actions/PostAction";
-import { PostMenu } from "./PostMenu";
+import { IPost } from "@/shared/models/post";
+import { ProfileBase } from "@/shared/models/profile";
 import { Link } from "react-router-dom";
+import { CardContent } from "../ui/card";
+import { Icons } from "./Icons";
+import { PostMenu } from "./PostMenu";
 
 interface IPostContentProps {
-  perfil: IProfile;
+  perfil: ProfileBase;
   post: IPost;
   fullPage: boolean;
   onClick: () => void;
@@ -35,10 +35,10 @@ export function PostContent({
               fullPage ? "flex-col" : ""
             } items-start text-aliceblue text-sm gap-2`}
           >
-            <Link to={`/users/${perfil?.uid}`}>
+            <Link to={`/users/${perfil?.username}`}>
               <h3>{perfil?.full_name}</h3>
             </Link>
-            <Link to={`/users/${perfil?.uid}`}>
+            <Link to={`/users/${perfil?.username}`}>
               <h4 className="opacity-70">@{perfil?.username}</h4>
             </Link>
           </div>
@@ -60,7 +60,7 @@ export function PostContent({
       ${fullPage ? " w-1/4" : " w-1/4"}
       `}
             >
-              <Icons post={post} fullPage={fullPage}></Icons>
+              <Icons post={post}></Icons>
               <PostMenu handleEdit={handleEdit} post={post}></PostMenu>
             </div>
           </footer>

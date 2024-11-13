@@ -1,71 +1,58 @@
-import { IPost } from "../../models/post";
-import { IProfile } from "../../models/profile";
-import { PostContent } from "./PostContent";
-import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
-import { Card, CardFooter } from "../ui/card";
 import { Button } from "@/shared/components/ui/button";
 import { Textarea } from "@/shared/components/ui/textarea";
-import { GetProfileById } from "@/actions/ProfileAction";
+import { IPost } from "../../models/post";
+import { Card, CardFooter } from "../ui/card";
+import { PostContent } from "./PostContent";
 
-import { useRef, useState } from "react";
-import { PostMenu } from "./PostMenu";
-import { Icons } from "./Icons";
-import { Label } from "@radix-ui/react-label";
 import { UpdatePost } from "@/actions/PostAction";
-import {
-  Link,
-  Navigate,
-  useLocation,
-  useNavigate,
-  useNavigation,
-} from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Icons } from "./Icons";
+import { PostMenu } from "./PostMenu";
+import { ProfileBase } from "@/shared/models/profile";
 
-type IPostProps = {
+type Props = {
+  owner?: ProfileBase;
   post: IPost;
   fullPage: boolean;
   fullBorder: boolean;
 };
 
-export const Post = ({
-  post,
-  fullPage = false,
-  fullBorder = false,
-}: IPostProps) => {
-  const { response: perfil, isSuccess } = GetProfileById(post.owner.uid);
-  const [editMode, setEditMode] = useState(false);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+export const Post = ({ fullBorder = false, ...props }: Props) => {
+  const post = props.post;
+  const perfil = props.owner ?? props.post.owner;
+  const fullPage = props.fullPage;
+
   const { mutate: handlePatch } = UpdatePost();
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const local = useLocation();
+  const [editMode, setEditMode] = useState(false);
 
   function handleSaveEdit() {
     if (
       textareaRef.current !== null &&
       textareaRef.current.value !== post.content
     ) {
-      handlePatch({ content: textareaRef.current.value, id: post.uid });
+      handlePatch({ content: textareaRef.current.value, uid: post.uid });
     }
     setEditMode(!editMode);
   }
+  
   const navigate = useNavigate();
 
   const onClick = () => {
-    // <Navigate to={`/posts/postPage/${post.id}`}/>
-    // const queryClient = useQueryClient()
     const link = `/posts/${post.uid}`;
-    //evitar q o usuario numa full page fique fazendo refetch do post atual
     if (local.pathname != link) {
       navigate(link);
-      console.log("naveguei fds");
     }
-    // queryClient.invalidateQueries({queryKey: ['post']})
   };
 
   return (
     <>
-      {isSuccess && (
-        <Card
-          className={`flex flex-col
+      <Card
+        className={`flex flex-col
           ${fullPage ? "" : "cursor-pointer"}
     ${fullPage || editMode ? "bg-transparent" : "h-full bg-rebeccapurple"}
     ${
@@ -76,61 +63,57 @@ export const Post = ({
         : "border-t-0 border-l-0 border-r-0 border-b-purple-400 rounded-none"
     }
     `}
-        >
-          {isSuccess && editMode ? (
-            <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-t-0 border-b-0 border-l-0 border-r-0">
-              <Textarea
-                defaultValue={post.content}
-                ref={textareaRef}
-                autoFocus={true}
-                className="bg-rebeccapurple w-noavatar"
-                placeholder="Edit your message here."
-                id={`post-${post.uid}`}
-              ></Textarea>
-              <Button onClick={handleSaveEdit} variant="ghost">
-                Salvar
-              </Button>
+      >
+        {editMode ? (
+          <div className="flex flex-col items-center justify-center w-full h-full gap-2 border-t-0 border-b-0 border-l-0 border-r-0">
+            <Textarea
+              defaultValue={post.content}
+              ref={textareaRef}
+              autoFocus={true}
+              className="bg-rebeccapurple w-noavatar"
+              placeholder="Edit your message here."
+              id={`post-${post.uid}`}
+            ></Textarea>
+            <Button onClick={handleSaveEdit} variant="ghost">
+              Salvar
+            </Button>
+          </div>
+        ) : (
+          <>
+            <div className="flex w-full pt-3 pl-5 pr-3 h-fit">
+              <Link to={`/users/${perfil.username}`}>
+                <Avatar>
+                  <AvatarImage
+                    className="w-12 h-12 rounded-full"
+                    src={perfil.avatar_link === "" ? "src/assets/chorro-timido.JPG" : perfil.avatar_link }
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </Link>
+
+              <PostContent
+                onClick={onClick}
+                perfil={perfil}
+                post={post}
+                fullPage={fullPage}
+                handleEdit={setEditMode}
+              />
             </div>
-          ) : (
-            <>
-              <div className="flex w-full pt-3 pl-5 pr-3 h-fit">
-                <Link to={`/users/${perfil?.uid}`}>
-                  <Avatar className="w-12 h-12 rounded-full">
-                    <AvatarImage
-                      src={
-                        perfil?.avatar ??
-                        "https://p2.trrsf.com/image/fget/cf/1200/1600/middle/images.terra.com/2023/07/31/pedro-flamengo-uv5ta7zqn5us.jpg"
-                      }
-                    />
-
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                </Link>
-
-                <PostContent
-                  onClick={onClick}
-                  perfil={post.owner!}
-                  post={post}
-                  fullPage={fullPage}
-                  handleEdit={setEditMode}
-                />
-              </div>
-              {/* {!fullPage && (
-                <CardFooter className="flex items-center justify-end h-fit">
-                  <div
-                    className={`flex flex-row justify-between pr-7 pb-1 h-fit
+            {!fullPage && (
+              <CardFooter className="flex items-center justify-end h-fit">
+                <div
+                  className={`flex flex-row justify-between pr-7 pb-1 h-fit
       ${fullPage ? " w-1/4 max-md:w-full" : " w-1/4 max-md:w-full"}
       `}
-                  >
-                    <Icons post={post} fullPage={fullPage}></Icons>
-                    <PostMenu handleEdit={setEditMode} post={post} />
-                  </div>
-                </CardFooter>
-              )} */}
-            </>
-          )}
-        </Card>
-      )}
+                >
+                  <Icons post={post}></Icons>
+                  <PostMenu handleEdit={setEditMode} post={post} />
+                </div>
+              </CardFooter>
+            )}
+          </>
+        )}
+      </Card>
     </>
   );
 };

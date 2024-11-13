@@ -1,16 +1,13 @@
 // import { Input } from "@chakra-ui/react";
-import { useContext, useRef } from "react";
-import style from "./textbox.module.css";
-import { ulid } from "ulidx";
-import { IPost } from "../models/post";
-import { Textarea } from "./ui/textarea";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { CreatePost, CreatePostJsonServer } from "@/actions/PostAction";
+import { CommentPost, CreatePost } from "@/actions/PostAction";
 import { GetProfileById } from "@/actions/ProfileAction";
 import { useAuth } from "@/context/AuthContext";
+import { useRef } from "react";
+import { ulid } from "ulidx";
 import { useToken } from "../hooks/useToken";
+import { IPost } from "../models/post";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Button } from "./ui/button";
 
 type TextBoxProps = {
   linkedTo: string | null;
@@ -22,35 +19,31 @@ export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
     }
 
     const newPost: any = {
-      title: "No title",
       content: input.current.value,
       token: token(),
+      uid: linkedTo,
     };
 
-    const newPostJsonServer: IPost = {
-      id: ulid(),
-      user_id: idLoggedUser,
-      content: input.current.value,
-      created_at: `${new Date().toISOString()}`,
-      likes: 0,
-      deslikes: 0,
-      linked_to: linkedTo,
-    };
-
-    addNewPost(newPost);
-    addNewPostJsonServer(newPostJsonServer);
+    if (linkedTo) {
+      addNewComment(newPost);
+      console.log("novo comment", newPost);
+    } else {
+      addNewPost(newPost);
+      console.log("novo post", newPost);
+    }
     input.current.value = "";
   }
 
-  const input = useRef<HTMLTextAreaElement>(null);
-  const { mutate: addNewPost } = CreatePost();
-  const { mutate: addNewPostJsonServer } = CreatePostJsonServer();
-  const { user: loggedUser } = useAuth();
-  const name = loggedUser?.first_name;
-
-  const idLoggedUser = loggedUser?.id ?? "";
-  const { response: profile } = GetProfileById(idLoggedUser);
   const { token } = useToken();
+  const { user: loggedUser } = useAuth();
+  const name = loggedUser?.full_name;
+  const idLoggedUser = loggedUser?.uid ?? "";
+
+  const { response: profile } = GetProfileById(idLoggedUser);
+  const input = useRef<HTMLTextAreaElement>(null);
+
+  const { mutate: addNewPost } = CreatePost();
+  const { mutate: addNewComment } = CommentPost();
 
   return (
     <div>
@@ -58,14 +51,17 @@ export const TextBox = ({ linkedTo = null }: TextBoxProps) => {
         <div className="w-full flex flex-row gap-8 items-center">
           <Avatar className="w-12 h-12 rounded-full">
             <AvatarImage
-              src={profile?.avatar ?? "src/assets/chorro-timido.JPG"}
+              src={profile?.avatar_link ?? "src/assets/chorro-timido.JPG"}
             />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
 
           <textarea
             onKeyDown={(e) => {
-              e.key == "Enter" && handleClick();
+              if (e.key == "Enter") {
+                e.preventDefault();
+                handleClick();
+              }
             }}
             ref={input}
             className="bg-transparent py-5 w-full content-center border-none text-white outline-none resize-none"
