@@ -1,12 +1,6 @@
-import axios, { AxiosPromise, AxiosResponse } from "axios";
-import { useToken } from "@/shared/hooks/useToken";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { IPost } from "@/shared/models/post";
-import { ProfileDetailed } from "@/shared/models/profile";
-import { useContext } from "react";
-import { useAuth } from "@/context/AuthContext";
-import { GetProfileByUsername } from "./ProfileAction";
 import { axiosInstance } from "@/config/axiosConfig";
+import { useToken } from "@/shared/hooks/useToken";
+import { useMutation } from "@tanstack/react-query";
 
 type credentialsLogin = {
   username: string;

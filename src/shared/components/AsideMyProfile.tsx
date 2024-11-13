@@ -18,8 +18,8 @@ export const AsideMyProfile = () => {
   const { user: perfil, signed } = useAuth();
   const idLoggedUser = perfil?.uid;
   const local = useLocation();
-  const localIsHome = local.pathname === "/posts";
-  const localIsUser = local.pathname === `/users/${perfil?.uid}`;
+  const localIsHome = local.pathname === "/";
+  const localIsUser = local.pathname === `/users/${perfil?.username}`;
   const localIsConfig = local.pathname === "/config";
   // const { response: perfil, isSuccess } = GetProfileById(idLoggedUser ?? "");
   return (
@@ -40,7 +40,7 @@ export const AsideMyProfile = () => {
           <div className="flex flex-col items-center justify-between w-full  h-screen p-5 text-5xl pb-7">
             <div className="flex flex-col items-center h-full gap-8">
               <div className="flex flex-col items-center gap-4">
-                <Link to={"/posts"}>
+                <Link to={"/"}>
                   <h2 className="max-xl:hidden">LABORAS</h2>
                 </Link>
                 <h2 className="xl:hidden">L</h2>
@@ -48,7 +48,7 @@ export const AsideMyProfile = () => {
               </div>
 
               <div className="flex flex-col w-full gap-4 text-5xl ">
-                <Link to="/posts">
+                <Link to="/">
                   <Button className="flex items-center max-xl:p-0 max-xl:pb-2 max-xl:justify-center justify-start w-full gap-4 p-1 xl:pl-3 text-lg font-bold text-white transition-all duration-200 bg-transparent rounded-full h-fit pr-7 hover:bg-rebeccapurple">
                     {localIsHome ? (
                       <HomeIconFilled className="w-8 max-xl:mr-0 h-8 mr-1 text-biancapurple" />
@@ -59,7 +59,7 @@ export const AsideMyProfile = () => {
                   </Button>
                 </Link>
 
-                <Link to={`/users/${perfil?.uid}`}>
+                <Link to={`/users/${perfil?.username}`}>
                   <Button className="flex items-center  max-xl:p-0 max-xl:pb-2 max-xl:justify-center justify-start w-full gap-4 p-1 pl-3 text-lg font-bold text-white transition-all duration-200 bg-transparent rounded-full max-md:hidden h-fit pr-7 hover:bg-rebeccapurple">
                     {localIsUser ? (
                       <UserCircleIconFilled className="w-8 h-8 max-xl:mr-0 mr-1 text-biancapurple" />
@@ -85,9 +85,7 @@ export const AsideMyProfile = () => {
             <ProfileTag perfil={perfil!} />
             <Avatar className="w-12 xl:hidden h-12 rounded-full cursor-pointer">
               <AvatarImage
-                src={
-                  perfil?.avatar_link?? "src/assets/chorro-timido.JPG"
-                }
+                src={perfil?.avatar_link ?? "src/assets/chorro-timido.JPG"}
               />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>

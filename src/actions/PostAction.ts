@@ -12,8 +12,13 @@ export function InteractPost(action: "like" | "dislike") {
 
   const mutate = useMutation({
     mutationFn: (post_id: string) => fetchInteractPost(action, post_id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: [`post-${variables}`],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["posts"],
+      });
     },
   });
 

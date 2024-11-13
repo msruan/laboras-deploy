@@ -35,10 +35,10 @@ export function PostContent({
               fullPage ? "flex-col" : ""
             } items-start text-aliceblue text-sm gap-2`}
           >
-            <Link to={`/users/${perfil?.uid}`}>
+            <Link to={`/users/${perfil?.username}`}>
               <h3>{perfil?.full_name}</h3>
             </Link>
-            <Link to={`/users/${perfil?.uid}`}>
+            <Link to={`/users/${perfil?.username}`}>
               <h4 className="opacity-70">@{perfil?.username}</h4>
             </Link>
           </div>

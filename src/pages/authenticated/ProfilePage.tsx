@@ -1,19 +1,16 @@
-import { GetProfileByUsername, GetProfilePosts } from "@/actions/ProfileAction";
+import { GetProfileByUsername } from "@/actions/ProfileAction";
 import { useAuth } from "@/context/AuthContext";
 import Seo from "@/shared/components/Seo";
 import Post from "@/shared/components/post/Post";
 import { Profile } from "@/shared/components/profile/Profile";
 import { ProfileMobile } from "@/shared/components/profile/ProfileMobile";
-import { useToken } from "@/shared/hooks/useToken";
 import { IPost } from "@/shared/models/post";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const ProfilePage = () => {
-  console.log("dando errado");
-  const { id } = useParams();
-  const { user: context } = useAuth();
+  const { username } = useParams();
   const navigate = useNavigate();
 
   const {
@@ -21,8 +18,9 @@ export const ProfilePage = () => {
     isSuccess,
     isLoading,
     isError,
+    error,
     refetch,
-  } = GetProfileByUsername(id!);
+  } = GetProfileByUsername(username!);
 
   function handleGoBack() {
     navigate(-1);
@@ -30,13 +28,13 @@ export const ProfilePage = () => {
 
   useEffect(() => {
     refetch();
-  }, [id]);
+  }, [username]);
 
   return (
     <div>
       <Seo title={"@" + profile?.username} />
-      {isLoading && <div>Pedding...</div>}
-      {isError && <div>Error</div>}
+      {/* {/* {isLoading && <div>Pedding...</div>} */}
+      {isError && <div>{error.message}</div>}
       {isSuccess && (
         <div className="flex flex-col h-full max-xl:border-0 gap-2 pl-3 pr-3 border-rebeccapurple2 border-r-2 border-l-2">
           <div className="flex flex-col gap-1">
@@ -49,16 +47,15 @@ export const ProfilePage = () => {
                 ></ChevronLeftIcon>
                 <h1 className="font-bold">{profile?.username}</h1>
               </div>
-              {profile && (
                 <>
                   <Profile profile={profile!} />
                   <ProfileMobile profile={profile!} />
                 </>
-              )}
             </div>
           </div>
           {profile?.posts.map((post: IPost) => (
             <Post
+              owner={profile}
               key={post.uid}
               post={post}
               fullPage={false}
@@ -66,7 +63,7 @@ export const ProfilePage = () => {
             />
           ))}
         </div>
-      )}
+      )} 
     </div>
   );
 };

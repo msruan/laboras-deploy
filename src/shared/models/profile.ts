@@ -6,7 +6,7 @@ export interface ProfileBase {
   full_name: string;
   email: string;
   following: ProfileBase[];
-  followers?: ProfileBase[];
+  followed_by?: ProfileBase[];
   created_at: string;
   updated_at: string;
   avatar_link: string;

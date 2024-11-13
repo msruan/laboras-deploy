@@ -12,7 +12,7 @@ export const ErrorPage = () => {
           <h1 className="text-6xl font-bold pt-10">PAGE NOT FOUND</h1>
             <div className="relative inline-block">
               <img width={600} src="src/assets/404.jpg"/>
-              <Link to="/posts">
+              <Link to="/">
                 <Button className="font-bold absolute top-1/2 left-1/2 transform -translate-x-72 translate-y-32 px-4 py-2 text-white cursor-pointer rounded-full">GO HOME</Button>
               </Link>
             </div>
