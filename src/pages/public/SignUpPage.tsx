@@ -78,7 +78,7 @@ export function SignUpPage() {
         <div>
           <Label htmlFor="full_name">Nome</Label>
           <Input
-            placeholder="Type your full name"
+            placeholder="Digite seu nome"
             type="text"
             name="full_name"
             id="full_name"

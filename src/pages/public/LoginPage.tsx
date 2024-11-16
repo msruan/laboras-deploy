@@ -27,6 +27,7 @@ export function LoginPage() {
   const { Login, signed } = useAuth();
 
   const [isEntering, setIsEntering] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [inputValues, setInputValues] = useState<CredentialsLogin>({
     username: "",
     password: "",
@@ -38,13 +39,17 @@ export function LoginPage() {
     setInputValues({ ...inputValues, [name]: value } as LoginRequest);
   };
 
-  const onSubmit = (e: React.MouseEvent<HTMLButtonElement> | null = null) => {
+  const onSubmit = async (e: React.MouseEvent<HTMLButtonElement> | null = null) => {
     if (e) {
       e.preventDefault();
     }
     // mutate(inputValues);
-    Login(inputValues);
     setIsEntering(true);
+    const { ok } = await Login(inputValues);
+    if (!ok) {
+      setIsError(true)
+      setIsEntering(false);
+    }
   };
 
   if (signed) {
@@ -108,9 +113,12 @@ export function LoginPage() {
           </Button>
         ) : (
           <Button className="mt-2" onClick={onSubmit}>
-            Entrar
+            {isError ? "Tentar novamente?" : " Entrar"}
           </Button>
         )}
+        {isError &&
+          <span className="text-xs text-center">Falha durante o login.</span>
+        }
 
         {/* <div className="flex justify-center items-center gap-6 mt-2">
               <Separator></Separator>

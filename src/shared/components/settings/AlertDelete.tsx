@@ -20,7 +20,7 @@ export function AlertDelete({ handleDelete }: { handleDelete: () => void }) {
           variant="ghost"
           className="flex justify-between w-full text-red-700"
         >
-          Delete account
+          Deletar conta
           <ArchiveBoxXMarkIcon className="w-4 h-4" />
         </Button>
       </AlertDialogTrigger>

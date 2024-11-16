@@ -1,8 +1,6 @@
 import { ProfileTag } from "./profile/ProfileTag";
-// import { AvatarIcon, HomeIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
-import { Link, useLocation } from "react-router-dom";
-import { GetProfileById } from "@/actions/ProfileAction";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CogIcon, HomeIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import {
   CogIcon as CogIconFilled,
@@ -13,6 +11,10 @@ import { useContext } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { Separator } from "./ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent } from "./ui/dropdown-menu";
+import { Card, CardContent } from "./ui/card";
+import { Logout } from "@/actions/AuthAction";
+import { AlertLogout } from "./settings/AlertLogout";
 
 export const AsideMyProfile = () => {
   const { user: perfil, signed } = useAuth();
@@ -20,6 +22,18 @@ export const AsideMyProfile = () => {
   const localIsHome = local.pathname === "/";
   const localIsUser = local.pathname === `/users/${perfil?.username}`;
   const localIsConfig = local.pathname === "/config";
+
+  const { setSigned } = useAuth();
+  const navigate = useNavigate();
+
+
+  const handleLogout = () => {
+    setSigned(false);
+    Logout();
+    navigate("/login");
+  };
+
+
   return (
     <div
       className={`flex flex-col max-xl:border-r-[1px] max-xl:border-gray-700  border-rebeccapurple2 xl:p-5 justify-between fixed top-0 left-0 min-h-screen overflow-x-hidden max-xl:w-fit max-md:hidden w-72 z-1`}
@@ -64,7 +78,7 @@ export const AsideMyProfile = () => {
                     ) : (
                       <UserCircleIcon className="w-8 h-8 max-xl:mr-0 mr-1 text-biancapurple" />
                     )}
-                    <span className="max-xl:hidden text-purple-400 dark:text-white">Profile</span>
+                    <span className="max-xl:hidden text-purple-400 dark:text-white">Perfil</span>
                   </Button>
                 </Link>
 
@@ -75,18 +89,43 @@ export const AsideMyProfile = () => {
                     ) : (
                       <CogIcon className="w-8 h-8 mr-1 max-xl:mr-0 text-biancapurple" />
                     )}
-                    <span className="max-xl:hidden text-purple-400 dark:text-white">Settings</span>
+                    <span className="max-xl:hidden text-purple-400 dark:text-white">Configurações</span>
                   </Button>
                 </Link>
               </div>
             </div>
-            <ProfileTag perfil={perfil!} />
             <Avatar className="w-12 xl:hidden h-12 rounded-full cursor-pointer">
               <AvatarImage
                 src={perfil?.avatar_link ?? "src/assets/chorro-timido.JPG"}
               />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Card className="w-full cursor-pointer bg-rebeccapurple2 flex gap-4 p-2 border-0 rounded-full hover:bg-rebeccapurple transition-all duration-150">
+                  <Avatar className="w-12 h-12 rounded-full cursor-pointer">
+                    <AvatarImage
+                      src={perfil?.avatar_link ?? "src/assets/chorro-timido.JPG"}
+                    />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                  <CardContent className="flex gap-5 break-all justify-center items-center p-0">
+                    <div className="flex flex-col items-start text-aliceblue text-sm gap-0.5">
+                      <h3>
+                        <strong>{perfil?.full_name}</strong>
+                      </h3>
+                      <h4 className="opacity-70">@{perfil?.username}</h4>
+                    </div>
+                  </CardContent>
+                </Card>
+              </DropdownMenuTrigger>
+
+              <DropdownMenuContent>
+                <AlertLogout handleLogout={handleLogout}/>
+              </DropdownMenuContent>
+
+            </DropdownMenu>
+
           </div>
         </>
       )}

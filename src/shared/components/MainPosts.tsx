@@ -15,7 +15,7 @@ export const MainPosts = () => {
     <>
     <Seo title='Laboras'/>
       {isLoading && <Spinner />}
-      {isError && <div>Error</div>}
+      {isError && <Spinner error/>}
       <div>
         {isSuccess && idLoggedUser && (
           <div className="flex flex-col h-full max-xl:border-0 gap-2 pl-3 pr-3 border-rebeccapurple2 border-r-2 border-l-2">

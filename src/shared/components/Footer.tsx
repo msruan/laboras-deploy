@@ -54,7 +54,7 @@ export function Footer() {
           <Link to={`/users/${perfil?.username}`}>
             <Avatar className="w-8 h-8 rounded-full cursor-pointer">
               <AvatarImage
-                src={perfil?.avatar ?? "src/assets/chorro-timido.JPG"}
+                src={perfil?.avatar_link ?? "src/assets/chorro-timido.JPG"}
               />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>

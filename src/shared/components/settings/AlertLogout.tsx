@@ -17,7 +17,7 @@ export function AlertLogout({ handleLogout }: { handleLogout: () => void }) {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button variant="ghost" className="flex justify-between w-full">
-          Logout
+          Sair
           <ArrowLeftStartOnRectangleIcon className="w-4 h-4" />
         </Button>
       </AlertDialogTrigger>
@@ -31,8 +31,8 @@ export function AlertLogout({ handleLogout }: { handleLogout: () => void }) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleLogout}>Continue</AlertDialogAction>
+          <AlertDialogCancel>Cancelar</AlertDialogCancel>
+          <AlertDialogAction onClick={handleLogout}>Continuar</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

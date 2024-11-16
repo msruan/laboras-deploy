@@ -22,20 +22,20 @@ export function SectionProfile({ profile }: { profile: ProfileDetailed }) {
   return (
     <Tabs defaultValue="account" className="w-full mb-4">
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="account">Account</TabsTrigger>
-        <TabsTrigger value="password">Password</TabsTrigger>
+        <TabsTrigger value="account">Conta</TabsTrigger>
+        <TabsTrigger value="password">Senha</TabsTrigger>
       </TabsList>
       <TabsContent value="account">
         <Card>
           <CardHeader>
-            <CardTitle>Account</CardTitle>
+            <CardTitle>Conta</CardTitle>
             <CardDescription>
-              Make changes to your account here. Click save when you're done.
+              Faça mudanças em sua conta aqui. Clique em Salvar quando acabar.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             <div className="space-y-1">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">Nome</Label>
               <Input
                 id="name"
                 defaultValue={`${profile.full_name}`}
@@ -51,16 +51,16 @@ export function SectionProfile({ profile }: { profile: ProfileDetailed }) {
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Save changes</Button>
+            <Button>Salvar mudanças</Button>
           </CardFooter>
         </Card>
       </TabsContent>
       <TabsContent value="password">
         <Card>
           <CardHeader>
-            <CardTitle>Password</CardTitle>
+            <CardTitle>Senha</CardTitle>
             <CardDescription>
-              Change your password here. After saving, you'll be logged out.
+              Troque sua senha aqui. Após salvar, você será deslogado.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
@@ -74,7 +74,7 @@ export function SectionProfile({ profile }: { profile: ProfileDetailed }) {
             </div>
           </CardContent>
           <CardFooter>
-            <Button>Save password</Button>
+            <Button>Salvar senha</Button>
           </CardFooter>
         </Card>
       </TabsContent>

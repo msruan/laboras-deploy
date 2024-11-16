@@ -8,7 +8,7 @@ type Props = {
 
 export const AsideFollowers = ({ ...props }: Props) => {
   const { user, signed } = useAuth();
-  const followers = user?.following;
+  const followers = user?.followed_by;
 
   return (
     <>

@@ -1,7 +1,6 @@
 import axiosInstance from "@/config/axiosConfig";
 import { useToken } from "@/shared/hooks/useToken";
 import { ProfileDetailed } from "@/shared/models/profile";
-import { useQuery } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import {
   useState,
@@ -10,7 +9,6 @@ import {
   useContext,
   useEffect,
 } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 
 export function useAuth() {
   return useContext(AuthContext);
@@ -26,7 +24,7 @@ export type LoggedUserContextType = {
   signed: boolean;
   setSigned: (arg: boolean) => void;
   // handleChange: ({ username, id }: LoggedUserInfo) => void;
-  Login(credentials: CredentialsLogin): Promise<void>;
+  Login(credentials: CredentialsLogin): Promise<{ ok: boolean }>;
 };
 
 const AuthContext = createContext<LoggedUserContextType>(
@@ -56,16 +54,23 @@ export const LoggedUserProvider = ({ children }: { children: ReactNode }) => {
   async function Login(credentials: CredentialsLogin) {
     const { setToken } = useToken();
 
-    const loginRequest: AxiosResponse<{ acess_token: string }> =
-      await axiosInstance.post("/auth/login", credentials);
+    try {
 
-    const token = loginRequest?.data.acess_token;
-    setToken(token);
+      const loginRequest: AxiosResponse<{ acess_token: string }> =
+        await axiosInstance.post("/auth/login", credentials);
+      const token = loginRequest?.data.acess_token;
+      setToken(token);
 
-    axiosInstance.defaults.headers.Authorization = `Bearer ${token}`;
-    getLoggedUser(token);
+      axiosInstance.defaults.headers.Authorization = `Bearer ${token}`;
+      getLoggedUser(token);
 
-    setSigned(true);
+      setSigned(true);
+
+      return { ok: true }
+    }
+    catch (err) {
+      return { ok: false }
+    }
   }
 
   function getLoggedUser(token: string): void {

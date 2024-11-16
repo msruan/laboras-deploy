@@ -16,6 +16,7 @@ export interface ProfileBase {
 export interface ProfileDetailed extends ProfileBase {
   posts: IPost[];
   following: ProfileBase[];
+  followed_by: ProfileBase[];
 }
 
 export interface ProfileUpdate {

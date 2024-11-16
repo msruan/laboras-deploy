@@ -27,7 +27,7 @@ export const ProfileMobile = ({ profile }: IProfileProps) => {
           <Avatar className="h-56 w-56 max-xl:h-40 max-xl:w-40 max-sm:h-20 max-sm:w-20">
             <AvatarImage
               src={
-                profile?.avatar ??
+                profile?.avatar_link ??
                 "https://i.pinimg.com/originals/b5/81/61/b58161c8a74b05c68eeefae22908ce35.jpg"
               }
             />
@@ -63,7 +63,7 @@ export const ProfileMobile = ({ profile }: IProfileProps) => {
       <CardContent className="flex flex-col gap-6 p-0 items-center w-full">
         <div className="flex w-fit h-fit text-wrap ">
           <p className="break-normal text-ellipsis ">
-            {profile?.bio ?? (
+            {profile.bio !== "" ? profile.bio : (
               <p>
                 Meiga e abusada, faço você se perder! e quem foi que disse que
                 eu estava apaixonada por você? eu só quero saber! linda e

@@ -14,6 +14,7 @@ import img1 from "./../..//assets/img1.svg";
 import img2 from "./../../assets/img2.svg";
 import img3 from "./../../assets/img3.svg";
 import img4 from "./../../assets/img4.svg";
+import Middleware from "@/middleware";
 
 export const LoginLayout = () => {
   type MyCarouselItemProps = {
@@ -31,6 +32,8 @@ export const LoginLayout = () => {
   }
 
   return (
+    <>
+    <Middleware />
     <main className=" h-screen  flex justify-center items-center  w-full">
       <div className="bg-card w-full h-full md:flex justify-center items-center p-16 max-sm:hidden">
         <Carousel
@@ -56,5 +59,7 @@ export const LoginLayout = () => {
         <Outlet />
       </section>
     </main>
+    </>
+  
   );
 };

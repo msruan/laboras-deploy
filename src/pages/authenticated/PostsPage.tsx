@@ -1,6 +1,7 @@
 import { GetPost } from "@/actions/PostAction";
 import { TextBox } from "@/shared/components/TextBox";
 import Post from "@/shared/components/post/Post";
+import Spinner from "@/shared/components/ui/spinner";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -22,7 +23,7 @@ export const PostsPage = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const { response: post, isSuccess: isGetPostSuccess, refetch } = GetPost(id!);
+  const { response: post, isSuccess: isGetPostSuccess, refetch, isLoading } = GetPost(id!);
 
   function handleGoBack() {
     navigate(-1);
@@ -36,6 +37,8 @@ export const PostsPage = () => {
     <div className="flex flex-col gap-2">
       <Header handleGoBack={handleGoBack}></Header>
       <div className="max-sm:mt-8">
+        {isLoading && <Spinner />}
+        
         {isGetPostSuccess &&
           (post ? (
             <div>

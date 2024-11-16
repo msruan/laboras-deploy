@@ -4,6 +4,7 @@ import Seo from "@/shared/components/Seo";
 import Post from "@/shared/components/post/Post";
 import { Profile } from "@/shared/components/profile/Profile";
 import { ProfileMobile } from "@/shared/components/profile/ProfileMobile";
+import Spinner from "@/shared/components/ui/spinner";
 import { IPost } from "@/shared/models/post";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
@@ -33,8 +34,8 @@ export const ProfilePage = () => {
   return (
     <div>
       <Seo title={"@" + profile?.username} />
-      {/* {/* {isLoading && <div>Pedding...</div>} */}
-      {isError && <div>{error.message}</div>}
+      {isLoading && <Spinner />}
+      {isError && <Spinner error/>}
       {isSuccess && (
         <div className="flex flex-col h-full max-xl:border-0 gap-2 pl-3 pr-3 border-rebeccapurple2 border-r-2 border-l-2">
           <div className="flex flex-col gap-1">
