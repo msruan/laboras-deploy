@@ -15,7 +15,7 @@ export const AsideFollowers = ({ ...props }: Props) => {
       {signed ? (
         <>
           <div
-            className={`flex flex-col items-center p-6 gap-3 fixed top-0 right-0 min-h-screen overflow-x-hidden max-xl:hidden w-72 z-1`}
+            className={`flex flex-col items-center p-6 gap-3 fixed top-0 right-0 min-h-screen overflow-x-hidden mr-24 max-xl:hidden w-72 z-1`}
           >
             <h2 className="text-white font-sans text-2xl font-bold">
               {followers?.length ? "Seguimores" : "Seu flopado..."}

@@ -7,11 +7,14 @@ import {
   HomeIcon as HomeIconFilled,
   UserCircleIcon as UserCircleIconFilled,
 } from "@heroicons/react/16/solid";
-import { useContext } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { Separator } from "./ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent } from "./ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+} from "./ui/dropdown-menu";
 import { Card, CardContent } from "./ui/card";
 import { Logout } from "@/actions/AuthAction";
 import { AlertLogout } from "./settings/AlertLogout";
@@ -26,17 +29,15 @@ export const AsideMyProfile = () => {
   const { setSigned } = useAuth();
   const navigate = useNavigate();
 
-
   const handleLogout = () => {
     setSigned(false);
     Logout();
     navigate("/login");
   };
 
-
   return (
     <div
-      className={`flex flex-col max-xl:border-r-[1px] max-xl:border-gray-700  border-rebeccapurple2 xl:p-5 justify-between fixed top-0 left-0 min-h-screen overflow-x-hidden max-xl:w-fit max-md:hidden w-72 z-1`}
+      className={`flex flex-col max-xl:border-r-[1px] max-xl:border-gray-700  border-rebeccapurple2 xl:p-5 justify-between fixed top-0 left-0 min-h-screen overflow-x-hidden max-xl:w-fit max-md:hidden ml-24 w-72 z-1`}
     >
       {signed && (
         <>
@@ -53,7 +54,7 @@ export const AsideMyProfile = () => {
             <div className="flex flex-col items-center h-full gap-8">
               <div className="flex flex-col items-center gap-4">
                 <Link to={"/"}>
-                  <h2 className="max-xl:hidden">LABORAS</h2>
+                  <img src="src/assets/logo.svg" />
                 </Link>
                 <h2 className="xl:hidden">L</h2>
                 <Separator></Separator>
@@ -67,7 +68,9 @@ export const AsideMyProfile = () => {
                     ) : (
                       <HomeIcon className="w-8 max-xl:mr-0 h-8 mr-1 text-biancapurple" />
                     )}
-                    <span className="max-xl:hidden text-purple-400 dark:text-white">Home</span>
+                    <span className="max-xl:hidden text-purple-400 dark:text-white">
+                      Home
+                    </span>
                   </Button>
                 </Link>
 
@@ -78,7 +81,9 @@ export const AsideMyProfile = () => {
                     ) : (
                       <UserCircleIcon className="w-8 h-8 max-xl:mr-0 mr-1 text-biancapurple" />
                     )}
-                    <span className="max-xl:hidden text-purple-400 dark:text-white">Perfil</span>
+                    <span className="max-xl:hidden text-purple-400 dark:text-white">
+                      Perfil
+                    </span>
                   </Button>
                 </Link>
 
@@ -89,7 +94,9 @@ export const AsideMyProfile = () => {
                     ) : (
                       <CogIcon className="w-8 h-8 mr-1 max-xl:mr-0 text-biancapurple" />
                     )}
-                    <span className="max-xl:hidden text-purple-400 dark:text-white">Configurações</span>
+                    <span className="max-xl:hidden text-purple-400 dark:text-white">
+                      Configurações
+                    </span>
                   </Button>
                 </Link>
               </div>
@@ -105,7 +112,9 @@ export const AsideMyProfile = () => {
                 <Card className="w-full cursor-pointer bg-rebeccapurple2 flex gap-4 p-2 border-0 rounded-full hover:bg-rebeccapurple transition-all duration-150">
                   <Avatar className="w-12 h-12 rounded-full cursor-pointer">
                     <AvatarImage
-                      src={perfil?.avatar_link ?? "src/assets/chorro-timido.JPG"}
+                      src={
+                        perfil?.avatar_link ?? "src/assets/chorro-timido.JPG"
+                      }
                     />
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
@@ -121,11 +130,9 @@ export const AsideMyProfile = () => {
               </DropdownMenuTrigger>
 
               <DropdownMenuContent>
-                <AlertLogout handleLogout={handleLogout}/>
+                <AlertLogout handleLogout={handleLogout} />
               </DropdownMenuContent>
-
             </DropdownMenu>
-
           </div>
         </>
       )}

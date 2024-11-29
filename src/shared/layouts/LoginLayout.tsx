@@ -9,12 +9,14 @@ import {
 } from "@/shared/components/ui/carousel";
 
 import Autoplay from "embla-carousel-autoplay";
+import Snowfall from "react-snowfall";
 
 import img1 from "./../..//assets/img1.svg";
 import img2 from "./../../assets/img2.svg";
 import img3 from "./../../assets/img3.svg";
 import img4 from "./../../assets/img4.svg";
 import Middleware from "@/middleware";
+import { getMonth } from "date-fns";
 
 export const LoginLayout = () => {
   type MyCarouselItemProps = {
@@ -31,35 +33,37 @@ export const LoginLayout = () => {
     );
   }
 
+  const isDecember = getMonth(new Date()) === 10;
+
   return (
     <>
-    <Middleware />
-    <main className=" h-screen  flex justify-center items-center  w-full">
-      <div className="bg-card w-full h-full md:flex justify-center items-center p-16 max-sm:hidden">
-        <Carousel
-          className="w-full max-w-xl"
-          opts={{ loop: true }}
-          plugins={[
-            Autoplay({
-              delay: 3000,
-            }),
-          ]}
-        >
-          <CarouselContent>
-            <MyCarouselItem img={img1} />
-            <MyCarouselItem img={img2} />
-            <MyCarouselItem img={img3} />
-            <MyCarouselItem img={img4} />
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
-      </div>
-      <section className="flex items-center justify-center bg-background h-full max-w-3xl w-full p-4">
-        <Outlet />
-      </section>
-    </main>
+      <Middleware />
+      <main className=" h-screen  flex justify-center items-center  w-full">
+        <div className="bg-card w-full h-full md:flex justify-center items-center p-16 max-sm:hidden">
+          {isDecember && <Snowfall />}
+          <Carousel
+            className="w-full max-w-xl"
+            opts={{ loop: true }}
+            plugins={[
+              Autoplay({
+                delay: 3000,
+              }),
+            ]}
+          >
+            <CarouselContent>
+              <MyCarouselItem img={img1} />
+              <MyCarouselItem img={img2} />
+              <MyCarouselItem img={img3} />
+              <MyCarouselItem img={img4} />
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
+        <section className="flex items-center justify-center bg-background h-full max-w-3xl w-full p-4">
+          <Outlet />
+        </section>
+      </main>
     </>
-  
   );
 };

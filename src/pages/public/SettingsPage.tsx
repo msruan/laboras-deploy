@@ -13,12 +13,13 @@ import { Logout } from "@/actions/AuthAction";
 import { GetProfileById } from "@/actions/ProfileAction";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { Snowfall } from "react-snowfall";
+import Neve from "react-snowfall";
 
 export function SettingsPage() {
   const { user: profile } = useAuth();
   const { setSigned } = useAuth();
   const navigate = useNavigate();
-
 
   const handleLogout = () => {
     setSigned(false);
@@ -27,29 +28,31 @@ export function SettingsPage() {
   };
 
   return (
-        <div className="flex items-center justify-center pt-6">
-          <Card className="w-full max-w-lg text-wrap bg-transparant">
-            <CardHeader>
-              <CardTitle
-                id="beggin"
-                className="text-2xl font-bold tracking-tighter text-center"
-              >
-                Configurações
-              </CardTitle>
-              <Separator />
-            </CardHeader>
-            <CardContent className="flex flex-col gap-8">
-              <section className="flex flex-col justify-between h-full gap-6 items-center">
-                <SectionTitle title="Perfil" />
-                <SectionProfile profile={profile!} />
-              </section>
-              <section className="flex flex-col justify-between h-full gap-4 w-full items-center">
-                <SectionTitle title="Gerais" />
-                <SectionGeneral handleLogout={handleLogout} />
-              </section>
-            </CardContent>
-          </Card>
-        </div>
+    <div className="flex items-center justify-center pt-6">
+      <Snowfall />
+      <Neve />
+      <Card className="w-full max-w-lg text-wrap bg-transparant">
+        <CardHeader>
+          <CardTitle
+            id="beggin"
+            className="text-2xl font-bold tracking-tighter text-center"
+          >
+            Configurações
+          </CardTitle>
+          <Separator />
+        </CardHeader>
+        <CardContent className="flex flex-col gap-8">
+          <section className="flex flex-col justify-between h-full gap-6 items-center">
+            <SectionTitle title="Perfil" />
+            <SectionProfile profile={profile!} />
+          </section>
+          <section className="flex flex-col justify-between h-full gap-4 w-full items-center">
+            <SectionTitle title="Gerais" />
+            <SectionGeneral handleLogout={handleLogout} />
+          </section>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
 

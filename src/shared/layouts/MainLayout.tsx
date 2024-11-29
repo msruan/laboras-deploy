@@ -14,7 +14,7 @@ export const MainLayout = () => {
       {user && (
         <div className=" w-full min-h-screen">
           <AsideMyProfile />
-          <main className="ml-72 max-xl:ml-24 xl:mr-72 max-md:m-0 max-sm:mb-16">
+          <main className="ml-96 max-xl:ml-24 xl:mr-96 max-md:m-0 max-sm:mb-16">
             <Outlet />
           </main>
           <AsideFollowers />
