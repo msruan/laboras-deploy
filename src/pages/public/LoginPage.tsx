@@ -39,7 +39,9 @@ export function LoginPage() {
     setInputValues({ ...inputValues, [name]: value } as LoginRequest);
   };
 
-  const onSubmit = async (e: React.MouseEvent<HTMLButtonElement> | null = null) => {
+  const onSubmit = async (
+    e: React.MouseEvent<HTMLButtonElement> | null = null
+  ) => {
     if (e) {
       e.preventDefault();
     }
@@ -47,7 +49,7 @@ export function LoginPage() {
     setIsEntering(true);
     const { ok } = await Login(inputValues);
     if (!ok) {
-      setIsError(true)
+      setIsError(true);
       setIsEntering(false);
     }
   };
@@ -61,8 +63,6 @@ export function LoginPage() {
   };
 
   return (
-    // <Helmet>
-    // <title>vsf</title>
     <Card
       className="w-full max-w-md text-wrap"
       onKeyDown={(e) => {
@@ -116,9 +116,9 @@ export function LoginPage() {
             {isError ? "Tentar novamente?" : " Entrar"}
           </Button>
         )}
-        {isError &&
+        {isError && (
           <span className="text-xs text-center">Falha durante o login.</span>
-        }
+        )}
 
         {/* <div className="flex justify-center items-center gap-6 mt-2">
               <Separator></Separator>

@@ -1,20 +1,30 @@
 import Snowfall from "react-snowfall";
+import { ReactNode } from "react";
+import christmasLogo from "@/assets/christmas-logo.svg";
 
 interface Celebration {
-  isTimeToCelebrate: () => boolean;
+  isTimeToCelebrate(): boolean;
+  launchVisuals(): ReactNode | void;
+  customLogo(): ReactNode;
 }
 
 class Christmas implements Celebration {
   isTimeToCelebrate() {
     return new Date().getMonth() === 11; //December is the 11 month
   }
-  snowFall() {
-    return Snowfall;
+
+  launchVisuals() {
+    return <Snowfall />;
+  }
+
+  customLogo() {
+    return <img src={christmasLogo} />;
   }
 }
 
 class Celebrant {
-  actualCelebration: Celebration | null = null;
+  public actualCelebration: Celebration | null = null;
+
   constructor(celebrations: Celebration[]) {
     for (const celebration of celebrations) {
       if (!celebration.isTimeToCelebrate()) {
@@ -23,6 +33,7 @@ class Celebrant {
       if (this.actualCelebration !== null) {
         throw new Error("Two celebrations cannot happen in the same time!");
       } else {
+        this.actualCelebration = celebration;
       }
     }
   }

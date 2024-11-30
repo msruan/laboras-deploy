@@ -19,6 +19,8 @@ import { Card, CardContent } from "./ui/card";
 import { Logout } from "@/actions/AuthAction";
 import { AlertLogout } from "./settings/AlertLogout";
 
+import Celebrate from "@/shared/lib/celebrations";
+
 export const AsideMyProfile = () => {
   const { user: perfil, signed } = useAuth();
   const local = useLocation();
@@ -34,6 +36,8 @@ export const AsideMyProfile = () => {
     Logout();
     navigate("/login");
   };
+
+  const actualCelebration = Celebrate.actualCelebration;
 
   return (
     <div
@@ -53,8 +57,12 @@ export const AsideMyProfile = () => {
           <div className="flex flex-col items-center justify-between w-full  h-screen p-5 text-5xl pb-7">
             <div className="flex flex-col items-center h-full gap-8">
               <div className="flex flex-col items-center gap-4">
-                <Link to={"/"}>
-                  <img src="src/assets/logo.svg" />
+                <Link className="max-xl:hidden" to={"/"}>
+                  {actualCelebration ? (
+                    actualCelebration.customLogo() ?? ""
+                  ) : (
+                    <h2>LABORAS</h2>
+                  )}
                 </Link>
                 <h2 className="xl:hidden">L</h2>
                 <Separator></Separator>

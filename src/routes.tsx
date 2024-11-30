@@ -9,6 +9,7 @@ import ProfilePage from "./pages/authenticated/ProfilePage";
 import { MainPosts } from "@/shared/components/MainPosts";
 import { SettingsPage } from "./pages/public/SettingsPage";
 import { SignUpPage } from "./pages/public/SignUpPage";
+import LandPage from "./pages/public/LandPage";
 
 const AuthRoutes = [
   {
@@ -34,6 +35,10 @@ const SignRoutes = [
         element: <PostsPage />,
       },
     ],
+  },
+  {
+    path: "/land",
+    element: <LandPage />,
   },
 
   {

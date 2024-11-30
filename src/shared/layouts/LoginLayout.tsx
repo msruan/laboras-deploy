@@ -8,15 +8,15 @@ import {
   CarouselPrevious,
 } from "@/shared/components/ui/carousel";
 
+import Celebrant from "@/shared/lib/celebrations";
+
 import Autoplay from "embla-carousel-autoplay";
-import Snowfall from "react-snowfall";
 
 import img1 from "./../..//assets/img1.svg";
 import img2 from "./../../assets/img2.svg";
 import img3 from "./../../assets/img3.svg";
 import img4 from "./../../assets/img4.svg";
 import Middleware from "@/middleware";
-import { getMonth } from "date-fns";
 
 export const LoginLayout = () => {
   type MyCarouselItemProps = {
@@ -33,14 +33,15 @@ export const LoginLayout = () => {
     );
   }
 
-  const isDecember = getMonth(new Date()) === 10;
+  const actualCelebration = Celebrant.actualCelebration;
 
   return (
     <>
       <Middleware />
       <main className=" h-screen  flex justify-center items-center  w-full">
+        {actualCelebration && (actualCelebration.launchVisuals() ?? "")}
+
         <div className="bg-card w-full h-full md:flex justify-center items-center p-16 max-sm:hidden">
-          {isDecember && <Snowfall />}
           <Carousel
             className="w-full max-w-xl"
             opts={{ loop: true }}
