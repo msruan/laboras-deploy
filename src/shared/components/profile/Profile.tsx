@@ -14,7 +14,7 @@ import {
   UpdateProfile,
 } from "@/actions/ProfileAction";
 import { useToken } from "@/shared/hooks/useToken";
-import { UpdatePost } from "@/actions/PostAction";
+import { Link } from "react-router-dom";
 
 type Props = {
   profile: ProfileDetailed;
@@ -36,7 +36,7 @@ export const Profile = ({ profile }: Props) => {
 
   const { mutate: followMutate } = FollowProfile(profileToBeFollowed);
   const { mutate: unfollowMutate } = UnfollowProfile(profileToBeFollowed);
-  const { mutation: handlePatch } = UpdateProfile();
+  const { mutate: changeBio } = UpdateProfile();
 
   const isFollowing = user?.following.some((user) => user.uid === profile.uid);
 
@@ -51,12 +51,13 @@ export const Profile = ({ profile }: Props) => {
     }
   }
 
-  function handleUpdateAvatar() {}
-
   function handleUpdateBio() {
     const bioUpdated = {
+      userId: user!.uid,
       bio: bio,
     };
+
+    changeBio(bioUpdated);
 
     //to=do implementar com a rota de put
     setIsEditingBio(false);
@@ -75,12 +76,11 @@ export const Profile = ({ profile }: Props) => {
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         {signed && isCurrentUserProfile && (
-          <Button
-            className="w-32 text-white rounded-full font-bold px-9"
-            onClick={handleUpdateAvatar}
-          >
-            Change image
-          </Button>
+          <Link to="/config">
+            <Button className="w-32 text-white rounded-full font-bold px-9">
+              Mudar
+            </Button>
+          </Link>
         )}
         {!isCurrentUserProfile && (
           <Button
@@ -89,7 +89,7 @@ export const Profile = ({ profile }: Props) => {
             }`}
             onClick={handleFollow}
           >
-            {isFollowing ? "Unfollow" : "Follow"}
+            {isFollowing ? "Deixar de seguir" : "Seguir"}
           </Button>
         )}
       </div>
@@ -111,13 +111,15 @@ export const Profile = ({ profile }: Props) => {
               <textarea
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-                className="border border-gray-300 rounded p-2"
+                className="border bg-black text-white border-gray-300 rounded p-2"
                 rows={4}
                 placeholder="Digite sua nova bio aqui..."
               />
             ) : (
               <p className="break-normal text-ellipsis">
-                {profile?.bio ?? (
+                {profile.bio !== "" ? (
+                  profile.bio
+                ) : (
                   <p>
                     Meiga e abusada, faço você se perder! e quem foi que disse
                     que eu estava apaixonada por você? eu só quero saber! linda
@@ -135,23 +137,24 @@ export const Profile = ({ profile }: Props) => {
               className="font-bold p-4 px-9 w-16 h-8 bg-slate-700 hover:bg-slate-800 text-white rounded-full justify-self-center"
               onClick={() => setIsEditingBio(true)}
             >
-              Edit bio
+              Editar bio
             </Button>
           )}
 
           {isEditingBio && (
             <div className="flex gap-4">
               <Button
-                className="font-bold p-4 px-9 w-16 h-8 bg-green-600 hover:bg-green-700 text-white rounded-full justify-self-center"
-                onClick={handleUpdateBio}
-              >
-                Save
-              </Button>
-              <Button
                 className="font-bold p-4 px-9 w-16 h-8 bg-gray-500 hover:bg-gray-600 text-white rounded-full justify-self-center"
                 onClick={() => setIsEditingBio(false)}
               >
-                Cancel
+                Cancelar
+              </Button>
+
+              <Button
+                className="font-bold p-4 px-9 w-16 h-8 bg-green-600 hover:bg-green-700 text-white rounded-full justify-self-center"
+                onClick={handleUpdateBio}
+              >
+                Salvar
               </Button>
             </div>
           )}

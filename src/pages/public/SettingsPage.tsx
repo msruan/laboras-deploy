@@ -27,10 +27,11 @@ export function SettingsPage() {
     navigate("/login");
   };
 
+  const isDecember = new Date().getMonth() === 11;
+
   return (
     <div className="flex items-center justify-center pt-6">
-      <Snowfall />
-      <Neve />
+      {isDecember && <Neve />}
       <Card className="w-full max-w-lg text-wrap bg-transparant">
         <CardHeader>
           <CardTitle

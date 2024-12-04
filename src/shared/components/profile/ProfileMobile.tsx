@@ -7,6 +7,7 @@ import {
 import { Button } from "@/shared/components/ui/button";
 import { ProfileDetailed } from "../../models/profile";
 import { useAuth } from "@/context/AuthContext";
+import { Link } from "react-router-dom";
 
 type IProfileProps = {
   profile: ProfileDetailed;
@@ -34,9 +35,11 @@ export const ProfileMobile = ({ profile }: IProfileProps) => {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           {signed && isCurrentUserProfile && (
-            <Button className="w-6   text-white rounded-full font-bold text-sm px-8">
-              Change
-            </Button>
+            <Link to="/config">
+              <Button className="w-6   text-white rounded-full font-bold text-sm px-8">
+                Mudar
+              </Button>
+            </Link>
           )}
         </div>
         <div className="flex flex-col items-start gap-4">
@@ -63,7 +66,9 @@ export const ProfileMobile = ({ profile }: IProfileProps) => {
       <CardContent className="flex flex-col gap-6 p-0 items-center w-full">
         <div className="flex w-fit h-fit text-wrap ">
           <p className="break-normal text-ellipsis ">
-            {profile.bio !== "" ? profile.bio : (
+            {profile.bio !== "" ? (
+              profile.bio
+            ) : (
               <p>
                 Meiga e abusada, faço você se perder! e quem foi que disse que
                 eu estava apaixonada por você? eu só quero saber! linda e
@@ -75,9 +80,11 @@ export const ProfileMobile = ({ profile }: IProfileProps) => {
           </p>
         </div>
         {signed && isCurrentUserProfile && (
-          <Button className="font-bold p-4 px-9 w-16 h-8 bg-slate-700 hover:bg-slate-800 text-white rounded-full justify-self-center">
-            Edit bio
-          </Button>
+          <Link to="/config">
+            <Button className="font-bold p-4 px-9 w-16 h-8 bg-slate-700 hover:bg-slate-800 text-white rounded-full justify-self-center">
+              Editar bio
+            </Button>
+          </Link>
         )}
       </CardContent>
     </Card>

@@ -20,8 +20,8 @@ export interface ProfileDetailed extends ProfileBase {
 }
 
 export interface ProfileUpdate {
-  full_name: string;
-  password: string;
-  bio: string
-  avatar_link: string
+  full_name?: string;
+  password?: string;
+  bio?: string
+  avatar_link?: string
 }

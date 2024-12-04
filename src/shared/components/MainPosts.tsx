@@ -6,7 +6,13 @@ import Seo from "@/shared/components/Seo";
 import blinkers from "@/assets/blinkers.gif";
 
 export const MainPosts = () => {
-  const { response: posts, isSuccess, isError, isLoading } = GetAllPosts();
+  const {
+    response: posts,
+    isSuccess,
+    isError,
+    isLoading,
+    error,
+  } = GetAllPosts();
 
   const isDecember = new Date().getMonth() === 11;
 
@@ -16,6 +22,7 @@ export const MainPosts = () => {
       <Seo title="Laboras" />
       {isLoading && <Spinner />}
       {isError && <Spinner error />}
+      {isError && error.message}
       <div>
         {isDecember && (
           <div
@@ -24,7 +31,7 @@ export const MainPosts = () => {
               backgroundRepeat: "repeat-x",
               backgroundSize: "150px 150px",
             }}
-            className={`w-full h-[150px]`}
+            className={`w-full h-[155px]`}
           ></div>
         )}
         {isSuccess && (

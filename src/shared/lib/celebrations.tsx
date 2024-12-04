@@ -32,9 +32,8 @@ class Celebrant {
       }
       if (this.actualCelebration !== null) {
         throw new Error("Two celebrations cannot happen in the same time!");
-      } else {
-        this.actualCelebration = celebration;
       }
+      this.actualCelebration = celebration;
     }
   }
 }

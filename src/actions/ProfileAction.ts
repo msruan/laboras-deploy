@@ -2,19 +2,15 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "../config/axiosConfig";
 import { AxiosPromise, AxiosResponse } from "axios";
 import {
-  ProfileBase,
   ProfileDetailed,
   ProfileUpdate,
 } from "@/shared/models/profile";
-import { IPost } from "@/shared/models/post";
-import { LoggedUserProvider } from "@/context/AuthContext";
 
 export function GetProfileById(profileId: string) {
   const fetchGetProfile = async (
     profileId: string
   ): AxiosPromise<ProfileDetailed> => {
-    const res = await axiosInstance.get(`/users/${profileId}`);
-    return res;
+    return await axiosInstance.get(`/users/${profileId}`);
   };
   //Todo: atualizar rota para algo como .get('<token_user>/followers);
 
@@ -52,14 +48,14 @@ export function GetProfileByUsername(username: string) {
   };
 }
 
-async function fetPatchProfile(profile: ProfileUpdate) {
-  const response = await axiosInstance.put(`/users/`, profile);
-  return response;
-}
-
 export function UpdateProfile() {
+  async function fetPatchProfile(profile: ProfileUpdate & {userId:string}, ) {
+    const response = await axiosInstance.put(`/users/${profile.userId}`, profile);
+    return response;
+  }
+
   const queryClient = useQueryClient();
-  const mutation = useMutation({
+  const mutate = useMutation({
     mutationFn: fetPatchProfile,
     //@Todo: o back ta retornando esse Profile?
     onSuccess: (response: AxiosResponse<ProfileUpdate>) => {
@@ -70,25 +66,18 @@ export function UpdateProfile() {
     },
   });
   return {
-    mutation,
+    ...mutate,
   };
 }
 
-
-async function fetchFollow(user: { id_user: string, token: string }) {
-  const response = await axiosInstance.post(
-    `/users/follow/${user.id_user}`,
-    {},
-    {
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    }
-  );
-  return response.data;
-}
-
 export function FollowProfile(user: { id_user: string, token: string }) {
+  async function fetchFollow(user: { id_user: string, token: string }) {
+    const response = await axiosInstance.post(
+      `/users/follow/${user.id_user}`,
+    );
+    return response.data;
+  }
+  
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: () => fetchFollow(user),
@@ -97,32 +86,35 @@ export function FollowProfile(user: { id_user: string, token: string }) {
       queryClient.refetchQueries({ queryKey: ["posts"] })
     }
   })
-  return mutation
+  return mutation;
 }
 
-
-async function fetchUnfollow(user: { id_user: string, token: string, username: string }) {
-  const response = await axiosInstance.post(
-    `/users/unfollow/${user.id_user}`,
-    {},
-    {
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    }
-  );
-  return response.data;
-}
 
 export function UnfollowProfile(user: { id_user: string, token: string, username: string }) {
+  const fetchUnfollow = async(user: { id_user: string, token: string, username: string })=> {
+    const response = await axiosInstance.post(
+      `/users/unfollow/${user.id_user}`,
+    );
+    return response.data
+  }
+  
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: () => fetchUnfollow(user),
     mutationKey: ["unfollow"],
     onSuccess: () => {
-      queryClient.refetchQueries({ queryKey: [`users/${user.username}`] })
+      queryClient.refetchQueries({ queryKey: [`users/${user.username}`] }) //Todo: o certo seria só atualizar esse dado, já que o back devolve
     }
   })
   return mutation
 }
 
+const ProfileAPI = {
+  getById: GetProfileById,
+  getByUsername : UpdateProfile,
+  update : UpdateProfile,
+  follow: FollowProfile,
+  unfollow : UnfollowProfile,
+}
+
+export default ProfileAPI;

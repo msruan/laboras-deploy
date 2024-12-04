@@ -55,7 +55,6 @@ export const LoggedUserProvider = ({ children }: { children: ReactNode }) => {
     const { setToken } = useToken();
 
     try {
-
       const loginRequest: AxiosResponse<{ acess_token: string }> =
         await axiosInstance.post("/auth/login", credentials);
       const token = loginRequest?.data.acess_token;
@@ -66,10 +65,9 @@ export const LoggedUserProvider = ({ children }: { children: ReactNode }) => {
 
       setSigned(true);
 
-      return { ok: true }
-    }
-    catch (err) {
-      return { ok: false }
+      return { ok: true };
+    } catch (err) {
+      return { ok: false };
     }
   }
 
