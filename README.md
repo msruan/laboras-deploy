@@ -1,30 +1,37 @@
-# React + TypeScript + Vite
+A React project of a social network...
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+#### Todo
 
-Currently, two official plugins are available:
+##### Components
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [OK] Profile
+- [OK] Post
+- [OK] Follower
+- [OK] TextBox
+- [OK] MainPosts
+- [OK] AsideMyProfile
+- [OK] AsideFollowers
 
-## Expanding the ESLint configuration
+##### Others
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Depois, tirar o fetch em profile de dentro de AsideMyProfile e deixar IProfile já como prop em App.tsx
+- Consertar textarea do TextBox (trocar por uma autosize textarea)
 
-- Configure the top-level `parserOptions` property like this:
+##### Extra
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- Usuarios online?
+- Chat
+- Bloqueio de perfis, perfil público x privado
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+##### GIFS
+
+- https://giphy.com/stickers/ssm-bysecond-songgsongmeow-NMGMrnJpelTIMNVJVY
+- https://giphy.com/stickers/fireworks-transparency-NxpMNq17Y2Khq
+- https://giphy.com/stickers/sparkle-fireworks-firework-6d7r0dwU2J91guI7x2
+- https://giphy.com/stickers/anajohnson2019-ana-johnson-anajohnson-gif-3rZRFcAetsL71sFKAz
+- https://giphy.com/stickers/Studiokapel-fireworks-independence-day-kapel-Q7qAHcQmvfN8JWVPGd
+- https://giphy.com/stickers/OlySheet-transparent-EEYSW45kVtJQ6BiatW
+- https://giphy.com/stickers/istitutoburgobrasil-happy-new-year-ano-novo-2025-ldFdlMJaHDf7u87SJi
+- https://uiverse.io/kennyotsu/fresh-lizard-20
+- https://www.youtube.com/watch?v=z6j7lXN3_eI
+- https://www.youtube.com/watch?v=mHa36Dso28I

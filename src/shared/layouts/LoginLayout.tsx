@@ -34,7 +34,7 @@ export const LoginLayout = () => {
   }
 
   const actualCelebration = Celebrant.actualCelebration;
-
+  console.log(actualCelebration);
   return (
     <>
       <Middleware />
